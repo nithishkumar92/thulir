@@ -6,6 +6,7 @@
     <title>Thulir Construction</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
@@ -13,36 +14,45 @@
             color: #000000; /* Black text for white background */
             padding: 20px;
         }
+
+        /* Placeholder for Contact Us Section */
         .contact-section h2 {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
         }
+
         .contact-section .icon {
             font-size: 24px;
             margin-right: 10px;
-            color: #ff5722;
+            color: #ff5722; /* Accent color for icons */
         }
+
         .contact-block {
             margin-bottom: 30px;
         }
+
         .contact-block h3 {
             font-size: 22px;
             font-weight: 600;
             margin: 10px 0;
         }
+
         .contact-block p {
             margin: 5px 0;
             font-size: 16px;
         }
+
         .social-icons {
             display: flex;
             align-items: center;
             margin-top: 20px;
         }
+
         .social-icons a {
             margin-right: 15px;
         }
+
         .social-icons img {
             width: 32px;
             height: 32px;
@@ -51,14 +61,15 @@
     </style>
 </head>
 <body>
-    <!-- Contact Us Section Placeholder -->
+    <!-- Placeholder for Contact Us Section -->
     <div id="contact-us-placeholder"></div>
 
+    <!-- JavaScript to Load Contact Us Section -->
     <script>
-        // JavaScript to Load External HTML
         document.addEventListener("DOMContentLoaded", function () {
             const contactPlaceholder = document.getElementById("contact-us-placeholder");
 
+            // Fetch and insert the contact.html content
             fetch("contact.html")
                 .then(response => {
                     if (!response.ok) {
