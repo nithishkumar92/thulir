@@ -2,140 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thulir Construction</title>
-    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
-            overflow-x: hidden;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text for white background */
+            padding: 20px;
         }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: white;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 1200px; /* Desktop width */
-            margin: 0 auto;
-        }
-
-        html {
-            width: 1200px; /* Locks the viewport width */
-            height: 100%; /* Full height */
-            overflow-x: hidden;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 70px;
-            margin-right: 10px;
-        }
-
-        .logo-text-container {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .logo-text-bold {
+        .contact-section h2 {
             font-size: 28px;
-            font-weight: 1000;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
-
-        .logo-text-light {
-            font-size: 18px;
-            font-weight: 300;
+        .contact-section .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #ff5722;
         }
-
-        .nav {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .contact-block {
+            margin-bottom: 30px;
         }
-
-        .nav li {
-            margin-right: 40px;
+        .contact-block h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 10px 0;
         }
-
-        .nav a {
-            text-decoration: none;
-            color: black;
-            font-weight: 400;
-            font-size: 18px;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        .nav a.active {
-            color: red;
-            font-weight: 800;
-        }
-
-        .schedule-button {
-            background-color: red;
-            color: white;
+        .contact-block p {
+            margin: 5px 0;
             font-size: 16px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
+        }
+        .social-icons {
             display: flex;
             align-items: center;
-            transition: background-color 0.5s ease;
+            margin-top: 20px;
         }
-
-        .schedule-button:hover {
-            background-color: darkred;
+        .social-icons a {
+            margin-right: 15px;
+        }
+        .social-icons img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">
-            <img src="images/logo255.jpg" alt="Thulir Construction Logo">
-            <div class="logo-text-container">
-                <span class="logo-text-bold">Thulir</span>
-                <span class="logo-text-bold">Construction</span>
-            </div>
-        </div>
-
-        <ul class="nav">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#careers">Careers</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <button class="schedule-button">Schedule Meeting</button>
-    </div>
+    <!-- Contact Us Section Placeholder -->
+    <div id="contact-us-placeholder"></div>
 
     <script>
-        // Select all navigation links
-        const navLinks = document.querySelectorAll('.nav a');
+        // JavaScript to Load External HTML
+        document.addEventListener("DOMContentLoaded", function () {
+            const contactPlaceholder = document.getElementById("contact-us-placeholder");
 
-        // Add click event listener to each link
-        navLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Remove 'active' class from all links
-                navLinks.forEach(nav => nav.classList.remove('active'));
-
-                // Add 'active' class to the clicked link
-                this.classList.add('active');
-            });
+            fetch("contact.html")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to load contact.html");
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    contactPlaceholder.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error("Error loading the contact section:", error);
+                });
         });
     </script>
 </body>
