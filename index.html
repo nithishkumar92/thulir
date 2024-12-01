@@ -3,88 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Thulir Construction - Reliable construction solutions for residential, commercial, and industrial projects.">
     <title>Thulir Construction</title>
-    <link rel="stylesheet" href="styles.css">
+     <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 70px;
+            margin-right: 10px;
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text-bold {
+            font-size: 30px;
+            font-weight: 1000; /* Bold weight */
+        }
+
+        .logo-text-light {
+            font-size: 18px;
+            font-weight: 300; /* Light weight */
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav li {
+            margin-right: 40px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: 400; /* Regular weight */
+            font-size: 18px;
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for color and shadow */
+        }
+
+        .nav a:hover {
+            color: red;
+        }
+
+        .nav a.active {
+            color: red; /* Active tab text color */
+            font-weight: 800;
+        }
+
+        .schedule-button {
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.5s ease;
+        }
+
+        .schedule-button:hover {
+            background-color: darkred;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <h1>Thulir Construction</h1>
-            <p>Your trusted partner in construction excellence.</p>
-            <nav class="navbar">
-                <a href="#home1">Home1</a>
-                <a href="#about1">About Us1</a>
-                <a href="#services1">Services1</a>
-                <a href="#projects">Projects1</a>
-                <a href="#contact">Contact Uzzzzzzzzzzzzz</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Building the Future with Quality and Integrity</h2>
-            <p>We specialize in delivering top-notch construction solutions that meet your needs and exceed your expectations.</p>
-            <a href="#contact" class="btn-primary">Get in Touch</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <div class="services-container">
-            <div class="service">
-                <h3>Residential Construction</h3>
-                <p>Building homes with precision, quality, and attention to detail.</p>
-            </div>
-            <div class="service">
-                <h3>Commercial Construction</h3>
-                <p>Reliable commercial construction services to elevate your business.</p>
-            </div>
-            <div class="service">
-                <h3>Industrial Projects</h3>
-                <p>Strong, durable, and efficient solutions for industrial needs.</p>
+    <div class="header">
+        <div class="logo">
+            <img src="D:\Google Drive\thulir\logo255.jpg" alt="Thulir Construction Logo">
+            <div class="logo-text-container">
+                <span class="logo-text-bold">Thulir</span>
+                <span class="logo-text-bold">Construction</span>
             </div>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2>Our Projects</h2>
-        <p>Take a look at some of our recent work and ongoing projects.</p>
-        <div class="project-gallery">
-            <!-- Images of projects can be inserted here -->
-            <img src="project1.jpg" alt="Project 1">
-            <img src="project2.jpg" alt="Project 2">
-            <img src="project3.jpg" alt="Project 3">
-        </div>
-    </section>
+        <ul class="nav">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>Reach out to us for any inquiries or quotes.</p>
-        <form class="contact-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+        <button class="schedule-button">Schedule Meeting</button>
+    </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <script>
+        // Select all navigation links
+        const navLinks = document.querySelectorAll('.nav a');
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+        // Add click event listener to each link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
 
-            <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-    </section>
+                // Remove 'active' class from all links
+                navLinks.forEach(nav => nav.classList.remove('active'));
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 Thulir Construction. All Rights Reserved.</p>
-    </footer>
-
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
