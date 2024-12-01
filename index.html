@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200">
     <title>Thulir Construction</title>
-     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
+            overflow-x: hidden;
         }
 
         .header {
@@ -19,6 +20,14 @@
             padding: 15px 30px;
             background-color: white;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 1200px; /* Desktop width */
+            margin: 0 auto;
+        }
+
+        html {
+            width: 1200px; /* Locks the viewport width */
+            height: 100%; /* Full height */
+            overflow-x: hidden;
         }
 
         .logo {
@@ -39,12 +48,12 @@
 
         .logo-text-bold {
             font-size: 28px;
-            font-weight: 1000; /* Bold weight */
+            font-weight: 1000;
         }
 
         .logo-text-light {
             font-size: 18px;
-            font-weight: 300; /* Light weight */
+            font-weight: 300;
         }
 
         .nav {
@@ -61,17 +70,13 @@
         .nav a {
             text-decoration: none;
             color: black;
-            font-weight: 400; /* Regular weight */
+            font-weight: 400;
             font-size: 18px;
-            transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for color and shadow */
-        }
-
-        .nav a:hover {
-            color: red;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .nav a.active {
-            color: red; /* Active tab text color */
+            color: red;
             font-weight: 800;
         }
 
@@ -123,7 +128,7 @@
         // Add click event listener to each link
         navLinks.forEach(link => {
             link.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default link behavior
+                e.preventDefault();
 
                 // Remove 'active' class from all links
                 navLinks.forEach(nav => nav.classList.remove('active'));
