@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thulir Construction</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,7 +16,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 15px 30px;
             background-color: white;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -27,7 +27,7 @@
         }
 
         .logo img {
-            height: 60px;
+            height: 70px;
             margin-right: 10px;
         }
 
@@ -38,8 +38,13 @@
         }
 
         .logo-text-bold {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 1000; /* Bold weight */
+        }
+
+        .logo-text-light {
+            font-size: 18px;
+            font-weight: 300; /* Light weight */
         }
 
         .nav {
@@ -50,14 +55,14 @@
         }
 
         .nav li {
-            margin-right: 20px;
+            margin-right: 40px;
         }
 
         .nav a {
             text-decoration: none;
             color: black;
             font-weight: 400; /* Regular weight */
-            font-size: 16px;
+            font-size: 18px;
             transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for color and shadow */
         }
 
@@ -67,7 +72,7 @@
 
         .nav a.active {
             color: red; /* Active tab text color */
-            font-weight: 800; /* Slightly bold */
+            font-weight: 800;
         }
 
         .schedule-button {
@@ -75,7 +80,7 @@
             color: white;
             font-size: 16px;
             font-weight: bold;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border: none;
             border-radius: 20px;
             cursor: pointer;
@@ -86,66 +91,6 @@
 
         .schedule-button:hover {
             background-color: darkred;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .logo {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            .logo img {
-                height: 50px;
-            }
-
-            .logo-text-bold {
-                font-size: 20px;
-            }
-
-            .nav {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .nav li {
-                margin-right: 0;
-            }
-
-            .nav a {
-                font-size: 14px;
-            }
-
-            .schedule-button {
-                margin-top: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo img {
-                height: 40px;
-            }
-
-            .logo-text-bold {
-                font-size: 18px;
-            }
-
-            .nav a {
-                font-size: 12px;
-            }
-
-            .schedule-button {
-                font-size: 14px;
-                padding: 6px 12px;
-            }
         }
     </style>
 </head>
