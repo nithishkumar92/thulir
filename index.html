@@ -10,47 +10,9 @@
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
-            background-color: #ffffff; /* White background */
-            color: #000000; /* Black text for white background */
-            padding: 20px;
-        }
-
-        .contact-section .icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: red; /* Accent color for icons */
-        }
-
-        .contact-block {
-            margin-bottom: 1000px;
-        }
-
-        .contact-block h3 {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 10px 0;
-            
-        }
-
-        .contact-block p {
-            margin: 5px 0;
-            font-size: 16px;
-        }
-
-        .social-icons {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            margin-right: 15px;
-        }
-
-        .social-icons img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 0;
         }
 
         .header {
@@ -58,7 +20,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            background-color: white;
+            background-color: #fff;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -73,19 +35,12 @@
         }
 
         .logo-text-container {
-            display: flex;
-            flex-direction: column;
             line-height: 1.2;
         }
 
         .logo-text-bold {
             font-size: 30px;
-            font-weight: 1000; /* Bold weight */
-        }
-
-        .logo-text-light {
-            font-size: 18px;
-            font-weight: 300; /* Light weight */
+            font-weight: 700;
         }
 
         .nav {
@@ -96,15 +51,15 @@
         }
 
         .nav li {
-            margin-right: 40px;
+            margin-right: 20px;
         }
 
         .nav a {
             text-decoration: none;
-            color: black;
-            font-weight: 400; /* Regular weight */
+            color: #000;
+            font-weight: 400;
             font-size: 16px;
-            transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for color and shadow */
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         .nav a:hover {
@@ -112,32 +67,66 @@
         }
 
         .nav a.active {
-            color: red; /* Active tab text color */
+            color: red;
             font-weight: 600;
         }
 
         .schedule-button {
             background-color: red;
-            color: white;
+            color: #fff;
             font-size: 16px;
             font-weight: bold;
             padding: 10px 20px;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.3s;
         }
 
         .schedule-button:hover {
             background-color: darkred;
         }
+
+        #contact-us-placeholder {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-section .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: red;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <div class="header">
+    <header class="header">
         <div class="logo">
             <img src="images/logo255.jpg" alt="Thulir Construction Logo">
             <div class="logo-text-container">
@@ -156,18 +145,15 @@
         </ul>
 
         <button class="schedule-button">Schedule Meeting</button>
-    </div>
+    </header>
 
     <!-- Contact Us Section Placeholder -->
-    <div id="contact-us-placeholder"></div>
+    <div id="contact-us-placeholder">Loading contact section...</div>
 
-    <!-- JavaScript -->
     <script>
-        // Load Contact Us Section Dynamically
         document.addEventListener("DOMContentLoaded", function () {
             const contactPlaceholder = document.getElementById("contact-us-placeholder");
 
-            // Fetch and insert the contact.html content
             fetch("contact.html")
                 .then(response => {
                     if (!response.ok) {
@@ -180,19 +166,14 @@
                 })
                 .catch(error => {
                     console.error("Error loading the contact section:", error);
+                    contactPlaceholder.innerHTML = "<p>Unable to load contact section. Please try again later.</p>";
                 });
         });
 
-        // Navigation Active Tab Handler
         const navLinks = document.querySelectorAll('.nav a');
         navLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default link behavior
-
-                // Remove 'active' class from all links
+            link.addEventListener('click', function () {
                 navLinks.forEach(nav => nav.classList.remove('active'));
-
-                // Add 'active' class to the clicked link
                 this.classList.add('active');
             });
         });
