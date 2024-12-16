@@ -381,8 +381,8 @@
             margin-top: 15px; /* Increased margin */
         }
     
-         /* ================= CONTACT US SECTION ================= */
-    #contact {
+        /* ================= CONTACT US SECTION ================= */
+        #contact {
             padding: 60px 0; /* Increased padding */
         }
     
@@ -437,8 +437,25 @@
         width: 100%; /* Make the map fill the container width */
         height: 350px; /* You can adjust the height as needed */
     }
+   .whatsapp-icon {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .whatsapp-icon img {
+            width: 50px; /* Increased size */
+            height: 50px; /* Increased size */
+            object-fit: contain;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .whatsapp-icon:hover img {
+            transform: scale(1.1);
+    }
+
     
-    /* ================= CONTACT FORM ================= */
+        /* ================= CONTACT FORM ================= */
     .contact-form {
         max-width: 600px;
         margin: 30px auto; /* Increased margin */
@@ -458,6 +475,7 @@
     .contact-form input[type="text"],
     .contact-form input[type="email"],
     .contact-form textarea {
+        display: none;
         width: 100%;
         padding: 12px; /* Increased padding */
         margin-bottom: 20px; /* Increased margin */
@@ -467,6 +485,7 @@
     }
     
     .contact-form button {
+        display:none;
         background-color: #007bff; /* Blue button */
         color: #fff;
         padding: 12px 25px; /* Increased padding */
@@ -501,6 +520,10 @@
               .map-container iframe {
             height: 300px; /* Adjusted height for smaller screens */
         }
+         .whatsapp-icon img {
+             width: 40px; /* Adjusted size for smaller screens */
+            height: 40px;
+            }
         }
     </style>
 </head>
@@ -650,22 +673,12 @@
                 <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
                 <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
             </div>
+             <div class="contact-form">
+               <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" class="whatsapp-icon">
+                    <img src="images/whatsapp.png" alt="WhatsApp">
+               </a>
+         </div>
     
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <form action="#" method="post">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-    
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-    
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-    
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
         </div>
     </section>
     </main>
