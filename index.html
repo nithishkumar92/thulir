@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thulir Construction</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* General Styles */
+        /* ================= GENERAL STYLES ================= */
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
             background-color: #ffffff;
             color: #000000;
             padding: 0;
+            line-height: 1.6;
+             scroll-behavior: smooth;
         }
-
+    
+        a {
+        text-decoration: none; /* Removes underlines from links */
+        }
+        
+    
+        /* ================= HEADER ================= */
         .header {
             display: flex;
             justify-content: space-between;
@@ -22,55 +31,58 @@
             padding: 15px 30px;
             background-color: #fff;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100; /* Ensures header stays on top */
         }
-
+    
         .logo {
             display: flex;
             align-items: center;
         }
-
+    
         .logo img {
             height: 80px;
             margin-right: 10px;
         }
-
+    
         .logo-text-container {
             line-height: 1.2;
         }
-
+    
         .logo-text-bold {
             font-size: 30px;
             font-weight: 700;
         }
-
+    
         .nav {
             display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
         }
-
+    
         .nav li {
             margin-right: 20px;
         }
-
+    
         .nav a {
-            text-decoration: none;
             color: #000;
             font-weight: 400;
             font-size: 16px;
             transition: color 0.3s, text-shadow 0.3s;
+             
         }
-
+    
         .nav a:hover {
             color: red;
         }
-
+    
         .nav a.active {
             color: red;
             font-weight: 600;
         }
-
+    
         .schedule-button {
             background-color: red;
             color: #fff;
@@ -82,101 +94,393 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
+    
         .schedule-button:hover {
             background-color: darkred;
         }
-
-        #contact-us-placeholder {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    
+           /* ================= MAIN CONTENT ================= */
+           main {
+            padding-top: 20px; /* Adds some spacing below the header */
         }
-
-        .contact-section {
+    
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    
+            /* ================= HERO SECTION ================= */
+        #hero-section {
+            background-image: url('images/hero.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            color: white;
             text-align: center;
+            padding: 100px 20px;
         }
-
-        .contact-section .icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: red;
+    
+        #hero-section h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+             text-shadow: 2px 2px 4px #000000;
         }
-
-        .social-icons {
+        
+         #hero-section p {
+             font-size: 1.2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px #000000;
+        }
+    
+    
+           /* ================= ABOUT SECTION ================= */
+    
+          #about {
+            background-color: #f9f9f9;
+             padding: 40px 0;
+              margin-bottom: 40px;
+          }
+    
+          #about h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+             margin-bottom: 20px;
+        }
+    
+           #about .about-content {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
+            gap: 30px;
+           }
+           
+           #about .about-image {
+             flex: 1;
+             min-width: 300px; /* Prevents images from becoming too small */
+             max-width: 500px;
+            }
+            
+            #about .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+            
+           #about .about-text {
+            flex: 1;
+             min-width: 300px;
+            padding-left: 20px;
+           }
+    
+    
+           /* ================= TEAM SECTION ================= */
+    
+        #team {
+             padding: 40px 0;
+              margin-bottom: 40px;
+         }
+    
+          #team h2 {
+             text-align: center;
+            font-size: 2.5em;
+            color: #333;
+             margin-bottom: 20px;
+           }
+            .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            }
+    
+            .team-member {
+             background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+             text-align: center;
+             padding: 15px;
+         }
+         
+           .team-member img {
+            width: 100%;
+            height: auto;
+             border-bottom: 1px solid #ddd;
+         }
+    
+         .team-member h3 {
+             margin: 10px 0 5px;
+             font-size: 1.2em;
+            color: #333;
+         }
+    
+         .team-member p {
+             margin: 0;
+              font-size: 1em;
+             color: #555;
         }
-
-        .social-icons a {
-            margin: 0 10px;
+    
+    
+       /* ================= SERVICES SECTION ================= */
+    
+        #services {
+            background-color: #f9f9f9;
+            padding: 40px 0;
+            margin-bottom: 40px;
         }
-
-        .social-icons img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+    
+        #services h2 {
+             text-align: center;
+            font-size: 2.5em;
+            color: #333;
+             margin-bottom: 20px;
+          }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 20px;
+            padding: 20px;
         }
-
+    
+        .service-item {
+           background-color: #fff;
+           border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+           overflow: hidden;
+            text-align: center;
+           padding: 15px;
+       }
+       
+       .service-item img {
+           width: 100%;
+            height: auto;
+             border-bottom: 1px solid #ddd;
+          }
+    
+        .service-item h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+             color: #333;
+        }
+    
+         .service-item p {
+            margin: 0;
+              font-size: 1em;
+            color: #555;
+        }
+    
+       /* ================= LATEST PROJECTS SECTION ================= */
+    
         .latest-projects {
             margin: 40px auto;
             max-width: 1200px;
             padding: 20px;
             background-color: #f5f5f5;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+             border-radius: 10px;
+             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-
+    
         .latest-projects h2 {
             text-align: center;
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
         }
-
+    
         .project-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
-
+    
         .project-item {
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
-            overflow: hidden;
+             overflow: hidden;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 10px;
-        }
-
+             text-align: center;
+           padding: 10px;
+       }
+    
         .project-item img {
             width: 100%;
             height: auto;
-            border-bottom: 1px solid #ddd;
+           border-bottom: 1px solid #ddd;
         }
-
+    
         .project-item p {
             margin: 10px 0 0;
-            font-size: 16px;
-            color: #555;
-        }
-
-                .btn-custom {
-            background-color: #007bff; /* Example: Blue background */
-            color: #fff; 
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none; 
-            cursor: pointer;
+             font-size: 16px;
+             color: #555;
         }
         
+         .project-item a{
+              margin-top: 10px;
+              display: inline-block;
+            }
+    
+       /* ================= CAREERS SECTION ================= */
+        #careers {
+            padding: 40px 0;
+            background-color: #f9f9f9;
+             margin-bottom: 40px;
+        }
+    
+         #careers h2 {
+             text-align: center;
+             font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+          }
+         .careers-content {
+            padding: 0 20px;
+         }
+    
+        .career-listing {
+           background-color: #fff;
+            border-radius: 8px;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+             padding: 20px;
+             margin-bottom: 15px;
+        }
+    
+         .career-listing h3 {
+            margin-bottom: 10px;
+             color: #333;
+           }
+        .career-listing p {
+            color: #555;
+        }
+         .career-listing a {
+            display: inline-block;
+            margin-top: 10px;
+         }
+    
+       /* ================= CONTACT US SECTION ================= */
+    
+       #contact {
+          padding: 40px 0;
+        }
+    
+        #contact h2 {
+          text-align: center;
+          font-size: 2.5em;
+           color: #333;
+           margin-bottom: 20px;
+      }
+    
+    
+        .contact-section {
+            text-align: center;
+        }
+    
+        .contact-section .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: red;
+        }
+    
+        .social-icons {
+             display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    
+        .social-icons a {
+             margin: 0 10px;
+        }
+    
+        .social-icons img {
+             width: 32px;
+            height: 32px;
+             object-fit: contain;
+        }
+        
+    
+        /* ================= CONTACT FORM ================= */
+            .contact-form {
+                 max-width: 600px;
+                margin: 20px auto;
+                 padding: 20px;
+               background-color: #f9f9f9;
+                border: 1px solid #ddd;
+               border-radius: 8px;
+              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }
+    
+            .contact-form label {
+              display: block;
+             margin-bottom: 5px;
+            }
+    
+           .contact-form input[type="text"],
+             .contact-form input[type="email"],
+            .contact-form textarea {
+                width: 100%;
+                padding: 10px;
+                 margin-bottom: 15px;
+                border: 1px solid #ddd;
+               border-radius: 4px;
+                box-sizing: border-box;
+            }
+    
+           .contact-form button {
+             background-color: #007bff;
+             color: #fff;
+             padding: 10px 20px;
+            border: none;
+             border-radius: 4px;
+            cursor: pointer;
+         }
+        
+           /* ================= BUTTONS ================= */
+    
+        .btn-custom {
+            background-color: #007bff; /* Example: Blue background */
+            color: #fff;
+            border: none;
+           padding: 10px 20px;
+           border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+         
+          /* ================= FOOTER ================= */
+            footer {
+                text-align: center;
+                padding: 20px 0;
+                background-color: #f0f0f0;
+                margin-top: 50px;
+                 border-top: 1px solid #ddd;
+                font-size: 0.9em;
+                color: #777;
+              }
+    
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (max-width: 768px) {
+             .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+    
+             .logo {
+                margin-bottom: 10px;
+             }
+    
+             .nav {
+                 margin-top: 10px;
+            }
+    
+            .nav li {
+                margin-right: 10px;
+            }
+        }
+    
+    
     </style>
 </head>
 <body>
@@ -189,61 +493,176 @@
                 <span class="logo-text-bold">Construction</span>
             </div>
         </div>
-
+    
         <ul class="nav">
             <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
+             <li><a href="#about">About</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#careers">Careers</a></li>
+             <li><a href="#careers">Careers</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-
-        <button class="schedule-button">Schedule Meeting</button>
+    
+         <button class="schedule-button">Schedule Meeting</button>
     </header>
 
-    <!-- Latest Projects Section -->
-    <section id="latest-projects" class="latest-projects">
-        <h2>Latest Projects</h2>
-        <div class="project-gallery">
-            <div class="project-item">
-                <img src="images/pic01.jpg" alt="Project 1">
-                <p>Project 1 Description</p>
+    <main>
+        <!-- Hero Section -->
+         <section id="hero-section">
+        <div class="container">
+            <h1>Building Dreams, Delivering Excellence</h1>
+            <p>Your trusted partner for all construction needs. Let's create something amazing together.</p>
+             <a href="#contact" class="btn-custom">Get a Free Quote</a>
+        </div>
+    </section>
+    
+         <!-- About Us Section -->
+         <section id="about" class="container">
+              <h2>About Us</h2>
+              <div class="about-content">
+                <div class="about-image">
+                 <img src="images/about-image.jpg" alt="About Us Image">
+                 </div>
+                  <div class="about-text">
+                 <p>Thulir Construction is a leading construction company dedicated to building high-quality and sustainable structures. With years of experience, we specialize in both residential and commercial projects, ensuring every client receives the best possible outcome. Our team of skilled professionals is committed to excellence and innovation, delivering projects on time and within budget. We focus on providing a seamless and transparent experience, from planning to completion. Our passion for building and our commitment to quality makes us the ideal partner for your next project.</p>
+                 </div>
+                </div>
+    
+         </section>
+    
+    
+      <!-- Team Section -->
+     <section id="team" class="container">
+            <h2>Our Team</h2>
+             <div class="team-grid">
+                 <div class="team-member">
+                    <img src="images/team1.jpg" alt="Team Member 1">
+                     <h3>John Doe</h3>
+                     <p>Project Manager</p>
+               </div>
+                 <div class="team-member">
+                    <img src="images/team2.jpg" alt="Team Member 2">
+                     <h3>Jane Smith</h3>
+                     <p>Lead Architect</p>
+                </div>
+                <div class="team-member">
+                     <img src="images/team3.jpg" alt="Team Member 3">
+                    <h3>Peter Pan</h3>
+                    <p>Site Supervisor</p>
+                </div>
             </div>
-            <div class="project-item">
-                <img src="images/pic02.jpg" alt="Project 2">
-                <p>Project 2 Description</p>
+         </section>
+         
+            <!-- Services Section -->
+            <section id="services" class="container">
+                 <h2>Our Services</h2>
+                  <div class="services-grid">
+                <div class="service-item">
+                    <img src="images/service1.jpg" alt="Service 1">
+                     <h3>Residential Construction</h3>
+                     <p>Building custom homes tailored to your unique needs.</p>
+                </div>
+                    <div class="service-item">
+                         <img src="images/service2.jpg" alt="Service 2">
+                        <h3>Commercial Construction</h3>
+                        <p>Constructing functional and sustainable commercial buildings.</p>
+                    </div>
+                   <div class="service-item">
+                       <img src="images/service3.jpg" alt="Service 3">
+                        <h3>Renovation & Remodeling</h3>
+                        <p>Transforming existing spaces with quality upgrades.</p>
+                 </div>
+                </div>
+          </section>
+    
+          <!-- Latest Projects Section -->
+        <section id="latest-projects" class="latest-projects">
+            <h2>Latest Projects</h2>
+            <div class="project-gallery">
+                 <div class="project-item">
+                     <img src="images/pic01.jpg" alt="Project 1">
+                     <p>Project 1 Description</p>
+                       <a href="#contact" class="btn-custom">Learn More</a>
+                 </div>
+                 <div class="project-item">
+                    <img src="images/pic02.jpg" alt="Project 2">
+                    <p>Project 2 Description</p>
+                     <a href="#contact" class="btn-custom">Learn More</a>
+                </div>
+                <div class="project-item">
+                    <img src="images/pic03.jpg" alt="Project 3">
+                     <p>Project 3 Description</p>
+                      <a href="#contact" class="btn-custom">Learn More</a>
+                </div>
             </div>
-            <div class="project-item">
-                <img src="images/pic03.jpg" alt="Project 3">
-                <p>Project 3 Description</p>
+      </section>
+      
+      <!-- Careers Section -->
+        <section id="careers" class="container">
+        <h2>Careers</h2>
+        <div class="careers-content">
+         <div class="career-listing">
+                <h3>Construction Manager</h3>
+                <p>We are looking for a skilled Construction Manager with extensive project management experience.</p>
+                <a href="#" class="btn-custom">Apply Now</a>
+            </div>
+             <div class="career-listing">
+                <h3>Civil Engineer</h3>
+                <p>Seeking a detail-oriented Civil Engineer to oversee the structural design and execution.</p>
+                <a href="#" class="btn-custom">Apply Now</a>
             </div>
         </div>
     </section>
-
-    <!-- Contact Us Section Placeholder -->
-    <div id="contact-us-placeholder">Loading contact section...</div>
+        
+         <!-- Contact Us Section -->
+        <section id="contact" class="container">
+          <h2>Contact Us</h2>
+          <div class="contact-section">
+            <p><i class="fas fa-map-marker-alt icon"></i>123 Construction Road, City, State</p>
+            <p><i class="fas fa-phone icon"></i>+1 (555) 123-4567</p>
+             <p><i class="fas fa-envelope icon"></i>info@thulirconstruction.com</p>
+            
+              <div class="social-icons">
+               <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
+               <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
+               <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
+            </div>
+        
+            <!-- Contact Form -->
+           <div class="contact-form">
+             <form action="#" method="post">
+                  <label for="name">Name:</label>
+                   <input type="text" id="name" name="name" required>
+                  
+                   <label for="email">Email:</label>
+                   <input type="email" id="email" name="email" required>
+                    
+                   <label for="message">Message:</label>
+                   <textarea id="message" name="message" rows="5" required></textarea>
+                   
+                    <button type="submit">Send Message</button>
+              </form>
+           </div>
+       </div>
+       </section>
+    </main>
+    
+        <!-- Footer Section -->
+      <footer>
+        <p>&copy; 2024 Thulir Construction. All rights reserved.</p>
+     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const contactPlaceholder = document.getElementById("contact-us-placeholder");
-
-            fetch("contact.html")
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to load contact.html");
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    contactPlaceholder.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error("Error loading the contact section:", error);
-                    contactPlaceholder.innerHTML = "<p>Unable to load contact section. Please try again later.</p>";
-                });
+    
+      // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+         anchor.addEventListener('click', function (e) {
+             e.preventDefault();
+             document.querySelector(this.getAttribute('href')).scrollIntoView({
+               behavior: 'smooth'
+           });
         });
-
+      });
         const navLinks = document.querySelectorAll('.nav a');
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
