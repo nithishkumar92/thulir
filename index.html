@@ -381,113 +381,7 @@
             margin-top: 15px; /* Increased margin */
         }
     
-        /* ================= CONTACT US SECTION ================= */
-        #contact {
-            padding: 60px 0; /* Increased padding */
-        }
-    
-        #contact h2 {
-            text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
-        }
-    
-        .contact-section {
-            text-align: center;
-        }
-    
-        .contact-section .icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: #dc3545; /* Red icon */
-        }
-    
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            margin-top: 25px; /* Increased margin */
-        }
-    
-        .social-icons a {
-            margin: 0 15px; /* Increased margin */
-        }
-    
-        .social-icons img {
-            width: 36px; /* Slightly larger icons */
-            height: 36px; /* Slightly larger icons */
-            object-fit: contain;
-        }
-    
-        /* ================= CONTACT FORM ================= */
-        .contact-form {
-            max-width: 600px;
-            margin: 30px auto; /* Increased margin */
-            padding: 30px; /* Increased padding */
-            background-color: #fff; /* White background */
-            border: 1px solid #dee2e6; /* Light gray border */
-            border-radius: 10px; /* More rounded */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-        }
-    
-        .contact-form label {
-            display: block;
-            margin-bottom: 8px; /* Increased margin */
-            font-weight: 500; /* Slightly bolder */
-        }
-    
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px; /* Increased padding */
-            margin-bottom: 20px; /* Increased margin */
-            border: 1px solid #dee2e6; /* Light gray border */
-            border-radius: 5px; /* Slightly rounded */
-            box-sizing: border-box;
-        }
-    
-        .contact-form button {
-            background-color: #007bff; /* Blue button */
-            color: #fff;
-            padding: 12px 25px; /* Increased padding */
-            border: none;
-            border-radius: 5px; /* Slightly rounded */
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-    
-        .contact-form button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-    
-        /* ================= BUTTONS ================= */
-        .btn-custom {
-            background-color: #007bff; /* Blue background */
-            color: #fff;
-            border: none;
-            padding: 12px 25px; /* Increased padding */
-            border-radius: 5px; /* Slightly rounded */
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-    
-        .btn-custom:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-    
-        /* ================= FOOTER ================= */
-        footer {
-            text-align: center;
-            padding: 25px 0; /* Increased padding */
-            background-color: #f8f9fa; /* Light gray background */
-            margin-top: 60px; /* Increased margin */
-            border-top: 1px solid #dee2e6; /* Light gray border */
-            font-size: 0.95em; /* Slightly larger font */
-            color: #6c757d; /* Medium gray text */
-        }
-            /* ================= CONTACT US SECTION ================= */
+         /* ================= CONTACT US SECTION ================= */
     #contact {
             padding: 60px 0; /* Increased padding */
         }
@@ -532,6 +426,16 @@
         width: 36px; /* Slightly larger icons */
         height: 36px; /* Slightly larger icons */
         object-fit: contain;
+    }
+     .map-container {
+            max-width: 600px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden; /* To clip the map within the rounded border */
+    }
+     .map-container iframe {
+        width: 100%; /* Make the map fill the container width */
+        height: 350px; /* You can adjust the height as needed */
     }
     
     /* ================= CONTACT FORM ================= */
@@ -594,6 +498,9 @@
             .nav li {
                 margin-right: 15px; /* Increased margin */
             }
+              .map-container iframe {
+            height: 300px; /* Adjusted height for smaller screens */
+        }
         }
     </style>
 </head>
@@ -726,7 +633,7 @@
         </section>
     
         <!-- Contact Us Section -->
-    <section id="contact" class="container">
+      <section id="contact" class="container">
         <h2>Contact Us</h2>
         <div class="contact-section">
             <p><i class="fas fa-map-marker-alt icon"></i>29F/1A, 1st Floor, Andal Street,
@@ -734,8 +641,11 @@
                 Tamilnadu(India).</p>
             <p><i class="fas fa-phone icon"></i>+91 95000 92596, +91 93450 50519</p>
            <p><i class="fas fa-envelope icon"></i>ak@fourthwall.co.in</p>
-    
-            <div class="social-icons">
+           <div class="map-container">
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.853442692168!2d78.13621327569778!3d8.795439191526478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0187835bcaf195%3A0x3727f65702858e70!2sFourth%20Wall!5e0!3m2!1sen!2sin!4v1718341428565!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+             <div class="social-icons">
                 <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
                 <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
                 <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
