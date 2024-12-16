@@ -11,104 +11,135 @@
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
-            background-color: #f8f9fa; /* Light gray background */
-            color: #343a40; /* Dark gray text */
+            background-color: #f8f9fa;
+            color: #343a40;
             padding: 0;
             line-height: 1.6;
             scroll-behavior: smooth;
         }
-    
+
         a {
             text-decoration: none;
         }
-    
+
         /* ================= HEADER ================= */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px; /* Increased padding */
+            padding: 15px 20px; /* Adjusted padding for mobile */
             background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-    
+
         .logo {
             display: flex;
             align-items: center;
         }
-    
+
         .logo img {
-            height: 80px;
-            margin-right: 15px; /* Increased margin */
+            height: 60px; /* Adjusted logo height for mobile */
+            margin-right: 10px; /* Adjusted margin for mobile */
         }
-    
+
         .logo-text-container {
             line-height: 1.2;
         }
-    
+
         .logo-text-bold {
-            font-size: 32px; /* Slightly larger font */
+            font-size: 24px; /* Adjusted font size for mobile */
             font-weight: 700;
-            color: #212529; /* Darker text */
+            color: #212529;
         }
-    
+
         .nav {
             display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
+             flex-direction: column; /* Stack navigation on mobile */
+            position: absolute;
+             top: 70px;
+            right: 15px;
+             background-color: #fff;
+             border: 1px solid #ddd;
+            border-radius: 5px;
+             padding: 10px;
+            display: none; /* Initially hide on mobile */
         }
-    
+
+         .nav.active {
+            display: flex; /* Show navigation on mobile when active */
+        }
+
         .nav li {
-            margin-right: 25px; /* Increased margin */
+            margin: 5px; /* Adjusted margin for mobile */
         }
-    
+
         .nav a {
-            color: #495057; /* Medium gray text */
-            font-weight: 500; /* Slightly bolder */
-            font-size: 17px; /* Slightly larger font */
+            color: #495057;
+            font-weight: 500;
+            font-size: 16px;
             transition: color 0.3s, text-shadow 0.3s;
+            padding: 8px 12px; /* Adjusted padding for mobile */
+            display: block; /* Make each link take full width on mobile */
+            text-align: center; /* Center text */
+
         }
-    
-        .nav a:hover {
+
+         .nav a:hover,
+         .nav a.active {
             color: #dc3545; /* Red on hover */
         }
-    
-        .nav a.active {
-            color: #dc3545;
-            font-weight: 600;
+
+
+       .nav-toggle {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+             padding: 5px;
         }
-    
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+
+
         .schedule-button {
-            background-color: #dc3545; /* Red button */
+            background-color: #dc3545;
             color: #fff;
-            font-size: 16px;
+            font-size: 14px; /* Adjusted font size for mobile */
             font-weight: bold;
-            padding: 12px 25px; /* Increased padding */
+            padding: 10px 20px; /* Adjusted padding for mobile */
             border: none;
-            border-radius: 25px; /* More rounded */
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s;
+             white-space: nowrap; /* Keep button text on one line */
         }
-    
-        .schedule-button:hover {
-            background-color: #c82333; /* Darker red on hover */
+
+         .schedule-button:hover {
+            background-color: #c82333;
         }
-    
+
         /* ================= MAIN CONTENT ================= */
         main {
-            padding-top: 30px; /* Increased spacing below header */
+            padding-top: 20px;
         }
-    
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
-    
+
         /* ================= HERO SECTION ================= */
         #hero-section {
             background-image: url('images/hero.jpg');
@@ -116,10 +147,10 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding: 150px 20px; /* Increased padding */
-            position: relative; /* For overlay */
+            padding: 100px 20px; /* Adjusted padding for mobile */
+            position: relative;
         }
-    
+
         #hero-section::before {
             content: '';
             position: absolute;
@@ -127,403 +158,415 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
-    
+
         #hero-section .container {
             position: relative;
             z-index: 2;
         }
-    
+
         #hero-section h1 {
-            font-size: 3.5em; /* Larger font */
-            margin-bottom: 25px; /* Increased margin */
+            font-size: 2.5em; /* Adjusted font size for mobile */
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px #000000;
         }
-    
+
         #hero-section p {
-            font-size: 1.3em; /* Larger font */
-            margin-bottom: 40px; /* Increased margin */
+            font-size: 1.1em; /* Adjusted font size for mobile */
+            margin-bottom: 30px;
             text-shadow: 1px 1px 2px #000000;
         }
-    
+
+          .btn-custom {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-custom:hover{
+           background-color: #c82333;
+        }
+
+
         /* ================= ABOUT SECTION ================= */
         #about {
-            background-color: #fff; /* White background */
-            padding: 60px 0; /* Increased padding */
-            margin-bottom: 50px; /* Increased margin */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+             background-color: #fff;
+            padding: 40px 0; /* Adjusted padding for mobile */
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-    
-        #about h2 {
+
+         #about h2 {
             text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
+            font-size: 2.2em; /* Adjusted font size for mobile */
+            color: #212529;
+            margin-bottom: 20px;
         }
-    
+
         #about .about-content {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 40px; /* Increased gap */
+            gap: 20px; /* Adjusted gap for mobile */
         }
-    
+
         #about .about-image {
             flex: 1;
-            min-width: 350px; /* Increased min-width */
-            max-width: 550px; /* Increased max-width */
+            min-width: 100%;
+            max-width: 100%;
         }
-    
-        #about .about-image img {
+
+         #about .about-image img {
             width: 100%;
             height: auto;
-            border-radius: 10px; /* More rounded */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            border-radius: 10px;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-    
+
         #about .about-text {
             flex: 1;
-            min-width: 350px; /* Increased min-width */
-            padding-left: 30px; /* Increased padding */
-            font-size: 1.1em; /* Slightly larger font */
-            color: #495057; /* Medium gray text */
+            min-width: 100%;
+            padding-left: 0;
+            font-size: 1em;
+            color: #495057;
         }
-    
+
+
         /* ================= TEAM SECTION ================= */
         #team {
-            padding: 60px 0; /* Increased padding */
-            margin-bottom: 50px; /* Increased margin */
+            padding: 40px 0; /* Adjusted padding for mobile */
+            margin-bottom: 30px;
         }
-    
+
         #team h2 {
             text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
+            font-size: 2.2em; /* Adjusted font size for mobile */
+            color: #212529;
+            margin-bottom: 20px;
         }
-    
+
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width */
-            gap: 30px; /* Increased gap */
-            padding: 30px; /* Increased padding */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min-width for mobile */
+            gap: 20px;
+            padding: 20px;
         }
-    
+
         .team-member {
-            background-color: #fff;
-            border-radius: 10px; /* More rounded */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+           background-color: #fff;
+            border-radius: 10px;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             text-align: center;
-            padding: 20px; /* Increased padding */
+             padding: 15px;
         }
-    
-        .team-member img {
+
+       .team-member img {
             width: 100%;
             height: auto;
-            border-bottom: 1px solid #dee2e6; /* Light gray border */
+            border-bottom: 1px solid #dee2e6;
         }
-    
+
         .team-member h3 {
-            margin: 15px 0 8px; /* Increased margin */
-            font-size: 1.3em; /* Larger font */
-            color: #212529; /* Darker text */
+            margin: 10px 0 5px;
+            font-size: 1.1em;
+            color: #212529;
         }
-    
-        .team-member p {
+
+       .team-member p {
             margin: 0;
-            font-size: 1.1em; /* Slightly larger font */
-            color: #495057; /* Medium gray text */
+            font-size: 1em;
+            color: #495057;
         }
-    
+
         /* ================= SERVICES SECTION ================= */
         #services {
-            background-color: #fff; /* White background */
-            padding: 60px 0; /* Increased padding */
-            margin-bottom: 50px; /* Increased margin */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            background-color: #fff;
+            padding: 40px 0; /* Adjusted padding for mobile */
+            margin-bottom: 30px;
+             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-    
-        #services h2 {
+
+         #services h2 {
             text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
+            font-size: 2.2em; /* Adjusted font size for mobile */
+            color: #212529;
+            margin-bottom: 20px;
         }
-    
+
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width */
-            gap: 30px; /* Increased gap */
-            padding: 30px; /* Increased padding */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min-width for mobile */
+            gap: 20px;
+            padding: 20px;
         }
-    
-        .service-item {
-            background-color: #fff;
-            border-radius: 10px; /* More rounded */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+
+
+         .service-item {
+           background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             text-align: center;
-            padding: 20px; /* Increased padding */
+            padding: 15px;
         }
-    
+
         .service-item img {
             width: 100%;
             height: auto;
-            border-bottom: 1px solid #dee2e6; /* Light gray border */
+            border-bottom: 1px solid #dee2e6;
         }
-    
+
         .service-item h3 {
-            margin: 15px 0 8px; /* Increased margin */
-            font-size: 1.3em; /* Larger font */
-            color: #212529; /* Darker text */
+            margin: 10px 0 5px;
+            font-size: 1.1em;
+            color: #212529;
         }
-    
+
         .service-item p {
             margin: 0;
-            font-size: 1.1em; /* Slightly larger font */
-            color: #495057; /* Medium gray text */
+            font-size: 1em;
+            color: #495057;
         }
-    
+
         /* ================= LATEST PROJECTS SECTION ================= */
         .latest-projects {
-            margin: 60px auto; /* Increased margin */
+             margin: 40px auto; /* Adjusted margin for mobile */
             max-width: 1200px;
-            padding: 30px; /* Increased padding */
-            background-color: #fff; /* White background */
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+           padding: 20px;
+           background-color: #fff;
+             border-radius: 10px;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-    
+
+
         .latest-projects h2 {
-            text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
+             text-align: center;
+            font-size: 2.2em; /* Adjusted font size for mobile */
+            color: #212529;
+            margin-bottom: 20px;
         }
-    
+
         .project-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased min-width */
-            gap: 30px; /* Increased gap */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min-width for mobile */
+            gap: 20px;
         }
-    
-        .project-item {
-            background-color: #fff;
-            border: 1px solid #dee2e6; /* Light gray border */
-            border-radius: 10px; /* More rounded */
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+
+         .project-item {
+          background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+             overflow: hidden;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 15px; /* Increased padding */
+            padding: 10px;
         }
-    
-        .project-item img {
+
+       .project-item img {
             width: 100%;
             height: auto;
-            border-bottom: 1px solid #dee2e6; /* Light gray border */
+             border-bottom: 1px solid #dee2e6;
         }
-    
+
         .project-item p {
-            margin: 15px 0 0; /* Increased margin */
-            font-size: 1.1em; /* Slightly larger font */
-            color: #495057; /* Medium gray text */
+            margin: 10px 0 0;
+            font-size: 1em;
+            color: #495057;
         }
-    
-        .project-item a {
-            margin-top: 15px; /* Increased margin */
-            display: inline-block;
+
+         .project-item a {
+            margin-top: 10px;
+             display: inline-block;
         }
-    
+
         /* ================= CAREERS SECTION ================= */
-        #careers {
-            padding: 60px 0; /* Increased padding */
-            background-color: #fff; /* White background */
-            margin-bottom: 50px; /* Increased margin */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+         #careers {
+           padding: 40px 0; /* Adjusted padding for mobile */
+           background-color: #fff;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-    
+
         #careers h2 {
             text-align: center;
-            font-size: 2.8em; /* Larger font */
-            color: #212529; /* Darker text */
-            margin-bottom: 30px; /* Increased margin */
+            font-size: 2.2em; /* Adjusted font size for mobile */
+            color: #212529;
+            margin-bottom: 20px;
         }
-    
+
         .careers-content {
-            padding: 0 30px; /* Increased padding */
+            padding: 0 20px;
         }
-    
+
         .career-listing {
             background-color: #fff;
-            border-radius: 10px; /* More rounded */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-            padding: 25px; /* Increased padding */
-            margin-bottom: 20px; /* Increased margin */
+             border-radius: 10px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+             margin-bottom: 15px;
         }
-    
-        .career-listing h3 {
-            margin-bottom: 12px; /* Increased margin */
-            color: #212529; /* Darker text */
-            font-size: 1.3em; /* Larger font */
+
+       .career-listing h3 {
+            margin-bottom: 10px;
+             color: #212529;
+            font-size: 1.1em;
         }
-    
+
         .career-listing p {
-            color: #495057; /* Medium gray text */
-            font-size: 1.1em; /* Slightly larger font */
+             color: #495057;
+             font-size: 1em;
         }
-    
+
         .career-listing a {
-            display: inline-block;
-            margin-top: 15px; /* Increased margin */
+             display: inline-block;
+             margin-top: 10px;
         }
-    
-        /* ================= CONTACT US SECTION ================= */
-        #contact {
-            padding: 60px 0; /* Increased padding */
+
+       /* ================= CONTACT US SECTION ================= */
+         #contact {
+           padding: 40px 0; /* Adjusted padding for mobile */
         }
-    
-    #contact h2 {
-        text-align: center;
-        font-size: 2.8em; /* Larger font */
-        color: #212529; /* Darker text */
-        margin-bottom: 30px; /* Increased margin */
-    }
-    
-    .contact-section {
-        text-align: center;
-        
-    }
 
-    .contact-section p{
-        margin-bottom: 10px;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-    }
+        #contact h2 {
+             text-align: center;
+           font-size: 2.2em; /* Adjusted font size for mobile */
+             color: #212529;
+            margin-bottom: 20px;
+        }
+       .contact-section {
+             text-align: center;
+        }
 
-    
-    .contact-section .icon {
-        font-size: 24px;
-        margin-right: 10px;
-        color: #dc3545; /* Red icon */
-    }
-    
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        margin-top: 25px; /* Increased margin */
-    }
-    
-    .social-icons a {
-        margin: 0 15px; /* Increased margin */
-    }
-    
-    .social-icons img {
-        width: 36px; /* Slightly larger icons */
-        height: 36px; /* Slightly larger icons */
-        object-fit: contain;
-    }
-     .map-container {
-            max-width: 600px;
-            margin: 20px auto;
-            border-radius: 10px;
-            overflow: hidden; /* To clip the map within the rounded border */
-    }
-     .map-container iframe {
-        width: 100%; /* Make the map fill the container width */
-        height: 350px; /* You can adjust the height as needed */
-    }
-   .whatsapp-icon {
-            position: relative;
+        .contact-section p {
+           margin-bottom: 10px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-section .icon {
+           font-size: 20px;
+            margin-right: 8px;
+           color: #dc3545; /* Red icon */
+        }
+
+        .social-icons {
+          display: flex;
+           justify-content: center;
+            margin-top: 20px; /* Adjusted margin for mobile */
+        }
+
+       .social-icons a {
+            margin: 0 10px;
+        }
+
+         .social-icons img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .map-container {
+             max-width: 100%;
+             margin: 10px auto;
+              border-radius: 10px;
+             overflow: hidden;
+        }
+
+         .map-container iframe {
+            width: 100%;
+           height: 250px;
+        }
+
+        .whatsapp-icon {
+          position: relative;
             display: inline-block;
             cursor: pointer;
         }
 
         .whatsapp-icon img {
-            width: 50px; /* Increased size */
-            height: 50px; /* Increased size */
-            object-fit: contain;
-            transition: transform 0.2s ease-in-out;
+            width: 40px; /* Adjusted size for mobile */
+           height: 40px; /* Adjusted size for mobile */
+             object-fit: contain;
+             transition: transform 0.2s ease-in-out;
         }
 
         .whatsapp-icon:hover img {
-            transform: scale(1.1);
-    }
-
-    
-        /* ================= CONTACT FORM ================= */
-    .contact-form {
-        max-width: 600px;
-        margin: 30px auto; /* Increased margin */
-        padding: 30px; /* Increased padding */
-        background-color: #fff; /* White background */
-        border: 1px solid #dee2e6; /* Light gray border */
-        border-radius: 10px; /* More rounded */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-    }
-    
-    .contact-form label {
-        display: block;
-        margin-bottom: 8px; /* Increased margin */
-        font-weight: 500; /* Slightly bolder */
-    }
-    
-    .contact-form input[type="text"],
-    .contact-form input[type="email"],
-    .contact-form textarea {
-        display: none;
-        width: 100%;
-        padding: 12px; /* Increased padding */
-        margin-bottom: 20px; /* Increased margin */
-        border: 1px solid #dee2e6; /* Light gray border */
-        border-radius: 5px; /* Slightly rounded */
-        box-sizing: border-box;
-    }
-    
-    .contact-form button {
-        display:none;
-        background-color: #007bff; /* Blue button */
-        color: #fff;
-        padding: 12px 25px; /* Increased padding */
-        border: none;
-        border-radius: 5px; /* Slightly rounded */
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    
-    .contact-form button:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-    }
-    
-        /* ================= RESPONSIVE DESIGN ================= */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-    
-            .logo {
-                margin-bottom: 15px; /* Increased margin */
-            }
-    
-            .nav {
-                margin-top: 15px; /* Increased margin */
-            }
-    
-            .nav li {
-                margin-right: 15px; /* Increased margin */
-            }
-              .map-container iframe {
-            height: 300px; /* Adjusted height for smaller screens */
+             transform: scale(1.1);
         }
-         .whatsapp-icon img {
-             width: 40px; /* Adjusted size for smaller screens */
-            height: 40px;
+
+        /* ================= CONTACT FORM ================= */
+        .contact-form {
+            display:none;
+           max-width: 100%;
+             margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+             border-radius: 10px;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form label {
+             display: block;
+            margin-bottom: 5px;
+           font-weight: 500;
+        }
+
+       .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+             padding: 10px;
+             margin-bottom: 15px;
+             border: 1px solid #dee2e6;
+            border-radius: 5px;
+             box-sizing: border-box;
+        }
+
+        .contact-form button {
+           background-color: #007bff;
+            color: #fff;
+           padding: 10px 20px;
+            border: none;
+             border-radius: 5px;
+             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+       .contact-form button:hover {
+           background-color: #0056b3;
+        }
+
+       /* ================== RESPONSIVE DESIGN ================= */
+        @media (min-width: 769px) {
+            .nav {
+              display: flex !important; /* Show navigation on desktop */
+              flex-direction: row; /* Display horizontally */
+             position: static; /* reset position on desktop*/
+            border: none; /* remove border */
+             padding: 0;/* remove padding */
+
             }
+
+           .nav-toggle {
+                display: none;
+            }
+        }
+         /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f8f9fa;
+            color: #495057;
         }
     </style>
 </head>
@@ -537,17 +580,20 @@
                 <span class="logo-text-bold">Construction</span>
             </div>
         </div>
-    
-        <ul class="nav">
+         <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav" id="mainNav">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#services">Services</a></li>
-             <li><a href="#careers">Careers</a></li>
+               <li><a href="#careers">Careers</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-    
-        <button class="schedule-button">Schedule Meeting</button>
+           <button class="schedule-button">Schedule Meeting</button>
     </header>
 
     <main>
@@ -556,10 +602,10 @@
             <div class="container">
                 <h1>Building Dreams, Delivering Excellence</h1>
                 <p>Your trusted partner for all construction needs. Let's create something amazing together.</p>
-                <a href="#contact" class="btn-custom">Get a Free Quote</a>
+                 <a href="#contact" class="btn-custom">Get a Free Quote</a>
             </div>
         </section>
-    
+
         <!-- About Us Section -->
         <section id="about" class="container">
             <h2>About Us</h2>
@@ -568,11 +614,11 @@
                     <img src="images/about-image.jpg" alt="About Us Image">
                 </div>
                 <div class="about-text">
-                    <p>Thulir Construction is a leading construction company dedicated to building high-quality and sustainable structures. With years of experience, we specialize in both residential and commercial projects, ensuring every client receives the best possible outcome. Our team of skilled professionals is committed to excellence and innovation, delivering projects on time and within budget. We focus on providing a seamless and transparent experience, from planning to completion. Our passion for building and our commitment to quality makes us the ideal partner for your next project.</p>
+                   <p>Thulir Construction is a leading construction company dedicated to building high-quality and sustainable structures. With years of experience, we specialize in both residential and commercial projects, ensuring every client receives the best possible outcome. Our team of skilled professionals is committed to excellence and innovation, delivering projects on time and within budget. We focus on providing a seamless and transparent experience, from planning to completion. Our passion for building and our commitment to quality makes us the ideal partner for your next project.</p>
                 </div>
             </div>
         </section>
-    
+
         <!-- Team Section -->
         <section id="team" class="container">
             <h2>Our Team</h2>
@@ -594,7 +640,7 @@
                 </div>
             </div>
         </section>
-    
+
         <!-- Services Section -->
         <section id="services" class="container">
             <h2>Our Services</h2>
@@ -616,97 +662,104 @@
                 </div>
             </div>
         </section>
-        
-            <!-- Latest Projects Section -->
+
+        <!-- Latest Projects Section -->
         <section id="latest-projects" class="latest-projects">
             <h2>Latest Projects</h2>
             <div class="project-gallery">
-                <div class="project-item">
-                    <img src="images/pic01.jpg" alt="Project 1">
+                 <div class="project-item">
+                     <img src="images/pic01.jpg" alt="Project 1">
                      <p>Project 1 Description</p>
                     <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
                 <div class="project-item">
-                    <img src="images/pic02.jpg" alt="Project 2">
-                     <p>Project 2 Description</p>
-                   <a href="#contact" class="btn-custom">Learn More</a>
-                </div>
+                     <img src="images/pic02.jpg" alt="Project 2">
+                    <p>Project 2 Description</p>
+                    <a href="#contact" class="btn-custom">Learn More</a>
+                 </div>
                 <div class="project-item">
                     <img src="images/pic03.jpg" alt="Project 3">
-                      <p>Project 3 Description</p>
-                    <a href="#contact" class="btn-custom">Learn More</a>
-                </div>
+                    <p>Project 3 Description</p>
+                   <a href="#contact" class="btn-custom">Learn More</a>
+               </div>
             </div>
         </section>
-            <!-- Careers Section -->
+
+          <!-- Careers Section -->
         <section id="careers" class="container">
             <h2>Careers</h2>
             <div class="careers-content">
                 <div class="career-listing">
                     <h3>Construction Manager</h3>
                     <p>We are looking for a skilled Construction Manager with extensive project management experience.</p>
-                    <a href="#" class="btn-custom">Apply Now</a>
+                     <a href="#" class="btn-custom">Apply Now</a>
                 </div>
                 <div class="career-listing">
                     <h3>Civil Engineer</h3>
-                    <p>Seeking a detail-oriented Civil Engineer to oversee the structural design and execution.</p>
+                     <p>Seeking a detail-oriented Civil Engineer to oversee the structural design and execution.</p>
                     <a href="#" class="btn-custom">Apply Now</a>
+                 </div>
+           </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-section">
+                <p><i class="fas fa-map-marker-alt icon"></i>3/325A Krishna Nagar-II,
+                    Sankari, Salem Dist - 637301,
+                    Tamilnadu(India).</p>
+                <p><i class="fas fa-phone icon"></i>+91 9884277647</p>
+                <p><i class="fas fa-envelope icon"></i>nithishkumar@thulirconstruction.in</p>
+                 <div class="map-container">
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.853442692168!2d78.13621327569778!3d8.795439191526478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0187835bcaf195%3A0x3727f65702858e70!2sFourth%20Wall!5e0!3m2!1sen!2sin!4v1718341428565!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  </div>
+                    <div class="social-icons">
+                      <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
+                        <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
+                       <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
+                    </div>
+                <div class="contact-form">
+                  <a href="https://wa.me/917418477647" target="_blank" class="whatsapp-icon">
+                       <img src="images/whatsapp.png" alt="WhatsApp">
+                   </a>
                 </div>
             </div>
         </section>
-    
-        <!-- Contact Us Section -->
-      <section id="contact" class="container">
-        <h2>Contact Us</h2>
-        <div class="contact-section">
-            <p><i class="fas fa-map-marker-alt icon"></i>3/325A Krishna Nagar-II,
-                Sankari, Salem Dist - 637301,
-                Tamilnadu(India).</p>
-            <p><i class="fas fa-phone icon"></i>+91 9884277647</p>
-           <p><i class="fas fa-envelope icon"></i>nithishkumar@thulirconstruction.in</p>
-           <div class="map-container">
-             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.853442692168!2d78.13621327569778!3d8.795439191526478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0187835bcaf195%3A0x3727f65702858e70!2sFourth%20Wall!5e0!3m2!1sen!2sin!4v1718341428565!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
 
-             <div class="social-icons">
-                <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
-                <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
-                <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
-            </div>
-             <div class="contact-form">
-               <a href="https://wa.me/917418477647" target="_blank" class="whatsapp-icon">
-                    <img src="images/whatsapp.png" alt="WhatsApp">
-               </a>
-         </div>
-    
-        </div>
-    </section>
     </main>
-    
+
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Thulir Construction. All rights reserved.</p>
+        <p>© 2024 Thulir Construction. All rights reserved.</p>
     </footer>
+ <script>
+       // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+         anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+           document.querySelector(this.getAttribute('href')).scrollIntoView({
+             behavior: 'smooth'
+           });
+        });
+      });
 
-    <script>
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+       // Highlight active navigation link
+       const navLinks = document.querySelectorAll('.nav a');
+       navLinks.forEach(link => {
+          link.addEventListener('click', function () {
+              navLinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
         });
-       
-        // Highlight active navigation link
-        const navLinks = document.querySelectorAll('.nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+      });
+
+       // Mobile Navigation Toggle
+     const navToggle = document.getElementById('navToggle');
+       const mainNav = document.getElementById('mainNav');
+         navToggle.addEventListener('click', () => {
+             mainNav.classList.toggle('active');
+          });
+
+</script>
 </body>
 </html>
