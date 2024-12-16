@@ -487,6 +487,94 @@
             font-size: 0.95em; /* Slightly larger font */
             color: #6c757d; /* Medium gray text */
         }
+            /* ================= CONTACT US SECTION ================= */
+    #contact {
+            padding: 60px 0; /* Increased padding */
+        }
+    
+    #contact h2 {
+        text-align: center;
+        font-size: 2.8em; /* Larger font */
+        color: #212529; /* Darker text */
+        margin-bottom: 30px; /* Increased margin */
+    }
+    
+    .contact-section {
+        text-align: center;
+        
+    }
+
+    .contact-section p{
+        margin-bottom: 10px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    .contact-section .icon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: #dc3545; /* Red icon */
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px; /* Increased margin */
+    }
+    
+    .social-icons a {
+        margin: 0 15px; /* Increased margin */
+    }
+    
+    .social-icons img {
+        width: 36px; /* Slightly larger icons */
+        height: 36px; /* Slightly larger icons */
+        object-fit: contain;
+    }
+    
+    /* ================= CONTACT FORM ================= */
+    .contact-form {
+        max-width: 600px;
+        margin: 30px auto; /* Increased margin */
+        padding: 30px; /* Increased padding */
+        background-color: #fff; /* White background */
+        border: 1px solid #dee2e6; /* Light gray border */
+        border-radius: 10px; /* More rounded */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+    }
+    
+    .contact-form label {
+        display: block;
+        margin-bottom: 8px; /* Increased margin */
+        font-weight: 500; /* Slightly bolder */
+    }
+    
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        width: 100%;
+        padding: 12px; /* Increased padding */
+        margin-bottom: 20px; /* Increased margin */
+        border: 1px solid #dee2e6; /* Light gray border */
+        border-radius: 5px; /* Slightly rounded */
+        box-sizing: border-box;
+    }
+    
+    .contact-form button {
+        background-color: #007bff; /* Blue button */
+        color: #fff;
+        padding: 12px 25px; /* Increased padding */
+        border: none;
+        border-radius: 5px; /* Slightly rounded */
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .contact-form button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
     
         /* ================= RESPONSIVE DESIGN ================= */
         @media (max-width: 768px) {
@@ -525,7 +613,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#careers">Careers</a></li>
+             <li><a href="#careers">Careers</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     
@@ -598,30 +686,29 @@
                 </div>
             </div>
         </section>
-    
-        <!-- Latest Projects Section -->
+        
+            <!-- Latest Projects Section -->
         <section id="latest-projects" class="latest-projects">
             <h2>Latest Projects</h2>
             <div class="project-gallery">
                 <div class="project-item">
                     <img src="images/pic01.jpg" alt="Project 1">
-                    <p>Project 1 Description</p>
+                     <p>Project 1 Description</p>
                     <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
                 <div class="project-item">
                     <img src="images/pic02.jpg" alt="Project 2">
-                    <p>Project 2 Description</p>
-                    <a href="#contact" class="btn-custom">Learn More</a>
+                     <p>Project 2 Description</p>
+                   <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
                 <div class="project-item">
                     <img src="images/pic03.jpg" alt="Project 3">
-                    <p>Project 3 Description</p>
+                      <p>Project 3 Description</p>
                     <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
             </div>
         </section>
-    
-        <!-- Careers Section -->
+            <!-- Careers Section -->
         <section id="careers" class="container">
             <h2>Careers</h2>
             <div class="careers-content">
@@ -639,36 +726,38 @@
         </section>
     
         <!-- Contact Us Section -->
-        <section id="contact" class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-section">
-                <p><i class="fas fa-map-marker-alt icon"></i>123 Construction Road, City, State</p>
-                <p><i class="fas fa-phone icon"></i>+1 (555) 123-4567</p>
-                <p><i class="fas fa-envelope icon"></i>info@thulirconstruction.com</p>
+    <section id="contact" class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-section">
+            <p><i class="fas fa-map-marker-alt icon"></i>29F/1A, 1st Floor, Andal Street,
+                Tuticorin - 628 002,
+                Tamilnadu(India).</p>
+            <p><i class="fas fa-phone icon"></i>+91 95000 92596, +91 93450 50519</p>
+           <p><i class="fas fa-envelope icon"></i>ak@fourthwall.co.in</p>
     
-                <div class="social-icons">
-                    <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
-                    <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
-                    <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
-                </div>
-    
-                <!-- Contact Form -->
-                <div class="contact-form">
-                    <form action="#" method="post">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
-    
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-    
-                        <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-    
-                        <button type="submit">Send Message</button>
-                    </form>
-                </div>
+            <div class="social-icons">
+                <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
             </div>
-        </section>
+    
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+    
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
     </main>
     
     <!-- Footer Section -->
@@ -686,7 +775,7 @@
                 });
             });
         });
-    
+       
         // Highlight active navigation link
         const navLinks = document.querySelectorAll('.nav a');
         navLinks.forEach(link => {
