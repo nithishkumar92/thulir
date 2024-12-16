@@ -11,29 +11,28 @@
         body {
             margin: 0;
             font-family: 'Comfortaa', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark gray text */
             padding: 0;
             line-height: 1.6;
-             scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
     
         a {
-        text-decoration: none; /* Removes underlines from links */
+            text-decoration: none;
         }
-        
     
         /* ================= HEADER ================= */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            padding: 20px 30px; /* Increased padding */
             background-color: #fff;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
             position: sticky;
             top: 0;
-            z-index: 100; /* Ensures header stays on top */
+            z-index: 100;
         }
     
         .logo {
@@ -43,7 +42,7 @@
     
         .logo img {
             height: 80px;
-            margin-right: 10px;
+            margin-right: 15px; /* Increased margin */
         }
     
         .logo-text-container {
@@ -51,8 +50,9 @@
         }
     
         .logo-text-bold {
-            font-size: 30px;
+            font-size: 32px; /* Slightly larger font */
             font-weight: 700;
+            color: #212529; /* Darker text */
         }
     
         .nav {
@@ -63,45 +63,44 @@
         }
     
         .nav li {
-            margin-right: 20px;
+            margin-right: 25px; /* Increased margin */
         }
     
         .nav a {
-            color: #000;
-            font-weight: 400;
-            font-size: 16px;
+            color: #495057; /* Medium gray text */
+            font-weight: 500; /* Slightly bolder */
+            font-size: 17px; /* Slightly larger font */
             transition: color 0.3s, text-shadow 0.3s;
-             
         }
     
         .nav a:hover {
-            color: red;
+            color: #dc3545; /* Red on hover */
         }
     
         .nav a.active {
-            color: red;
+            color: #dc3545;
             font-weight: 600;
         }
     
         .schedule-button {
-            background-color: red;
+            background-color: #dc3545; /* Red button */
             color: #fff;
             font-size: 16px;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 12px 25px; /* Increased padding */
             border: none;
-            border-radius: 20px;
+            border-radius: 25px; /* More rounded */
             cursor: pointer;
             transition: background-color 0.3s;
         }
     
         .schedule-button:hover {
-            background-color: darkred;
+            background-color: #c82333; /* Darker red on hover */
         }
     
-           /* ================= MAIN CONTENT ================= */
-           main {
-            padding-top: 20px; /* Adds some spacing below the header */
+        /* ================= MAIN CONTENT ================= */
+        main {
+            padding-top: 30px; /* Increased spacing below header */
         }
     
         .container {
@@ -110,269 +109,289 @@
             padding: 0 20px;
         }
     
-            /* ================= HERO SECTION ================= */
+        /* ================= HERO SECTION ================= */
         #hero-section {
-            background-image: url('images/hero.jpg'); /* Replace with your image */
+            background-image: url('images/hero.jpg');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 150px 20px; /* Increased padding */
+            position: relative; /* For overlay */
+        }
+    
+        #hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            z-index: 1;
+        }
+    
+        #hero-section .container {
+            position: relative;
+            z-index: 2;
         }
     
         #hero-section h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-             text-shadow: 2px 2px 4px #000000;
+            font-size: 3.5em; /* Larger font */
+            margin-bottom: 25px; /* Increased margin */
+            text-shadow: 2px 2px 4px #000000;
         }
-        
-         #hero-section p {
-             font-size: 1.2em;
-            margin-bottom: 30px;
+    
+        #hero-section p {
+            font-size: 1.3em; /* Larger font */
+            margin-bottom: 40px; /* Increased margin */
             text-shadow: 1px 1px 2px #000000;
         }
     
-    
-           /* ================= ABOUT SECTION ================= */
-    
-          #about {
-            background-color: #f9f9f9;
-             padding: 40px 0;
-              margin-bottom: 40px;
-          }
-    
-          #about h2 {
-            text-align: center;
-            font-size: 2.5em;
-            color: #333;
-             margin-bottom: 20px;
+        /* ================= ABOUT SECTION ================= */
+        #about {
+            background-color: #fff; /* White background */
+            padding: 60px 0; /* Increased padding */
+            margin-bottom: 50px; /* Increased margin */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
     
-           #about .about-content {
+        #about h2 {
+            text-align: center;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
+        }
+    
+        #about .about-content {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-           }
-           
-           #about .about-image {
-             flex: 1;
-             min-width: 300px; /* Prevents images from becoming too small */
-             max-width: 500px;
-            }
-            
-            #about .about-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            }
-            
-           #about .about-text {
-            flex: 1;
-             min-width: 300px;
-            padding-left: 20px;
-           }
-    
-    
-           /* ================= TEAM SECTION ================= */
-    
-        #team {
-             padding: 40px 0;
-              margin-bottom: 40px;
-         }
-    
-          #team h2 {
-             text-align: center;
-            font-size: 2.5em;
-            color: #333;
-             margin-bottom: 20px;
-           }
-            .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            }
-    
-            .team-member {
-             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-             text-align: center;
-             padding: 15px;
-         }
-         
-           .team-member img {
-            width: 100%;
-            height: auto;
-             border-bottom: 1px solid #ddd;
-         }
-    
-         .team-member h3 {
-             margin: 10px 0 5px;
-             font-size: 1.2em;
-            color: #333;
-         }
-    
-         .team-member p {
-             margin: 0;
-              font-size: 1em;
-             color: #555;
+            gap: 40px; /* Increased gap */
         }
     
+        #about .about-image {
+            flex: 1;
+            min-width: 350px; /* Increased min-width */
+            max-width: 550px; /* Increased max-width */
+        }
     
-       /* ================= SERVICES SECTION ================= */
+        #about .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+        }
     
+        #about .about-text {
+            flex: 1;
+            min-width: 350px; /* Increased min-width */
+            padding-left: 30px; /* Increased padding */
+            font-size: 1.1em; /* Slightly larger font */
+            color: #495057; /* Medium gray text */
+        }
+    
+        /* ================= TEAM SECTION ================= */
+        #team {
+            padding: 60px 0; /* Increased padding */
+            margin-bottom: 50px; /* Increased margin */
+        }
+    
+        #team h2 {
+            text-align: center;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
+        }
+    
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width */
+            gap: 30px; /* Increased gap */
+            padding: 30px; /* Increased padding */
+        }
+    
+        .team-member {
+            background-color: #fff;
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            overflow: hidden;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+        }
+    
+        .team-member img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #dee2e6; /* Light gray border */
+        }
+    
+        .team-member h3 {
+            margin: 15px 0 8px; /* Increased margin */
+            font-size: 1.3em; /* Larger font */
+            color: #212529; /* Darker text */
+        }
+    
+        .team-member p {
+            margin: 0;
+            font-size: 1.1em; /* Slightly larger font */
+            color: #495057; /* Medium gray text */
+        }
+    
+        /* ================= SERVICES SECTION ================= */
         #services {
-            background-color: #f9f9f9;
-            padding: 40px 0;
-            margin-bottom: 40px;
+            background-color: #fff; /* White background */
+            padding: 60px 0; /* Increased padding */
+            margin-bottom: 50px; /* Increased margin */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
     
         #services h2 {
-             text-align: center;
-            font-size: 2.5em;
-            color: #333;
-             margin-bottom: 20px;
-          }
+            text-align: center;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
+        }
+    
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-             gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min-width */
+            gap: 30px; /* Increased gap */
+            padding: 30px; /* Increased padding */
         }
     
         .service-item {
-           background-color: #fff;
-           border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-           overflow: hidden;
+            background-color: #fff;
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            overflow: hidden;
             text-align: center;
-           padding: 15px;
-       }
-       
-       .service-item img {
-           width: 100%;
+            padding: 20px; /* Increased padding */
+        }
+    
+        .service-item img {
+            width: 100%;
             height: auto;
-             border-bottom: 1px solid #ddd;
-          }
+            border-bottom: 1px solid #dee2e6; /* Light gray border */
+        }
     
         .service-item h3 {
-            margin: 10px 0 5px;
-            font-size: 1.2em;
-             color: #333;
+            margin: 15px 0 8px; /* Increased margin */
+            font-size: 1.3em; /* Larger font */
+            color: #212529; /* Darker text */
         }
     
-         .service-item p {
+        .service-item p {
             margin: 0;
-              font-size: 1em;
-            color: #555;
+            font-size: 1.1em; /* Slightly larger font */
+            color: #495057; /* Medium gray text */
         }
     
-       /* ================= LATEST PROJECTS SECTION ================= */
-    
+        /* ================= LATEST PROJECTS SECTION ================= */
         .latest-projects {
-            margin: 40px auto;
+            margin: 60px auto; /* Increased margin */
             max-width: 1200px;
-            padding: 20px;
-            background-color: #f5f5f5;
-             border-radius: 10px;
-             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px; /* Increased padding */
+            background-color: #fff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
         }
     
         .latest-projects h2 {
             text-align: center;
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
         }
     
         .project-gallery {
-             display: grid;
-             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased min-width */
+            gap: 30px; /* Increased gap */
         }
     
         .project-item {
             background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-             overflow: hidden;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-             text-align: center;
-           padding: 10px;
-       }
+            border: 1px solid #dee2e6; /* Light gray border */
+            border-radius: 10px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            text-align: center;
+            padding: 15px; /* Increased padding */
+        }
     
         .project-item img {
             width: 100%;
             height: auto;
-           border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #dee2e6; /* Light gray border */
         }
     
         .project-item p {
-            margin: 10px 0 0;
-             font-size: 16px;
-             color: #555;
+            margin: 15px 0 0; /* Increased margin */
+            font-size: 1.1em; /* Slightly larger font */
+            color: #495057; /* Medium gray text */
         }
-        
-         .project-item a{
-              margin-top: 10px;
-              display: inline-block;
-            }
     
-       /* ================= CAREERS SECTION ================= */
+        .project-item a {
+            margin-top: 15px; /* Increased margin */
+            display: inline-block;
+        }
+    
+        /* ================= CAREERS SECTION ================= */
         #careers {
-            padding: 40px 0;
-            background-color: #f9f9f9;
-             margin-bottom: 40px;
+            padding: 60px 0; /* Increased padding */
+            background-color: #fff; /* White background */
+            margin-bottom: 50px; /* Increased margin */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
     
-         #careers h2 {
-             text-align: center;
-             font-size: 2.5em;
-            color: #333;
-            margin-bottom: 20px;
-          }
-         .careers-content {
-            padding: 0 20px;
-         }
+        #careers h2 {
+            text-align: center;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
+        }
+    
+        .careers-content {
+            padding: 0 30px; /* Increased padding */
+        }
     
         .career-listing {
-           background-color: #fff;
-            border-radius: 8px;
-             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-             padding: 20px;
-             margin-bottom: 15px;
+            background-color: #fff;
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            padding: 25px; /* Increased padding */
+            margin-bottom: 20px; /* Increased margin */
         }
     
-         .career-listing h3 {
-            margin-bottom: 10px;
-             color: #333;
-           }
+        .career-listing h3 {
+            margin-bottom: 12px; /* Increased margin */
+            color: #212529; /* Darker text */
+            font-size: 1.3em; /* Larger font */
+        }
+    
         .career-listing p {
-            color: #555;
+            color: #495057; /* Medium gray text */
+            font-size: 1.1em; /* Slightly larger font */
         }
-         .career-listing a {
+    
+        .career-listing a {
             display: inline-block;
-            margin-top: 10px;
-         }
+            margin-top: 15px; /* Increased margin */
+        }
     
-       /* ================= CONTACT US SECTION ================= */
-    
-       #contact {
-          padding: 40px 0;
+        /* ================= CONTACT US SECTION ================= */
+        #contact {
+            padding: 60px 0; /* Increased padding */
         }
     
         #contact h2 {
-          text-align: center;
-          font-size: 2.5em;
-           color: #333;
-           margin-bottom: 20px;
-      }
-    
+            text-align: center;
+            font-size: 2.8em; /* Larger font */
+            color: #212529; /* Darker text */
+            margin-bottom: 30px; /* Increased margin */
+        }
     
         .contact-section {
             text-align: center;
@@ -381,106 +400,113 @@
         .contact-section .icon {
             font-size: 24px;
             margin-right: 10px;
-            color: red;
+            color: #dc3545; /* Red icon */
         }
     
         .social-icons {
-             display: flex;
+            display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 25px; /* Increased margin */
         }
     
         .social-icons a {
-             margin: 0 10px;
+            margin: 0 15px; /* Increased margin */
         }
     
         .social-icons img {
-             width: 32px;
-            height: 32px;
-             object-fit: contain;
+            width: 36px; /* Slightly larger icons */
+            height: 36px; /* Slightly larger icons */
+            object-fit: contain;
         }
-        
     
         /* ================= CONTACT FORM ================= */
-            .contact-form {
-                 max-width: 600px;
-                margin: 20px auto;
-                 padding: 20px;
-               background-color: #f9f9f9;
-                border: 1px solid #ddd;
-               border-radius: 8px;
-              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            }
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto; /* Increased margin */
+            padding: 30px; /* Increased padding */
+            background-color: #fff; /* White background */
+            border: 1px solid #dee2e6; /* Light gray border */
+            border-radius: 10px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+        }
     
-            .contact-form label {
-              display: block;
-             margin-bottom: 5px;
-            }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px; /* Increased margin */
+            font-weight: 500; /* Slightly bolder */
+        }
     
-           .contact-form input[type="text"],
-             .contact-form input[type="email"],
-            .contact-form textarea {
-                width: 100%;
-                padding: 10px;
-                 margin-bottom: 15px;
-                border: 1px solid #ddd;
-               border-radius: 4px;
-                box-sizing: border-box;
-            }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px; /* Increased padding */
+            margin-bottom: 20px; /* Increased margin */
+            border: 1px solid #dee2e6; /* Light gray border */
+            border-radius: 5px; /* Slightly rounded */
+            box-sizing: border-box;
+        }
     
-           .contact-form button {
-             background-color: #007bff;
-             color: #fff;
-             padding: 10px 20px;
+        .contact-form button {
+            background-color: #007bff; /* Blue button */
+            color: #fff;
+            padding: 12px 25px; /* Increased padding */
             border: none;
-             border-radius: 4px;
+            border-radius: 5px; /* Slightly rounded */
             cursor: pointer;
-         }
-        
-           /* ================= BUTTONS ================= */
+            transition: background-color 0.3s;
+        }
     
+        .contact-form button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    
+        /* ================= BUTTONS ================= */
         .btn-custom {
-            background-color: #007bff; /* Example: Blue background */
+            background-color: #007bff; /* Blue background */
             color: #fff;
             border: none;
-           padding: 10px 20px;
-           border-radius: 5px;
+            padding: 12px 25px; /* Increased padding */
+            border-radius: 5px; /* Slightly rounded */
             text-decoration: none;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-         
-          /* ================= FOOTER ================= */
-            footer {
-                text-align: center;
-                padding: 20px 0;
-                background-color: #f0f0f0;
-                margin-top: 50px;
-                 border-top: 1px solid #ddd;
-                font-size: 0.9em;
-                color: #777;
-              }
+    
+        .btn-custom:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            padding: 25px 0; /* Increased padding */
+            background-color: #f8f9fa; /* Light gray background */
+            margin-top: 60px; /* Increased margin */
+            border-top: 1px solid #dee2e6; /* Light gray border */
+            font-size: 0.95em; /* Slightly larger font */
+            color: #6c757d; /* Medium gray text */
+        }
     
         /* ================= RESPONSIVE DESIGN ================= */
         @media (max-width: 768px) {
-             .header {
+            .header {
                 flex-direction: column;
                 align-items: flex-start;
             }
     
-             .logo {
-                margin-bottom: 10px;
-             }
+            .logo {
+                margin-bottom: 15px; /* Increased margin */
+            }
     
-             .nav {
-                 margin-top: 10px;
+            .nav {
+                margin-top: 15px; /* Increased margin */
             }
     
             .nav li {
-                margin-right: 10px;
+                margin-right: 15px; /* Increased margin */
             }
         }
-    
-    
     </style>
 </head>
 <body>
@@ -496,173 +522,172 @@
     
         <ul class="nav">
             <li><a href="#home" class="active">Home</a></li>
-             <li><a href="#about">About</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#services">Services</a></li>
-             <li><a href="#careers">Careers</a></li>
+            <li><a href="#careers">Careers</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     
-         <button class="schedule-button">Schedule Meeting</button>
+        <button class="schedule-button">Schedule Meeting</button>
     </header>
 
     <main>
         <!-- Hero Section -->
-         <section id="hero-section">
-        <div class="container">
-            <h1>Building Dreams, Delivering Excellence</h1>
-            <p>Your trusted partner for all construction needs. Let's create something amazing together.</p>
-             <a href="#contact" class="btn-custom">Get a Free Quote</a>
-        </div>
-    </section>
+        <section id="hero-section">
+            <div class="container">
+                <h1>Building Dreams, Delivering Excellence</h1>
+                <p>Your trusted partner for all construction needs. Let's create something amazing together.</p>
+                <a href="#contact" class="btn-custom">Get a Free Quote</a>
+            </div>
+        </section>
     
-         <!-- About Us Section -->
-         <section id="about" class="container">
-              <h2>About Us</h2>
-              <div class="about-content">
+        <!-- About Us Section -->
+        <section id="about" class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
                 <div class="about-image">
-                 <img src="images/about-image.jpg" alt="About Us Image">
-                 </div>
-                  <div class="about-text">
-                 <p>Thulir Construction is a leading construction company dedicated to building high-quality and sustainable structures. With years of experience, we specialize in both residential and commercial projects, ensuring every client receives the best possible outcome. Our team of skilled professionals is committed to excellence and innovation, delivering projects on time and within budget. We focus on providing a seamless and transparent experience, from planning to completion. Our passion for building and our commitment to quality makes us the ideal partner for your next project.</p>
-                 </div>
+                    <img src="images/about-image.jpg" alt="About Us Image">
                 </div>
+                <div class="about-text">
+                    <p>Thulir Construction is a leading construction company dedicated to building high-quality and sustainable structures. With years of experience, we specialize in both residential and commercial projects, ensuring every client receives the best possible outcome. Our team of skilled professionals is committed to excellence and innovation, delivering projects on time and within budget. We focus on providing a seamless and transparent experience, from planning to completion. Our passion for building and our commitment to quality makes us the ideal partner for your next project.</p>
+                </div>
+            </div>
+        </section>
     
-         </section>
-    
-    
-      <!-- Team Section -->
-     <section id="team" class="container">
+        <!-- Team Section -->
+        <section id="team" class="container">
             <h2>Our Team</h2>
-             <div class="team-grid">
-                 <div class="team-member">
+            <div class="team-grid">
+                <div class="team-member">
                     <img src="images/team1.jpg" alt="Team Member 1">
-                     <h3>John Doe</h3>
-                     <p>Project Manager</p>
-               </div>
-                 <div class="team-member">
-                    <img src="images/team2.jpg" alt="Team Member 2">
-                     <h3>Jane Smith</h3>
-                     <p>Lead Architect</p>
+                    <h3>John Doe</h3>
+                    <p>Project Manager</p>
                 </div>
                 <div class="team-member">
-                     <img src="images/team3.jpg" alt="Team Member 3">
+                    <img src="images/team2.jpg" alt="Team Member 2">
+                    <h3>Jane Smith</h3>
+                    <p>Lead Architect</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/team3.jpg" alt="Team Member 3">
                     <h3>Peter Pan</h3>
                     <p>Site Supervisor</p>
                 </div>
             </div>
-         </section>
-         
-            <!-- Services Section -->
-            <section id="services" class="container">
-                 <h2>Our Services</h2>
-                  <div class="services-grid">
+        </section>
+    
+        <!-- Services Section -->
+        <section id="services" class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
                 <div class="service-item">
                     <img src="images/service1.jpg" alt="Service 1">
-                     <h3>Residential Construction</h3>
-                     <p>Building custom homes tailored to your unique needs.</p>
+                    <h3>Residential Construction</h3>
+                    <p>Building custom homes tailored to your unique needs.</p>
                 </div>
-                    <div class="service-item">
-                         <img src="images/service2.jpg" alt="Service 2">
-                        <h3>Commercial Construction</h3>
-                        <p>Constructing functional and sustainable commercial buildings.</p>
-                    </div>
-                   <div class="service-item">
-                       <img src="images/service3.jpg" alt="Service 3">
-                        <h3>Renovation & Remodeling</h3>
-                        <p>Transforming existing spaces with quality upgrades.</p>
-                 </div>
+                <div class="service-item">
+                    <img src="images/service2.jpg" alt="Service 2">
+                    <h3>Commercial Construction</h3>
+                    <p>Constructing functional and sustainable commercial buildings.</p>
                 </div>
-          </section>
+                <div class="service-item">
+                    <img src="images/service3.jpg" alt="Service 3">
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transforming existing spaces with quality upgrades.</p>
+                </div>
+            </div>
+        </section>
     
-          <!-- Latest Projects Section -->
+        <!-- Latest Projects Section -->
         <section id="latest-projects" class="latest-projects">
             <h2>Latest Projects</h2>
             <div class="project-gallery">
-                 <div class="project-item">
-                     <img src="images/pic01.jpg" alt="Project 1">
-                     <p>Project 1 Description</p>
-                       <a href="#contact" class="btn-custom">Learn More</a>
-                 </div>
-                 <div class="project-item">
+                <div class="project-item">
+                    <img src="images/pic01.jpg" alt="Project 1">
+                    <p>Project 1 Description</p>
+                    <a href="#contact" class="btn-custom">Learn More</a>
+                </div>
+                <div class="project-item">
                     <img src="images/pic02.jpg" alt="Project 2">
                     <p>Project 2 Description</p>
-                     <a href="#contact" class="btn-custom">Learn More</a>
+                    <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
                 <div class="project-item">
                     <img src="images/pic03.jpg" alt="Project 3">
-                     <p>Project 3 Description</p>
-                      <a href="#contact" class="btn-custom">Learn More</a>
+                    <p>Project 3 Description</p>
+                    <a href="#contact" class="btn-custom">Learn More</a>
                 </div>
             </div>
-      </section>
-      
-      <!-- Careers Section -->
+        </section>
+    
+        <!-- Careers Section -->
         <section id="careers" class="container">
-        <h2>Careers</h2>
-        <div class="careers-content">
-         <div class="career-listing">
-                <h3>Construction Manager</h3>
-                <p>We are looking for a skilled Construction Manager with extensive project management experience.</p>
-                <a href="#" class="btn-custom">Apply Now</a>
+            <h2>Careers</h2>
+            <div class="careers-content">
+                <div class="career-listing">
+                    <h3>Construction Manager</h3>
+                    <p>We are looking for a skilled Construction Manager with extensive project management experience.</p>
+                    <a href="#" class="btn-custom">Apply Now</a>
+                </div>
+                <div class="career-listing">
+                    <h3>Civil Engineer</h3>
+                    <p>Seeking a detail-oriented Civil Engineer to oversee the structural design and execution.</p>
+                    <a href="#" class="btn-custom">Apply Now</a>
+                </div>
             </div>
-             <div class="career-listing">
-                <h3>Civil Engineer</h3>
-                <p>Seeking a detail-oriented Civil Engineer to oversee the structural design and execution.</p>
-                <a href="#" class="btn-custom">Apply Now</a>
-            </div>
-        </div>
-    </section>
-        
-         <!-- Contact Us Section -->
+        </section>
+    
+        <!-- Contact Us Section -->
         <section id="contact" class="container">
-          <h2>Contact Us</h2>
-          <div class="contact-section">
-            <p><i class="fas fa-map-marker-alt icon"></i>123 Construction Road, City, State</p>
-            <p><i class="fas fa-phone icon"></i>+1 (555) 123-4567</p>
-             <p><i class="fas fa-envelope icon"></i>info@thulirconstruction.com</p>
-            
-              <div class="social-icons">
-               <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
-               <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
-               <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
+            <h2>Contact Us</h2>
+            <div class="contact-section">
+                <p><i class="fas fa-map-marker-alt icon"></i>123 Construction Road, City, State</p>
+                <p><i class="fas fa-phone icon"></i>+1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope icon"></i>info@thulirconstruction.com</p>
+    
+                <div class="social-icons">
+                    <a href="#" target="_blank"><img src="images/fb.png" alt="Facebook"></a>
+                    <a href="#" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
+                    <a href="#" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
+                </div>
+    
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+    
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+    
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+    
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
             </div>
-        
-            <!-- Contact Form -->
-           <div class="contact-form">
-             <form action="#" method="post">
-                  <label for="name">Name:</label>
-                   <input type="text" id="name" name="name" required>
-                  
-                   <label for="email">Email:</label>
-                   <input type="email" id="email" name="email" required>
-                    
-                   <label for="message">Message:</label>
-                   <textarea id="message" name="message" rows="5" required></textarea>
-                   
-                    <button type="submit">Send Message</button>
-              </form>
-           </div>
-       </div>
-       </section>
+        </section>
     </main>
     
-        <!-- Footer Section -->
-      <footer>
+    <!-- Footer Section -->
+    <footer>
         <p>&copy; 2024 Thulir Construction. All rights reserved.</p>
-     </footer>
+    </footer>
 
     <script>
-    
-      // Add smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-         anchor.addEventListener('click', function (e) {
-             e.preventDefault();
-             document.querySelector(this.getAttribute('href')).scrollIntoView({
-               behavior: 'smooth'
-           });
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
-      });
+    
+        // Highlight active navigation link
         const navLinks = document.querySelectorAll('.nav a');
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
