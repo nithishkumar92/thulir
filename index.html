@@ -38,7 +38,7 @@
 <section class="hero">
     <div class="hero-content">
         <div class="hero-left">
-            <h1>Your Vision,<br>Our Expertise.</h1>
+            <h1 class="gradient-text">Your Vision,<br>Our Expertise.</h1>
                     </div>
         <div class="hero-right">
             <p>At Thulir Construction, we blend innovative design with expert craftsmanship to deliver exceptional construction projects. From residential homes to commercial spaces, we are committed to exceeding client expectations through quality workmanship, transparent communication, and on-time project completion.</p>
@@ -46,7 +46,7 @@
                 <h2>Our Expertise</h2>
                 <div class="good-at-items">
                     <div class="good-at-item">
-                        <img src="images/Architectural Design.png" alt="Design">
+                        <img src="design-icon.png" alt="Design">
                         <span>Architectural Design</span>
                     </div>
                     <div class="good-at-item">
@@ -170,11 +170,12 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 
 .hero-left {
 
-    flex: 0.8; /* Takes up available space */
+    flex: 0.9; /* Takes up available space */
     color: #d11a2a; /* Red text color */
-    font-size: 3em;
+    font-size: 1.8em;
     font-weight: bold;
     line-height: 1.2;
+    padding-left: 5px;
 }
 
 .hero-right {
@@ -209,7 +210,19 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 }
 
 .good-at-item img {
-    width: 30px; /* Adjust icon size */
+    width: 20px; /* Adjust icon size */
     margin-right: 10px;
 }
+
+.gradient-text {
+    background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em; /* Keep your original font size */
+    font-weight: bold; /* Keep your original font weight */
+    line-height: 1.2; /* Keep your original line height */
+}
+
 </style>
