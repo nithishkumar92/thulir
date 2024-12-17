@@ -29,64 +29,63 @@
             </div>
         </div>
     </div>
-  
-</body>
 
-    </script>
-</html>
-
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-left">
-            <h1 class="gradient-text">Your Vision,<br>Our Expertise.</h1>
-                    </div>
-        <div class="hero-right">
-            <p>At Thulir Construction, we blend innovative design with expert craftsmanship to deliver exceptional construction projects. From residential homes to commercial spaces, we are committed to exceeding client expectations through quality workmanship, transparent communication, and on-time project completion.</p>
-            <div class="we-are-good-at">
-                <h2>Our Expertise</h2>
-                <div class="good-at-items">
-                    <div class="good-at-item">
-                        <img src="design-icon.png" alt="Design">
-                        <span>Architectural Design</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="construction-icon.png" alt="Construction">
-                        <span>General Contracting</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="project-management-icon.png" alt="Project Management">
-                        <span>Project Management</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="renovation-icon.png" alt="Renovation">
-                        <span>Renovations & Remodeling</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="sustainable-icon.png" alt="Sustainable Building">
-                        <span>Sustainable Building</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="consulting-icon.png" alt="Consulting">
-                        <span>Construction Consulting</span>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1 class="gradient-text">Your Vision,<br>Our Expertise.</h1>
+            </div>
+            <div class="hero-right">
+                <p>At Thulir Construction, we blend innovative design with expert craftsmanship to deliver exceptional construction projects. From residential homes to commercial spaces, we are committed to exceeding client expectations through quality workmanship, transparent communication, and on-time project completion.</p>
+                <div class="we-are-good-at">
+                    <h2>Our Expertise</h2>
+                    <div class="good-at-items">
+                        <div class="good-at-item">
+                            <img src="design-icon.png" alt="Design">
+                            <span>Architectural Design</span>
+                        </div>
+                        <div class="good-at-item">
+                            <img src="construction-icon.png" alt="Construction">
+                            <span>General Contracting</span>
+                        </div>
+                        <div class="good-at-item">
+                            <img src="project-management-icon.png" alt="Project Management">
+                            <span>Project Management</span>
+                        </div>
+                        <div class="good-at-item">
+                            <img src="renovation-icon.png" alt="Renovation">
+                            <span>Renovations & Remodeling</span>
+                        </div>
+                        <div class="good-at-item">
+                            <img src="sustainable-icon.png" alt="Sustainable Building">
+                            <span>Sustainable Building</span>
+                        </div>
+                        <div class="good-at-item">
+                            <img src="consulting-icon.png" alt="Consulting">
+                            <span>Construction Consulting</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
+</body>
+</html>
 
 
 
 <style>
 
-    /* style.css */
+  /* style.css */
+body {
+    margin: 0;
+    font-family: 'Comfortaa';
+}
+
 .navbar {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    font-family: 'Comfortaa';
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -98,6 +97,7 @@
 
 .logo-img {
     height: 70px;
+    max-width: 100%;
     margin-right: 10px;
 }
 
@@ -129,49 +129,48 @@
     display: flex;
     white-space: nowrap;
 }
-    
+
 .nav-links a {
     text-decoration: none;
-  font-size: 1.1em;
-    margin-left: 50px; /* Reduced margin for tighter spacing */
+    font-size: 1.1em;
+    margin-left: 50px;
     color: black;
-transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s ease; /* Add transition for background-position */
-    background-image: linear-gradient(to right, transparent, transparent); /* Transparent gradient by default */
-    background-size: 200% 100%; /* Double the width for smooth transition */
-    background-position: 0 0; /* Start from the left */
+    transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s ease;
+    background-image: linear-gradient(to right, transparent, transparent);
+    background-size: 200% 100%;
+    background-position: 0 0;
 }
 
-.nav-links a:hover { /* Hover effect */
-    color: #007bff; /* Example hover color (blue) */
+.nav-links a:hover {
+    color: #007bff;
     font-weight: 600;
 }
 
 .nav-links a.active {
     font-weight: bold;
-    background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+    background-image: linear-gradient(to right, #a88734, #d9ac5a);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; /* Make text transparent to show gradient */
-    -webkit-text-fill-color: transparent; /* For Safari support */
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero {
-    padding: 40px 20px; /* Adjust padding as needed */font-       family: 'Comfortaa';
-    background-color: #f8f8f8; /* Light gray background */
+    padding: 40px 20px;
+    background-color: #f8f8f8;
 }
 
 .hero-content {
     display: flex;
-    max-width: 1200px; /* Set a maximum width for the content */
+    max-width: 1200px;
     margin: 0 auto;
-    align-items: flex-start; /* Align items to the top */
-    gap: 40px; /* Add some gap between left and right sides */
+    align-items: flex-start;
+    gap: 40px;
 }
 
 .hero-left {
-
-    flex: 0.9; /* Takes up available space */
-    color: #d11a2a; /* Red text color */
+    flex: 0.9;
+    color: #d11a2a;
     font-size: 1.8em;
     font-weight: bold;
     line-height: 1.2;
@@ -179,19 +178,16 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 }
 
 .hero-right {
-    flex: 1; /* Takes up available space */
+    flex: 1;
+  font-family: 'Comfortaa';
 }
 
 .hero-right p {
-    font-family: 'Comfortaa';
     line-height: 1.6;
     font-size: 1.2em;
     margin-bottom: 20px;
     text-align: justify;
-    -webkit-hyphens: auto; /* For Safari */
-    -moz-hyphens: auto; /* For Firefox */
-    -ms-hyphens: auto; /* For Internet Explorer/Edge */
-    hyphens: auto; /* Standard property */
+    hyphens: auto;
 }
 
 .we-are-good-at h2 {
@@ -200,7 +196,7 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 
 .good-at-items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
     gap: 20px;
 }
 
@@ -210,19 +206,76 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 }
 
 .good-at-item img {
-    width: 20px; /* Adjust icon size */
+    width: 20px;
     margin-right: 10px;
+    max-width: 100%;
+    height: auto;
 }
 
 .gradient-text {
-    background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+    background-image: linear-gradient(to right, #a88734, #d9ac5a);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    font-size: 3em; /* Keep your original font size */
-    font-weight: bold; /* Keep your original font weight */
-    line-height: 1.2; /* Keep your original line height */
+    font-size: 3em;
+    font-weight: bold;
+    line-height: 1.2;
 }
 
+/* Media Queries for Responsiveness */
+@media only screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center; /* Center items on mobile */
+    }
+
+    .logo {
+        margin-bottom: 10px; /* Space between logo and nav on mobile */
+    }
+
+    .nav-container {
+        width: 100%;
+        justify-content: center; /* Center nav links */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch; /* Stretch links to full width */
+        width: 100%;
+    }
+
+    .nav-links a {
+        margin: 5px 0;
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in width calculation */
+        text-align: center; /* Center link text */
+        margin-left: 0;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center; /* Center content on mobile */
+        text-align: center;
+    }
+
+    .hero-left {
+        font-size: 2em; /* Slightly larger font on mobile */
+        padding: 0 10px;
+    }
+    .hero-right{
+        padding: 0 10px;
+    }
+
+    .gradient-text {
+        font-size: 2.5em; /* Smaller gradient text on mobile */
+    }
+
+    .good-at-items {
+        grid-template-columns: repeat(1, 1fr); /* Single column on mobile */
+    }
+    .hero-right p{
+        text-align: left;
+    }
+}
 </style>
