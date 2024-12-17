@@ -9,9 +9,73 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<style>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-main">THULIR</span>
+                <span class="logo-sub">CONSTRUCTION</span>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">About</a>
+                <a href="#">Team</a>
+                <a href="#">Services</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </div>
+  
+</body>
+
+    </script>
+</html>
 
 
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-left">
+            <h1>We are not just<br>another Construction<br>
+              Company!</h1>
+        </div>
+        <div class="hero-right">
+            <p>Precise Rebar is operated by a team of young potential and well-experienced Estimators and Detailers which is located in Tamilnadu, India. We are committed to producing a quality product, on time - every time.</p>
+            <div class="we-are-good-at">
+                <h2>We are good at</h2>
+                <div class="good-at-items">
+                    <div class="good-at-item">
+                        <img src="quick-turnaround-icon.png" alt="Quick Turnaround">
+                        <span>Quick Turnaround</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="competitive-rates-icon.png" alt="Competitive Rates">
+                        <span>Competitive Rates</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="accurate-icon.png" alt="Accurate">
+                        <span>Accurate</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="experienced-icon.png" alt="Experienced">
+                        <span>Experienced</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="detailed-breakouts-icon.png" alt="Detailed Breakouts">
+                        <span>Detailed Breakouts</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="customizable-takeoffs-icon.png" alt="Customizable Takeoffs">
+                        <span>Customizable Takeoffs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 /* style.css */
 .navbar {
     display: flex;
@@ -87,7 +151,7 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 }
 
 .hero {
-    padding: 50px 20px; /* Adjust padding as needed */
+    padding: 30px 20px; /* Adjust padding as needed */font-       family: 'Comfortaa';
     background-color: #f8f8f8; /* Light gray background */
 }
 
@@ -100,7 +164,7 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
 }
 
 .hero-left {
-    flex: 1; /* Takes up available space */
+    flex: 0.8; /* Takes up available space */
     color: #d11a2a; /* Red text color */
     font-size: 3em;
     font-weight: bold;
@@ -136,80 +200,3 @@ transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s eas
     margin-right: 10px;
 }
 
- </style>
-
-<body>
-    <div class="navbar">
-        <div class="logo">
-            <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
-            <div class="logo-text">
-                <span class="logo-main">THULIR</span>
-                <span class="logo-sub">CONSTRUCTION</span>
-            </div>
-        </div>
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#">About</a>
-                <a href="#">Team</a>
-                <a href="#">Services</a>
-                <a href="#">Careers</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="hero-container"></div> <script>
-        fetch('hero.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('hero-container').innerHTML = html;
-            });
-    </script>
-</body>
-</html>
-
-
-
-
-
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-left">
-            <h1>We are not just<br>another Rebar<br>Servicing<br>Company!</h1>
-        </div>
-        <div class="hero-right">
-            <p>Precise Rebar is operated by a team of young potential and well-experienced Estimators and Detailers which is located in Tamilnadu, India. We are committed to producing a quality product, on time - every time.</p>
-            <div class="we-are-good-at">
-                <h2>We are good at</h2>
-                <div class="good-at-items">
-                    <div class="good-at-item">
-                        <img src="quick-turnaround-icon.png" alt="Quick Turnaround">
-                        <span>Quick Turnaround</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="competitive-rates-icon.png" alt="Competitive Rates">
-                        <span>Competitive Rates</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="accurate-icon.png" alt="Accurate">
-                        <span>Accurate</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="experienced-icon.png" alt="Experienced">
-                        <span>Experienced</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="detailed-breakouts-icon.png" alt="Detailed Breakouts">
-                        <span>Detailed Breakouts</span>
-                    </div>
-                    <div class="good-at-item">
-                        <img src="customizable-takeoffs-icon.png" alt="Customizable Takeoffs">
-                        <span>Customizable Takeoffs</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- 
