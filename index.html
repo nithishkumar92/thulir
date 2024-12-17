@@ -3,78 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precise Rebar</title>
-    <style>
-        body {
-            font-family: sans-serif; /* Choose a font for your website */
-            margin: 0;
-        }
-
-        header {
-            background-color: #fff; /* White background for the header */
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        .logo span {
-            color: red; /* Red color for "REBAR" */
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        nav li {
-            margin-left: 30px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333; /* Dark gray color for navigation links */
-            font-weight: bold;
-            transition: color 0.3s ease; /* Smooth color transition on hover */
-        }
-
-        nav a:hover {
-            color: red; /* Red color for navigation links on hover */
-        }
-
-        .shadow-line {
-            height: 2px;
-            background-color: #ccc; /* Light gray color for the line */
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
-        }
-    </style>
+    <title>Centered Navigation Bar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+<style>
+
+
+/* style.css */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-family: 'Comfortaa';
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 70px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-main {
+    font-weight: 700;
+    font-size: 2.2em;
+}
+
+.logo-sub {
+    font-size: 1em;
+    font-weight: 800;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    white-space: nowrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+  font-size: 1.1em;
+    margin-left: 50px; /* Reduced margin for tighter spacing */
+    color: black;
+transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s ease; /* Add transition for background-position */
+    background-image: linear-gradient(to right, transparent, transparent); /* Transparent gradient by default */
+    background-size: 200% 100%; /* Double the width for smooth transition */
+    background-position: 0 0; /* Start from the left */
+}
+
+.nav-links a:hover { /* Hover effect */
+    color: #007bff; /* Example hover color (blue) */
+    font-weight: 600;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+    background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Make text transparent to show gradient */
+    -webkit-text-fill-color: transparent; /* For Safari support */
+}
+
+.hero {
+    padding: 50px 20px; /* Adjust padding as needed */
+    background-color: #f8f8f8; /* Light gray background */
+}
+
+.hero-content {
+    display: flex;
+    max-width: 1200px; /* Set a maximum width for the content */
+    margin: 0 auto;
+    align-items: flex-start; /* Align items to the top */
+    gap: 50px; /* Add some gap between left and right sides */
+}
+
+.hero-left {
+    flex: 1; /* Takes up available space */
+    color: #d11a2a; /* Red text color */
+    font-size: 3em;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.hero-right {
+    flex: 1; /* Takes up available space */
+}
+
+.hero-right p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.we-are-good-at h2 {
+    margin-bottom: 10px;
+}
+
+.good-at-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px;
+}
+
+.good-at-item {
+    display: flex;
+    align-items: center;
+}
+
+.good-at-item img {
+    width: 20px; /* Adjust icon size */
+    margin-right: 10px;
+}
+
+ </style>
+
 <body>
-
-    <header>
+    <div class="navbar">
         <div class="logo">
-            PRECISE <span>REBAR</span> 
+            <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-main">THULIR</span>
+                <span class="logo-sub">CONSTRUCTION</span>
+            </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">About</a>
+                <a href="#">Team</a>
+                <a href="#">Services</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </div>
 
-    <div class="shadow-line"></div>
-
+    <div id="hero-container"></div> <script>
+        fetch('hero.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('hero-container').innerHTML = html;
+            });
+    </script>
 </body>
 </html>
+
+
+
+
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-left">
+            <h1>We are not just<br>another Rebar<br>Servicing<br>Company!</h1>
+        </div>
+        <div class="hero-right">
+            <p>Precise Rebar is operated by a team of young potential and well-experienced Estimators and Detailers which is located in Tamilnadu, India. We are committed to producing a quality product, on time - every time.</p>
+            <div class="we-are-good-at">
+                <h2>We are good at</h2>
+                <div class="good-at-items">
+                    <div class="good-at-item">
+                        <img src="quick-turnaround-icon.png" alt="Quick Turnaround">
+                        <span>Quick Turnaround</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="competitive-rates-icon.png" alt="Competitive Rates">
+                        <span>Competitive Rates</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="accurate-icon.png" alt="Accurate">
+                        <span>Accurate</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="experienced-icon.png" alt="Experienced">
+                        <span>Experienced</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="detailed-breakouts-icon.png" alt="Detailed Breakouts">
+                        <span>Detailed Breakouts</span>
+                    </div>
+                    <div class="good-at-item">
+                        <img src="customizable-takeoffs-icon.png" alt="Customizable Takeoffs">
+                        <span>Customizable Takeoffs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ 
