@@ -47,7 +47,7 @@ body {
 .nav-container {
     display: flex;
     justify-content: flex-end;
-    align-items: center; /* Align the icon with other navbar items */
+    align-items: center;
 }
 
 .nav-links {
@@ -263,38 +263,39 @@ body {
 }
 
 
-/* Hamburger Menu Icon */
 .hamburger {
-  display: none; /* Hide by default on larger screens */
+  display: none; 
   cursor: pointer;
   font-size: 1.5em;
-  margin-left: 20px; /* Add some space to the left */
+  position: absolute; /* Position it absolutely */
+  top: 15px; /* Adjust top position as needed */
+  right: 20px; /* Adjust right position as needed */
 }
 
 @media (max-width: 768px) {
   .hamburger {
-    display: block; /* Show the hamburger icon on mobile */
+    display: block; 
   }
 
   .nav-links {
-    display: none; /* Hide the navigation links by default */
+    display: none; 
     flex-direction: column;
     position: absolute;
-    top: 60px; /* Position below the navbar */
-    left: 0;
-    width: 100%;
+    top: 60px; 
+    right: 0; /* Align to the right */
+    width: 200px; /* Adjust width as needed */
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
   }
 
   .nav-links.show {
-    display: flex; /* Show the links when the icon is clicked */
+    display: flex; 
   }
 
   .nav-links a {
     margin: 10px 0;
-    text-align: center; /* Center the links in the dropdown */
+    text-align: center;
   }
 
   .navbar {
@@ -311,7 +312,7 @@ body {
   }
 
   .hero {
-      height: auto; 
+      height: auto;
       padding: 20px; 
   }
 
@@ -320,11 +321,11 @@ body {
   }
 
   .hero-right p {
-      font-size: 1em;
+      font-size: 1em; 
   }
 
   .good-at-items {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
   .footer-section {
