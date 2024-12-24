@@ -1,9 +1,7 @@
-<style>
-
-  /* style.css */
 body {
     margin: 0;
     font-family: 'Comfortaa';
+    background: url("subtle_pattern.jpg"); 
 }
 
 .navbar {
@@ -12,6 +10,11 @@ body {
     padding: 10px 20px;
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky; 
+    top: 0;
+    z-index: 10; 
+    background-color: white; 
+    height: 60px; 
 }
 
 .logo {
@@ -29,16 +32,19 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1;
+    
 }
 
 .logo-main {
     font-weight: 700;
     font-size: 2.5em;
+
 }
 
 .logo-sub {
     font-size: 1.15em;
     font-weight: 800;
+    
 }
 
 .nav-container {
@@ -47,11 +53,11 @@ body {
 }
 
 .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    white-space: nowrap;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
 
 .nav-links a {
@@ -80,8 +86,11 @@ body {
 }
 
 .hero {
-    padding: 40px 20px;
-    background-color: #f8f8f8;
+    height: 50vh; 
+    padding: 30px 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 }
 
 .hero-content {
@@ -93,47 +102,49 @@ body {
 }
 
 .hero-left {
-    flex: 0.9;
+    flex: 1;
     color: #d11a2a;
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     line-height: 1.2;
     padding-left: 5px;
 }
 
 .hero-right {
-    flex: 1;
-  font-family: 'Comfortaa';
+    flex: 1.3;
+    font-family: 'Comfortaa', cursive;
 }
 
 .hero-right p {
     line-height: 1.6;
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-bottom: 20px;
     text-align: justify;
     hyphens: auto;
 }
 
 .we-are-good-at h2 {
-    margin-bottom: 1px;
+    margin-bottom: 25px;
+    color: black; 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+    font-weight: bold;
 }
 
 .good-at-items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    font-size: 1.2em;
 }
 
 .good-at-item {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
-.good-at-item img {
-    width: 20px;
-    margin-right: 10px;
-    max-width: 100%;
-    height: auto;
+.good-at-item i {
+    font-size: 1em; /* Adjust icon size if needed */
 }
 
 .gradient-text {
@@ -147,59 +158,117 @@ body {
     line-height: 1.2;
 }
 
-/* Media Queries for Responsiveness */
-@media only screen and (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center; /* Center items on mobile */
-    }
-
-    .logo {
-        margin-bottom: 10px; /* Space between logo and nav on mobile */
-    }
-
-    .nav-container {
-        width: 100%;
-        justify-content: center; /* Center nav links */
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: stretch; /* Stretch links to full width */
-        width: 100%;
-    }
-
-    .nav-links a {
-        margin: 5px 0;
-        padding: 10px;
-        box-sizing: border-box; /* Include padding in width calculation */
-        text-align: center; /* Center link text */
-        margin-left: 0;
-    }
-
-    .hero-content {
-        flex-direction: column;
-        align-items: center; /* Center content on mobile */
-        text-align: center;
-    }
-
-    .hero-left {
-        font-size: 2em; /* Slightly larger font on mobile */
-        padding: 0 10px;
-    }
-    .hero-right{
-        padding: 0 10px;
-    }
-
-    .gradient-text {
-        font-size: 2.5em; /* Smaller gradient text on mobile */
-    }
-
-    .good-at-items {
-        grid-template-columns: repeat(1, 1fr); /* Single column on mobile */
-    }
-    .hero-right p{
-        text-align: left;
-    }
+.footer {
+  background: linear-gradient(to bottom, #fafafa, #f0f0f0);
+  color: #333;
+  padding: 20px 20px;
+  margin: 0;
+  font-size: 0.9em;
+  height: auto;
+  line-height: 1.5;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
-</style>
+
+.footer-content {
+  max-width: 1200px;
+  gap: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 5px;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  color:  #000;
+}
+
+.footer-section p, .footer-section a {
+  line-height: 1.4;
+  color: #555;
+}
+
+.footer-section a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #d11a2a;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-links h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: black;
+}
+
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    color: black;
+    font-size: 2.5em;
+    transition: color 0.4s ease;
+}
+
+.social-icons a:hover {
+    color: #a88734; /* Changed to gold color */
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-list i {
+  color: black;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.address-section {
+  text-align: center;
+
+}
+
+.address-section p {
+  margin-bottom: 5px;
+
+}
+
+/* Responsive design for footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 30px;
+  }
+}
