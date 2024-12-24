@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    font-family: 'Comfortaa';
-    background: url("subtle_pattern.jpg"); 
+    font-family: 'Comfortaa', cursive;
+    background: url("subtle_pattern.jpg");
 }
 
 .navbar {
@@ -12,9 +12,9 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 10; 
-    background-color: white; 
-    height: 60px; 
+    z-index: 10;
+    background-color: white;
+    height: 60px;
 }
 
 .logo {
@@ -53,8 +53,8 @@ body {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    flex-wrap: wrap; 
-    justify-content: center; 
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .nav-links a {
@@ -83,11 +83,11 @@ body {
 }
 
 .hero {
-    height: 50vh; 
-    padding: 30px 20px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    height: 50vh;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-content {
@@ -96,7 +96,6 @@ body {
     margin: 0 auto;
     align-items: flex-start;
     gap: 40px;
-    flex-direction: column; /* Stack elements vertically on smaller screens */
 }
 
 .hero-left {
@@ -106,13 +105,10 @@ body {
     font-weight: bold;
     line-height: 1.2;
     padding-left: 5px;
-    text-align: center; /* Center text on smaller screens */
 }
 
 .hero-right {
     flex: 1.3;
-    font-family: 'Comfortaa', cursive;
-    text-align: center; /* Center text on smaller screens */
 }
 
 .hero-right p {
@@ -125,10 +121,9 @@ body {
 
 .we-are-good-at h2 {
     margin-bottom: 25px;
-    color: black; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+    color: black;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     font-weight: bold;
-    text-align: center;
 }
 
 .good-at-items {
@@ -145,7 +140,7 @@ body {
 }
 
 .good-at-item i {
-    font-size: 1em; /* Adjust icon size if needed */
+    font-size: 1em;
 }
 
 .gradient-text {
@@ -178,21 +173,18 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
-    flex-direction: column; /* Stack sections vertically on smaller screens */
-    align-items: center; /* Center content on smaller screens */
 }
 
 .footer-section {
     flex: 1;
     min-width: 250px;
     margin-bottom: 5px;
-    text-align: center; /* Center text in sections on smaller screens */
 }
 
 .footer-section h3 {
     margin-bottom: 15px;
     font-size: 1.2em;
-    color:  #000;
+    color: #000;
 }
 
 .footer-section p, .footer-section a {
@@ -234,7 +226,7 @@ body {
 }
 
 .social-icons a:hover {
-    color: #a88734; /* Changed to gold color */
+    color: #a88734;
 }
 
 .contact-list {
@@ -262,43 +254,14 @@ body {
     margin-bottom: 5px;
 }
 
-/* Responsive design - Key improvements for mobile */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column; /* Stack navbar elements */
-        height: auto; /* Allow navbar to adjust height */
-    }
-
-    .logo {
-        margin-bottom: 10px; /* Add space between logo and nav */
-    }
-
-    .nav-links {
-        align-items: center; /* Center nav links */
-    }
-
-    .nav-links a {
-        margin: 5px 10px; /* Adjust spacing for smaller screens */
-    }
-
-    .hero {
-        height: auto; /* Allow hero to adjust height */
-        padding: 20px; /* Reduce padding */
-    }
-
-    .hero-left {
-        font-size: 1.4em; /* Slightly smaller font size */
-    }
-
-    .hero-right p {
-        font-size: 1em; /* Slightly smaller font size */
-    }
-
-    .good-at-items {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for smaller items */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .footer-section {
-        margin-bottom: 20px; /* Add space between footer sections */
+        margin-bottom: 30px;
     }
 }
