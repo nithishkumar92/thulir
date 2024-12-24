@@ -3,65 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>THULIR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <h1>Welcome to Our Website</h1>
-        <p>Your satisfaction is our priority.</p>
-    </section>
-
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We are a team of dedicated professionals committed to delivering top-notch services to our clients.</p>
-    </section>
-
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="service">
-            <h3>Service 1</h3>
-            <p>Description of service 1.</p>
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-main">THULIR</span>
+                <span class="logo-sub">CONSTRUCTION</span>
+            </div>
         </div>
-        <div class="service">
-            <h3>Service 2</h3>
-            <p>Description of service 2.</p>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">About</a>
+                <a href="#">Team</a>
+                <a href="projects.html">Projects</a> 
+                <a href="#">Contact</a>
+            </div>
         </div>
-        <div class="service">
-            <h3>Service 3</h3>
-            <p>Description of service 3.</p>
+    </div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1 class="gradient-text">Your Vision,<br>Our Expertise.</h1>
+            </div>
+            <div class="hero-right">
+                <p>At Thulir Construction, we blend innovative design with expert craftsmanship to deliver exceptional construction projects. From residential homes to commercial spaces, we are committed to exceeding client expectations through quality workmanship, transparent communication, and on-time project completion.</p>
+                <div class="we-are-good-at">
+                    <h2>Our Expertise</h2>
+                    <div class="good-at-items">
+                        <div class="good-at-item"> <i class="fa fa-drafting-compass me-2"></i> <span>Architectural Design</span> </div>
+                        <div class="good-at-item"> <i class="fa fa-building me-2"></i> <span>General Contracting</span> </div>
+                        <div class="good-at-item"> <i class="fa fa-tasks me-2"></i> <span>Project Management</span> </div>
+                        <div class="good-at-item"> <i class="fa fa-tools me-2"></i> <span>Renovations & Remodeling</span> </div>
+                        <div class="good-at-item"> <i class="fa fa-leaf me-2"></i> <span>Sustainable Building</span> </div>
+                        <div class="good-at-item"> <i class="fa fa-comments me-2"></i> <span>Construction Consulting</span> </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    <footer class="footer">
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form action="#" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+  <div class="footer-content">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <div class="footer-section social-links">
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
+      <h3>Follow Us</h3>
 
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+      <ul class="social-icons">
 
-    <footer>
-        <p>&copy; 2024 Your Website. All rights reserved.</p>
-    </footer>
-</body>
+        <a href="https://www.youtube.com/your-channel" target="_blank"><i class="fab fa-youtube"></i></a>
+
+        <a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
+
+        <a href="https://www.instagram.com/your-profile" target="_blank"><i class="fab fa-instagram"></i></a>
+
+      </ul>
+
+    </div>
+
+    <div class="footer-section address-section">
+
+      <h3>Address</h3>
+
+      <p>123 Krishna Nagar-II</p>
+
+      <p>Sankari tk, 637301</p>
+
+      <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
+
+    </div>
+
+    <div class="footer-section contact-info">
+
+      <h3>Contact Us</h3>
+
+      <ul class="contact-list">
+
+        <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+
+        <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</footer>
+
+    </body>
 </html>
