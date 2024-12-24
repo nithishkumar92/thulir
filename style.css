@@ -10,7 +10,7 @@ body {
     padding: 10px 20px;
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky; 
+    position: sticky;
     top: 0;
     z-index: 10; 
     background-color: white; 
@@ -32,19 +32,16 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1;
-    
 }
 
 .logo-main {
     font-weight: 700;
     font-size: 2.5em;
-
 }
 
 .logo-sub {
     font-size: 1.15em;
     font-weight: 800;
-    
 }
 
 .nav-container {
@@ -99,6 +96,7 @@ body {
     margin: 0 auto;
     align-items: flex-start;
     gap: 40px;
+    flex-direction: column; /* Stack elements vertically on smaller screens */
 }
 
 .hero-left {
@@ -108,11 +106,13 @@ body {
     font-weight: bold;
     line-height: 1.2;
     padding-left: 5px;
+    text-align: center; /* Center text on smaller screens */
 }
 
 .hero-right {
     flex: 1.3;
     font-family: 'Comfortaa', cursive;
+    text-align: center; /* Center text on smaller screens */
 }
 
 .hero-right p {
@@ -128,6 +128,7 @@ body {
     color: black; 
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
     font-weight: bold;
+    text-align: center;
 }
 
 .good-at-items {
@@ -159,54 +160,57 @@ body {
 }
 
 .footer {
-  background: linear-gradient(to bottom, #fafafa, #f0f0f0);
-  color: #333;
-  padding: 20px 20px;
-  margin: 0;
-  font-size: 0.9em;
-  height: auto;
-  line-height: 1.5;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #fafafa, #f0f0f0);
+    color: #333;
+    padding: 20px 20px;
+    margin: 0;
+    font-size: 0.9em;
+    height: auto;
+    line-height: 1.5;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer-content {
-  max-width: 1200px;
-  gap: 10px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
+    max-width: 1200px;
+    gap: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    flex-direction: column; /* Stack sections vertically on smaller screens */
+    align-items: center; /* Center content on smaller screens */
 }
 
 .footer-section {
-  flex: 1;
-  min-width: 250px;
-  margin-bottom: 5px;
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 5px;
+    text-align: center; /* Center text in sections on smaller screens */
 }
 
 .footer-section h3 {
-  margin-bottom: 15px;
-  font-size: 1.2em;
-  color:  #000;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color:  #000;
 }
 
 .footer-section p, .footer-section a {
-  line-height: 1.4;
-  color: #555;
+    line-height: 1.4;
+    color: #555;
 }
 
 .footer-section a {
-  text-decoration: none;
-  transition: color 0.3s ease;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-  color: #d11a2a;
+    color: #d11a2a;
 }
 
 .social-icons {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .social-links h3 {
@@ -234,41 +238,67 @@ body {
 }
 
 .contact-list {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .contact-list li {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .contact-list i {
-  color: black;
-  margin-right: 10px;
-  font-size: 1.2em;
+    color: black;
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
 .address-section {
-  text-align: center;
-
+    text-align: center;
 }
 
 .address-section p {
-  margin-bottom: 5px;
-
+    margin-bottom: 5px;
 }
 
-/* Responsive design for footer */
+/* Responsive design - Key improvements for mobile */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    .navbar {
+        flex-direction: column; /* Stack navbar elements */
+        height: auto; /* Allow navbar to adjust height */
+    }
 
-  .footer-section {
-    margin-bottom: 30px;
-  }
+    .logo {
+        margin-bottom: 10px; /* Add space between logo and nav */
+    }
+
+    .nav-links {
+        align-items: center; /* Center nav links */
+    }
+
+    .nav-links a {
+        margin: 5px 10px; /* Adjust spacing for smaller screens */
+    }
+
+    .hero {
+        height: auto; /* Allow hero to adjust height */
+        padding: 20px; /* Reduce padding */
+    }
+
+    .hero-left {
+        font-size: 1.4em; /* Slightly smaller font size */
+    }
+
+    .hero-right p {
+        font-size: 1em; /* Slightly smaller font size */
+    }
+
+    .good-at-items {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for smaller items */
+    }
+
+    .footer-section {
+        margin-bottom: 20px; /* Add space between footer sections */
+    }
 }
