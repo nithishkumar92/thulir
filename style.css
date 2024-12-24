@@ -50,22 +50,21 @@ body {
 }
 
 .nav-links {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    flex-wrap: wrap; 
-    justify-content: center; 
+    display: flex; /* Use flexbox for better control */
+    flex-wrap: wrap; /* Allow links to wrap */
+    justify-content: space-between; /* Distribute links evenly */
+    align-items: center; 
 }
 
 .nav-links a {
     text-decoration: none;
     font-size: 1.1em;
-    margin-left: 50px;
     color: black;
     transition: color 0.3s ease, font-weight 0.3s ease, background-position 0.3s ease;
     background-image: linear-gradient(to right, transparent, transparent);
     background-size: 200% 100%;
     background-position: 0 0;
+    margin: 10px; /* Add some margin around links */
 }
 
 .nav-links a:hover {
@@ -263,24 +262,25 @@ body {
 }
 
 /* Responsive design - Key improvements for mobile */
-@media (max-width: 768px) {
+@media (max-width: 768px) { 
     .navbar {
-        flex-direction: column; /* Stack navbar elements */
-        height: auto; /* Allow navbar to adjust height */
+        flex-direction: column; 
+        height: auto; 
     }
 
     .logo {
-        margin-bottom: 10px; /* Add space between logo and nav */
+        margin-bottom: 10px; 
     }
 
     .nav-links {
-        align-items: center; /* Center nav links */
+        flex-direction: column; /* Stack links vertically on mobile */
+        align-items: center;
+        width: 100%; /* Make nav links take full width */
     }
 
     .nav-links a {
-        margin: 5px 10px; /* Adjust spacing for smaller screens */
+        margin: 5px 0; /* Adjust spacing for smaller screens */
     }
-
     .hero {
         height: auto; /* Allow hero to adjust height */
         padding: 20px; /* Reduce padding */
