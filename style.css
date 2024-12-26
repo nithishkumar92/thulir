@@ -315,6 +315,8 @@ body {
 
   .nav-links.show {
     display: flex;
+  top: -10px;
+  left: 270px; 
     /* Show the links when the icon is clicked */
   }
 
