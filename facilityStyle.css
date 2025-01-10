@@ -1,0 +1,65 @@
+.facility-section {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.facility-item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.facility-item img {
+  max-width: 400px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.facility-item .text-content {
+  flex: 1;
+}
+
+.facility-item h3 {
+  color: #d11a2a;
+  margin-bottom: 10px;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+    background-image: linear-gradient(to right, #a88734, #d9ac5a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Mobile-Specific Styles */
+@media (max-width: 768px) {
+    .facility-item {
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center; /* Center text content */
+        scroll-margin-top: 130px;
+    }
+
+        .facility-item img {
+            max-width: 100%; /* Make image responsive */
+            margin-bottom: 20px; /* Add space between image and text */
+            order: 2; /* Place the image second */
+        }
+
+        .facility-item .text-content {
+            order: 1; /* Place the text content first */
+        }
+
+        .facility-item h3 {
+            font-size: 1.5em; /* Larger font size for headings */
+        }
+
+        .facility-item p {
+            font-size: 1em; /* Larger font size for descriptions */
+            line-height: 1.6; /* Improved readability */
+        }
+}
