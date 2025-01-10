@@ -173,36 +173,37 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const facilityItems = document.querySelectorAll('.facility-item');
 
   let currentItem = 0;
 
   function scrollToItem(index) {
-    facilityItems[index].scrollIntoView({
-      behavior: 'smooth',
-      block: 'start' 
-    });
-    currentItem = index;
+    if (index >= 0 && index < facilityItems.length) {
+      facilityItems[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      currentItem = index;
+    }
   }
 
-  let scrollPosition = 0;
-  window.addEventListener('scroll', function() {
-    const newScrollPosition = window.scrollY;
+  window.addEventListener('scroll', function () {
+    let nextItem = currentItem;
 
-    if (newScrollPosition > scrollPosition) {
-      // Scrolling down
-      if (currentItem < facilityItems.length - 1) {
-        scrollToItem(currentItem + 1);
-      }
-    } else {
-      // Scrolling up
-      if (currentItem > 0) {
-        scrollToItem(currentItem - 1);
+    // Determine the next item based on scroll direction and visibility
+    for (let i = 0; i < facilityItems.length; i++) {
+      const itemRect = facilityItems[i].getBoundingClientRect();
+      if (itemRect.top > 0 && itemRect.bottom < window.innerHeight) {
+        nextItem = i;
+        break;
       }
     }
 
-    scrollPosition = newScrollPosition;
+    // Scroll to the next item only if it's different from the current item
+    if (nextItem !== currentItem) {
+      scrollToItem(nextItem);
+    }
   });
 });
 
