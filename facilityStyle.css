@@ -1,3 +1,4 @@
+
 .facility-section {
   max-width: 1200px;
   margin: 30px auto;
@@ -39,34 +40,38 @@
 /* Mobile-Specific Styles */
 @media (max-width: 768px) {
     .facility-item {
-        flex-direction: column; /* Stack image and text vertically */
-        text-align: center; /* Center text content */
-        scroll-margin-top: 130px;
+        flex-direction: column;
+        text-align: center;
+        scroll-margin-top: 130px; /* Adjust as needed */
     }
 
         .facility-item img {
-            max-width: 100%; /* Make image responsive */
+            max-width: 100%;
             height: auto;
-            margin-bottom: 20px; /* Add space between image and text */
-            order: 2; /* Place the image second */
+            margin-bottom: 20px;
+            order: 2;
         }
 
         .facility-item .text-content {
-            order: 1; /* Place the text content first */
+            order: 1;
         }
 
         .facility-item h3 {
-            font-size: 1.5em; /* Larger font size for headings */
+            font-size: 1.5em;
         }
 
         .facility-item p {
-            font-size: 1em; /* Larger font size for descriptions */
-            line-height: 1.6; /* Improved readability */
+            font-size: 1em;
+            line-height: 1.6;
         }
 
     .navbar .nav-links {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start; /* Align the links to the left */
         padding: 10px;
     }
+
+        .navbar .nav-links a {
+            margin: 5px 0; /* Adjust spacing between links */
+        }
 }

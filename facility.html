@@ -173,17 +173,60 @@
       }
     }
 
-document.addEventListener('DOMContentLoaded', () => {
-    let lastScrollTime = 0;
-    document.addEventListener('wheel', (event) => {
-        const now = Date.now();
-        if (now - lastScrollTime < 500) return;
-        lastScrollTime = now;
-        // Handle scrolling logic
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+  const facilityItems = document.querySelectorAll('.facility-item');
+
+  let currentItem = 0;
+
+  function scrollToItem(index) {
+    if (index >= 0 && index < facilityItems.length) {
+      facilityItems[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      currentItem = index;
+    }
+  }
+
+  function handleScroll() {
+    let nextItem = currentItem;
+    let foundNext = false;
+
+    // Iterate through items starting from the current item
+    for (let i = currentItem; i < facilityItems.length; i++) {
+      const itemRect = facilityItems[i].getBoundingClientRect();
+
+      // Check if the top of the next item is above the viewport top
+      if (itemRect.top <= 0) {
+        nextItem = i + 1; // Set the next item to the one below
+      } else {
+        foundNext = true; // Found the next item, no need to continue
+        break;
+      }
+    }
+
+    // If no next item found, stay at the current item
+    if (!foundNext) {
+      nextItem = currentItem;
+    }
+
+    // Scroll to the next item only if it's different from the current item
+    if (nextItem !== currentItem) {
+      scrollToItem(nextItem);
+    }
+  }
+
+  function checkScreenSize() {
+    if (window.innerWidth <= 768) {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
+
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
 });
-
-
   </script>
 </body>
 </html>
