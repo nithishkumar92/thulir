@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const facilityItems = document.querySelectorAll('.facility-item');
 
   let currentItem = 0;
+  let lastScrollTime = 0;
 
   function scrollToItem(index) {
     if (index >= 0 && index < facilityItems.length) {
@@ -188,23 +189,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  window.addEventListener('scroll', function () {
-    let nextItem = currentItem;
+  function handleScroll() {
+    const now = Date.now();
+    const timeSinceLastScroll = now - lastScrollTime;
 
-    // Determine the next item based on scroll direction and visibility
-    for (let i = 0; i < facilityItems.length; i++) {
-      const itemRect = facilityItems[i].getBoundingClientRect();
-      if (itemRect.top > 0 && itemRect.bottom < window.innerHeight) {
-        nextItem = i;
-        break;
+    if (timeSinceLastScroll > 300) { 
+      let nextItem = currentItem;
+
+      for (let i = 0; i < facilityItems.length; i++) {
+        const itemRect = facilityItems[i].getBoundingClientRect();
+        if (itemRect.top > 0 && itemRect.bottom < window.innerHeight) {
+          nextItem = i;
+          break;
+        }
+      }
+
+      if (nextItem !== currentItem) {
+        scrollToItem(nextItem);
       }
     }
 
-    // Scroll to the next item only if it's different from the current item
-    if (nextItem !== currentItem) {
-      scrollToItem(nextItem);
+    lastScrollTime = now;
+  }
+
+  // Check screen size on load and resize
+  function checkScreenSize() {
+    if (window.innerWidth <= 768) { // Mobile view
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      window.removeEventListener('scroll', handleScroll);
     }
-  });
+  }
+
+  checkScreenSize(); // Check on page load
+  window.addEventListener('resize', checkScreenSize); // Check on window resize
 });
 
   </script>
