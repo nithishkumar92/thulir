@@ -46,6 +46,7 @@
 
         .facility-item img {
             max-width: 100%; /* Make image responsive */
+            height: auto;
             margin-bottom: 20px; /* Add space between image and text */
             order: 2; /* Place the image second */
         }
@@ -62,4 +63,10 @@
             font-size: 1em; /* Larger font size for descriptions */
             line-height: 1.6; /* Improved readability */
         }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
 }
