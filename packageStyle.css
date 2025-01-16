@@ -4,6 +4,7 @@
     max-width: 1200px;
     margin: 30px auto;
     padding: 20px;
+    overflow-x: auto;
 }
 
     .package-section h2 {
@@ -15,6 +16,7 @@
     .package-section table {
         width: 100%;
         border-collapse: collapse;
+        position: relative;
     }
 
     .package-section th, .package-section td {
@@ -27,7 +29,6 @@
         background-color: #f5f5f5;
         font-weight: bold;
     }
-
 
 .nav-links a {
     transition: color 0.3s;
@@ -45,19 +46,47 @@
     background-color: #f1f1f1;
 }
 
-
-
-
-/* Add more styles as needed for visual appeal */
+/* Mobile-Specific Styles */
 @media (max-width: 768px) {
     .package-section table {
         display: block;
+        width: 100%;
         overflow-x: auto;
         white-space: nowrap;
     }
 
-    .nav-links {
-        flex-direction: column;
-        align-items: flex-start;
+    .package-section th,
+    .package-section td {
+        white-space: nowrap;
+        padding: 8px;
+    }
+
+        /* Sticky column (first column) */
+        .package-section th:first-child,
+        .package-section td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: #f5f5f5;
+            z-index: 2;
+        }
+
+    /* Adjust column visibility for scrolling */
+    .package-section tr th {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+    }
+
+    /* Ensuring only two columns fit the screen width */
+    .package-section td,
+    .package-section th {
+        display: inline-block;
+        width: 50%; /* Two columns per screen width */
+        box-sizing: border-box;
+    }
+
+    /* Horizontal scrolling adjustments */
+    .package-section table {
+        table-layout: auto; /* Allows columns to adjust dynamically */
     }
 }
