@@ -1,0 +1,109 @@
+/* contactStyle.css */
+
+.contact-section {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center; /* Center the content */
+}
+
+    .contact-section h2 {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+.contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    text-align: center; /* Center the content within each item */
+}
+
+    .contact-item i {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Increased gap between links */
+    margin-top: 40px; /* Increased top margin */
+}
+
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px; /* Increased gap between icon and text */
+        text-decoration: none;
+        color: #333;
+        font-size: 1.5em; /* Increased font size */
+    }
+
+
+/* Media Queries for Smaller Screens */
+@media screen and (max-width: 768px) {
+    .contact-options {
+        flex-direction: column; /* Stack items vertically */
+        padding: 20px
+    }
+
+    .contact-item {
+        flex: 1 1 80%; /* Full-width items */
+     
+    }
+
+    .social-links {
+        flex-direction: column; /* Stack social links vertically */
+        gap: 15px; /* Reduce gap between links */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-section h2 {
+        font-size: 1.5em; /* Further reduce heading size */
+    }
+
+    .contact-options {
+        gap: 15px; /* Reduce spacing */
+    }
+
+    .contact-item i {
+        font-size: 1.5em; /* Smaller icon size */
+    }
+
+    .social-links a {
+        font-size: 1em; /* Smaller text size */
+        gap: 8px;
+        font-size: 1.2em;
+        justify-content: center; /* Center text and icon horizontally */
+        align-items: center;
+    }
+}
