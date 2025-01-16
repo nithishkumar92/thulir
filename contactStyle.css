@@ -100,7 +100,6 @@
     }
 
     .social-links a {
-        font-size: 1em; /* Smaller text size */
         gap: 8px;
         font-size: 1.2em;
         justify-content: center; /* Center text and icon horizontally */
