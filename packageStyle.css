@@ -1,0 +1,31 @@
+/* packageStyle.css */
+
+.package-section {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+    .package-section h2 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .package-section table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .package-section th, .package-section td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .package-section th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+
+/* Add more styles as needed for visual appeal */
