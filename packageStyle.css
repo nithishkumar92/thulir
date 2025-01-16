@@ -1,100 +1,93 @@
 /* packageStyle.css */
 
 .package-section {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
-  overflow-x: auto;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    overflow-x: auto;
 }
 
-.package-section h2 {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
+    .package-section h2 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
 
-.package-section table {
-  width: 100%;
-  border-collapse: collapse;
-  position: relative;
-}
+    .package-section table {
+        width: 100%;
+        border-collapse: collapse;
+        position: relative;
+    }
 
-.package-section th, .package-section td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-  word-wrap: break-word;
-}
+    .package-section th, .package-section td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        word-wrap: break-word;
+    }
 
     .package-section th {
-        background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(to right, #a88734, #d9ac5a);
         font-weight: bold;
+        color: black;
     }
 
 .nav-links a {
-  transition: color 0.3s;
+    transition: color 0.3s;
 }
 
-.nav-links a:hover {
-  color: #ff5733;
-}
+    .nav-links a:hover {
+        color: #ff5733;
+    }
 
 .package-section tr:nth-child(odd) {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 .package-section tr:hover {
-  background-color: #f1f1f1;
+    background-color: #f1f1f1;
 }
 
 /* Mobile-Specific Styles */
 @media (max-width: 768px) {
-  .package-section th, .package-section td {
-    white-space: normal; /* Allow text to wrap */
-  }
+    .package-section th, .package-section td {
+        white-space: normal;
+    }
 
-       .package-section th:first-child,
-       .package-section td:first-child {
-           position: sticky;
-           left: 0;
-           background-color: #f5f5f5;
-           z-index: 1;
-           background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
-           -webkit-background-clip: text;
-           background-clip: text;
-           color: transparent;
-           -webkit-text-fill-color: transparent;
-       }
+        .package-section th:first-child,
+        .package-section td:first-child {
+            position: sticky;
+            left: 0;
+            background-image: linear-gradient(to right, #a88734, #d9ac5a);
+            z-index: 1;
+            color: black; /* Text color for the frozen column */
+        }
 
-  .package-section tr th {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
+    .package-section tr th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
 
-  .package-section table {
-    overflow-x: auto;
-    /* white-space: nowrap; - Remove this */ 
-    table-layout: fixed;
-    width: auto;
-  }
+    .package-section table {
+        overflow-x: auto;
+        white-space: nowrap; /* Keep nowrap for horizontal scrolling */
+        table-layout: fixed;
+        width: auto;
+    }
 
-  .nav-links {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  /* Adjust column widths */
-  .package-section td:first-child {
-    width: 30%;
-  }
+    /* Adjust column widths */
+    .package-section td:first-child {
+        width: 30%;
+    }
 
-  .package-section td:nth-child(2), 
-  .package-section td:nth-child(3) {
-    width: 35%;
-  }
+    .package-section td:nth-child(2),
+    .package-section td:nth-child(3) {
+        width: 35%;
+    }
 }
