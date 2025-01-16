@@ -60,7 +60,7 @@
 
 .package-section tr th {
     position: sticky;
-    top: 0;
+    padding-top: -10px
     z-index: 2;
 }
 
@@ -69,7 +69,7 @@
     .package-section th, .package-section td {
         white-space: normal;
         padding: 8px 10px; /* Adjust padding for smaller screens */
-    
+         
     }
 
         .package-section th:first-child,
@@ -82,6 +82,7 @@
             padding: 10px; /* Ensure sufficient padding */
             box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.2); /* Subtle shadow for better visibility */
             white-space: normal; /* Prevent text wrapping in sticky column */
+            width: 50vw;
         }
 
 
@@ -99,7 +100,8 @@
         overflow-x: auto;
         display: block; /* Ensure table is scrollable */
         border-radius: 5px; /* Rounded corners for aesthetics */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        box-shadow: 0 2px 5px rgb(222, 211, 211); /* Subtle shadow */
+       
     }
 
     .nav-links {
@@ -114,6 +116,6 @@
 
     .package-section td:nth-child(2),
     .package-section td:nth-child(3) {
-        width: 35%;
+        width: 50vw;
     }
 }
