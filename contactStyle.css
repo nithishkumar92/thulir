@@ -100,9 +100,61 @@
     }
 
     .social-links a {
+        font-size: 1em; /* Smaller text size */
         gap: 8px;
         font-size: 1.2em;
         justify-content: center; /* Center text and icon horizontally */
         align-items: center;
+    }
+
+
+    .hamburger {
+        display: block; /* Show hamburger icon on mobile */
+    }
+
+    .nav-container {
+        display: block; /* This will make the hamburger visible */
+        position: relative; /* To allow absolute positioning of the nav-links */
+    }
+
+    .nav-links {
+        display: none; /* Hide the navigation links by default */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Position below the navbar */
+        right: 0;
+        left: 0;
+        width: 100vw;
+        background-color: 0 2px 5px #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        border-bottom: 2px solid #ddd;
+        background-color: #fafafa;
+    }
+
+        .nav-links.show {
+            display: flex;
+            top: -10px;
+            left: 210px;
+            /* Show the links when the icon is clicked */
+        }
+
+        .nav-links a {
+            margin: 10px 0;
+            text-align: center;
+            display: block; /* Make each link a block element */
+            padding: 15px 20px; /* Add padding for better spacing and touch targets */
+            border-top: 2px solid #ddd; /* Add a top border to each link */
+            width: 100%; /* Make links take full width */
+            text-align: left; /* Align text to the left */
+        }
+
+    .navbar {
+        flex-direction: column;
+        /* Stack navbar elements */
+        height: auto;
+        top: 15px;
+        align-items: flex-start;
+        /* Allow navbar to adjust height */
     }
 }

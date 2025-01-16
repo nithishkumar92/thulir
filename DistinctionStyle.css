@@ -54,6 +54,9 @@
     -webkit-text-fill-color: transparent;
 }
 
+
+
+
 /* Mobile-Specific Styles */
 @media (max-width: 768px) {
     .facility-item {

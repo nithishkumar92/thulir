@@ -12,7 +12,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
   background-color: white;
   height: 60px;
 }
@@ -301,17 +301,20 @@ body {
     position: relative; /* To allow absolute positioning of the nav-links */
   }
 
-  .nav-links {
-    display: none;            /* Hide the navigation links by default */
-    flex-direction: column;
-    position: absolute;
-    top: 60px;                /* Position below the navbar */
-    right: 0;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
+    .nav-links {
+        display: none; /* Hide the navigation links by default */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Position below the navbar */
+        right: 0;
+        left: 0;
+        width: 100vw;
+        background-color: 0 2px 5px #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        border-bottom: 2px solid #ddd;
+        background-color: #fafafa;
+    }
 
   .nav-links.show {
     display: flex;
@@ -320,11 +323,15 @@ body {
     /* Show the links when the icon is clicked */
   }
 
-  .nav-links a {
-    margin: 10px 0;
-    text-align: center;
-    /* Center the links in the dropdown */
-  }
+    .nav-links a {
+        margin: 10px 0;
+        text-align: center;
+        display: block; /* Make each link a block element */
+        padding: 15px 20px; /* Add padding for better spacing and touch targets */
+        border-top: 2px solid #ddd; /* Add a top border to each link */
+        width: 100%; /* Make links take full width */
+        text-align: left; /* Align text to the left */
+    }
 
   .navbar {
     flex-direction: column;
