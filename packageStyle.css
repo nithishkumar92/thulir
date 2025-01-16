@@ -81,7 +81,7 @@
 
   /* Adjust column widths */
   .package-section td:first-child {
-    width: 50%;
+    width: 70%;
   }
 
   .package-section td:nth-child(2), 
