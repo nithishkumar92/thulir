@@ -70,7 +70,7 @@
         background-color: #f5f5f5;
         z-index: 2;
         width: 50%; /* Shrink width to 50% of screen */
-        min-width: 50%; /* Ensure consistent sizing */
+        min-width: 25%; /* Ensure consistent sizing */
         box-sizing: border-box;
     }
 
