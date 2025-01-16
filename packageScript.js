@@ -1,6 +1,6 @@
 const apiKey = 'AIzaSyAwVNjzgZ2Q0XdOVPtzNUBYTqfZxfoie6I';
 const spreadsheetId = '14xy2C6uXhbwAc_9u2ey8_kEPR2F-tsbLs-FLdZs7THM';
-const range = 'English!A1:D46'; // Use the correct range
+const range = 'English!A1:D46';
 
 fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`)
     .then(response => response.json())
@@ -9,7 +9,7 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
         const table = document.getElementById('packageTable');
         const tbody = table.querySelector('tbody');
 
-        values.forEach((row, rowIndex) => { // Add rowIndex
+        values.forEach((row, rowIndex) => {
             const tableRow = document.createElement('tr');
             row.forEach((cell, cellIndex) => {
                 const tableCell = document.createElement('td');
@@ -17,7 +17,6 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
                 if (cell === null) {
                     const prevCell = tableRow.cells[cellIndex - 1];
                     if (prevCell) {
-                        // Corrected colspan calculation
                         const colspan = parseInt(prevCell.getAttribute('colspan') || '1', 10) + 1;
                         prevCell.setAttribute('colspan', colspan);
                         return;
@@ -37,11 +36,9 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
     })
     .catch(error => console.error('Error fetching data:', error));
 
-// Function to toggle the mobile menu
 function toggleMenu() {
     var navLinks = document.getElementById("navLinks");
     navLinks.classList.toggle("show");
-
     if (navLinks.classList.contains("show")) {
         setTimeout(function () {
             navLinks.classList.remove("show");
