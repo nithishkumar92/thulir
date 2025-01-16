@@ -26,10 +26,14 @@
   word-wrap: break-word;
 }
 
-.package-section th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
+    .package-section th {
+        background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
 
 .nav-links a {
   transition: color 0.3s;
@@ -53,13 +57,18 @@
     white-space: normal; /* Allow text to wrap */
   }
 
-  .package-section th:first-child,
-  .package-section td:first-child {
-    position: sticky;
-    left: 0;
-    background-color: #f5f5f5;
-    z-index: 1;
-  }
+       .package-section th:first-child,
+       .package-section td:first-child {
+           position: sticky;
+           left: 0;
+           background-color: #f5f5f5;
+           z-index: 1;
+           background-image: linear-gradient(to right, #a88734, #d9ac5a); /* Golden gradient */
+           -webkit-background-clip: text;
+           background-clip: text;
+           color: transparent;
+           -webkit-text-fill-color: transparent;
+       }
 
   .package-section tr th {
     position: sticky;
