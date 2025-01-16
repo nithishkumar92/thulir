@@ -9,7 +9,7 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
         const table = document.getElementById('packageTable');
         const tbody = table.querySelector('tbody');
 
-        values.forEach(row => {
+        values.forEach((row, rowIndex) => { // Add rowIndex
             const tableRow = document.createElement('tr');
             row.forEach((cell, cellIndex) => {
                 const tableCell = document.createElement('td');
@@ -17,7 +17,8 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
                 if (cell === null) {
                     const prevCell = tableRow.cells[cellIndex - 1];
                     if (prevCell) {
-                        const colspan = parseInt(prevCell.getAttribute('colspan') || '1') + 1;
+                        // Corrected colspan calculation
+                        const colspan = parseInt(prevCell.getAttribute('colspan') || '1', 10) + 1;
                         prevCell.setAttribute('colspan', colspan);
                         return;
                     }
@@ -47,8 +48,3 @@ function toggleMenu() {
         }, 5000);
     }
 }
-
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    navbar.classList.toggle('sticky', window.scrollY > 0);
-});
