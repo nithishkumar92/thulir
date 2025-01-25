@@ -60,62 +60,70 @@
 
 .package-section tr th {
     position: sticky;
-    padding-top: -10px
-    z-index: 2;
+    padding-top: -10px z-index: 2;
 }
 
 /* Mobile-Specific Styles */
 @media (max-width: 768px) {
-    .package-section th, .package-section td {
-        white-space: normal;
-        padding: 8px 10px; /* Adjust padding for smaller screens */
-         
+    .package-section table {
+        border: none;
+        background: transparent;
     }
 
-        .package-section th:first-child,
+    .package-section thead {
+        display: none;
+    }
+
+    .package-section tbody tr {
+        display: block;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .package-section td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border: none !important;
+        border-bottom: 1px solid #eee !important;
+        text-align: right;
+    }
+
         .package-section td:first-child {
-            position: sticky;
-            left: 0;
-            background-color: #f5f5f5; /* Use a solid background color */
-            z-index: 2; /* Increase z-index to ensure it stays on top */
-            font-weight: bold; /* Keep the text bold */
-            padding: 10px; /* Ensure sufficient padding */
-            box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.2); /* Subtle shadow for better visibility */
-            white-space: normal; /* Prevent text wrapping in sticky column */
-            width: 50vw;
+            background: #f8f9fa;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #333;
+            border-bottom: 2px solid #ddd !important;
+            text-align: left;
         }
 
+        .package-section td:not(:first-child)::before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: #666;
+            margin-right: 15px;
+            float: left;
+            text-align: left;
+            width: 30%;
+        }
 
-    .package-section tr th {
-        position: sticky;
-        top: 0;
-        z-index: 3; /* Ensure header stays above other elements */
-        background-color: #f5f5f5; /* Match background with sticky column */
-        padding: 10px; /* Add padding for better spacing */
-        white-space: nowrap; /* Prevent wrapping for header text */
+        .package-section td:last-child {
+            border-bottom: none !important;
+        }
+
+    .package-section tr:hover {
+        background: transparent;
     }
 
-
-    .package-section table {
-        overflow-x: auto;
-        display: block; /* Ensure table is scrollable */
-        border-radius: 5px; /* Rounded corners for aesthetics */
-        box-shadow: 0 2px 5px rgb(222, 211, 211); /* Subtle shadow */
-       
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    /* Adjust column widths for mobile */
+    /* Remove sticky positioning */
+    .package-section th:first-child,
     .package-section td:first-child {
-        width: auto;
-    }
-
-    .package-section td:nth-child(2),
-    .package-section td:nth-child(3) {
-        width: 50vw;
+        position: static;
+        box-shadow: none;
     }
 }

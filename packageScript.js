@@ -14,6 +14,12 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${r
             row.forEach((cell, cellIndex) => {
                 const tableCell = document.createElement('td');
 
+                // Add data labels for mobile view
+                if (cellIndex > 0) {
+                    const packageNames = ['Silver', 'Gold', 'Platinum'];
+                    tableCell.setAttribute('data-label', packageNames[cellIndex - 1]);
+                }
+
                 if (cell === null) {
                     const prevCell = tableRow.cells[cellIndex - 1];
                     if (prevCell) {
