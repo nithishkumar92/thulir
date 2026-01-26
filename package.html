@@ -3,171 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THULIR - Construction Packages</title>
+  <title>THULIR - Packages</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">  
   <link rel="stylesheet" href="packageStyle.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
+  <div class="navbar" id="navbar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+      <div class="logo-text">
+        <span class="logo-main">THULIR</span>
+        <span class="logo-sub">CONSTRUCTION</span>
+      </div>
+    </div>
     <div class="nav-container">
-      <div class="logo">
-        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-main">THULIR</span>
-          <span class="logo-sub">CONSTRUCTION</span>
-        </div>
-      </div>
-      
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="#about">About</a>
-        <a href="Distinction.html">Distinction</a>
-        <a href="package.html" class="active">Packages</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      
       <div class="hamburger" id="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a> 
+        <a href="#about">About</a>
+        <a href="Distinction.html">Distinction</a>
+        <a href="package.html" class="active">Packages</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
-  </nav>
+  </div>
 
   <!-- Hero Section -->
-  <section class="package-hero">
+  <section class="packages-hero">
     <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-crown"></i>
-        <span>Premium Packages</span>
-      </div>
       <h1>Choose Your Perfect Package</h1>
-      <p>Tailored construction solutions designed to match your vision and budget. Every package delivers exceptional quality and value.</p>
+      <p>Tailored construction solutions designed to bring your dream home to life</p>
     </div>
   </section>
 
-  <!-- Package Comparison Section -->
+  <!-- Packages Section -->
   <section class="package-section">
-    <div class="container">
+    <div class="package-container">
       <div class="section-intro">
-        <h2>Compare Our Packages</h2>
-        <p>Select the package that best fits your needs. All packages include our signature quality standards and professional craftsmanship.</p>
+        <h2>Our Construction Packages</h2>
+        <p>Select the package that best fits your vision and budget. Each package is designed with quality, transparency, and your satisfaction in mind.</p>
       </div>
 
-      <!-- Desktop Table View -->
-      <div class="table-container">
-        <table id="packageTable" class="package-table">
+      <div class="table-wrapper">
+        <table id="packageTable">
           <thead>
             <tr>
-              <th class="feature-column">Features</th>
-              <th class="package-column silver">
+              <th>Feature</th>
+              <th class="package-col silver">
                 <div class="package-header">
                   <i class="fas fa-medal"></i>
                   <span>Silver Package</span>
                 </div>
               </th>
-              <th class="package-column gold">
+              <th class="package-col gold">
                 <div class="package-header">
-                  <i class="fas fa-trophy"></i>
+                  <i class="fas fa-crown"></i>
                   <span>Gold Package</span>
                 </div>
               </th>
-              <th class="package-column platinum">
+              <th class="package-col platinum">
                 <div class="package-header">
-                  <i class="fas fa-crown"></i>
+                  <i class="fas fa-gem"></i>
                   <span>Platinum Package</span>
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            <!-- Data will be loaded here via JavaScript -->
           </tbody>
         </table>
       </div>
 
-      <!-- Mobile Card View -->
-      <div class="mobile-packages" id="mobilePackages">
-        <!-- Mobile cards will be generated here -->
-      </div>
-
-      <!-- CTA Section -->
-      <div class="package-cta">
-        <div class="cta-content">
-          <h3>Ready to Start Your Project?</h3>
-          <p>Our team is here to help you choose the perfect package and answer any questions.</p>
-          <div class="cta-buttons">
-            <a href="contact.html" class="btn btn-primary">
-              <i class="fas fa-phone"></i>
-              Contact Us Now
-            </a>
-            <a href="Distinction.html" class="btn btn-secondary">
-              <i class="fas fa-star"></i>
-              Why Choose Us
-            </a>
-          </div>
-        </div>
+      <div class="cta-section">
+        <h3>Ready to Start Your Project?</h3>
+        <p>Contact us today for a free consultation and detailed quote</p>
+        <a href="contact.html" class="btn btn-primary">
+          <i class="fas fa-phone"></i>
+          Get Free Quote
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Thulir Construction</h3>
-          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
-          <div class="social-icons">
-            <a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://www.facebook.com/your-page" target="_blank" aria-label="Facebook">
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/your-profile" target="_blank" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/your-channel" target="_blank" aria-label="YouTube">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <p><a href="index.html">Home</a></p>
-          <p><a href="#about">About Us</a></p>
-          <p><a href="Distinction.html">Our Distinction</a></p>
-          <p><a href="package.html">Packages</a></p>
-          <p><a href="contact.html">Contact</a></p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Our Address</h3>
-          <p>Krishna Nagar-II</p>
-          <p>Sankari tk, 637301</p>
-          <p style="margin-top: 20px;">
-            <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-            <a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a>
-          </p>
-          <p>
-            <i class="fas fa-phone" style="margin-right: 10px;"></i>
-            <a href="tel:+917418477647">+91 74184-77647</a>
-          </p>
-        </div>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <ul class="social-icons">
+          <li><a href="https://www.youtube.com/your-channel" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="https://www.instagram.com/your-profile" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        </ul>
       </div>
-      
-      <div class="footer-bottom">
+      <div class="footer-section address-section">
+        <h3>Address</h3>
+        <p>123 Krishna Nagar-II</p>
+        <p>Sankari tk, 637301</p>
         <p>© 2025 Thulir Construction. All rights reserved.</p>
+      </div>
+      <div class="footer-section contact-info">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+          <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+        </ul>
       </div>
     </div>
   </footer>
 
   <script src="packageScript.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
