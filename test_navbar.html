@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Navigation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #a88734;
+      --secondary-gold: #d9ac5a;
+      --dark-text: #333;
+      --light-text: #666;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      padding: 100px 20px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(168, 135, 52, 0.1);
+      z-index: 1000;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* THIS IS THE KEY - The pill container */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(248, 249, 250, 0.6);
+      padding: 6px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Individual link styles */
+    .nav-links a {
+      padding: 10px 24px;
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* GOLDEN ACTIVE STATE */
+    .nav-links a.active {
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)) !important;
+      color: white !important;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(168, 135, 52, 0.3);
+    }
+
+    .nav-links a.active:hover {
+      box-shadow: 0 6px 20px rgba(168, 135, 52, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-text">THULIR</div>
+      </div>
+      
+      <div class="nav-menu">
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="#about">About</a>
+          <a href="Distinction.html">Distinction</a>
+          <a href="package.html" class="active">Packages</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <h1>Modern Pill Navigation Test</h1>
+    <p>You should see:</p>
+    <ul>
+      <li>A light gray pill container around all navigation links</li>
+      <li>The "Packages" link with a golden gradient background</li>
+      <li>White text on the active "Packages" link</li>
+      <li>Hover effects on other links</li>
+    </ul>
+    
+    <h2 style="margin-top: 40px;">If you DON'T see the pill navigation:</h2>
+    <ol>
+      <li><strong>Clear your browser cache</strong> (Ctrl+Shift+Delete or Cmd+Shift+Delete)</li>
+      <li><strong>Hard refresh</strong> the page (Ctrl+F5 or Cmd+Shift+R)</li>
+      <li>Make sure you uploaded BOTH the style.css AND packageStyle.css files</li>
+      <li>Check that the CSS files aren't being cached by your hosting</li>
+    </ol>
+  </div>
+</body>
+</html>
