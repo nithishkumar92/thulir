@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THULIR - Packages</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">  
-  <link rel="stylesheet" href="packageStyle.css"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="packageStyle.css">
 </head>
 <body>
   <nav class="navbar" id="navbar">
@@ -23,14 +28,13 @@
       </div>
       
       <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a> 
-        <a href="#about">About</a>
+        <a href="index.html">Home</a>
         <a href="Distinction.html">Distinction</a>
         <a href="package.html" class="active">Packages</a>
         <a href="contact.html">Contact</a>
       </div>
       
-      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
         <span></span>
@@ -41,6 +45,7 @@
   <!-- Hero Section -->
   <section class="packages-hero">
     <div class="hero-content">
+      <span class="section-tag">Our Packages</span>
       <h1>Choose Your Perfect Package</h1>
       <p>Tailored construction solutions designed to bring your dream home to life</p>
     </div>
@@ -54,8 +59,12 @@
         <p>Select the package that best fits your vision and budget. Each package is designed with quality, transparency, and your satisfaction in mind.</p>
       </div>
 
-      <div class="table-wrapper">
-        <table id="packageTable">
+      <div class="table-wrapper" id="tableWrapper">
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading packages...</p>
+        </div>
+        <table id="packageTable" style="display: none;">
           <thead>
             <tr>
               <th>Feature</th>
@@ -96,36 +105,56 @@
   </section>
 
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Follow Us</h3>
-        <ul class="social-icons">
-          <li><a href="https://www.youtube.com/your-channel" target="_blank"><i class="fab fa-youtube"></i></a></li>
-          <li><a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a></li>
-          <li><a href="https://www.instagram.com/your-profile" target="_blank"><i class="fab fa-instagram"></i></a></li>
-        </ul>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Thulir Construction</h3>
+          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
+          <ul class="social-icons">
+            <li><a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="Distinction.html">Our Distinction</a></p>
+          <p><a href="package.html">Packages</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Services</h3>
+          <p><a href="#">Architectural Design</a></p>
+          <p><a href="#">General Contracting</a></p>
+          <p><a href="#">Project Management</a></p>
+          <p><a href="#">Renovations</a></p>
+          <p><a href="#">Consulting</a></p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-section address-section">
-        <h3>Address</h3>
-        <p>123 Krishna Nagar-II</p>
-        <p>Sankari tk, 637301</p>
-        <p>© 2025 Thulir Construction. All rights reserved.</p>
-      </div>
-      <div class="footer-section contact-info">
-        <h3>Contact Us</h3>
-        <ul class="contact-list">
-          <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
-          <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
-        </ul>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="packageScript.js"></script>
   <script>
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('navbar');
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
       } else {
@@ -133,22 +162,105 @@
       }
     });
 
-    // Mobile menu toggle
+    // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
 
-    hamburger.addEventListener('click', function() {
-      this.classList.toggle('active');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
       navLinks.classList.toggle('active');
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
-        navLinks.classList.remove('active');
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
         hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
       }
     });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Load package data from Google Sheets
+    const apiKey = 'AIzaSyAwVNjzgZ2Q0XdOVPtzNUBYTqfZxfoie6I';
+    const spreadsheetId = '14xy2C6uXhbwAc_9u2ey8_kEPR2F-tsbLs-FLdZs7THM';
+    const range = 'English!A1:D46';
+
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const values = data.values;
+        const table = document.getElementById('packageTable');
+        const tbody = table.querySelector('tbody');
+        const loadingSpinner = document.querySelector('.loading-spinner');
+
+        if (values && values.length > 0) {
+          // Skip header row (index 0) since we have it in HTML
+          values.slice(1).forEach((row, rowIndex) => {
+            const tableRow = document.createElement('tr');
+            
+            // Ensure we have 4 columns
+            while (row.length < 4) {
+              row.push('');
+            }
+            
+            row.forEach((cell, cellIndex) => {
+              const tableCell = document.createElement('td');
+
+              // Add data labels for mobile view
+              if (cellIndex > 0) {
+                const packageNames = ['Silver', 'Gold', 'Platinum'];
+                tableCell.setAttribute('data-label', packageNames[cellIndex - 1]);
+              }
+
+              // Handle null/undefined cells
+              if (cell === null || cell === undefined) {
+                cell = '';
+              }
+
+              // Check for bold formatting
+              if (cell && cell.startsWith('<b>') && cell.endsWith('</b>')) {
+                tableCell.innerHTML = cell;
+              } else {
+                tableCell.textContent = cell;
+              }
+
+              tableRow.appendChild(tableCell);
+            });
+            tbody.appendChild(tableRow);
+          });
+
+          // Hide loading, show table
+          loadingSpinner.style.display = 'none';
+          table.style.display = 'table';
+        } else {
+          loadingSpinner.innerHTML = '<p>No package data available. Please check back later.</p>';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        const loadingSpinner = document.querySelector('.loading-spinner');
+        loadingSpinner.innerHTML = `
+          <i class="fas fa-exclamation-triangle" style="color: var(--primary-gold); font-size: 2rem;"></i>
+          <p>Unable to load package details.</p>
+          <p style="font-size: 0.9rem; color: var(--light-text);">Please contact us directly for package information.</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top: 20px;">
+            <i class="fas fa-phone"></i>
+            Contact Us
+          </a>
+        `;
+      });
   </script>
 </body>
 </html>
