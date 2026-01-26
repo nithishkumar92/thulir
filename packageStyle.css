@@ -13,6 +13,11 @@
   --platinum: #e5e4e2;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  padding-top: 80px;
+}
+
 /* Navbar Styles */
 .navbar {
   position: fixed;
@@ -33,7 +38,7 @@
   box-shadow: 0 4px 20px var(--shadow-light);
 }
 
-.nav-wrapper {
+.nav-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -93,9 +98,10 @@
   padding: 6px;
   border-radius: 50px;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.nav-link {
+.nav-links a {
   position: relative;
   padding: 10px 24px;
   text-decoration: none;
@@ -108,26 +114,21 @@
   align-items: center;
 }
 
-.nav-link span {
-  position: relative;
-  z-index: 2;
-}
-
-.nav-link:hover {
+.nav-links a:hover {
   color: var(--dark-text);
   background: rgba(255, 255, 255, 0.5);
 }
 
-.nav-link.active {
+.nav-links a.active {
   background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-  color: white;
+  color: white !important;
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(168, 135, 52, 0.3);
 }
 
-.nav-link.active:hover {
+.nav-links a.active:hover {
   background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-  color: white;
+  color: white !important;
   box-shadow: 0 6px 20px rgba(168, 135, 52, 0.4);
   transform: translateY(-1px);
 }
@@ -159,11 +160,6 @@
 
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -7px);
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  padding-top: 80px;
 }
 
 /* Hero Section */
