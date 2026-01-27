@@ -83,6 +83,7 @@ body {
   color: transparent;
   line-height: 1;
   letter-spacing: -0.5px;
+  text-transform: capitalize;
 }
 
 .logo-sub {
