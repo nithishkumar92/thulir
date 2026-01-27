@@ -14,6 +14,189 @@
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Hero Visual Enhancement with Cover Image */
+    .hero-visual {
+      position: relative;
+      height: 600px;
+    }
+
+    .hero-image-stack {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-card {
+      position: absolute;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .hero-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-card-main {
+      width: 85%;
+      height: 70%;
+      top: 15%;
+      left: 0;
+      z-index: 3;
+      background: white;
+      border: 1px solid rgba(168, 135, 52, 0.1);
+    }
+
+    .hero-card-accent {
+      width: 70%;
+      height: 60%;
+      bottom: 5%;
+      right: 0;
+      z-index: 2;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      opacity: 0.15;
+    }
+
+    .hero-card-bg {
+      width: 60%;
+      height: 50%;
+      top: 0;
+      right: 10%;
+      z-index: 1;
+      background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+      opacity: 0.6;
+    }
+
+    .hero-card-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-width: 500px;
+    }
+
+    .floating-badges {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      top: 10%;
+      right: -5%;
+      z-index: 4;
+    }
+
+    .floating-badge {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(168, 135, 52, 0.15);
+      animation: float 5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 200px;
+    }
+
+    .floating-badge:nth-child(2) {
+      animation-delay: 1.5s;
+    }
+
+    .badge-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .badge-content h4 {
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+      color: var(--dark-text);
+      font-weight: 700;
+    }
+
+    .badge-content p {
+      font-size: 0.75rem;
+      color: var(--light-text);
+      margin: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-visual {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-visual {
+        height: 350px;
+        margin-top: 30px;
+      }
+
+      .floating-badges {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .hero-card-content img {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-visual {
+        height: 300px;
+      }
+
+      .floating-badge {
+        min-width: 160px;
+        padding: 15px 18px;
+      }
+
+      .badge-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      .badge-content h4 {
+        font-size: 0.8rem;
+      }
+
+      .badge-content p {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar" id="navbar">
@@ -82,7 +265,7 @@
           <div class="hero-card hero-card-accent"></div>
           <div class="hero-card hero-card-main">
             <div class="hero-card-content">
-              <i class="fas fa-building hero-card-icon"></i>
+              <img src="cover.png" alt="Thulir Construction Quality" loading="eager">
             </div>
           </div>
         </div>
