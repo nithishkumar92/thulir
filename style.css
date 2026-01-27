@@ -153,7 +153,7 @@ body {
 }
 
 .hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -161,7 +161,7 @@ body {
 }
 
 .hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ========================================
@@ -838,13 +838,14 @@ body {
     bottom: 0;
     background: #ffffff;
     flex-direction: column;
-    padding: 30px 5%;
+    padding: 0;
     transform: translateX(-100%);
     transition: var(--transition);
     box-shadow: 0 15px 50px var(--shadow-light);
     gap: 0;
     z-index: 999;
     overflow-y: auto;
+    height: calc(100vh - 85px);
   }
 
   .nav-links.active {
@@ -852,12 +853,12 @@ body {
   }
 
   .nav-links a {
-    padding: 22px 15px;
+    padding: 22px 25px;
     border-bottom: 1px solid rgba(168, 135, 52, 0.15);
     width: 100%;
     text-align: left;
     font-size: 1.1rem;
-    background: #ffffff;
+    display: block;
   }
 
   .nav-links a:last-child {
