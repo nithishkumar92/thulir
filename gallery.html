@@ -533,6 +533,11 @@
         text-align: left !important;
         font-size: 1.1rem !important;
         display: block !important;
+        background: transparent !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        color: #333 !important;
+        -webkit-text-fill-color: #333 !important;
       }
 
       .nav-links a:last-child {
@@ -544,8 +549,11 @@
       }
 
       .nav-links a.active {
-        background: linear-gradient(135deg, rgba(168, 135, 52, 0.1), rgba(217, 172, 90, 0.1)) !important;
+        background: linear-gradient(135deg, rgba(168, 135, 52, 0.15), rgba(217, 172, 90, 0.15)) !important;
         border-left: 4px solid var(--primary-gold) !important;
+        color: #a88734 !important;
+        -webkit-text-fill-color: #a88734 !important;
+        font-weight: 700 !important;
       }
     }
   </style>

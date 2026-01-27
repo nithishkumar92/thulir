@@ -859,6 +859,11 @@ body {
     text-align: left;
     font-size: 1.1rem;
     display: block;
+    background: transparent;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--dark-text);
+    -webkit-text-fill-color: var(--dark-text);
   }
 
   .nav-links a:last-child {
@@ -870,8 +875,11 @@ body {
   }
 
   .nav-links a.active {
-    background: linear-gradient(135deg, rgba(168, 135, 52, 0.1), rgba(217, 172, 90, 0.1));
+    background: linear-gradient(135deg, rgba(168, 135, 52, 0.15), rgba(217, 172, 90, 0.15));
     border-left: 4px solid var(--primary-gold);
+    color: var(--primary-gold);
+    -webkit-text-fill-color: var(--primary-gold);
+    font-weight: 700;
   }
 
   .hero-content h1 {
