@@ -4,29 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THULIR - Packages</title>
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="packageStyle.css">
+  <style>
+    body { padding-top: 85px; }
+    .packages-hero { background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 80px 20px 60px; text-align: center; position: relative; overflow: hidden; }
+    .packages-hero::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 200%; background: radial-gradient(ellipse at center, rgba(168, 135, 52, 0.08) 0%, transparent 70%); }
+    .packages-hero .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+    .packages-hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 15px; line-height: 1.2; }
+    .packages-hero p { font-size: 1.1rem; color: var(--light-text); line-height: 1.6; }
+    .pricing-section { padding: 60px 20px; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); }
+    .pricing-container { max-width: 1200px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+    .pricing-card { background: white; border-radius: 24px; padding: 35px 25px; text-align: center; position: relative; border: 2px solid #f0f0f0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1); }
+    .pricing-card.silver { border-color: #c0c0c0; }
+    .pricing-card.gold { border-color: var(--primary-gold); transform: scale(1.02); box-shadow: 0 20px 40px rgba(168, 135, 52, 0.2); }
+    .pricing-card.gold:hover { transform: scale(1.02) translateY(-8px); }
+    .pricing-card.platinum { border-color: #4a5568; }
+    .pricing-card .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); color: white; padding: 6px 20px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .pricing-card .icon { width: 70px; height: 70px; margin: 0 auto 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .pricing-card.silver .icon { background: linear-gradient(135deg, #e8e8e8, #c0c0c0); color: #666; }
+    .pricing-card.gold .icon { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); color: white; }
+    .pricing-card.platinum .icon { background: linear-gradient(135deg, #4a5568, #2d3748); color: white; }
+    .pricing-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: var(--dark-text); }
+    .pricing-card .price { font-size: 2.8rem; font-weight: 900; margin-bottom: 5px; line-height: 1; }
+    .pricing-card.silver .price { color: #808080; }
+    .pricing-card.gold .price { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .pricing-card.platinum .price { color: #4a5568; }
+    .pricing-card .unit { font-size: 0.95rem; color: var(--light-text); margin-bottom: 20px; }
+    .pricing-card .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+    .pricing-card.silver .cta-btn { background: #f0f0f0; color: #666; }
+    .pricing-card.silver .cta-btn:hover { background: #e0e0e0; }
+    .pricing-card.gold .cta-btn { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); color: white; box-shadow: 0 8px 20px rgba(168, 135, 52, 0.3); }
+    .pricing-card.gold .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(168, 135, 52, 0.4); }
+    .pricing-card.platinum .cta-btn { background: #4a5568; color: white; }
+    .pricing-card.platinum .cta-btn:hover { background: #2d3748; }
+    .details-section { padding: 60px 20px 80px; background: #f8f9fa; }
+    .details-container { max-width: 1200px; margin: 0 auto; }
+    .section-intro { text-align: center; margin-bottom: 50px; }
+    .section-intro h2 { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 10px; }
+    .section-intro p { font-size: 1rem; color: var(--light-text); }
+    .category-card { background: white; border-radius: 20px; margin-bottom: 25px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); }
+    .category-header { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); color: white; padding: 18px 25px; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.3s ease; }
+    .category-header:hover { filter: brightness(1.05); }
+    .category-header i { font-size: 1.2rem; }
+    .category-header .toggle-icon { margin-left: auto; transition: transform 0.3s ease; }
+    .category-card.collapsed .toggle-icon { transform: rotate(-90deg); }
+    .category-content { padding: 0; max-height: 2000px; overflow: hidden; transition: max-height 0.4s ease; }
+    .category-card.collapsed .category-content { max-height: 0; }
+    .feature-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; border-bottom: 1px solid #f0f0f0; }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row > div { padding: 18px 20px; font-size: 0.95rem; display: flex; align-items: center; }
+    .feature-name { font-weight: 600; color: var(--dark-text); background: #fafafa; }
+    .feature-value { color: var(--light-text); justify-content: center; text-align: center; }
+    .feature-value.silver-col { background: rgba(192, 192, 192, 0.05); }
+    .feature-value.gold-col { background: rgba(168, 135, 52, 0.05); }
+    .feature-value.platinum-col { background: rgba(74, 85, 104, 0.05); }
+    .column-headers { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; background: #f8f9fa; border-bottom: 2px solid #f0f0f0; position: sticky; top: 85px; z-index: 10; }
+    .column-headers > div { padding: 15px 20px; font-weight: 700; font-size: 0.9rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .column-headers .feature-label { justify-content: flex-start; color: var(--dark-text); }
+    .column-headers .silver-header { color: #808080; }
+    .column-headers .gold-header { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .column-headers .platinum-header { color: #4a5568; }
+    .cta-section { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 20px; margin-top: 40px; }
+    .cta-section h3 { font-size: 2rem; font-weight: 700; color: var(--dark-text); margin-bottom: 15px; }
+    .cta-section p { font-size: 1.1rem; color: var(--light-text); margin-bottom: 30px; }
+    @media (max-width: 900px) {
+      .pricing-grid { grid-template-columns: 1fr; gap: 20px; max-width: 400px; margin: 0 auto; }
+      .pricing-card.gold { transform: none; order: -1; }
+      .pricing-card.gold:hover { transform: translateY(-8px); }
+      .column-headers { display: none; }
+      .feature-row { display: block; margin-bottom: 15px; background: #fafafa; border-radius: 12px; overflow: hidden; border-bottom: none; }
+      .feature-name { display: block; padding: 12px 15px; background: #f0f0f0; font-size: 0.9rem; }
+      .feature-value { display: flex; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid #e8e8e8; text-align: left; background: white; }
+      .feature-value:last-child { border-bottom: none; }
+      .feature-value::before { content: attr(data-package); font-weight: 600; font-size: 0.85rem; min-width: 70px; }
+      .feature-value.silver-col::before { color: #808080; }
+      .feature-value.gold-col::before { background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .feature-value.platinum-col::before { color: #4a5568; }
+      .category-content { padding: 15px; }
+      .category-card.collapsed .category-content { padding: 0; }
+    }
+    @media (max-width: 480px) {
+      .packages-hero { padding: 60px 15px 40px; }
+      .packages-hero h1 { font-size: 1.9rem; }
+      .pricing-section { padding: 40px 15px; }
+      .pricing-card { padding: 30px 20px; }
+      .pricing-card .price { font-size: 2.4rem; }
+      .details-section { padding: 40px 15px 60px; }
+      .category-header { padding: 15px 18px; font-size: 1rem; }
+      .section-intro h2 { font-size: 1.6rem; }
+      .cta-section h3 { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
         <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-main">THULIR</span>
-          <span class="logo-sub">CONSTRUCTION</span>
-        </div>
+        <div class="logo-text"><span class="logo-main">THULIR</span><span class="logo-sub">CONSTRUCTION</span></div>
       </div>
-      
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="gallery.html">Gallery</a>
@@ -34,16 +118,10 @@
         <a href="package.html" class="active">Packages</a>
         <a href="contact.html">Contact</a>
       </div>
-      
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="packages-hero">
     <div class="hero-content">
       <span class="section-tag">Our Packages</span>
@@ -52,55 +130,159 @@
     </div>
   </section>
 
-  <!-- Packages Section -->
-  <section class="package-section">
-    <div class="package-container">
+  <section class="pricing-section">
+    <div class="pricing-container">
+      <div class="pricing-grid">
+        <div class="pricing-card silver">
+          <div class="icon"><i class="fas fa-medal"></i></div>
+          <h3>Silver Package</h3>
+          <div class="price">₹2,000</div>
+          <div class="unit">per square foot</div>
+          <a href="contact.html" class="cta-btn"><i class="fas fa-phone"></i> Get Quote</a>
+        </div>
+        <div class="pricing-card gold">
+          <span class="badge">Most Popular</span>
+          <div class="icon"><i class="fas fa-crown"></i></div>
+          <h3>Gold Package</h3>
+          <div class="price">₹2,300</div>
+          <div class="unit">per square foot</div>
+          <a href="contact.html" class="cta-btn"><i class="fas fa-phone"></i> Get Quote</a>
+        </div>
+        <div class="pricing-card platinum">
+          <div class="icon"><i class="fas fa-gem"></i></div>
+          <h3>Platinum Package</h3>
+          <div class="price">₹2,800</div>
+          <div class="unit">per square foot</div>
+          <a href="contact.html" class="cta-btn"><i class="fas fa-phone"></i> Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="details-section">
+    <div class="details-container">
       <div class="section-intro">
-        <h2>Our Construction Packages</h2>
-        <p>Select the package that best fits your vision and budget. Each package is designed with quality, transparency, and your satisfaction in mind.</p>
+        <h2>Package Comparison</h2>
+        <p>Detailed breakdown of what's included in each package</p>
+      </div>
+      <div class="column-headers">
+        <div class="feature-label">Feature</div>
+        <div class="silver-header"><i class="fas fa-medal"></i> Silver</div>
+        <div class="gold-header"><i class="fas fa-crown"></i> Gold</div>
+        <div class="platinum-header"><i class="fas fa-gem"></i> Platinum</div>
       </div>
 
-      <div class="table-wrapper" id="tableWrapper">
-        <div class="loading-spinner" id="loadingSpinner">
-          <i class="fas fa-spinner fa-spin"></i>
-          <p>Loading packages...</p>
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-cubes"></i>Basic Materials<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Cement</div><div class="feature-value silver-col" data-package="Silver">Priya / Bharathi</div><div class="feature-value gold-col" data-package="Gold">JSW / Chettinad</div><div class="feature-value platinum-col" data-package="Platinum">Ultratech / Ramco / ACC</div></div>
+          <div class="feature-row"><div class="feature-name">Reinforcement</div><div class="feature-value silver-col" data-package="Silver">Andavar / Prime Gold</div><div class="feature-value gold-col" data-package="Gold">Vizag / Agni Steels</div><div class="feature-value platinum-col" data-package="Platinum">JSW / TATA</div></div>
         </div>
-        <table id="packageTable" style="display: none;">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th class="package-col silver">
-                <div class="package-header">
-                  <i class="fas fa-medal"></i>
-                  <span>Silver Package</span>
-                </div>
-              </th>
-              <th class="package-col gold">
-                <div class="package-header">
-                  <i class="fas fa-crown"></i>
-                  <span>Gold Package</span>
-                </div>
-              </th>
-              <th class="package-col platinum">
-                <div class="package-header">
-                  <i class="fas fa-gem"></i>
-                  <span>Platinum Package</span>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-layer-group"></i>Brickwork<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Brick (Below Floor Level)</div><div class="feature-value silver-col" data-package="Silver">Flyash Bricks</div><div class="feature-value gold-col" data-package="Gold">Flyash Bricks</div><div class="feature-value platinum-col" data-package="Platinum">Flyash Bricks</div></div>
+          <div class="feature-row"><div class="feature-name">Brick (Above Floor Level)</div><div class="feature-value silver-col" data-package="Silver">Non-Chamber Bricks</div><div class="feature-value gold-col" data-package="Gold">Chamber Brick</div><div class="feature-value platinum-col" data-package="Platinum">Wire Cut Chamber Bricks</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-building"></i>Structure<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Basement Height</div><div class="feature-value silver-col" data-package="Silver">Upto 1.5 Feet</div><div class="feature-value gold-col" data-package="Gold">Upto 2.5 Feet</div><div class="feature-value platinum-col" data-package="Platinum">Upto 3.0 Feet</div></div>
+          <div class="feature-row"><div class="feature-name">Slab to Slab Height</div><div class="feature-value silver-col" data-package="Silver">10'0" Feet</div><div class="feature-value gold-col" data-package="Gold">10'6" Feet</div><div class="feature-value platinum-col" data-package="Platinum">11'0" Feet</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-vector-square"></i>Reinforcement Details<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Footing Size</div><div class="feature-value silver-col" data-package="Silver">[3'0" x 3'0"] 10mm @ 5"</div><div class="feature-value gold-col" data-package="Gold">[3'6" x 3'6"] 10mm @ 5"</div><div class="feature-value platinum-col" data-package="Platinum">[3'6" x 3'6"] 10mm @ 5"</div></div>
+          <div class="feature-row"><div class="feature-name">Pillar / Column</div><div class="feature-value silver-col" data-package="Silver">[1'0" x 0'9"] 12mm @ 6 Nos</div><div class="feature-value gold-col" data-package="Gold">[1'3" x 0'9"] 16mm @ 6 Nos</div><div class="feature-value platinum-col" data-package="Platinum">[1'3" x 0'9"] 16mm @ 6 Nos</div></div>
+          <div class="feature-row"><div class="feature-name">Belt Beam</div><div class="feature-value silver-col" data-package="Silver">[0'5" x 0'9"] 12mm @ 4 Nos</div><div class="feature-value gold-col" data-package="Gold">[0'5" x 0'9"] 12mm @ 4 Nos</div><div class="feature-value platinum-col" data-package="Platinum">[0'5" x 0'9"] 12mm @ 4 Nos</div></div>
+          <div class="feature-row"><div class="feature-name">7' Adi Beam</div><div class="feature-value silver-col" data-package="Silver">[0'5" x 0'9"] 12mm @ 4 Nos</div><div class="feature-value gold-col" data-package="Gold">[0'6" x 0'9"] 12mm @ 4 Nos</div><div class="feature-value platinum-col" data-package="Platinum">[0'6" x 0'9"] 12mm @ 4 Nos</div></div>
+          <div class="feature-row"><div class="feature-name">Slab Beam</div><div class="feature-value silver-col" data-package="Silver">Nil</div><div class="feature-value gold-col" data-package="Gold">[1'0" x 0'9"] 12mm @ 4 Nos</div><div class="feature-value platinum-col" data-package="Platinum">[1'0" x 0'9"] 12mm @ 4 Nos</div></div>
+          <div class="feature-row"><div class="feature-name">Slab Reinforcement</div><div class="feature-value silver-col" data-package="Silver">Main: 10mm @ 7" | Distri: 8mm @ 6"</div><div class="feature-value gold-col" data-package="Gold">Main: 10mm @ 5" | Distri: 8mm @ 6"</div><div class="feature-value platinum-col" data-package="Platinum">Main: 10mm @ 5" | Distri: 8mm @ 6"</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-door-open"></i>Doors & Frames<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Main Door & Frame</div><div class="feature-value silver-col" data-package="Silver">Sal Wood</div><div class="feature-value gold-col" data-package="Gold">Kerala Teak Wood</div><div class="feature-value platinum-col" data-package="Platinum">Mini Burma Teak Wood</div></div>
+          <div class="feature-row"><div class="feature-name">Pooja Door & Frame</div><div class="feature-value silver-col" data-package="Silver">Commercial Quality</div><div class="feature-value gold-col" data-package="Gold">Kerala Teak Wood</div><div class="feature-value platinum-col" data-package="Platinum">Mini Burma Teak Wood</div></div>
+          <div class="feature-row"><div class="feature-name">Bedroom Door Frame</div><div class="feature-value silver-col" data-package="Silver">Maha Kani Red</div><div class="feature-value gold-col" data-package="Gold">Sal Wood</div><div class="feature-value platinum-col" data-package="Platinum">2nd Quality Kerala Teak</div></div>
+          <div class="feature-row"><div class="feature-name">Bedroom Door</div><div class="feature-value silver-col" data-package="Silver">Laminated upto ₹4,000</div><div class="feature-value gold-col" data-package="Gold">Laminated upto ₹5,500</div><div class="feature-value platinum-col" data-package="Platinum">Laminated upto ₹7,000</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-window-maximize"></i>Windows<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Hall Front Window</div><div class="feature-value silver-col" data-package="Silver">Maha Kani</div><div class="feature-value gold-col" data-package="Gold">Kerala Teak Wood</div><div class="feature-value platinum-col" data-package="Platinum">Mini Burma Teak Wood</div></div>
+          <div class="feature-row"><div class="feature-name">Other Window & Shutter</div><div class="feature-value silver-col" data-package="Silver">Commercial Quality</div><div class="feature-value gold-col" data-package="Gold">Red Sal Wood</div><div class="feature-value platinum-col" data-package="Platinum">Mini Burma Teak Wood</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-faucet"></i>Plumbing<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Plumbing Pipe</div><div class="feature-value silver-col" data-package="Silver">Commercial Quality</div><div class="feature-value gold-col" data-package="Gold">Finolex PVC + CPVC Hot Line</div><div class="feature-value platinum-col" data-package="Platinum">Finolex Super Thick / CPVC</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-bolt"></i>Electrical<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Electrical Cable</div><div class="feature-value silver-col" data-package="Silver">Commercial Quality</div><div class="feature-value gold-col" data-package="Gold">Finolex FR</div><div class="feature-value platinum-col" data-package="Platinum">Finolex FR</div></div>
+          <div class="feature-row"><div class="feature-name">Electrical Switch</div><div class="feature-value silver-col" data-package="Silver">Commercial Quality</div><div class="feature-value gold-col" data-package="Gold">Legrand Mylinc / L&T (₹35/Switch)</div><div class="feature-value platinum-col" data-package="Platinum">Legrand Myris / Wipro (₹55/Switch)</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-toilet"></i>Sanitary Ware<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Water Closet</div><div class="feature-value silver-col" data-package="Silver">Upto ₹4,500</div><div class="feature-value gold-col" data-package="Gold">Upto ₹6,000</div><div class="feature-value platinum-col" data-package="Platinum">Upto ₹8,000</div></div>
+          <div class="feature-row"><div class="feature-name">Wash Basin</div><div class="feature-value silver-col" data-package="Silver">Upto ₹2,000</div><div class="feature-value gold-col" data-package="Gold">Upto ₹3,000</div><div class="feature-value platinum-col" data-package="Platinum">Upto ₹4,000</div></div>
+          <div class="feature-row"><div class="feature-name">Mixer Value Tap</div><div class="feature-value silver-col" data-package="Silver">Nil</div><div class="feature-value gold-col" data-package="Gold">Jaquar / Kerovit upto ₹4,500</div><div class="feature-value platinum-col" data-package="Platinum">Jaquar / Kerovit upto ₹5,500</div></div>
+          <div class="feature-row"><div class="feature-name">Metal Value Tap</div><div class="feature-value silver-col" data-package="Silver">Upto ₹500</div><div class="feature-value gold-col" data-package="Gold">Jaquar / Kerovit upto ₹600</div><div class="feature-value platinum-col" data-package="Platinum">Jaquar / Kerovit upto ₹700</div></div>
+          <div class="feature-row"><div class="feature-name">Shower</div><div class="feature-value silver-col" data-package="Silver">Upto ₹750</div><div class="feature-value gold-col" data-package="Gold">Jaquar / Kerovit upto ₹2,000</div><div class="feature-value platinum-col" data-package="Platinum">Jaquar / Kerovit upto ₹3,000</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-border-all"></i>Flooring Work<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Floor</div><div class="feature-value silver-col" data-package="Silver">₹45 per Sq.Ft Tiles</div><div class="feature-value gold-col" data-package="Gold">₹80 per Sq.Ft Tiles</div><div class="feature-value platinum-col" data-package="Platinum">₹120 per Sq.Ft Tiles</div></div>
+          <div class="feature-row"><div class="feature-name">Kitchen Counter Top</div><div class="feature-value silver-col" data-package="Silver">₹70 per Sq.Ft Granite</div><div class="feature-value gold-col" data-package="Gold">₹200 per Sq.Ft Granite</div><div class="feature-value platinum-col" data-package="Platinum">₹250 per Sq.Ft Granite</div></div>
+          <div class="feature-row"><div class="feature-name">Bathroom & Kitchen Wall</div><div class="feature-value silver-col" data-package="Silver">₹35 per Sq.Ft Tiles</div><div class="feature-value gold-col" data-package="Gold">₹55 per Sq.Ft Tiles</div><div class="feature-value platinum-col" data-package="Platinum">₹75 per Sq.Ft Tiles</div></div>
+          <div class="feature-row"><div class="feature-name">Parking & Staircase</div><div class="feature-value silver-col" data-package="Silver">₹35 per Sq.Ft Tiles</div><div class="feature-value gold-col" data-package="Gold">₹55 per Sq.Ft Tiles</div><div class="feature-value platinum-col" data-package="Platinum">₹75 per Sq.Ft Tiles</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-paint-roller"></i>Painting Work<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Internal Paint</div><div class="feature-value silver-col" data-package="Silver">1 Coat Putty + 1 Primer + 1 Emulsion</div><div class="feature-value gold-col" data-package="Gold">2 Coat Putty + 1 Primer + 2 Tractor Emulsion</div><div class="feature-value platinum-col" data-package="Platinum">2 Coat Putty + 1 Primer + 2 Tractor Emulsion</div></div>
+          <div class="feature-row"><div class="feature-name">External Paint</div><div class="feature-value silver-col" data-package="Silver">1 Coat Primer</div><div class="feature-value gold-col" data-package="Gold">1 Primer + 1 Exterior Emulsion</div><div class="feature-value platinum-col" data-package="Platinum">1 Primer + 1 Exterior Emulsion</div></div>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <div class="category-header" onclick="toggleCategory(this)"><i class="fas fa-plus-circle"></i>Additional Works<i class="fas fa-chevron-down toggle-icon"></i></div>
+        <div class="category-content">
+          <div class="feature-row"><div class="feature-name">Staircase Handrails</div><div class="feature-value silver-col" data-package="Silver">MS Plain Design</div><div class="feature-value gold-col" data-package="Gold">SS Plain Design</div><div class="feature-value platinum-col" data-package="Platinum">SS with Toughened Glass</div></div>
+          <div class="feature-row"><div class="feature-name">Elevation Works</div><div class="feature-value silver-col" data-package="Silver">Additional Cost for Border, Grill, Tiles</div><div class="feature-value gold-col" data-package="Gold">Additional Cost for Grill & Tiles</div><div class="feature-value platinum-col" data-package="Platinum">Full Finished as per Design</div></div>
+          <div class="feature-row"><div class="feature-name">Shelfs</div><div class="feature-value silver-col" data-package="Silver">Nil</div><div class="feature-value gold-col" data-package="Gold">120 Sqft/Floor with Kadapa Stone</div><div class="feature-value platinum-col" data-package="Platinum">240 Sqft/Floor with Kadapa Stone</div></div>
+        </div>
       </div>
 
       <div class="cta-section">
         <h3>Ready to Start Your Project?</h3>
         <p>Contact us today for a free consultation and detailed quote</p>
-        <a href="contact.html" class="btn btn-primary">
-          <i class="fas fa-phone"></i>
-          Get Free Quote
-        </a>
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-phone"></i> Get Free Quote</a>
       </div>
     </div>
   </section>
@@ -110,229 +292,31 @@
       <div class="footer-content">
         <div class="footer-section">
           <h3>Thulir Construction</h3>
-          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
+          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations.</p>
           <ul class="social-icons">
-            <li><a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
-            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://wa.me/917418477647" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </div>
-        
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <p><a href="index.html">Home</a></p>
-          <p><a href="gallery.html">Gallery</a></p>
-          <p><a href="Distinction.html">Our Distinction</a></p>
-          <p><a href="package.html">Packages</a></p>
-          <p><a href="contact.html">Contact</a></p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Services</h3>
-          <p><a href="#">Architectural Design</a></p>
-          <p><a href="#">General Contracting</a></p>
-          <p><a href="#">Project Management</a></p>
-          <p><a href="#">Renovations</a></p>
-          <p><a href="#">Consulting</a></p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Contact Us</h3>
-          <ul class="contact-list">
-            <li><i class="fas fa-map-marker-alt"></i> 123 Krishna Nagar-II, Sankari tk, 637301</li>
-            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
-            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
-          </ul>
-        </div>
+        <div class="footer-section"><h3>Quick Links</h3><p><a href="index.html">Home</a></p><p><a href="gallery.html">Gallery</a></p><p><a href="Distinction.html">Our Distinction</a></p><p><a href="package.html">Packages</a></p><p><a href="contact.html">Contact</a></p></div>
+        <div class="footer-section"><h3>Services</h3><p><a href="#">Architectural Design</a></p><p><a href="#">General Contracting</a></p><p><a href="#">Project Management</a></p><p><a href="#">Renovations</a></p><p><a href="#">Consulting</a></p></div>
+        <div class="footer-section"><h3>Contact Us</h3><ul class="contact-list"><li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li><li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li><li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li></ul></div>
       </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Thulir Construction. All rights reserved.</p></div>
     </div>
   </footer>
 
   <script>
-    // Navbar scroll effect
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Hamburger menu
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      }
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-
-    // =====================================================
-    // THULIR CONSTRUCTION - PACKAGE DATA
-    // =====================================================
-    const fallbackPackageData = [
-      ["<b>RATES</b>", "Rs. 2,000 /sqft", "Rs. 2,300 /sqft", "Rs. 2,800 /sqft"],
-      ["<b>BASIC MATERIALS</b>", "", "", ""],
-      ["Cement", "Priya / Bharathi", "JSW / Chettinad", "Ultratech / Ramco / ACC"],
-      ["Reinforcement", "Andavar / Prime Gold", "Vizag / Agni Steels", "JSW / TATA"],
-      ["<b>BRICKWORK</b>", "", "", ""],
-      ["Brick (Below Floor Level)", "Flyash Bricks", "Flyash Bricks", "Flyash Bricks"],
-      ["Brick (Above Floor Level)", "Non-Chamber Bricks", "Chamber Brick", "Wire Cut Chamber Bricks"],
-      ["<b>STRUCTURE</b>", "", "", ""],
-      ["Basement Height", "Upto 1.5 Feet Height", "Upto 2.5 Feet Height", "Upto 3.0 Feet Height"],
-      ["Slab to Slab Height", "10'0\" Feet", "10'6\" Feet", "11'0\" Feet"],
-      ["<b>REINFORCEMENT DETAILS</b>", "", "", ""],
-      ["Footing Size", "[3'0\" x 3'0\"] 10mm Dia @ 5\" Spacing", "[3'6\" x 3'6\"] 10mm Dia @ 5\" Spacing", "[3'6\" x 3'6\"] 10mm Dia @ 5\" Spacing"],
-      ["Pillar or Column Size", "[1'0\" x 0'9\"] 12mm Dia @ 6 Nos", "[1'3\" x 0'9\"] 16mm Dia @ 6 Nos", "[1'3\" x 0'9\"] 16mm Dia @ 6 Nos"],
-      ["Belt Beam", "[0'5\" x 0'9\"] 12mm Dia @ 4 Nos", "[0'5\" x 0'9\"] 12mm Dia @ 4 Nos", "[0'5\" x 0'9\"] 12mm Dia @ 4 Nos"],
-      ["7' Adi Beam", "[0'5\" x 0'9\"] 12mm Dia @ 4 Nos", "[0'6\" x 0'9\"] 12mm Dia @ 4 Nos", "[0'6\" x 0'9\"] 12mm Dia @ 4 Nos"],
-      ["Slab Beam", "Nil", "[1'0\" x 0'9\"] 12mm Dia @ 4 Nos", "[1'0\" x 0'9\"] 12mm Dia @ 4 Nos"],
-      ["Slab Reinforcement", "Main Rod: 10mm Dia @ 7\" Spacing | Distri Rod: 8mm Dia @ 6\" Spacing", "Main Rod: 10mm Dia @ 5\" Spacing | Distri Rod: 8mm Dia @ 6\" Spacing", "Main Rod: 10mm Dia @ 5\" Spacing | Distri Rod: 8mm Dia @ 6\" Spacing"],
-      ["<b>DOORS & FRAMES</b>", "", "", ""],
-      ["Main Door & Frame", "Sal Wood", "Kerala Teak Wood", "Mini Burma Teak Wood"],
-      ["Pooja Door & Frame", "Commercial Quality", "Kerala Teak Wood", "Mini Burma Teak Wood"],
-      ["Bedroom Door Frame", "Maha Kani Red", "Sal Wood", "2nd Quality Kerala Teak Wood"],
-      ["Bedroom Door", "Laminated Door upto Rs. 4000", "Laminated Door upto Rs. 5500", "Laminated Door upto Rs. 7000"],
-      ["<b>WINDOWS</b>", "", "", ""],
-      ["Hall Front Window", "Maha Kani", "Kerala Teak Wood", "Mini Burma Teak Wood"],
-      ["Other Window & Shutter", "Commercial Quality", "Red Sal Wood", "Mini Burma Teak Wood"],
-      ["<b>PLUMBING</b>", "", "", ""],
-      ["Plumbing Pipe", "Commercial Quality", "Finolex PVC and Hot Water Line CPVC", "Finolex Super Thick / CPVC"],
-      ["<b>ELECTRICAL</b>", "", "", ""],
-      ["Electrical Cable", "Commercial Quality", "Finolex FR", "Finolex FR"],
-      ["Electrical Switch", "Commercial Quality", "Legrand Mylinc & L&T (Rs. 35/Switch)", "Legrand Myris / Wipro / L&T (Rs. 55/Switch)"],
-      ["<b>SANITARY WARE</b>", "", "", ""],
-      ["Water Closet", "Upto Rs. 4,500", "Upto Rs. 6,000", "Upto Rs. 8,000"],
-      ["Wash Basin", "Upto Rs. 2,000", "Upto Rs. 3,000", "Upto Rs. 4,000"],
-      ["Mixer Value Tap", "Nil", "Jaquar / Kerovit Upto Rs. 4,500", "Jaquar / Kerovit Upto Rs. 5,500"],
-      ["Metal Value Tap", "Upto Rs. 500", "Jaquar / Kerovit Upto Rs. 600", "Jaquar / Kerovit Upto Rs. 700"],
-      ["Shower", "Upto Rs. 750", "Jaquar / Kerovit Upto Rs. 2,000", "Jaquar / Kerovit Upto Rs. 3,000"],
-      ["<b>FLOORING WORK</b>", "", "", ""],
-      ["Floor", "Rs. 45 per Sq.Ft Tiles", "Rs. 80 per Sq.Ft Tiles", "Rs. 120 per Sq.Ft Tiles"],
-      ["Kitchen Counter Top", "Rs. 70 per Sq.Ft Granite", "Rs. 200 per Sq.Ft Granite", "Rs. 250 per Sq.Ft Granite"],
-      ["Bathroom Floor & Wall & Kitchen Wall", "Rs. 35 per Sq.Ft Tiles", "Rs. 55 per Sq.Ft Tiles", "Rs. 75 per Sq.Ft Tiles"],
-      ["Parking & Staircase Floor", "Rs. 35 per Sq.Ft Tiles", "Rs. 55 per Sq.Ft Tiles", "Rs. 75 per Sq.Ft Tiles"],
-      ["<b>PAINTING WORK</b>", "", "", ""],
-      ["Internal Paint", "Commercial 1 Coat Putty + 1 Coat Primer + 1 Coat Emulsion", "Asian / Berger / Nippon 2 Coat Putty + 1 Coat Primer + 2 Coat Tractor Emulsion", "Asian / Berger / Nippon 2 Coat Putty + 1 Coat Primer + 2 Coat Tractor Emulsion"],
-      ["External Paint", "1 Coat Primer", "1 Coat Primer + 1 Coat Exterior Emulsion", "1 Coat Primer + 1 Coat Exterior Emulsion"],
-      ["<b>ADDITIONAL WORKS</b>", "", "", ""],
-      ["Staircase Handrails", "MS Plain Design", "SS Plain Design", "SS with Toughened Glass"],
-      ["Elevation Works", "Additional Cost for Border Works, Grill Works, Tiles Elevation with Cement Work", "Additional Cost for Grill & Tiles", "Full Finished Elevation Works as per Design Sketch"],
-      ["<b>OTHER WORKS</b>", "", "", ""],
-      ["Shelfs", "Nil", "Per Floor 120 Sqft Shelf with Kadapa Stone", "Per Floor 240 Sqft Shelf with Kadapa Stone"]
-    ];
-
-    // Function to render table with data
-    function renderTable(data) {
-      const table = document.getElementById('packageTable');
-      const tbody = table.querySelector('tbody');
-      const loadingSpinner = document.getElementById('loadingSpinner');
-
-      tbody.innerHTML = '';
-
-      data.forEach((row, rowIndex) => {
-        const tableRow = document.createElement('tr');
-        
-        // Ensure we have 4 columns
-        while (row.length < 4) {
-          row.push('');
-        }
-        
-        row.forEach((cell, cellIndex) => {
-          const tableCell = document.createElement('td');
-
-          // Add data labels for mobile view
-          if (cellIndex > 0) {
-            const packageNames = ['Silver', 'Gold', 'Platinum'];
-            tableCell.setAttribute('data-label', packageNames[cellIndex - 1]);
-          }
-
-          // Handle null/undefined cells
-          if (cell === null || cell === undefined) {
-            cell = '';
-          }
-
-          // Check for bold formatting (section headers)
-          if (cell && cell.toString().startsWith('<b>') && cell.toString().endsWith('</b>')) {
-            tableCell.innerHTML = cell;
-          } else {
-            tableCell.textContent = cell;
-          }
-
-          tableRow.appendChild(tableCell);
-        });
-        tbody.appendChild(tableRow);
-      });
-
-      // Hide loading, show table
-      loadingSpinner.style.display = 'none';
-      table.style.display = 'table';
-    }
-
-    // Google Sheets API Configuration
-    const apiKey = 'AIzaSyAwVNjzgZ2Q0XdOVPtzNUBYTqfZxfoie6I';
-    const spreadsheetId = '14xy2C6uXhbwAc_9u2ey8_kEPR2F-tsbLs-FLdZs7THM';
-    const range = 'English!A1:D46';
-
-    // Try to load from Google Sheets, fall back to static data if it fails
-    async function loadPackageData() {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
-
-        const response = await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`,
-          { signal: controller.signal }
-        );
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        
-        const data = await response.json();
-        const values = data.values;
-
-        if (values && values.length > 1) {
-          // Skip header row (index 0) since we have it in HTML
-          renderTable(values.slice(1));
-          console.log('✅ Package data loaded from Google Sheets');
-        } else {
-          throw new Error('No data in response');
-        }
-      } catch (error) {
-        console.warn('⚠️ Could not load from Google Sheets, using fallback data:', error.message);
-        // Use fallback data
-        renderTable(fallbackPackageData);
-        console.log('✅ Package data loaded from fallback');
-      }
-    }
-
-    // Load package data on page load
-    loadPackageData();
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    document.addEventListener('click', (e) => { if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) { hamburger.classList.remove('active'); navLinks.classList.remove('active'); } });
+    document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }); });
+    function toggleCategory(header) { header.closest('.category-card').classList.toggle('collapsed'); }
   </script>
 </body>
 </html>
