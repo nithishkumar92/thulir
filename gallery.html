@@ -624,11 +624,11 @@
        ======================================== */
     const sites = [
       // Add your project folders here
-      // { folder: "folder-name", name: "Display Name", count: NUMBER_OF_PHOTOS, cover: COVER_PHOTO_NUMBER },
+      // { folder: "folder-name", name: "Display Name", count: NUMBER_OF_PHOTOS, cover: COVER_PHOTO_NUMBER, format: "png" or "jpg" },
       
-      // EXAMPLE ENTRIES (replace with your actual projects):
-      { folder: "sample-project-1", name: "Modern Villa - Sankari", count: 5, cover: 1 },
-      { folder: "sample-project-2", name: "Luxury Residence - Salem", count: 8, cover: 3 },
+      // YOUR PROJECTS:
+      { folder: "project-name-1", name: "Project Name 1", count: 2, cover: 1, format: "png" },
+      { folder: "project-name-2", name: "Project Name 2", count: 2, cover: 1, format: "png" },
       // Add more projects below...
     ];
 
@@ -640,49 +640,28 @@
       return String(num).padStart(3, '0');
     }
 
-    // Try to load image with multiple formats
-    async function tryLoadImage(basePath, number) {
-      const formats = ['jpg', 'jpeg', 'png', 'webp'];
+    // Build image URL directly (no fetch needed)
+    function getImageUrl(folder, number, format) {
       const numStr = formatNumber(number);
-      
-      for (const format of formats) {
-        const url = `${basePath}${numStr}.${format}`;
-        try {
-          const response = await fetch(url, { method: 'HEAD' });
-          if (response.ok) {
-            return url;
-          }
-        } catch (e) {
-          continue;
-        }
-      }
-      return null;
+      return `${imageBasePath}${folder}/${numStr}.${format}`;
     }
 
     // Load cover image for a project
-    async function loadCoverImage(site) {
-      const basePath = `${imageBasePath}${site.folder}/`;
-      const coverUrl = await tryLoadImage(basePath, site.cover);
-      return coverUrl;
+    function loadCoverImage(site) {
+      return getImageUrl(site.folder, site.cover, site.format);
     }
 
     // Load all images for a project
-    async function loadProjectImages(site) {
-      const basePath = `${imageBasePath}${site.folder}/`;
+    function loadProjectImages(site) {
       const images = [];
-      
       for (let i = 1; i <= site.count; i++) {
-        const imageUrl = await tryLoadImage(basePath, i);
-        if (imageUrl) {
-          images.push(imageUrl);
-        }
+        images.push(getImageUrl(site.folder, i, site.format));
       }
-      
       return images;
     }
 
     // Render projects grid
-    async function renderProjects() {
+    function renderProjects() {
       const grid = document.getElementById('projectsGrid');
       
       if (sites.length === 0) {
@@ -699,7 +678,7 @@
       grid.innerHTML = '';
 
       for (const site of sites) {
-        const coverUrl = await loadCoverImage(site);
+        const coverUrl = loadCoverImage(site);
         
         const card = document.createElement('div');
         card.className = 'project-card';
@@ -708,7 +687,7 @@
         card.dataset.count = site.count;
         
         card.innerHTML = `
-          ${coverUrl ? `<img src="${coverUrl}" alt="${site.name}" loading="lazy">` : ''}
+          <img src="${coverUrl}" alt="${site.name}" loading="lazy" onerror="this.style.display='none'">
           <div class="project-badge">
             <i class="fas fa-images"></i>
             ${site.count} Photos
@@ -728,7 +707,7 @@
     let currentImages = [];
     let currentIndex = 0;
 
-    async function openLightbox(site) {
+    function openLightbox(site) {
       const lightbox = document.getElementById('lightbox');
       const title = document.getElementById('lightboxTitle');
       const image = document.getElementById('lightboxImage');
@@ -739,12 +718,8 @@
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
       
-      // Show loading state
-      image.style.opacity = '0.5';
-      thumbnails.innerHTML = '<p style="color: white; padding: 10px;">Loading images...</p>';
-      
       // Load all images
-      currentImages = await loadProjectImages(site);
+      currentImages = loadProjectImages(site);
       currentIndex = 0;
       
       if (currentImages.length === 0) {
@@ -760,7 +735,7 @@
       currentImages.forEach((imgUrl, index) => {
         const thumb = document.createElement('div');
         thumb.className = `thumb ${index === 0 ? 'active' : ''}`;
-        thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}">`;
+        thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}" onerror="this.parentElement.style.display='none'">`;
         thumb.addEventListener('click', () => goToImage(index));
         thumbnails.appendChild(thumb);
       });
