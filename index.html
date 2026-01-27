@@ -155,30 +155,73 @@
 
     @media (max-width: 768px) {
       .hero-visual {
-        height: 350px;
+        height: auto;
         margin-top: 30px;
       }
 
-      .floating-badges {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 30px;
-        flex-wrap: wrap;
+      .hero-image-stack {
+        height: auto;
+        min-height: 300px;
+      }
+
+      .hero-card-main {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+
+      .hero-card-accent,
+      .hero-card-bg {
+        display: none;
+      }
+
+      .hero-card-content {
+        padding: 30px 20px;
+        height: auto;
       }
 
       .hero-card-content img {
         max-width: 100%;
+        height: auto;
+      }
+
+      .floating-badges {
+        position: static;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 20px;
+        padding: 0 20px;
+      }
+
+      .floating-badge {
+        width: 100%;
+        max-width: none;
       }
     }
 
     @media (max-width: 480px) {
       .hero-visual {
-        height: 300px;
+        margin-top: 20px;
+      }
+
+      .hero-image-stack {
+        min-height: 250px;
+      }
+
+      .hero-card-content {
+        padding: 20px 15px;
+      }
+
+      .floating-badges {
+        margin-top: 15px;
+        padding: 0 15px;
+        gap: 15px;
       }
 
       .floating-badge {
-        min-width: 160px;
+        min-width: auto;
         padding: 15px 18px;
       }
 
@@ -189,11 +232,11 @@
       }
 
       .badge-content h4 {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
 
       .badge-content p {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -204,7 +247,7 @@
       <div class="logo">
         <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
         <div class="logo-text">
-          <span class="logo-main">Thulir</span>
+          <span class="logo-main">THULIR</span>
           <span class="logo-sub">CONSTRUCTION</span>
         </div>
       </div>
@@ -454,7 +497,7 @@
           <h3>Contact Us</h3>
           <ul class="contact-list">
             <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
-            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-envelope"></i><a href="/cdn-cgi/l/email-protection#3957504d51504a51524c54584b794d514c55504b5a56574a4d4b4c5a4d505657175057"><span class="__cf_email__" data-cfemail="89e7e0fde1e0fae1e2fce4e8fbc9fde1fce5e0fbeae6e7fafdfbfceafde0e6e7a7e0e7">[email&#160;protected]</span></a></li>
             <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
           </ul>
         </div>
@@ -466,7 +509,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -494,13 +537,4 @@
       }
     });
 
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-  </script>
-</body>
-</html>
+    // Close
