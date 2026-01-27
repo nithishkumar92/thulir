@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THULIR - Project Gallery</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-top: 85px; }
+
+    /* ========================================
+       GALLERY HERO
+       ======================================== */
+    .gallery-hero {
+      padding: 100px 0 80px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(168, 135, 52, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .gallery-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 5%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gallery-hero p {
+      font-size: 1.2rem;
+      color: var(--light-text);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       PROJECTS GRID
+       ======================================== */
+    .projects-section {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border: 1px solid rgba(168, 135, 52, 0.1);
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(168, 135, 52, 0.2);
+      border-color: rgba(168, 135, 52, 0.3);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .project-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .project-card:hover .project-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .project-overlay h3 {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-overlay p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-overlay p i {
+      color: var(--secondary-gold);
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: var(--transition);
+    }
+
+    .project-card:hover .project-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       LIGHTBOX MODAL
+       ======================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lightbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .lightbox-title {
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .lightbox-title span {
+      color: var(--secondary-gold);
+    }
+
+    .lightbox-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--secondary-gold);
+    }
+
+    .lightbox-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .lightbox-image-container {
+      max-width: 90%;
+      max-height: 80vh;
+      position: relative;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-nav:hover {
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      border-color: var(--secondary-gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev {
+      left: 30px;
+    }
+
+    .lightbox-next {
+      right: 30px;
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 25px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-counter span {
+      color: var(--secondary-gold);
+      font-weight: 700;
+    }
+
+    /* ========================================
+       THUMBNAIL STRIP
+       ======================================== */
+    .lightbox-thumbnails {
+      padding: 15px 30px 25px;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .lightbox-thumbnails::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .lightbox-thumbnails::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+    }
+
+    .lightbox-thumbnails::-webkit-scrollbar-thumb {
+      background: var(--primary-gold);
+      border-radius: 3px;
+    }
+
+    .thumb {
+      width: 70px;
+      height: 50px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: var(--transition);
+      flex-shrink: 0;
+      border: 2px solid transparent;
+    }
+
+    .thumb:hover {
+      opacity: 0.8;
+    }
+
+    .thumb.active {
+      opacity: 1;
+      border-color: var(--secondary-gold);
+      transform: scale(1.1);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ========================================
+       LOADING STATE
+       ======================================== */
+    .loading-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      color: var(--light-text);
+    }
+
+    .loading-placeholder i {
+      font-size: 3rem;
+      color: var(--primary-gold);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========================================
+       EMPTY STATE
+       ======================================== */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .empty-state i {
+      font-size: 5rem;
+      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 1.5rem;
+      color: var(--dark-text);
+      margin-bottom: 10px;
+    }
+
+    .empty-state p {
+      color: var(--light-text);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 768px) {
+      .gallery-hero {
+        padding: 80px 0 60px;
+      }
+
+      .gallery-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .project-card {
+        aspect-ratio: 16/10;
+      }
+
+      .project-overlay {
+        transform: translateY(0);
+        opacity: 1;
+        padding: 20px;
+      }
+
+      .project-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .lightbox-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
+
+      .lightbox-header {
+        padding: 15px 20px;
+      }
+
+      .lightbox-title {
+        font-size: 1rem;
+      }
+
+      .lightbox-thumbnails {
+        padding: 10px 15px 20px;
+        justify-content: flex-start;
+      }
+
+      .thumb {
+        width: 55px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .gallery-hero p {
+        font-size: 1rem;
+      }
+
+      .projects-section {
+        padding: 50px 0;
+      }
+
+      .project-overlay h3 {
+        font-size: 1.2rem;
+      }
+
+      .lightbox-image {
+        max-height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-main">THULIR</span>
+          <span class="logo-sub">CONSTRUCTION</span>
+        </div>
+      </div>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="Distinction.html">Distinction</a>
+        <a href="package.html">Packages</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="gallery-hero">
+    <div class="gallery-hero-content">
+      <span class="section-tag">Our Work</span>
+      <h1>Project Gallery</h1>
+      <p>Explore our portfolio of completed projects. Each build tells a story of quality craftsmanship and attention to detail.</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-grid" id="projectsGrid">
+        <div class="loading-placeholder">
+          <i class="fas fa-spinner"></i>
+          <p>Loading projects...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-header">
+      <h3 class="lightbox-title" id="lightboxTitle">Project Name</h3>
+      <button class="lightbox-close" id="lightboxClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="lightbox-content">
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="lightbox-image-container">
+        <img src="" alt="Project Image" class="lightbox-image" id="lightboxImage">
+      </div>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="lightbox-counter">
+        <span id="currentIndex">1</span> / <span id="totalImages">10</span>
+      </div>
+    </div>
+    <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Thulir Construction</h3>
+          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
+          <ul class="social-icons">
+            <li><a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+          <p><a href="Distinction.html">Our Distinction</a></p>
+          <p><a href="package.html">Packages</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Services</h3>
+          <p><a href="#">Architectural Design</a></p>
+          <p><a href="#">General Contracting</a></p>
+          <p><a href="#">Project Management</a></p>
+          <p><a href="#">Renovations</a></p>
+          <p><a href="#">Consulting</a></p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================
+       CONFIGURATION - EDIT THIS SECTION
+       ======================================== */
+    const sites = [
+      // Add your project folders here
+      // { folder: "folder-name", name: "Display Name", count: NUMBER_OF_PHOTOS, cover: COVER_PHOTO_NUMBER },
+      
+      // EXAMPLE ENTRIES (replace with your actual projects):
+      { folder: "sample-project-1", name: "Modern Villa - Sankari", count: 5, cover: 1 },
+      { folder: "sample-project-2", name: "Luxury Residence - Salem", count: 8, cover: 3 },
+      // Add more projects below...
+    ];
+
+    const imageBasePath = "images/gallery/";
+    /* ======================================== */
+
+    // Format number to 3 digits (001, 002, etc.)
+    function formatNumber(num) {
+      return String(num).padStart(3, '0');
+    }
+
+    // Try to load image with multiple formats
+    async function tryLoadImage(basePath, number) {
+      const formats = ['jpg', 'jpeg', 'png', 'webp'];
+      const numStr = formatNumber(number);
+      
+      for (const format of formats) {
+        const url = `${basePath}${numStr}.${format}`;
+        try {
+          const response = await fetch(url, { method: 'HEAD' });
+          if (response.ok) {
+            return url;
+          }
+        } catch (e) {
+          continue;
+        }
+      }
+      return null;
+    }
+
+    // Load cover image for a project
+    async function loadCoverImage(site) {
+      const basePath = `${imageBasePath}${site.folder}/`;
+      const coverUrl = await tryLoadImage(basePath, site.cover);
+      return coverUrl;
+    }
+
+    // Load all images for a project
+    async function loadProjectImages(site) {
+      const basePath = `${imageBasePath}${site.folder}/`;
+      const images = [];
+      
+      for (let i = 1; i <= site.count; i++) {
+        const imageUrl = await tryLoadImage(basePath, i);
+        if (imageUrl) {
+          images.push(imageUrl);
+        }
+      }
+      
+      return images;
+    }
+
+    // Render projects grid
+    async function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      
+      if (sites.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-images"></i>
+            <h3>No Projects Yet</h3>
+            <p>Projects will appear here once added to the gallery.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = '';
+
+      for (const site of sites) {
+        const coverUrl = await loadCoverImage(site);
+        
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.dataset.folder = site.folder;
+        card.dataset.name = site.name;
+        card.dataset.count = site.count;
+        
+        card.innerHTML = `
+          ${coverUrl ? `<img src="${coverUrl}" alt="${site.name}" loading="lazy">` : ''}
+          <div class="project-badge">
+            <i class="fas fa-images"></i>
+            ${site.count} Photos
+          </div>
+          <div class="project-overlay">
+            <h3>${site.name}</h3>
+            <p><i class="fas fa-folder-open"></i> Click to view gallery</p>
+          </div>
+        `;
+        
+        card.addEventListener('click', () => openLightbox(site));
+        grid.appendChild(card);
+      }
+    }
+
+    // Lightbox functionality
+    let currentImages = [];
+    let currentIndex = 0;
+
+    async function openLightbox(site) {
+      const lightbox = document.getElementById('lightbox');
+      const title = document.getElementById('lightboxTitle');
+      const image = document.getElementById('lightboxImage');
+      const thumbnails = document.getElementById('lightboxThumbnails');
+      const totalSpan = document.getElementById('totalImages');
+      
+      title.innerHTML = `<span>${site.name}</span>`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Show loading state
+      image.style.opacity = '0.5';
+      thumbnails.innerHTML = '<p style="color: white; padding: 10px;">Loading images...</p>';
+      
+      // Load all images
+      currentImages = await loadProjectImages(site);
+      currentIndex = 0;
+      
+      if (currentImages.length === 0) {
+        image.src = '';
+        thumbnails.innerHTML = '<p style="color: white; padding: 10px;">No images found</p>';
+        return;
+      }
+      
+      totalSpan.textContent = currentImages.length;
+      
+      // Render thumbnails
+      thumbnails.innerHTML = '';
+      currentImages.forEach((imgUrl, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = `thumb ${index === 0 ? 'active' : ''}`;
+        thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}">`;
+        thumb.addEventListener('click', () => goToImage(index));
+        thumbnails.appendChild(thumb);
+      });
+      
+      // Show first image
+      showImage(0);
+    }
+
+    function showImage(index) {
+      const image = document.getElementById('lightboxImage');
+      const currentSpan = document.getElementById('currentIndex');
+      const thumbs = document.querySelectorAll('.thumb');
+      
+      currentIndex = index;
+      image.style.opacity = '0';
+      
+      setTimeout(() => {
+        image.src = currentImages[index];
+        image.style.opacity = '1';
+      }, 150);
+      
+      currentSpan.textContent = index + 1;
+      
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+      
+      // Scroll thumbnail into view
+      const activeThumb = thumbs[index];
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function goToImage(index) {
+      if (index >= 0 && index < currentImages.length) {
+        showImage(index);
+      }
+    }
+
+    function nextImage() {
+      const newIndex = (currentIndex + 1) % currentImages.length;
+      showImage(newIndex);
+    }
+
+    function prevImage() {
+      const newIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      showImage(newIndex);
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      currentImages = [];
+      currentIndex = 0;
+    }
+
+    // Event listeners
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+    document.getElementById('lightboxNext').addEventListener('click', nextImage);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('active')) return;
+      
+      switch(e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
+    });
+
+    // Close lightbox when clicking outside image
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.getElementById('lightbox').addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.getElementById('lightbox').addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+      }
+    }
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Initialize
+    renderProjects();
+  </script>
+</body>
+</html>
