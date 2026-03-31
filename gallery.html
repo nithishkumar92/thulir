@@ -3,554 +3,643 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THULIR - Project Gallery</title>
-  
-  <!-- Favicon -->
+  <title>Thulir Construction — Our Projects</title>
+
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    body { padding-top: 85px; }
+  <script src="gallery-data.js"></script>
 
-    /* ========================================
-       GALLERY HERO
-       ======================================== */
-    .gallery-hero {
-      padding: 100px 0 80px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      text-align: center;
+  <style>
+    body { padding-top: 85px; background: #f2ede4; }
+
+    :root {
+      --gold:      #C9A84C;
+      --gold-dim:  rgba(201,168,76,0.18);
+      --ink:       #0f0f0f;
+      --smoke:     #888;
+      --paper:     #f2ede4;
+      --card:      #ffffff;
+      --rule:      #e6e1d6;
+    }
+
+    /* ═══════════════════════════════════════
+       GALLERY HERO BAND
+    ═══════════════════════════════════════ */
+    .g-hero {
+      background: linear-gradient(135deg, #111 0%, #1c1c1c 100%);
+      padding: 54px 6% 46px;
       position: relative;
       overflow: hidden;
     }
+    .g-hero::before {
+      content: 'PROJECTS';
+      position: absolute;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(60px, 10vw, 120px);
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .g-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 3.8vw, 44px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+    .g-hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .g-hero p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .g-hero p span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .g-hero p span i { color: var(--gold); font-size: 10px; }
 
-    .gallery-hero::before {
+    /* ═══════════════════════════════════════
+       FILTER STRIP
+    ═══════════════════════════════════════ */
+    .filter-strip {
+      background: #fff;
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 85px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+    }
+    .filter-tabs { display: flex; }
+    .ftab {
+      padding: 16px 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--smoke);
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+    .ftab::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 200%;
-      background: radial-gradient(ellipse at center, rgba(168, 135, 52, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
+      bottom: 0; left: 16px; right: 16px;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s ease;
+    }
+    .ftab.active { color: var(--ink); }
+    .ftab.active::after { transform: scaleX(1); }
+    .ftab:hover { color: var(--ink); }
+    .proj-count {
+      font-size: 11px;
+      color: var(--smoke);
+      font-family: 'Outfit', sans-serif;
+      white-space: nowrap;
+      padding-left: 12px;
     }
 
-    .gallery-hero-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 5%;
-      position: relative;
-      z-index: 2;
-    }
-
-    .gallery-hero h1 {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .gallery-hero p {
-      font-size: 1.2rem;
-      color: var(--light-text);
-      line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* ========================================
-       PROJECTS GRID
-       ======================================== */
-    .projects-section {
-      padding: 80px 0;
-      background: var(--white);
-    }
-
-    .projects-grid {
+    /* ═══════════════════════════════════════
+       GRID WRAPPER
+    ═══════════════════════════════════════ */
+    .g-wrap { padding: 36px 6% 90px; }
+    .proj-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .project-card {
-      position: relative;
-      border-radius: 20px;
+    /* ═══════════════════════════════════════
+       PROJECT CARD
+    ═══════════════════════════════════════ */
+    .proj-card {
+      background: var(--card);
+      border-radius: 18px;
       overflow: hidden;
-      cursor: pointer;
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-      border: 1px solid rgba(168, 135, 52, 0.1);
-      transition: var(--transition);
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(168, 135, 52, 0.2);
-      border-color: rgba(168, 135, 52, 0.3);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .project-card:hover img {
-      transform: scale(1.1);
-    }
-
-    .project-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 30px;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-      transform: translateY(20px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.06);
+      transition: transform .32s ease, box-shadow .32s ease;
       opacity: 0;
-      transition: var(--transition);
+      transform: translateY(22px);
+      border: 1.5px solid transparent;
     }
-
-    .project-card:hover .project-overlay {
-      transform: translateY(0);
+    .proj-card.visible {
       opacity: 1;
+      transform: translateY(0);
+    }
+    .proj-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.13);
+      border-color: rgba(201,168,76,0.25);
     }
 
-    .project-overlay h3 {
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 8px;
+    /* ═══════════════════════════════════════
+       CARD VISUAL — split photo area
+    ═══════════════════════════════════════ */
+    .card-visual {
+      position: relative;
+      height: 270px;
+      display: grid;
+      grid-template-columns: 56% 44%;
+      background: #0f0f0f;
+      cursor: pointer;
     }
 
-    .project-overlay p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.95rem;
+    /* Gold diagonal slash divider */
+    .card-visual::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      /* centre the slash around the 56% boundary */
+      left: calc(56% - 14px);
+      width: 28px;
+      height: 100%;
+      z-index: 6;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom right,
+          transparent 46%,
+          var(--gold)  48%,
+          var(--gold)  52%,
+          transparent 54%
+        ),
+        linear-gradient(
+          to bottom right,
+          transparent 44%,
+          rgba(0,0,0,0.55) 48%,
+          rgba(0,0,0,0.55) 52%,
+          transparent 56%
+        );
+    }
+
+    /* Hover overlay hint */
+    .visual-hint {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background .3s;
+      pointer-events: none;
+    }
+    .visual-hint-label {
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .project-overlay p i {
-      color: var(--secondary-gold);
-    }
-
-    .project-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      color: white;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: var(--transition);
-    }
-
-    .project-card:hover .project-badge {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ========================================
-       LIGHTBOX MODAL
-       ======================================== */
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 9999;
+      background: rgba(0,0,0,0.62);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 9px 20px;
+      border-radius: 50px;
+      opacity: 0;
+      transform: translateY(6px) scale(0.97);
+      transition: opacity .28s, transform .28s;
     }
+    .proj-card:hover .visual-hint { background: rgba(0,0,0,0.18); }
+    .proj-card:hover .visual-hint-label { opacity: 1; transform: translateY(0) scale(1); }
 
-    .lightbox.active {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .lightbox-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 30px;
-      background: rgba(0,0,0,0.5);
-    }
-
-    .lightbox-title {
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-
-    .lightbox-title span {
-      color: var(--secondary-gold);
-    }
-
-    .lightbox-close {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: var(--transition);
-    }
-
-    .lightbox-close:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--secondary-gold);
-    }
-
-    .lightbox-content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Photo slots */
+    .photo-slot {
       position: relative;
-      padding: 20px;
       overflow: hidden;
     }
-
-    .lightbox-image-container {
-      max-width: 90%;
-      max-height: 80vh;
-      position: relative;
-    }
-
-    .lightbox-image {
-      max-width: 100%;
-      max-height: 75vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.1);
-      border: 2px solid rgba(255,255,255,0.2);
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.5rem;
-      transition: var(--transition);
-      backdrop-filter: blur(10px);
-    }
-
-    .lightbox-nav:hover {
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      border-color: var(--secondary-gold);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .lightbox-prev {
-      left: 30px;
-    }
-
-    .lightbox-next {
-      right: 30px;
-    }
-
-    .lightbox-counter {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      font-size: 1rem;
-      background: rgba(0,0,0,0.6);
-      padding: 10px 25px;
-      border-radius: 30px;
-      backdrop-filter: blur(10px);
-    }
-
-    .lightbox-counter span {
-      color: var(--secondary-gold);
-      font-weight: 700;
-    }
-
-    /* ========================================
-       THUMBNAIL STRIP
-       ======================================== */
-    .lightbox-thumbnails {
-      padding: 15px 30px 25px;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-
-    .lightbox-thumbnails::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .lightbox-thumbnails::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
-    }
-
-    .lightbox-thumbnails::-webkit-scrollbar-thumb {
-      background: var(--primary-gold);
-      border-radius: 3px;
-    }
-
-    .thumb {
-      width: 70px;
-      height: 50px;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: var(--transition);
-      flex-shrink: 0;
-      border: 2px solid transparent;
-    }
-
-    .thumb:hover {
-      opacity: 0.8;
-    }
-
-    .thumb.active {
-      opacity: 1;
-      border-color: var(--secondary-gold);
-      transform: scale(1.1);
-    }
-
-    .thumb img {
+    .photo-slot img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .proj-card:hover .photo-slot img { transform: scale(1.05); }
+
+    /* Photo labels (bottom-left of each slot) */
+    .photo-lbl {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 9px 3px;
+      border-radius: 4px;
+      font-family: 'Outfit', sans-serif;
+      z-index: 4;
     }
 
-    /* ========================================
-       LOADING STATE
-       ======================================== */
-    .loading-placeholder {
+    /* "+N more" badge on completed photo */
+    .more-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: 'Outfit', sans-serif;
+      z-index: 4;
+      letter-spacing: 0.2px;
+    }
+
+    /* Empty photo slot (no image yet) */
+    .photo-empty {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+    }
+    .photo-empty i {
+      font-size: 20px;
+      color: rgba(201,168,76,0.28);
+    }
+    .photo-empty span {
+      font-size: 8px;
+      color: rgba(255,255,255,0.18);
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════
+       CARD INFO SECTION
+    ═══════════════════════════════════════ */
+    .card-info {
+      padding: 18px 20px 17px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+    }
+    .card-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 3.5px;
+    }
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #1a7a45;
+      background: #e5f7ed;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .badge-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #1a7a45;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: 0 0 5px;
+    }
+    .card-loc {
+      font-size: 11px;
+      color: var(--smoke);
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+    .card-loc i { font-size: 9px; color: var(--gold); }
+
+    .card-rule {
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 13px;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .cpill {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: #555;
+      background: #f0ece4;
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-family: 'Outfit', sans-serif;
+      white-space: nowrap;
+    }
+
+    /* CTA Button */
+    .view-btn {
+      width: 100%;
+      background: var(--ink);
+      border: none;
+      border-radius: 11px;
+      padding: 11px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.3px;
+      transition: background .22s, color .22s, transform .15s;
+    }
+    .view-btn:hover { background: var(--gold); color: #000; }
+    .view-btn:active { transform: scale(0.98); }
+    .view-btn i { font-size: 12px; }
+    .vbtn-count {
+      background: rgba(255,255,255,0.13);
+      font-size: 9.5px;
+      padding: 1px 7px;
+      border-radius: 20px;
+      transition: background .22s, color .22s;
+    }
+    .view-btn:hover .vbtn-count { background: rgba(0,0,0,0.13); }
+    .view-btn.no-photos {
+      background: #e8e3db;
+      color: #999;
+      cursor: default;
+    }
+    .view-btn.no-photos:hover { background: #e8e3db; color: #999; }
+
+    /* ═══════════════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════════════ */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,4,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 9999;
       flex-direction: column;
-      gap: 15px;
-      color: var(--light-text);
+    }
+    .lightbox.open { display: flex; }
+
+    /* Header */
+    .lb-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .lb-proj-info { flex: 1; min-width: 0; }
+    .lb-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lb-meta {
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: 'Outfit', sans-serif;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lb-close {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.09);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* Main area */
+    .lb-main {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      padding: 0 68px;
+    }
+    .lb-img-box {
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-img {
+      max-width: 100%;
+      max-height: 66vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65);
+      transition: opacity .15s;
+      display: block;
+    }
+    .lb-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, border-color .2s;
+    }
+    .lb-nav-btn:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.25); }
+    #lbPrev { left: 12px; }
+    #lbNext { right: 12px; }
+    .lb-counter {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.5px;
     }
 
-    .loading-placeholder i {
-      font-size: 3rem;
-      color: var(--primary-gold);
-      animation: spin 1s linear infinite;
+    /* Thumbnail strip */
+    .lb-thumbs {
+      display: flex;
+      gap: 7px;
+      padding: 12px 22px 20px;
+      overflow-x: auto;
+      flex-shrink: 0;
+      scrollbar-width: none;
     }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .lb-thumbs::-webkit-scrollbar { display: none; }
+    .lb-thumb {
+      width: 62px; height: 46px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity .2s, border-color .2s, transform .2s;
     }
+    .lb-thumb:hover { opacity: 0.75; }
+    .lb-thumb.active { opacity: 1; border-color: var(--gold); transform: scale(1.1); }
+    .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* ========================================
-       EMPTY STATE
-       ======================================== */
-    .empty-state {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .empty-state i {
-      font-size: 5rem;
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 20px;
-      opacity: 0.5;
-    }
-
-    .empty-state h3 {
-      font-size: 1.5rem;
-      color: var(--dark-text);
-      margin-bottom: 10px;
-    }
-
-    .empty-state p {
-      color: var(--light-text);
-    }
-
-    /* ========================================
+    /* ═══════════════════════════════════════
        RESPONSIVE
-       ======================================== */
-    @media (max-width: 768px) {
-      .gallery-hero {
-        padding: 80px 0 60px;
-      }
-
-      .gallery-hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .project-card {
-        aspect-ratio: 16/10;
-      }
-
-      .project-overlay {
-        transform: translateY(0);
-        opacity: 1;
-        padding: 20px;
-      }
-
-      .project-badge {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .lightbox-nav {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-      }
-
-      .lightbox-prev {
-        left: 10px;
-      }
-
-      .lightbox-next {
-        right: 10px;
-      }
-
-      .lightbox-header {
-        padding: 15px 20px;
-      }
-
-      .lightbox-title {
-        font-size: 1rem;
-      }
-
-      .lightbox-thumbnails {
-        padding: 10px 15px 20px;
-        justify-content: flex-start;
-      }
-
-      .thumb {
-        width: 55px;
-        height: 40px;
-      }
+    ═══════════════════════════════════════ */
+    @media (max-width: 860px) {
+      .proj-grid { grid-template-columns: 1fr; gap: 20px; }
+      .g-wrap { padding: 24px 5% 70px; }
+      .g-hero { padding: 38px 5% 32px; }
+      .card-visual { height: 240px; }
+      .filter-strip { top: 85px; padding: 0 5%; }
+    }
+    @media (max-width: 520px) {
+      .card-visual { height: 195px; }
+      .card-info { padding: 14px 15px 15px; }
+      .card-name { font-size: 16px; }
+      .card-value { font-size: 19px; }
+      .filter-strip { padding: 0 4%; }
+      .ftab { padding: 14px 13px; font-size: 11px; }
+      .ftab::after { left: 13px; right: 13px; }
+      .lb-main { padding: 0 52px; }
+      .lb-img { max-height: 54vh; }
+      .lb-nav-btn { width: 40px; height: 40px; font-size: 13px; }
+      #lbPrev { left: 6px; }
+      #lbNext { right: 6px; }
     }
 
-    @media (max-width: 480px) {
-      .gallery-hero h1 {
-        font-size: 1.8rem;
-      }
-
-      .gallery-hero p {
-        font-size: 1rem;
-      }
-
-      .projects-section {
-        padding: 50px 0;
-      }
-
-      .project-overlay h3 {
-        font-size: 1.2rem;
-      }
-
-      .lightbox-image {
-        max-height: 60vh;
-      }
-    }
-
-    /* ========================================
-       MOBILE NAVIGATION FIX
-       ======================================== */
+    /* ═══════════════════════════════════════
+       NAVBAR MOBILE (from style.css overrides)
+    ═══════════════════════════════════════ */
     @media (max-width: 768px) {
-      .hamburger {
-        display: flex !important;
-      }
-
       .nav-links {
         position: fixed !important;
         top: 85px !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
+        left: 0 !important; right: 0 !important; bottom: 0 !important;
         background: #ffffff !important;
         flex-direction: column !important;
         padding: 0 !important;
         transform: translateX(-100%) !important;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1) !important;
+        transition: transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.1) !important;
         gap: 0 !important;
         z-index: 999 !important;
         overflow-y: auto !important;
         height: calc(100vh - 85px) !important;
       }
-
-      .nav-links.active {
-        transform: translateX(0) !important;
-      }
-
+      .nav-links.active { transform: translateX(0) !important; }
       .nav-links a {
         padding: 22px 25px !important;
-        border-bottom: 1px solid rgba(168, 135, 52, 0.15) !important;
+        border-bottom: 1px solid rgba(168,135,52,0.15) !important;
         width: 100% !important;
         text-align: left !important;
         font-size: 1.1rem !important;
         display: block !important;
-        background: transparent !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
         color: #333 !important;
         -webkit-text-fill-color: #333 !important;
       }
-
-      .nav-links a:last-child {
-        border-bottom: none !important;
-      }
-
-      .nav-links a::before {
-        display: none !important;
-      }
-
       .nav-links a.active {
-        background: linear-gradient(135deg, rgba(168, 135, 52, 0.15), rgba(217, 172, 90, 0.15)) !important;
-        border-left: 4px solid var(--primary-gold) !important;
+        background: linear-gradient(135deg, rgba(168,135,52,0.15), rgba(217,172,90,0.15)) !important;
+        border-left: 4px solid #a88734 !important;
         color: #a88734 !important;
         -webkit-text-fill-color: #a88734 !important;
         font-weight: 700 !important;
@@ -559,6 +648,8 @@
   </style>
 </head>
 <body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -568,75 +659,72 @@
           <span class="logo-sub">CONSTRUCTION</span>
         </div>
       </div>
-      
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="gallery.html" class="active">Gallery</a>
         <a href="Distinction.html">Distinction</a>
         <a href="package.html">Packages</a>
+        <a href="estimate.html">Estimator</a>
+        <a href="agreement.html">Agreement</a>
+        <a href="erp.html">Tracking</a>
         <a href="contact.html">Contact</a>
       </div>
-      
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="gallery-hero">
-    <div class="gallery-hero-content">
-      <span class="section-tag">Our Work</span>
-      <h1>Project Gallery</h1>
-      <p>Explore our portfolio of completed projects. Each build tells a story of quality craftsmanship and attention to detail.</p>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects-section">
-    <div class="container">
-      <div class="projects-grid" id="projectsGrid">
-        <div class="loading-placeholder">
-          <i class="fas fa-spinner"></i>
-          <p>Loading projects...</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-header">
-      <h3 class="lightbox-title" id="lightboxTitle">Project Name</h3>
-      <button class="lightbox-close" id="lightboxClose">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="lightbox-content">
-      <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="lightbox-image-container">
-        <img src="" alt="Project Image" class="lightbox-image" id="lightboxImage">
-      </div>
-      <button class="lightbox-nav lightbox-next" id="lightboxNext">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      <div class="lightbox-counter">
-        <span id="currentIndex">1</span> / <span id="totalImages">10</span>
-      </div>
-    </div>
-    <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+  <!-- ══════════ HERO BAND ══════════ -->
+  <div class="g-hero">
+    <h1>Our <em>Completed</em> Projects</h1>
+    <p>
+      <span><i class="fas fa-building"></i> 18+ Buildings</span>
+      <span><i class="fas fa-map-marker-alt"></i> Tamil Nadu</span>
+      <span><i class="fas fa-compass"></i> Vastu-Compliant</span>
+    </p>
   </div>
 
+  <!-- ══════════ FILTER STRIP ══════════ -->
+  <div class="filter-strip">
+    <div class="filter-tabs">
+      <button class="ftab active" data-filter="all">All</button>
+      <button class="ftab" data-filter="apartment">Apartments</button>
+      <button class="ftab" data-filter="villa">Villas</button>
+    </div>
+    <div class="proj-count" id="projCount">7 projects</div>
+  </div>
+
+  <!-- ══════════ GALLERY GRID ══════════ -->
+  <div class="g-wrap">
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+
+  <!-- ══════════ LIGHTBOX ══════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo Gallery">
+    <div class="lb-head">
+      <div class="lb-proj-info">
+        <div class="lb-name" id="lbName">Project</div>
+        <div class="lb-meta" id="lbMeta"></div>
+      </div>
+      <button class="lb-close" id="lbClose" aria-label="Close gallery"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="lb-main">
+      <button class="lb-nav-btn" id="lbPrev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+      <div class="lb-img-box">
+        <img src="" alt="" class="lb-img" id="lbImg">
+      </div>
+      <button class="lb-nav-btn" id="lbNext" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+      <div class="lb-counter"><span id="lbCur">1</span> / <span id="lbTot">1</span></div>
+    </div>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+
+  <!-- ══════════ FOOTER ══════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
           <h3>Thulir Construction</h3>
-          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
+          <p>Building dreams with excellence. Committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
           <ul class="social-icons">
             <li><a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
             <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
@@ -644,16 +732,15 @@
             <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Quick Links</h3>
           <p><a href="index.html">Home</a></p>
           <p><a href="gallery.html">Gallery</a></p>
           <p><a href="Distinction.html">Our Distinction</a></p>
           <p><a href="package.html">Packages</a></p>
+          <p><a href="agreement.html">Agreement</a></p>
           <p><a href="contact.html">Contact</a></p>
         </div>
-        
         <div class="footer-section">
           <h3>Services</h3>
           <p><a href="#">Architectural Design</a></p>
@@ -662,290 +749,326 @@
           <p><a href="#">Renovations</a></p>
           <p><a href="#">Consulting</a></p>
         </div>
-        
         <div class="footer-section">
           <h3>Contact Us</h3>
           <ul class="contact-list">
-            <li><i class="fas fa-map-marker-alt"></i> 123 Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
             <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
             <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
           </ul>
         </div>
       </div>
-      
       <div class="footer-bottom">
-        <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
+        <p>&copy; 2026 Thulir Construction. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
+  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <script>
-    /* ========================================
-       CONFIGURATION - EDIT THIS SECTION
-       ======================================== */
-    const sites = [
-      // Add your project folders here
-      // { folder: "folder-name", name: "Display Name", count: NUMBER_OF_PHOTOS, cover: COVER_PHOTO_NUMBER, format: "png" or "jpg" },
-      
-      // YOUR PROJECTS:
-      { folder: "project-name-1", name: "Project Name 1", count: 2, cover: 1, format: "png" },
-      { folder: "project-name-2", name: "Project Name 2", count: 2, cover: 1, format: "png" },
-      // Add more projects below...
+    /* ─────────────────────────────────────────────
+       DATA
+    ───────────────────────────────────────────── */
+    const IMG = 'images/gallery/';
+
+    const SITES = [
+      {
+        folder: 'apartment-flat', type: 'apartment',
+        name: 'Apartment Flat', value: '₹1.40 Cr',
+        location: 'Sankari, Salem District, Tamil Nadu',
+        stats: ['6,180 sq.ft.', '3 Floors', '5 × 2BHK'],
+      },
+      {
+        folder: 'villa-thangayur-1', type: 'villa',
+        name: 'Villa — Thangayur', value: '₹1.08 Cr',
+        location: 'Thangayur, Tamil Nadu',
+        stats: ['4,350 sq.ft.', '2 × 2BHK'],
+      },
+      {
+        folder: 'villa-akkamapetti', type: 'villa',
+        name: 'Villa — Akkamapetti', value: '₹80 Lakh',
+        location: 'Akkamapetti, Tamil Nadu',
+        stats: ['3,650 sq.ft.', '1.5 Years'],
+      },
+      {
+        folder: 'villa-thangayur-2', type: 'villa',
+        name: 'Villa — Thangayur II', value: '₹40 Lakh',
+        location: 'Thangayur, Tamil Nadu',
+        stats: ['1,350 sq.ft.', '2 BHK', '1 Year'],
+      },
+      {
+        folder: 'villa-pollachi', type: 'villa',
+        name: 'Villa — Pollachi', value: '₹35 Lakh',
+        location: 'Pollachi, Tamil Nadu',
+        stats: ['900 sq.ft.', '2 BHK', '10 Months'],
+      },
+      {
+        folder: 'villa-sankari-1', type: 'villa',
+        name: 'Villa — S.K Nagar Sankari', value: '₹90 Lakh',
+        location: 'S.K Nagar, Sankari, Tamil Nadu',
+        stats: ['3,200 sq.ft.', '1 Year'],
+      },
+      {
+        folder: 'villa-sankari-2', type: 'villa',
+        name: 'Villa — S.K Nagar Sankari II', value: '₹1.20 Cr',
+        location: 'S.K Nagar, Sankari, Tamil Nadu',
+        stats: ['3,100 sq.ft.', '1 Year'],
+      },
     ];
 
-    const imageBasePath = "images/gallery/";
-    /* ======================================== */
-
-    // Format number to 3 digits (001, 002, etc.)
-    function formatNumber(num) {
-      return String(num).padStart(3, '0');
+    function getFiles(folder) {
+      return (window.GALLERY_MANIFESTS || {})[folder] || [];
     }
 
-    // Build image URL directly (no fetch needed)
-    function getImageUrl(folder, number, format) {
-      const numStr = formatNumber(number);
-      return `${imageBasePath}${folder}/${numStr}.${format}`;
-    }
+    /* ─────────────────────────────────────────────
+       BUILD A SINGLE PHOTO SLOT HTML
+    ───────────────────────────────────────────── */
+    function buildSlot(src, label, extraCount) {
+      const moreBadge = (extraCount > 0)
+        ? `<div class="more-badge">+${extraCount} more</div>` : '';
 
-    // Load cover image for a project
-    function loadCoverImage(site) {
-      return getImageUrl(site.folder, site.cover, site.format);
-    }
-
-    // Load all images for a project
-    function loadProjectImages(site) {
-      const images = [];
-      for (let i = 1; i <= site.count; i++) {
-        images.push(getImageUrl(site.folder, i, site.format));
+      if (src) {
+        return `
+          <div class="photo-slot">
+            <img src="${src}" alt="${label}" loading="lazy">
+            <div class="photo-lbl">${label}</div>
+            ${moreBadge}
+          </div>`;
       }
-      return images;
-    }
-
-    // Render projects grid
-    function renderProjects() {
-      const grid = document.getElementById('projectsGrid');
-      
-      if (sites.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-images"></i>
-            <h3>No Projects Yet</h3>
-            <p>Projects will appear here once added to the gallery.</p>
+      /* No image yet */
+      const icon = (label === 'Elevation') ? 'drafting-compass' : 'camera';
+      return `
+        <div class="photo-slot">
+          <div class="photo-empty">
+            <i class="fas fa-${icon}"></i>
+            <span>${label}</span>
           </div>
-        `;
-        return;
-      }
+          <div class="photo-lbl">${label}</div>
+        </div>`;
+    }
+
+    /* ─────────────────────────────────────────────
+       RENDER GALLERY
+    ───────────────────────────────────────────── */
+    function renderGallery(filter) {
+      const grid = document.getElementById('projGrid');
+      const list = (filter === 'all') ? SITES : SITES.filter(s => s.type === filter);
+
+      document.getElementById('projCount').textContent =
+        list.length + ' project' + (list.length !== 1 ? 's' : '');
 
       grid.innerHTML = '';
 
-      for (const site of sites) {
-        const coverUrl = loadCoverImage(site);
-        
+      list.forEach((site, i) => {
+        const files = getFiles(site.folder);
+
+        /* Elevation = first image; Completed = third if ≥3, else second */
+        const elevSrc = files.length >= 1 ? `${IMG}${site.folder}/${files[0]}` : null;
+        const compFileIdx = files.length >= 3 ? 2 : (files.length >= 2 ? 1 : -1);
+        const compSrc  = compFileIdx >= 0 ? `${IMG}${site.folder}/${files[compFileIdx]}` : null;
+        const extraCnt = files.length > 2 ? files.length - 2 : 0;
+
+        const hasPhotos = files.length > 0;
+
+        const pillsHtml = site.stats
+          .map(s => `<span class="cpill">${s}</span>`)
+          .join('');
+
+        const btnHtml = hasPhotos
+          ? `<button class="view-btn js-view">
+               <i class="fas fa-images"></i>
+               View All Photos
+               <span class="vbtn-count">${files.length}</span>
+             </button>`
+          : `<button class="view-btn no-photos" disabled>
+               <i class="fas fa-clock"></i>
+               Photos Coming Soon
+             </button>`;
+
         const card = document.createElement('div');
-        card.className = 'project-card';
-        card.dataset.folder = site.folder;
-        card.dataset.name = site.name;
-        card.dataset.count = site.count;
-        
+        card.className = 'proj-card';
         card.innerHTML = `
-          <img src="${coverUrl}" alt="${site.name}" loading="lazy" onerror="this.style.display='none'">
-          <div class="project-badge">
-            <i class="fas fa-images"></i>
-            ${site.count} Photos
+          <div class="card-visual js-visual">
+            ${buildSlot(elevSrc, 'Elevation', 0)}
+            ${buildSlot(compSrc, 'Completed', extraCnt)}
+            <div class="visual-hint">
+              <div class="visual-hint-label">
+                <i class="fas fa-images"></i>
+                ${hasPhotos ? 'View Gallery' : 'Coming Soon'}
+              </div>
+            </div>
           </div>
-          <div class="project-overlay">
-            <h3>${site.name}</h3>
-            <p><i class="fas fa-folder-open"></i> Click to view gallery</p>
-          </div>
-        `;
-        
-        card.addEventListener('click', () => openLightbox(site));
+          <div class="card-info">
+            <div class="card-meta">
+              <span class="card-num">${String(i + 1).padStart(2, '0')}</span>
+              <span class="card-badge"><span class="badge-dot"></span>Completed</span>
+            </div>
+            <div class="card-name">${site.name}</div>
+            <div class="card-loc">
+              <i class="fas fa-map-marker-alt"></i>${site.location}
+            </div>
+            <div class="card-rule"></div>
+            <div class="card-bottom">
+              <div class="card-value">${site.value}</div>
+              <div class="card-pills">${pillsHtml}</div>
+            </div>
+            ${btnHtml}
+          </div>`;
+
+        /* Click on the visual opens the lightbox */
+        if (hasPhotos) {
+          card.querySelector('.js-visual').addEventListener('click', () =>
+            openLightbox(site, files, 0)
+          );
+          card.querySelector('.js-view').addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightbox(site, files, 0);
+          });
+        }
+
         grid.appendChild(card);
-      }
+      });
+
+      /* Scroll-triggered fade-in */
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      grid.querySelectorAll('.proj-card').forEach((c, idx) => {
+        c.style.transition =
+          `opacity .5s ease ${idx * 0.06}s, transform .5s ease ${idx * 0.06}s, ` +
+          'box-shadow .32s ease, border-color .32s ease';
+        obs.observe(c);
+      });
     }
 
-    // Lightbox functionality
-    let currentImages = [];
-    let currentIndex = 0;
+    /* Filter tab clicks */
+    document.querySelectorAll('.ftab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGallery(btn.dataset.filter);
+      });
+    });
 
-    function openLightbox(site) {
-      const lightbox = document.getElementById('lightbox');
-      const title = document.getElementById('lightboxTitle');
-      const image = document.getElementById('lightboxImage');
-      const thumbnails = document.getElementById('lightboxThumbnails');
-      const totalSpan = document.getElementById('totalImages');
-      
-      title.innerHTML = `<span>${site.name}</span>`;
-      lightbox.classList.add('active');
+    /* ─────────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────────── */
+    let lbFiles = [], lbIdx = 0;
+
+    function openLightbox(site, files, startIdx) {
+      if (!files.length) return;
+      lbFiles = files.map(f => `${IMG}${site.folder}/${f}`);
+
+      document.getElementById('lbName').textContent = site.name;
+      document.getElementById('lbMeta').textContent =
+        `${site.location}  ·  ${site.value}  ·  ${site.stats.join('  ·  ')}`;
+      document.getElementById('lbTot').textContent = lbFiles.length;
+
+      /* Build thumbnails */
+      const thumbsEl = document.getElementById('lbThumbs');
+      thumbsEl.innerHTML = '';
+      lbFiles.forEach((src, i) => {
+        const t = document.createElement('div');
+        t.className = 'lb-thumb';
+        t.innerHTML = `<img src="${src}" alt="Photo ${i + 1}" loading="lazy">`;
+        t.addEventListener('click', () => showImg(i));
+        thumbsEl.appendChild(t);
+      });
+
+      document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
-      
-      // Load all images
-      currentImages = loadProjectImages(site);
-      currentIndex = 0;
-      
-      if (currentImages.length === 0) {
-        image.src = '';
-        thumbnails.innerHTML = '<p style="color: white; padding: 10px;">No images found</p>';
-        return;
-      }
-      
-      totalSpan.textContent = currentImages.length;
-      
-      // Render thumbnails
-      thumbnails.innerHTML = '';
-      currentImages.forEach((imgUrl, index) => {
-        const thumb = document.createElement('div');
-        thumb.className = `thumb ${index === 0 ? 'active' : ''}`;
-        thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}" onerror="this.parentElement.style.display='none'">`;
-        thumb.addEventListener('click', () => goToImage(index));
-        thumbnails.appendChild(thumb);
-      });
-      
-      // Show first image
-      showImage(0);
+      showImg(startIdx);
     }
 
-    function showImage(index) {
-      const image = document.getElementById('lightboxImage');
-      const currentSpan = document.getElementById('currentIndex');
-      const thumbs = document.querySelectorAll('.thumb');
-      
-      currentIndex = index;
-      image.style.opacity = '0';
-      
+    function showImg(idx) {
+      lbIdx = idx;
+      const img = document.getElementById('lbImg');
+      img.style.opacity = '0';
       setTimeout(() => {
-        image.src = currentImages[index];
-        image.style.opacity = '1';
-      }, 150);
-      
-      currentSpan.textContent = index + 1;
-      
-      thumbs.forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === index);
+        img.src = lbFiles[idx];
+        img.style.opacity = '1';
+      }, 130);
+      document.getElementById('lbCur').textContent = idx + 1;
+      document.querySelectorAll('.lb-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === idx);
+        if (i === idx) t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       });
-      
-      // Scroll thumbnail into view
-      const activeThumb = thumbs[index];
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
-    }
-
-    function goToImage(index) {
-      if (index >= 0 && index < currentImages.length) {
-        showImage(index);
-      }
-    }
-
-    function nextImage() {
-      const newIndex = (currentIndex + 1) % currentImages.length;
-      showImage(newIndex);
-    }
-
-    function prevImage() {
-      const newIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      showImage(newIndex);
     }
 
     function closeLightbox() {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.classList.remove('active');
+      document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
-      currentImages = [];
-      currentIndex = 0;
     }
 
-    // Event listeners
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-    document.getElementById('lightboxPrev').addEventListener('click', prevImage);
-    document.getElementById('lightboxNext').addEventListener('click', nextImage);
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () =>
+      showImg((lbIdx - 1 + lbFiles.length) % lbFiles.length)
+    );
+    document.getElementById('lbNext').addEventListener('click', () =>
+      showImg((lbIdx + 1) % lbFiles.length)
+    );
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  showImg((lbIdx - 1 + lbFiles.length) % lbFiles.length);
+      if (e.key === 'ArrowRight') showImg((lbIdx + 1) % lbFiles.length);
+    });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      const lightbox = document.getElementById('lightbox');
-      if (!lightbox.classList.contains('active')) return;
-      
-      switch(e.key) {
-        case 'Escape':
-          closeLightbox();
-          break;
-        case 'ArrowLeft':
-          prevImage();
-          break;
-        case 'ArrowRight':
-          nextImage();
-          break;
+    /* Touch swipe */
+    let tsX = 0;
+    document.getElementById('lightbox').addEventListener('touchstart', e =>
+      tsX = e.changedTouches[0].screenX, { passive: true }
+    );
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+      const d = tsX - e.changedTouches[0].screenX;
+      if (Math.abs(d) > 50) {
+        d > 0
+          ? showImg((lbIdx + 1) % lbFiles.length)
+          : showImg((lbIdx - 1 + lbFiles.length) % lbFiles.length);
       }
     });
 
-    // Close lightbox when clicking outside image
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-content')) {
-        closeLightbox();
+    /* ─────────────────────────────────────────────
+       NAVBAR
+    ───────────────────────────────────────────── */
+    const navEl    = document.getElementById('navbar');
+    const hamEl    = document.getElementById('hamburger');
+    const linksEl  = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () =>
+      navEl.classList.toggle('scrolled', window.scrollY > 50)
+    );
+    hamEl.addEventListener('click', () => {
+      hamEl.classList.toggle('active');
+      linksEl.classList.toggle('active');
+    });
+    document.addEventListener('click', e => {
+      if (!hamEl.contains(e.target) && !linksEl.contains(e.target)) {
+        hamEl.classList.remove('active');
+        linksEl.classList.remove('active');
       }
     });
+    document.querySelectorAll('.nav-links a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamEl.classList.remove('active');
+        linksEl.classList.remove('active');
+      })
+    );
 
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.getElementById('lightbox').addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
-    document.getElementById('lightbox').addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, false);
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          nextImage();
-        } else {
-          prevImage();
-        }
-      }
-    }
-
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      }
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-
-    // Initialize
-    renderProjects();
+    /* ── INIT ── */
+    renderGallery('all');
   </script>
 </body>
 </html>

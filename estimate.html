@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thulir Construction — Cost Estimator</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-top: 85px; background: #f4f5f7; }
+
+    /* Hero */
+    .est-hero {
+      background: linear-gradient(135deg,#ffffff 0%,#f8f9fa 100%);
+      padding: 10px 0 8px; text-align: center;
+      border-bottom: 1px solid rgba(168,135,52,0.12);
+    }
+    .est-hero h1 {
+      font-family:'Inter',sans-serif; font-size:2.5rem; font-weight:900;
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin:10px 0 8px;
+    }
+    .est-hero p { color:var(--light-text); font-size:1.05rem; }
+
+    /* Layout */
+    .est-main {
+      max-width:1280px; margin:28px auto 80px; padding:0 28px;
+      display:grid; grid-template-columns:390px 1fr; gap:24px; align-items:start;
+    }
+    /* Prevent grid children from expanding beyond their track */
+    .input-panel, .output-panel { min-width:0; }
+
+    /* ── Input Panel ── */
+    .input-panel {
+      background:#fff; border-radius:22px; padding:28px 24px;
+      box-shadow:0 4px 24px rgba(0,0,0,0.06); border:1px solid rgba(168,135,52,0.1);
+      position:sticky; top:100px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .input-panel::-webkit-scrollbar { width:5px; }
+    .input-panel::-webkit-scrollbar-track { background:transparent; }
+    .input-panel::-webkit-scrollbar-thumb { background:rgba(168,135,52,0.25); border-radius:10px; }
+    .input-panel::-webkit-scrollbar-thumb:hover { background:rgba(168,135,52,0.5); }
+    .panel-title {
+      font-family:'Inter',sans-serif; font-size:1rem; font-weight:800;
+      color:var(--dark-text); margin-bottom:20px;
+      display:flex; align-items:center; gap:9px;
+    }
+    .panel-title i { color:var(--primary-gold); }
+
+    /* Plot area */
+    .form-group { margin-bottom:18px; }
+    .form-label {
+      display:block; font-size:0.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.6px; color:#888; margin-bottom:7px;
+    }
+    .area-wrap { position:relative; }
+    .area-wrap input {
+      width:100%; padding:12px 52px 12px 14px;
+      border:2px solid #e4e7ec; border-radius:11px;
+      font-family:'Inter',sans-serif; font-size:1.2rem; font-weight:700;
+      color:var(--dark-text); background:#fafbfc;
+      transition:border-color 0.2s; box-sizing:border-box;
+    }
+    .area-wrap input:focus { outline:none; border-color:var(--primary-gold); background:#fff; }
+    .area-unit {
+      position:absolute; right:14px; top:50%; transform:translateY(-50%);
+      font-size:0.82rem; font-weight:600; color:#aaa;
+    }
+    .builtup-row {
+      display:flex; justify-content:space-between; align-items:center;
+      background:rgba(168,135,52,0.06); border-radius:9px;
+      padding:8px 12px; margin-top:8px;
+    }
+    .builtup-row span { font-size:0.8rem; color:var(--light-text); }
+    .builtup-val { font-weight:700 !important; color:var(--primary-gold) !important; }
+
+    /* Floor buttons */
+    .floors-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+    .floor-btn {
+      padding:10px 4px; border:2px solid #e4e7ec; border-radius:10px;
+      background:#fafbfc; cursor:pointer; text-align:center;
+      font-family:'Inter',sans-serif; transition:all 0.15s;
+    }
+    .floor-btn .fl { font-size:0.95rem; font-weight:800; color:#555; display:block; }
+    .floor-btn .fs { font-size:0.65rem; color:#aaa; display:block; margin-top:1px; }
+    .floor-btn.active { border-color:var(--primary-gold); background:rgba(168,135,52,0.08); }
+    .floor-btn.active .fl { color:var(--primary-gold); }
+
+    /* Divider */
+    .input-divider { height:1px; background:#f0f2f5; margin:16px 0; }
+
+    /* Material section */
+    .mat-section { margin-bottom:14px; }
+    .mat-label {
+      font-size:0.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.6px; color:#aaa; margin-bottom:7px; display:block;
+    }
+    .mat-options { display:flex; gap:6px; }
+    .mat-btn {
+      flex:1; padding:8px 5px; border:1.5px solid #e4e7ec; border-radius:8px;
+      background:#fafbfc; cursor:pointer; font-family:'Inter',sans-serif;
+      font-size:0.75rem; font-weight:600; color:#666;
+      text-align:center; transition:all 0.15s; line-height:1.3;
+    }
+    .mat-btn .mb-sub { display:block; font-size:0.65rem; font-weight:400; color:#bbb; margin-top:2px; }
+    .mat-btn:hover { border-color:rgba(168,135,52,0.4); color:var(--dark-text); }
+    .mat-btn.active {
+      border-color:var(--primary-gold);
+      background:linear-gradient(135deg,rgba(168,135,52,0.09),rgba(217,172,90,0.09));
+      color:var(--primary-gold);
+    }
+    .mat-btn.active .mb-sub { color:rgba(168,135,52,0.65); }
+
+    /* Tile rate input */
+    .tile-input-wrap { position:relative; }
+    .tile-prefix {
+      position:absolute; left:12px; top:50%; transform:translateY(-50%);
+      font-size:0.9rem; font-weight:700; color:#888;
+    }
+    .tile-suffix {
+      position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      font-size:0.75rem; color:#aaa;
+    }
+    .tile-input {
+      width:100%; padding:10px 60px 10px 28px;
+      border:1.5px solid #e4e7ec; border-radius:8px;
+      font-family:'Inter',sans-serif; font-size:1rem; font-weight:700;
+      color:var(--dark-text); background:#fafbfc;
+      transition:border-color 0.2s; box-sizing:border-box;
+      -moz-appearance:textfield;
+    }
+    .tile-input::-webkit-outer-spin-button,
+    .tile-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+    .tile-input:focus { outline:none; border-color:var(--primary-gold); background:#fff; }
+
+    /* Live rate box */
+    .live-rate {
+      margin-top:18px;
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      border-radius:13px; padding:14px 18px;
+      display:flex; justify-content:space-between; align-items:center;
+      color:#fff;
+    }
+    .lr-label { font-size:0.78rem; opacity:0.88; }
+    .lr-val { font-family:'Inter',sans-serif; font-size:1.6rem; font-weight:900; }
+    .lr-unit { font-size:0.72rem; opacity:0.8; display:block; text-align:right; }
+
+    /* ── Output Panel ── */
+    .output-panel { min-height:400px; }
+    .empty-state {
+      background:#fff; border-radius:22px; padding:80px 40px;
+      text-align:center; border:2px dashed rgba(168,135,52,0.2);
+    }
+    .empty-state i { font-size:3.5rem; color:rgba(168,135,52,0.2); display:block; margin-bottom:18px; }
+    .empty-state p { color:#aaa; font-size:1rem; line-height:1.7; }
+
+    /* Estimate card */
+    .estimate-card {
+      background:#fff; border-radius:22px; overflow:hidden;
+      box-shadow:0 6px 30px rgba(0,0,0,0.09); border:1px solid rgba(168,135,52,0.1);
+      display:none;
+    }
+    .estimate-card.show { display:block; animation:fadeIn 0.3s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Header */
+    .est-hdr {
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      padding:26px 32px 22px; color:#fff; position:relative; overflow:hidden;
+    }
+    .est-hdr::after {
+      content:''; position:absolute; right:-50px; top:-50px;
+      width:180px; height:180px; background:rgba(255,255,255,0.07); border-radius:50%;
+    }
+    .hdr-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      background:rgba(255,255,255,0.2); padding:5px 14px;
+      border-radius:20px; font-size:0.8rem; font-weight:600;
+      margin-bottom:14px; position:relative; z-index:2;
+    }
+    .hdr-label { font-size:0.85rem; opacity:0.88; margin-bottom:3px; position:relative; z-index:2; }
+    .hdr-total {
+      font-family:'Inter',sans-serif; font-size:3rem; font-weight:900;
+      line-height:1; position:relative; z-index:2;
+    }
+    .hdr-sub { font-size:0.85rem; opacity:0.8; margin-top:5px; position:relative; z-index:2; }
+    .hdr-meta {
+      display:flex; gap:22px; flex-wrap:wrap;
+      margin-top:16px; padding-top:16px;
+      border-top:1px solid rgba(255,255,255,0.2);
+      position:relative; z-index:2;
+    }
+    .meta-chip { display:flex; align-items:center; gap:6px; font-size:0.83rem; opacity:0.9; }
+
+    /* Body */
+    .est-body { padding:26px 32px 28px; }
+    .section-head {
+      font-family:'Inter',sans-serif; font-size:0.82rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:0.7px; color:var(--dark-text);
+      margin-bottom:14px; display:flex; align-items:center; gap:7px;
+    }
+    .section-head i { color:var(--primary-gold); }
+    .est-divider { height:1px; background:#f0f2f5; margin:20px 0; }
+
+    /* BOQ table */
+    .boq-wrap { overflow-x:auto; border-radius:10px; border:1.5px solid #dde0e6; }
+    .boq-table { width:100%; border-collapse:collapse; font-size:0.86rem; min-width:520px; }
+    .boq-table thead tr { background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold)); }
+    .boq-table th {
+      color:#fff; padding:10px 10px; font-weight:700;
+      font-size:0.75rem; text-transform:uppercase; letter-spacing:0.4px;
+      border-right:1px solid rgba(255,255,255,0.18);
+    }
+    .boq-table th:last-child { border-right:none; }
+    .boq-table th:nth-child(1) { text-align:center; width:42px; }
+    .boq-table th:nth-child(2) { text-align:left; }
+    .boq-table th:nth-child(3) { text-align:center; width:65px; }
+    .boq-table th:nth-child(4) { text-align:right; width:95px; }
+    .boq-table th:nth-child(5) { text-align:right; width:95px; }
+    .boq-table th:nth-child(6) { text-align:right; width:120px; }
+    .boq-table td { padding:10px 10px; border-bottom:1px solid #eef0f3; border-right:1px solid #eef0f3; vertical-align:middle; }
+    .boq-table td:last-child { border-right:none; }
+    .boq-table tbody tr:nth-child(even) { background:#fafbfc; }
+    .boq-table td:nth-child(1) { text-align:center; color:#999; font-weight:700; }
+    .boq-table td:nth-child(2) { color:var(--dark-text); font-weight:500; }
+    .boq-table td:nth-child(3) { text-align:center; color:#888; }
+    .boq-table td:nth-child(4) { text-align:right; font-family:'Inter',sans-serif; color:#888; }
+    .boq-table td:nth-child(5) { text-align:right; font-family:'Inter',sans-serif; color:#888; }
+    .boq-table td:nth-child(6) { text-align:right; font-family:'Inter',sans-serif; font-weight:700; color:var(--dark-text); }
+    .boq-section-row td {
+      background:rgba(168,135,52,0.08) !important; color:var(--primary-gold);
+      font-weight:700; font-size:0.72rem; text-transform:uppercase;
+      letter-spacing:0.5px; padding:6px 10px; border-color:rgba(168,135,52,0.15);
+    }
+    .boq-total-row { border-top:2px solid var(--primary-gold); }
+    .boq-total-row td { background:#fff !important; padding:12px 10px; border-bottom:none; text-align:right; font-weight:800; font-size:0.88rem; color:var(--dark-text); }
+    .boq-total-row td span { font-family:'Inter',sans-serif; font-size:1.05rem; color:var(--primary-gold); margin-left:10px; }
+
+    /* Editable qty */
+    .qty-cell { position:relative; }
+    .boq-qty {
+      width:100%; border:1.5px dashed rgba(168,135,52,0.45); border-radius:6px;
+      padding:4px 22px 4px 6px; text-align:right;
+      font-family:'Inter',sans-serif; font-size:0.86rem; font-weight:700;
+      color:var(--dark-text); background:rgba(168,135,52,0.04);
+      box-sizing:border-box; transition:all 0.15s; -moz-appearance:textfield;
+    }
+    .boq-qty::-webkit-outer-spin-button,.boq-qty::-webkit-inner-spin-button{-webkit-appearance:none;}
+    .boq-qty:hover { border-color:var(--primary-gold); background:rgba(168,135,52,0.08); }
+    .boq-qty:focus { outline:none; border-style:solid; border-color:var(--primary-gold); background:#fff; box-shadow:0 0 0 3px rgba(168,135,52,0.13); }
+    .qty-pen { position:absolute; right:6px; top:50%; transform:translateY(-50%); font-size:0.6rem; color:var(--primary-gold); opacity:0.7; pointer-events:none; }
+    .qty-rate-sub { display:none; font-size:0.63rem; color:var(--primary-gold); opacity:0.75; margin-top:3px; }
+    .boq-hint { font-size:0.7rem; color:var(--primary-gold); opacity:0.7; margin-top:6px; display:flex; align-items:center; gap:5px; }
+
+    /* Materials grid */
+    .mat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+    .mat-cell { background:#f8f9fa; border-radius:10px; padding:12px 11px; }
+    .mat-lbl { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#aaa; margin-bottom:4px; }
+    .mat-val { font-size:0.84rem; font-weight:700; color:var(--dark-text); }
+
+    /* Breakdown */
+    .bk-table { width:100%; border-collapse:collapse; }
+    .bk-table tr { border-bottom:1px solid #f2f3f5; }
+    .bk-table tr:last-child { border-bottom:none; }
+    .bk-table td { padding:9px 5px; font-size:0.88rem; vertical-align:middle; }
+    .bk-name { color:var(--dark-text); font-weight:500; }
+    .bk-bar-cell { width:100px; padding:9px 13px !important; }
+    .bk-bar { height:5px; background:#eef0f3; border-radius:3px; overflow:hidden; }
+    .bk-fill { height:100%; background:linear-gradient(90deg,var(--primary-gold),var(--secondary-gold)); border-radius:3px; }
+    .bk-pct { width:34px; color:#aaa; font-size:0.76rem; text-align:center; }
+    .bk-amt { font-family:'Inter',sans-serif; font-weight:700; color:var(--dark-text); text-align:right; white-space:nowrap; }
+
+    /* Payment */
+    .pay-row { display:flex; align-items:center; gap:13px; padding:10px 0; border-bottom:1px solid #f2f3f5; }
+    .pay-row:last-child { border-bottom:none; }
+    .pay-step { width:25px; height:25px; background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold)); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.7rem; font-weight:700; flex-shrink:0; }
+    .pay-mile { flex:1; font-size:0.87rem; color:var(--dark-text); font-weight:500; }
+    .pay-pct  { width:34px; text-align:center; font-size:0.78rem; color:#aaa; }
+    .pay-amt  { font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:700; color:var(--primary-gold); text-align:right; width:125px; white-space:nowrap; }
+
+    /* Actions */
+    .est-actions { display:flex; gap:11px; margin-top:20px; }
+    .act-btn {
+      flex:1; padding:12px 8px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      gap:7px; font-size:0.9rem; font-weight:600;
+      text-decoration:none; cursor:pointer; border:none;
+      font-family:'Inter',sans-serif; transition:all 0.2s;
+    }
+    .btn-wa  { background:#25D366; color:#fff; }
+    .btn-wa:hover  { transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,211,102,0.35); }
+    .btn-prt { background:#f4f5f7; color:var(--dark-text); border:1px solid #e4e7ec; }
+    .btn-prt:hover { background:#e8eaec; }
+    .btn-pkg { background:rgba(168,135,52,0.09); color:var(--primary-gold); border:1px solid rgba(168,135,52,0.2); }
+    .btn-pkg:hover { background:rgba(168,135,52,0.16); }
+
+    .disclaimer { font-size:0.73rem; color:#bbb; text-align:center; margin-top:13px; line-height:1.7; }
+
+    /* Print */
+    @media print {
+      .navbar,.est-hero,.input-panel,.est-actions,.disclaimer,.whatsapp-float,.footer { display:none !important; }
+      body { background:#fff; padding-top:0; }
+      .est-main { grid-template-columns:1fr; padding:0; margin:0; }
+      .estimate-card { box-shadow:none; border:none; }
+      .est-hdr { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+
+    /* ── Tablet / Fold (single-column layout trigger) ── */
+    @media (max-width:1024px) {
+      body { overflow-x:hidden; }
+      .est-main {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+        margin: 16px auto 60px;
+        gap: 16px;
+        overflow-x: hidden;
+      }
+      .input-panel {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+      }
+      .input-panel::-webkit-scrollbar { display:none; }
+
+      /* BOQ — hide Unit & Rate, show rate inside qty cell */
+      .boq-table { font-size:0.82rem; min-width:0; }
+      .boq-table th, .boq-table td { padding:9px 6px; }
+      .boq-qty { font-size:0.82rem; }
+      .boq-table th:nth-child(3), .boq-table td:nth-child(3),
+      .boq-table th:nth-child(5), .boq-table td:nth-child(5) { display:none; }
+      .qty-rate-sub { display:block; }
+
+      /* Materials grid — 2 cols */
+      .mat-grid { grid-template-columns:repeat(2,1fr); gap:8px; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width:768px) {
+
+      /* Nav */
+      .hamburger { display:flex !important; }
+      .nav-links {
+        position:fixed !important; top:85px !important; left:0 !important; right:0 !important; bottom:0 !important;
+        background:#ffffff !important; flex-direction:column !important; padding:0 !important;
+        transform:translateX(-100%) !important; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
+        gap:0 !important; z-index:999 !important; overflow-y:auto !important; height:calc(100vh - 85px) !important;
+      }
+      .nav-links.active { transform:translateX(0) !important; }
+      .nav-links a {
+        padding:22px 25px !important; border-bottom:1px solid rgba(168,135,52,0.15) !important;
+        width:100% !important; text-align:left !important; font-size:1.1rem !important;
+        display:block !important; background:transparent !important;
+        -webkit-background-clip:unset !important; background-clip:unset !important;
+        color:#333 !important; -webkit-text-fill-color:#333 !important; pointer-events:auto !important;
+      }
+      .nav-links a:last-child { border-bottom:none !important; }
+      .nav-links a::before { display:none !important; }
+      .nav-links a.active {
+        background:linear-gradient(135deg,rgba(168,135,52,0.15),rgba(217,172,90,0.15)) !important;
+        border-left:4px solid #a88734 !important; color:#a88734 !important;
+        -webkit-text-fill-color:#a88734 !important; font-weight:700 !important;
+      }
+
+      /* Hero */
+      .est-hero { padding:36px 16px 24px; }
+      .est-hero h1 { font-size:1.7rem; }
+      .est-hero p  { font-size:0.92rem; }
+
+      /* Prevent horizontal scroll from estimate card content */
+      body { overflow-x: hidden; }
+
+      /* Layout — single column, input first then output */
+      .est-main {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+        margin: 16px auto 60px;
+        gap: 16px;
+        overflow-x: hidden;
+      }
+
+      /* Input panel — static, no scroll cap on mobile */
+      .input-panel {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+        border-radius: 16px;
+        padding: 22px 18px;
+      }
+      .input-panel::-webkit-scrollbar { display:none; }
+
+      /* Plot area input — bigger touch target */
+      .area-wrap input { font-size:1.4rem; padding:14px 52px 14px 14px; }
+
+      /* Floor buttons — 2 per row so labels don't cramp */
+      .floors-grid { grid-template-columns: repeat(2,1fr); gap:10px; }
+      .floor-btn { padding:13px 4px; }
+      .floor-btn .fl { font-size:1rem; }
+      .floor-btn .fs { font-size:0.72rem; }
+
+      /* Material option buttons — stack to 2 columns when 3 options */
+      .mat-options { flex-wrap:wrap; }
+      .mat-btn {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+        padding: 10px 6px;
+        font-size: 0.8rem;
+      }
+      /* 2-option rows stay side by side */
+      .mat-options .mat-btn:only-child,
+      .mat-options:has(.mat-btn:nth-child(2):last-child) .mat-btn { flex:1; }
+
+      /* Tile rate input — comfortable */
+      .tile-input { font-size:1rem; }
+
+      /* Live rate box */
+      .live-rate { padding:14px 16px; }
+      .lr-val { font-size:1.5rem; }
+
+      /* Empty state */
+      .empty-state { padding:50px 20px; }
+      .empty-state i { font-size:2.8rem; }
+
+      /* Estimate card */
+      .est-hdr { padding:22px 18px 18px; }
+      .hdr-total { font-size:2rem; }
+      .hdr-badge { font-size:0.74rem; padding:4px 12px; }
+      .hdr-meta { gap:12px; margin-top:14px; padding-top:14px; }
+      .meta-chip { font-size:0.78rem; }
+
+      .est-body { padding:20px 18px 24px; }
+      .section-head { font-size:0.76rem; }
+
+      /* BOQ table — mobile */
+      .boq-table { font-size:0.8rem; min-width:0; }
+      .boq-table th, .boq-table td { padding:8px 5px; }
+      .boq-qty { font-size:0.8rem; }
+      .boq-table th:nth-child(3), .boq-table td:nth-child(3),
+      .boq-table th:nth-child(5), .boq-table td:nth-child(5) { display:none; }
+      .qty-rate-sub { display:block; }
+
+      /* Cost breakdown bar chart — hide bar column, keep name/pct/amount */
+      .bk-bar-cell { display:none; }
+      .bk-table td { padding:8px 4px; font-size:0.84rem; }
+
+      /* Materials summary grid — 2 columns */
+      .mat-grid { grid-template-columns:repeat(2,1fr); gap:8px; }
+      .mat-cell { padding:10px 10px; }
+      .mat-lbl { font-size:0.62rem; }
+      .mat-val { font-size:0.8rem; }
+
+      /* Payment schedule */
+      .pay-row { gap:10px; padding:9px 0; }
+      .pay-mile { font-size:0.82rem; }
+      .pay-amt  { font-size:0.85rem; width:100px; }
+
+      /* Action buttons — 2 column grid */
+      .est-actions {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-top:18px;
+      }
+      .act-btn:first-child { grid-column:1 / -1; } /* WhatsApp spans full width */
+      .act-btn { padding:13px 8px; font-size:0.88rem; }
+
+      .disclaimer { font-size:0.7rem; }
+    }
+
+    @media (max-width:400px) {
+      .est-main { padding:0 10px; }
+      .input-panel { padding:18px 14px; }
+      .hdr-total { font-size:1.75rem; }
+      .mat-btn { font-size:0.74rem; }
+      .mat-grid { grid-template-columns:1fr 1fr; }
+      .floors-grid { grid-template-columns:repeat(2,1fr); }
+      .pay-amt { width:86px; font-size:0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+        <div class="logo-text"><span class="logo-main">THULIR</span><span class="logo-sub">CONSTRUCTION</span></div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="Distinction.html">Distinction</a>
+        <a href="package.html">Packages</a>
+        <a href="estimate.html" class="active">Estimator</a>
+        <a href="agreement.html">Agreement</a>
+        <a href="erp.html">Tracking</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <section class="est-hero">
+    <h1>Construction Cost Estimator</h1>
+    <p>Select your materials — get an instant detailed estimate</p>
+  </section>
+
+  <div class="est-main">
+
+    <!-- ── INPUT PANEL ── -->
+    <div class="input-panel">
+      <div class="panel-title"><i class="fas fa-sliders"></i> Project & Material Details</div>
+
+      <!-- Built-up Area -->
+      <div class="form-group">
+        <label class="form-label">Built-up Area</label>
+        <div class="area-wrap">
+          <input type="number" id="plotArea" value="1800" min="100" max="99999" oninput="onAreaChange()">
+          <span class="area-unit">sqft</span>
+        </div>
+      </div>
+
+      <!-- Floors -->
+      <div class="form-group">
+        <label class="form-label">Number of Floors</label>
+        <div class="floors-grid">
+          <button class="floor-btn active" data-f="1" onclick="pickFloor(this)"><span class="fl">G</span><span class="fs">Ground</span></button>
+          <button class="floor-btn" data-f="2" onclick="pickFloor(this)"><span class="fl">G+1</span><span class="fs">2 Floors</span></button>
+          <button class="floor-btn" data-f="3" onclick="pickFloor(this)"><span class="fl">G+2</span><span class="fs">3 Floors</span></button>
+          <button class="floor-btn" data-f="4" onclick="pickFloor(this)"><span class="fl">G+3</span><span class="fs">4 Floors</span></button>
+        </div>
+      </div>
+
+      <div class="input-divider"></div>
+
+      <!-- Structure -->
+      <div class="mat-section">
+        <span class="mat-label">Structure Type</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="structure" data-val="loadbearing" onclick="pickMat(this)">
+            Loadbearing<span class="mb-sub">Standard</span>
+          </button>
+          <button class="mat-btn active" data-cat="structure" data-val="rcc" onclick="pickMat(this)">
+            RCC Frame<span class="mb-sub">+₹200/sqft</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Brick -->
+      <div class="mat-section">
+        <span class="mat-label">Brick / Block</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="brick" data-val="flyash" onclick="pickMat(this)">
+            Flyash Brick<span class="mb-sub">Standard</span>
+          </button>
+          <button class="mat-btn active" data-cat="brick" data-val="wirecut" onclick="pickMat(this)">
+            Wire Cut<span class="mb-sub">+₹40/sqft</span>
+          </button>
+          <button class="mat-btn" data-cat="brick" data-val="aac" onclick="pickMat(this)">
+            AAC Block<span class="mb-sub">+₹80/sqft</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Steel -->
+      <div class="mat-section">
+        <span class="mat-label">Steel</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="steel" data-val="economy" onclick="pickMat(this)">
+            Economy<span class="mb-sub">Andavar / Local</span>
+          </button>
+          <button class="mat-btn" data-cat="steel" data-val="standard" onclick="pickMat(this)">
+            Standard<span class="mb-sub">Vizag / Agni +₹60</span>
+          </button>
+          <button class="mat-btn active" data-cat="steel" data-val="premium" onclick="pickMat(this)">
+            Premium<span class="mb-sub">TATA / JSW +₹120</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cement -->
+      <div class="mat-section">
+        <span class="mat-label">Cement</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="cement" data-val="economy" onclick="pickMat(this)">
+            Economy<span class="mb-sub">Priya / Bharathi</span>
+          </button>
+          <button class="mat-btn" data-cat="cement" data-val="standard" onclick="pickMat(this)">
+            Standard<span class="mb-sub">JSW / Chettinad +₹40</span>
+          </button>
+          <button class="mat-btn active" data-cat="cement" data-val="premium" onclick="pickMat(this)">
+            Premium<span class="mb-sub">Ultratech +₹80</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Paint -->
+      <div class="mat-section">
+        <span class="mat-label">Paint</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="paint" data-val="economy" onclick="pickMat(this)">
+            Economy<span class="mb-sub">Standard</span>
+          </button>
+          <button class="mat-btn" data-cat="paint" data-val="standard" onclick="pickMat(this)">
+            Standard<span class="mb-sub">Indigo / Nippon +₹35</span>
+          </button>
+          <button class="mat-btn active" data-cat="paint" data-val="premium" onclick="pickMat(this)">
+            Premium<span class="mb-sub">Asian / Berger +₹70</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tile Rate -->
+      <div class="mat-section">
+        <span class="mat-label">Tile Rate</span>
+        <div class="tile-input-wrap">
+          <span class="tile-prefix">₹</span>
+          <input type="number" class="tile-input" id="tileRateInput" value="70" min="10" max="1000" oninput="generate()">
+          <span class="tile-suffix">per sqft</span>
+        </div>
+      </div>
+
+      <!-- Wood -->
+      <div class="mat-section">
+        <span class="mat-label">Wood (Doors & Frame)</span>
+        <div class="mat-options">
+          <button class="mat-btn" data-cat="wood" data-val="upvc" onclick="pickMat(this)">
+            UPVC<span class="mb-sub">+₹50/sqft</span>
+          </button>
+          <button class="mat-btn" data-cat="wood" data-val="redsal" onclick="pickMat(this)">
+            Red Sal<span class="mb-sub">+₹50/sqft</span>
+          </button>
+          <button class="mat-btn active" data-cat="wood" data-val="teak" onclick="pickMat(this)">
+            Teak Wood<span class="mb-sub">+₹100/sqft</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Rate Display -->
+      <div class="live-rate">
+        <div>
+          <div class="lr-label">Effective Rate</div>
+          <div class="lr-val" id="liveRate">₹2,430</div>
+        </div>
+        <div style="text-align:right">
+          <span class="lr-unit">per sqft</span>
+          <span class="lr-unit" style="margin-top:2px">all materials included</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── OUTPUT PANEL ── -->
+    <div class="output-panel">
+
+      <div class="empty-state" id="emptyState">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <p>Enter your plot area above<br>— estimate updates automatically as you select materials</p>
+      </div>
+
+      <div class="estimate-card" id="estimateCard">
+
+        <div class="est-hdr">
+          <div class="hdr-badge"><i class="fas fa-calculator"></i> Construction Cost Estimate</div>
+          <div class="hdr-label">Total Estimated Cost</div>
+          <div class="hdr-total" id="hdrTotal">₹0</div>
+          <div class="hdr-sub" id="hdrSub">—</div>
+          <div class="hdr-meta">
+            <div class="meta-chip"><i class="fas fa-vector-square"></i> <span id="mBuiltup">—</span></div>
+            <div class="meta-chip"><i class="fas fa-layer-group"></i> <span id="mFloors">—</span></div>
+            <div class="meta-chip"><i class="fas fa-indian-rupee-sign"></i> <span id="mRate">—</span></div>
+            <div class="meta-chip"><i class="fas fa-clock"></i> <span id="mTime">—</span></div>
+          </div>
+        </div>
+
+        <div class="est-body">
+
+          <!-- BOQ -->
+          <div class="section-head"><i class="fas fa-file-alt"></i> Bill of Quantities — Detailed Estimate</div>
+          <div class="boq-wrap">
+            <table class="boq-table">
+              <thead>
+                <tr>
+                  <th>No.</th><th>Item of Work</th><th>Unit</th>
+                  <th>Quantity</th><th>Rate (₹)</th><th>Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="boqBody"></tbody>
+            </table>
+          </div>
+          <div class="boq-hint"><i class="fas fa-pen"></i> Click Quantity to edit — totals update instantly</div>
+
+          <div class="est-divider"></div>
+
+          <!-- Breakdown -->
+          <div class="section-head"><i class="fas fa-chart-bar"></i> Cost Breakdown by Work</div>
+          <table class="bk-table" id="bkTable"></table>
+
+          <div class="est-divider"></div>
+
+          <!-- Selected Materials -->
+          <div class="section-head"><i class="fas fa-cubes"></i> Selected Materials</div>
+          <div class="mat-grid" id="matGrid"></div>
+
+          <div class="est-divider"></div>
+
+          <!-- Payment Schedule -->
+          <div class="section-head"><i class="fas fa-calendar-check"></i> Payment Schedule — Milestone Based</div>
+          <div id="paySchedule"></div>
+
+          <div class="est-actions">
+            <a class="act-btn btn-wa" id="waBtn" href="#" target="_blank">
+              <i class="fab fa-whatsapp"></i> Share via WhatsApp
+            </a>
+            <button class="act-btn btn-prt" onclick="window.print()">
+              <i class="fas fa-print"></i> Print
+            </button>
+            <a class="act-btn btn-pkg" href="agreement.html">
+              <i class="fas fa-file-contract"></i> View Agreement
+            </a>
+          </div>
+
+          <p class="disclaimer">
+            * Estimate based on ₹/sqft × built-up area (65% plot coverage per floor) + additional structures.<br>
+            Final quotation after site visit. GST & government charges not included.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Thulir Construction</h3>
+          <p>Building dreams with excellence. Committed to delivering high-quality construction services that stand the test of time.</p>
+          <ul class="social-icons">
+            <li><a href="https://wa.me/917418477647" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+          <p><a href="Distinction.html">Our Distinction</a></p>
+          <p><a href="package.html">Packages</a></p>
+          <p><a href="estimate.html">Cost Estimator</a></p>
+          <p><a href="agreement.html">Agreement</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <p><a href="#">Villa Construction</a></p>
+          <p><a href="#">Apartment Buildings</a></p>
+          <p><a href="#">Structural Engineering</a></p>
+          <p><a href="#">Vastu-Compliant Design</a></p>
+          <p><a href="#">Project Management</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Thulir Construction. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    /* ── State ── */
+    let floors = 1;
+    let sel = { structure:'rcc', brick:'wirecut', steel:'premium', cement:'premium', paint:'premium', wood:'teak' };
+
+    const BASE_RATE = 1750; // per sqft excl. tiles
+
+    const ADDS = {
+      structure: { loadbearing:0, rcc:200 },
+      brick:     { flyash:0, wirecut:40, aac:80 },
+      steel:     { economy:0, standard:60, premium:120 },
+      cement:    { economy:0, standard:40, premium:80 },
+      paint:     { economy:0, standard:35, premium:70 },
+      wood:      { upvc:50, redsal:50, teak:100 },
+    };
+
+    const MAT_NAMES = {
+      structure: { loadbearing:'Loadbearing', rcc:'RCC Frame Structure' },
+      brick:     { flyash:'Flyash Brick', wirecut:'Wire Cut Brick', aac:'AAC Block' },
+      steel:     { economy:'Economy (Local)', standard:'Vizag / Agni Steels', premium:'TATA / JSW' },
+      cement:    { economy:'Priya / Bharathi', standard:'JSW / Chettinad', premium:'Ultratech / Ramco' },
+      paint:     { economy:'Economy Brand', standard:'Indigo / Nippon', premium:'Asian Paints / Berger' },
+      wood:      { upvc:'UPVC', redsal:'Red Sal', teak:'Teak Wood' },
+    };
+
+    const FLOOR_LABELS = { 1:'Ground Floor', 2:'G+1 (2 Floors)', 3:'G+2 (3 Floors)', 4:'G+3 (4 Floors)' };
+    const FLOOR_NAMES  = ['Ground Floor Construction','First Floor Construction','Second Floor Construction','Third Floor Construction'];
+
+    const BREAKDOWN = [
+      { name:'Foundation & Basement',     pct:15 },
+      { name:'Structural Work (RCC)',      pct:25 },
+      { name:'Masonry (Brickwork)',        pct:10 },
+      { name:'Plastering & Putty Finish',  pct: 8 },
+      { name:'Flooring (Tiles)',           pct: 8 },
+      { name:'Doors & Windows',           pct:10 },
+      { name:'Electrical Work',           pct: 7 },
+      { name:'Plumbing & Sanitary',       pct: 7 },
+      { name:'Painting',                  pct: 5 },
+      { name:'Finishing & Miscellaneous', pct: 5 },
+    ];
+
+    const MILESTONES = [
+      { label:'Agreement Signing',      pct:10 },
+      { label:'Foundation Completion',  pct:20 },
+      { label:'Ground Floor Slab',      pct:25 },
+      { label:'Roof / Top Slab',        pct:20 },
+      { label:'Brickwork & Plastering', pct:15 },
+      { label:'Final Handover',         pct:10 },
+    ];
+
+    /* ── Helpers ── */
+    function getTileRate() { return parseFloat(document.getElementById('tileRateInput').value) || 30; }
+
+    function effectiveRate() {
+      return BASE_RATE
+        + ADDS.structure[sel.structure]
+        + ADDS.brick[sel.brick]
+        + ADDS.steel[sel.steel]
+        + ADDS.cement[sel.cement]
+        + ADDS.paint[sel.paint]
+        + ADDS.wood[sel.wood]
+        + getTileRate();
+    }
+
+    function builtUp() {
+      return parseFloat(document.getElementById('plotArea').value) || 0;
+    }
+
+    function formatINR(n) {
+      if (n >= 10000000) return '₹' + (n/10000000).toFixed(2) + ' Cr';
+      if (n >= 100000)   return '₹' + (n/100000).toFixed(2) + ' Lakh';
+      return '₹' + n.toLocaleString('en-IN');
+    }
+
+    function timeline(bu) {
+      const lo = Math.max(8, Math.ceil(bu/150)) + (floors-1)*3;
+      return '~' + lo + '–' + (lo+2) + ' months';
+    }
+
+    function updateLiveRate() {
+      document.getElementById('liveRate').textContent = '₹' + effectiveRate().toLocaleString('en-IN');
+    }
+
+    /* ── Pickers ── */
+    function onAreaChange() {
+      generate();
+    }
+
+    function pickFloor(btn) {
+      document.querySelectorAll('.floor-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      floors = parseInt(btn.dataset.f);
+      onAreaChange();
+    }
+
+    function pickMat(btn) {
+      const cat = btn.dataset.cat;
+      document.querySelectorAll(`.mat-btn[data-cat="${cat}"]`).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      sel[cat] = btn.dataset.val;
+      updateLiveRate();
+      generate();
+    }
+
+    /* ── BOQ recalc (editable qty) ── */
+    function recalcBOQ() {
+      let grand = 0;
+      document.querySelectorAll('.boq-data-row').forEach(row => {
+        const qty  = parseFloat(row.querySelector('.boq-qty').value) || 0;
+        const rate = parseFloat(row.dataset.rate) || 0;
+        const amt  = qty * rate;
+        grand += amt;
+        row.querySelector('.boq-amt-cell').textContent = amt.toLocaleString('en-IN', {minimumFractionDigits:2});
+      });
+      const gtEl = document.getElementById('boqGrandTotal');
+      if (gtEl) gtEl.textContent = grand.toLocaleString('en-IN', {minimumFractionDigits:2});
+      document.getElementById('hdrTotal').textContent = formatINR(grand);
+    }
+
+    /* ── Main generate ── */
+    function generate() {
+      updateLiveRate();
+      const plot = parseFloat(document.getElementById('plotArea').value);
+      if (!plot || plot < 100) {
+        document.getElementById('emptyState').style.display = '';
+        document.getElementById('estimateCard').classList.remove('show');
+        return;
+      }
+
+      const bu        = builtUp();
+      const floorArea = Math.round(plot * 0.65);
+      const rate      = effectiveRate();
+
+      /* Tank sizing */
+      let tankL, sumpL;
+      if (bu < 1200)      { tankL=3000; sumpL=5000; }
+      else if (bu < 2500) { tankL=5000; sumpL=10000; }
+      else                { tankL=8000; sumpL=15000; }
+      const septicL=10000, TANK_R=25, SUMP_R=12, SEPTIC_R=12;
+      const tankAmt=tankL*TANK_R, sumpAmt=sumpL*SUMP_R, septicAmt=septicL*SEPTIC_R;
+
+      /* Build BOQ */
+      const boqRows = [];
+      for (let i=0; i<floors; i++) boqRows.push({ label:FLOOR_NAMES[i], unit:'Sqft', qty:floorArea, rate });
+      boqRows.push({ label:'RCC Overhead Water Tank',       unit:'Liters', qty:tankL,   rate:TANK_R   });
+      boqRows.push({ label:'Underground Sump (Flyash Based)',  unit:'Liters', qty:sumpL,   rate:SUMP_R   });
+      boqRows.push({ label:'Septic Tank (Flyash Based)',       unit:'Liters', qty:septicL, rate:SEPTIC_R });
+      boqRows.push({ label:'Compound Wall (Without Gate)',  unit:'Rft',    qty:210,     rate:2000     });
+
+      let boqHTML = '';
+      boqRows.forEach((row, idx) => {
+        if (idx === floors) boqHTML += `<tr class="boq-section-row"><td colspan="6">Additional Structures</td></tr>`;
+        const amt = row.qty * row.rate;
+        boqHTML += `<tr class="boq-data-row" data-rate="${row.rate}">
+          <td>${idx+1}</td>
+          <td>${row.label}</td>
+          <td style="text-align:center">${row.unit}</td>
+          <td class="qty-cell">
+            <input class="boq-qty" type="number" value="${row.qty}" oninput="recalcBOQ()" min="0">
+            <i class="fas fa-pen qty-pen"></i>
+            <span class="qty-rate-sub">@ ₹${row.rate.toLocaleString('en-IN')}/${row.unit}</span>
+          </td>
+          <td>${row.rate.toLocaleString('en-IN')}</td>
+          <td class="boq-amt-cell">${amt.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
+        </tr>`;
+      });
+      const grandTotal = boqRows.reduce((s,r) => s + r.qty*r.rate, 0);
+      boqHTML += `<tr class="boq-total-row">
+        <td colspan="6">Total : <span id="boqGrandTotal">${grandTotal.toLocaleString('en-IN', {minimumFractionDigits:2})}</span></td>
+      </tr>`;
+      document.getElementById('boqBody').innerHTML = boqHTML;
+
+      const total = grandTotal;
+
+      /* Header */
+      document.getElementById('hdrTotal').textContent = formatINR(total);
+      document.getElementById('hdrSub').textContent   = `${bu.toLocaleString('en-IN')} sqft built-up + additional structures`;
+      document.getElementById('mBuiltup').textContent = bu.toLocaleString('en-IN') + ' sqft';
+      document.getElementById('mFloors').textContent  = FLOOR_LABELS[floors];
+      document.getElementById('mRate').textContent    = '₹' + rate.toLocaleString('en-IN') + '/sqft';
+      document.getElementById('mTime').textContent    = timeline(bu);
+
+      /* Breakdown */
+      let bkHTML = '';
+      BREAKDOWN.forEach(item => {
+        const amt = Math.round(total * item.pct / 100);
+        bkHTML += `<tr>
+          <td class="bk-name">${item.name}</td>
+          <td class="bk-bar-cell"><div class="bk-bar"><div class="bk-fill" style="width:${Math.min(item.pct*4,100)}%"></div></div></td>
+          <td class="bk-pct">${item.pct}%</td>
+          <td class="bk-amt">${formatINR(amt)}</td>
+        </tr>`;
+      });
+      document.getElementById('bkTable').innerHTML = bkHTML;
+
+      /* Selected Materials */
+      document.getElementById('matGrid').innerHTML = `
+        <div class="mat-cell"><div class="mat-lbl">Structure</div><div class="mat-val">${MAT_NAMES.structure[sel.structure]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Brick / Block</div><div class="mat-val">${MAT_NAMES.brick[sel.brick]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Steel</div><div class="mat-val">${MAT_NAMES.steel[sel.steel]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Cement</div><div class="mat-val">${MAT_NAMES.cement[sel.cement]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Paint</div><div class="mat-val">${MAT_NAMES.paint[sel.paint]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Tile Rate</div><div class="mat-val">₹${getTileRate()}/sqft</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Wood</div><div class="mat-val">${MAT_NAMES.wood[sel.wood]}</div></div>
+        <div class="mat-cell"><div class="mat-lbl">Eff. Rate</div><div class="mat-val">₹${rate.toLocaleString('en-IN')}/sqft</div></div>
+      `;
+
+      /* Payment */
+      let payHTML = '';
+      MILESTONES.forEach((m,i) => {
+        const amt = Math.round(total * m.pct / 100);
+        payHTML += `<div class="pay-row">
+          <div class="pay-step">${i+1}</div>
+          <div class="pay-mile">${m.label}</div>
+          <div class="pay-pct">${m.pct}%</div>
+          <div class="pay-amt">${formatINR(amt)}</div>
+        </div>`;
+      });
+      document.getElementById('paySchedule').innerHTML = payHTML;
+
+      /* WhatsApp */
+      const msg = `Hello Thulir Construction,\n\nCost Estimator result:\n\n` +
+        `📐 Plot: ${plot.toLocaleString('en-IN')} sqft | Floors: ${FLOOR_LABELS[floors]}\n` +
+        `🏠 Built-up: ${bu.toLocaleString('en-IN')} sqft @ ₹${rate.toLocaleString('en-IN')}/sqft\n` +
+        `🧱 Structure: ${MAT_NAMES.structure[sel.structure]} | Brick: ${MAT_NAMES.brick[sel.brick]}\n` +
+        `⚙️ Steel: ${MAT_NAMES.steel[sel.steel]} | Cement: ${MAT_NAMES.cement[sel.cement]}\n` +
+        `🪵 Wood: ${MAT_NAMES.wood[sel.wood]} | Tile: ₹${getTileRate()}/sqft | Paint: ${MAT_NAMES.paint[sel.paint]}\n` +
+        `💰 Estimated Total: ${formatINR(total)}\n\nPlease contact me.`;
+      document.getElementById('waBtn').href = `https://wa.me/917418477647?text=${encodeURIComponent(msg)}`;
+
+      /* Show */
+      document.getElementById('emptyState').style.display = 'none';
+      const card = document.getElementById('estimateCard');
+      const first = !card.classList.contains('show');
+      card.classList.add('show');
+      if (first) card.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    /* Init */
+    updateLiveRate();
+    generate();
+
+    /* ── Navbar ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active'); navLinks.classList.remove('active');
+      }
+    });
+    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('active'); navLinks.classList.remove('active');
+    }));
+  </script>
+</body>
+</html>

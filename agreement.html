@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thulir Construction — Client Agreement</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-top: 85px; background: #f4f5f7; }
+
+    /* Hero */
+    .agr-hero {
+      background: linear-gradient(135deg,#ffffff 0%,#f8f9fa 100%);
+      padding: 60px 0 44px; text-align: center;
+      border-bottom: 1px solid rgba(168,135,52,0.12);
+    }
+    .agr-hero h1 {
+      font-family:'Inter',sans-serif; font-size: clamp(2rem,4vw,3.2rem);
+      font-weight:900; margin:10px 0 10px;
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .agr-hero p { color:var(--light-text); font-size:1.05rem; max-width:600px; margin:0 auto; line-height:1.7; }
+
+    /* Toolbar */
+    .agr-toolbar {
+      max-width:900px; margin:24px auto 0; padding:0 24px;
+      display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;
+    }
+    .tool-btn {
+      display:flex; align-items:center; gap:7px;
+      padding:9px 18px; border-radius:9px;
+      font-family:'Inter',sans-serif; font-size:0.88rem; font-weight:600;
+      cursor:pointer; border:none; transition:all 0.2s; text-decoration:none;
+    }
+    .btn-print { background:var(--primary-gold); color:#fff; }
+    .btn-print:hover { background:var(--secondary-gold); transform:translateY(-1px); }
+    .btn-wa { background:#25D366; color:#fff; }
+    .btn-wa:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(37,211,102,0.35); }
+
+    /* Main wrapper */
+    .agr-wrap {
+      max-width:900px; margin:24px auto 80px; padding:0 24px;
+    }
+
+    /* Document card */
+    .agr-doc {
+      background:#fff; border-radius:18px;
+      box-shadow:0 4px 24px rgba(0,0,0,0.07);
+      border:1px solid rgba(168,135,52,0.1);
+      overflow:hidden;
+    }
+
+    /* Document header */
+    .doc-header {
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      padding:36px 44px 30px; color:#fff; position:relative; overflow:hidden;
+    }
+    .doc-header::after {
+      content:''; position:absolute; right:-60px; top:-60px;
+      width:220px; height:220px; background:rgba(255,255,255,0.07); border-radius:50%;
+    }
+    .doc-logo-row {
+      display:flex; align-items:center; gap:14px; margin-bottom:20px;
+      position:relative; z-index:2;
+    }
+    .doc-logo-img {
+      width:52px; height:52px; border-radius:10px;
+      background:#fff; padding:4px; object-fit:cover;
+    }
+    .doc-logo-text .main { font-family:'Inter',sans-serif; font-size:1.3rem; font-weight:900; display:block; letter-spacing:1px; }
+    .doc-logo-text .sub  { font-size:0.72rem; opacity:0.85; letter-spacing:1.5px; }
+    .doc-title {
+      position:relative; z-index:2;
+      font-family:'Inter',sans-serif; font-size:1.7rem; font-weight:900; margin-bottom:6px;
+    }
+    .doc-subtitle { font-size:0.92rem; opacity:0.88; position:relative; z-index:2; }
+    .doc-meta-row {
+      display:flex; gap:20px; flex-wrap:wrap; margin-top:18px;
+      padding-top:18px; border-top:1px solid rgba(255,255,255,0.2);
+      position:relative; z-index:2;
+    }
+    .doc-meta { font-size:0.82rem; opacity:0.88; display:flex; align-items:center; gap:6px; }
+
+    /* Document body */
+    .doc-body { padding:36px 44px 44px; }
+
+    /* Notice banner */
+    .doc-notice {
+      background:rgba(168,135,52,0.07); border:1px solid rgba(168,135,52,0.2);
+      border-left:4px solid var(--primary-gold);
+      border-radius:10px; padding:14px 18px;
+      font-size:0.84rem; color:#6b5b2e; line-height:1.6;
+      margin-bottom:28px; display:flex; gap:10px; align-items:flex-start;
+    }
+    .doc-notice i { color:var(--primary-gold); margin-top:2px; flex-shrink:0; }
+
+    /* Section headings */
+    .agr-section { margin-bottom:28px; }
+    .agr-sec-title {
+      font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:0.8px;
+      color:var(--primary-gold); margin-bottom:12px;
+      display:flex; align-items:center; gap:8px;
+      padding-bottom:8px; border-bottom:2px solid rgba(168,135,52,0.12);
+    }
+    .agr-sec-title i { font-size:0.85rem; }
+
+    /* Parties grid */
+    .parties-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .party-card {
+      border:1.5px solid #e8eaed; border-radius:12px; padding:18px 20px;
+    }
+    .party-card.client { border-color:rgba(168,135,52,0.25); background:rgba(168,135,52,0.03); }
+    .party-label {
+      font-size:0.68rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.6px; color:#aaa; margin-bottom:8px;
+    }
+    .party-name { font-size:1rem; font-weight:700; color:var(--dark-text); margin-bottom:6px; }
+    .party-detail { font-size:0.83rem; color:var(--light-text); line-height:1.6; }
+    .party-field {
+      display:flex; flex-direction:column; gap:4px; margin-bottom:8px;
+    }
+    .party-field-label { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#bbb; }
+    .party-field-val { font-size:0.88rem; color:var(--dark-text); font-weight:500; }
+    .party-field-blank {
+      border-bottom:1.5px dashed #ddd; min-width:200px; display:inline-block;
+      height:1.2em; min-height:1.2em; vertical-align:bottom;
+    }
+
+    /* Numbered clauses */
+    .clause-list { list-style:none; padding:0; margin:0; counter-reset:clause; }
+    .clause-list li {
+      counter-increment:clause;
+      padding:10px 0 10px 36px; position:relative;
+      border-bottom:1px solid #f2f3f5; font-size:0.9rem; line-height:1.7; color:#444;
+    }
+    .clause-list li:last-child { border-bottom:none; }
+    .clause-list li::before {
+      content:counter(clause);
+      position:absolute; left:0; top:11px;
+      width:22px; height:22px; border-radius:50%;
+      background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold));
+      color:#fff; font-size:0.65rem; font-weight:800;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .clause-list li strong { color:var(--dark-text); }
+
+    /* Payment table */
+    .pay-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+    .pay-table thead tr { background:linear-gradient(135deg,var(--primary-gold),var(--secondary-gold)); }
+    .pay-table th { color:#fff; padding:10px 14px; font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.4px; text-align:left; }
+    .pay-table td { padding:11px 14px; border-bottom:1px solid #eef0f3; color:#444; vertical-align:middle; }
+    .pay-table tbody tr:nth-child(even) { background:#fafbfc; }
+    .pay-table .pct-cell { font-family:'Inter',sans-serif; font-weight:700; color:var(--primary-gold); }
+    .pay-table .stage-num { width:26px; height:26px; border-radius:50%; background:rgba(168,135,52,0.1); color:var(--primary-gold); font-size:0.72rem; font-weight:800; display:inline-flex; align-items:center; justify-content:center; margin-right:6px; }
+    .pay-total-row td { background:rgba(168,135,52,0.06) !important; font-weight:700; color:var(--dark-text); border-top:2px solid var(--primary-gold); }
+
+    /* Guarantee chips */
+    .guarantee-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .guarantee-chip {
+      background:#f8f9fa; border-radius:12px; padding:16px 14px;
+      text-align:center; border:1px solid #e8eaed;
+    }
+    .guarantee-chip i { font-size:1.4rem; color:var(--primary-gold); margin-bottom:8px; display:block; }
+    .guarantee-chip .gc-title { font-size:0.82rem; font-weight:700; color:var(--dark-text); margin-bottom:3px; }
+    .guarantee-chip .gc-sub { font-size:0.73rem; color:var(--light-text); line-height:1.4; }
+
+    /* Scope table */
+    .scope-table { width:100%; border-collapse:collapse; font-size:0.87rem; }
+    .scope-table th { background:#f8f9fa; padding:9px 14px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; color:#888; text-align:left; border-bottom:2px solid #eef0f3; }
+    .scope-table td { padding:10px 14px; border-bottom:1px solid #f0f2f5; color:#444; vertical-align:top; line-height:1.5; }
+    .scope-table tr:last-child td { border-bottom:none; }
+    .scope-included { color:#16a34a; font-size:0.8rem; font-weight:600; }
+    .scope-excluded { color:#dc2626; font-size:0.8rem; font-weight:600; }
+    .scope-label { font-weight:600; color:var(--dark-text); }
+
+    /* Signature block */
+    .sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:8px; }
+    .sig-block { padding-top:4px; }
+    .sig-party { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#aaa; margin-bottom:50px; }
+    .sig-line { border-bottom:1.5px solid #ccc; margin-bottom:6px; }
+    .sig-name-line { font-size:0.82rem; color:#888; }
+
+    /* Print */
+    @media print {
+      .navbar,.agr-hero,.agr-toolbar,.whatsapp-float,.footer { display:none !important; }
+      body { background:#fff; padding-top:0; }
+      .agr-wrap { margin:0; padding:0; max-width:100%; }
+      .agr-doc { box-shadow:none; border:none; border-radius:0; }
+      .doc-header { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .boq-table thead tr { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .agr-notice { page-break-inside:avoid; }
+    }
+
+    /* Mobile nav */
+    @media (max-width:768px) {
+      .hamburger { display:flex !important; }
+      .nav-links {
+        position:fixed !important; top:85px !important; left:0 !important; right:0 !important; bottom:0 !important;
+        background:#ffffff !important; flex-direction:column !important; padding:0 !important;
+        transform:translateX(-100%) !important; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
+        gap:0 !important; z-index:999 !important; overflow-y:auto !important; height:calc(100vh - 85px) !important;
+      }
+      .nav-links.active { transform:translateX(0) !important; }
+      .nav-links a {
+        padding:22px 25px !important; border-bottom:1px solid rgba(168,135,52,0.15) !important;
+        width:100% !important; text-align:left !important; font-size:1.1rem !important;
+        display:block !important; background:transparent !important;
+        -webkit-background-clip:unset !important; background-clip:unset !important;
+        color:#333 !important; -webkit-text-fill-color:#333 !important;
+      }
+      .nav-links a:last-child { border-bottom:none !important; }
+      .nav-links a::before { display:none !important; }
+      .nav-links a.active {
+        background:linear-gradient(135deg,rgba(168,135,52,0.15),rgba(217,172,90,0.15)) !important;
+        border-left:4px solid #a88734 !important; color:#a88734 !important;
+        -webkit-text-fill-color:#a88734 !important; font-weight:700 !important;
+      }
+      .doc-body { padding:24px 22px 30px; }
+      .doc-header { padding:28px 22px 22px; }
+      .parties-grid { grid-template-columns:1fr; }
+      .guarantee-grid { grid-template-columns:1fr 1fr; }
+      .sig-grid { grid-template-columns:1fr; gap:20px; }
+      .agr-toolbar { justify-content:stretch; }
+      .tool-btn { flex:1; justify-content:center; }
+    }
+    @media (max-width:480px) {
+      .guarantee-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+        <div class="logo-text"><span class="logo-main">THULIR</span><span class="logo-sub">CONSTRUCTION</span></div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="Distinction.html">Distinction</a>
+        <a href="package.html">Packages</a>
+        <a href="estimate.html">Estimator</a>
+        <a href="agreement.html" class="active">Agreement</a>
+        <a href="erp.html">Tracking</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <section class="agr-hero">
+    <span class="section-tag">Transparency First</span>
+    <h1>Construction Agreement</h1>
+    <p>We believe every client deserves to know exactly what they're agreeing to. This is our standard construction agreement — no hidden clauses.</p>
+  </section>
+
+  <div class="agr-toolbar">
+    <button class="tool-btn btn-print" onclick="window.print()">
+      <i class="fas fa-print"></i> Print / Save as PDF
+    </button>
+    <a class="tool-btn btn-wa" href="https://wa.me/917418477647?text=Hello%20Thulir%20Construction%2C%20I%20would%20like%20to%20discuss%20the%20construction%20agreement." target="_blank">
+      <i class="fab fa-whatsapp"></i> Discuss on WhatsApp
+    </a>
+  </div>
+
+  <div class="agr-wrap">
+    <div class="agr-doc">
+
+      <!-- Document Header -->
+      <div class="doc-header">
+        <div class="doc-logo-row">
+          <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction" class="doc-logo-img">
+          <div class="doc-logo-text">
+            <span class="main">THULIR CONSTRUCTION</span>
+            <span class="sub">REGISTERED CONSTRUCTION CONTRACTOR · TAMIL NADU</span>
+          </div>
+        </div>
+        <div class="doc-title">Construction Service Agreement</div>
+        <div class="doc-subtitle">This agreement sets out the terms between Thulir Construction and the Client for residential construction services.</div>
+        <div class="doc-meta-row">
+          <div class="doc-meta"><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301, Tamil Nadu</div>
+          <div class="doc-meta"><i class="fas fa-phone"></i> +91 74184-77647</div>
+          <div class="doc-meta"><i class="fas fa-envelope"></i> nithishkumar@thulirconstruction.in</div>
+        </div>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-notice">
+          <i class="fas fa-info-circle"></i>
+          <span>This is a <strong>standard agreement template</strong> used by Thulir Construction. The final signed agreement is executed on appropriate stamp paper as per Tamil Nadu Stamp Act. All blanks are filled during client onboarding.</span>
+        </div>
+
+        <!-- Parties -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-handshake"></i> Parties to This Agreement</div>
+          <div class="parties-grid">
+            <div class="party-card">
+              <div class="party-label">Contractor (Party A)</div>
+              <div class="party-name">Thulir Construction</div>
+              <div class="party-detail">
+                B.E. Civil Engineer &amp; Structural Expert<br>
+                Krishna Nagar-II, Sangagiri, Sankari tk<br>
+                Salem District — 637301, Tamil Nadu<br>
+                GST: <em>To be filled</em>
+              </div>
+            </div>
+            <div class="party-card client">
+              <div class="party-label">Client (Party B)</div>
+              <div class="party-field">
+                <div class="party-field-label">Name</div>
+                <div class="party-field-val"><span class="party-field-blank"></span></div>
+              </div>
+              <div class="party-field">
+                <div class="party-field-label">Address</div>
+                <div class="party-field-val"><span class="party-field-blank"></span></div>
+              </div>
+              <div class="party-field">
+                <div class="party-field-label">Phone / Aadhaar</div>
+                <div class="party-field-val"><span class="party-field-blank"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Details -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-building"></i> Project Details</div>
+          <div class="parties-grid">
+            <div class="party-card">
+              <div class="party-field"><div class="party-field-label">Site Address</div><div class="party-field-val"><span class="party-field-blank" style="min-width:100%"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Plot Area</div><div class="party-field-val"><span class="party-field-blank"></span> Sqft</div></div>
+              <div class="party-field"><div class="party-field-label">Total Built-up Area</div><div class="party-field-val"><span class="party-field-blank"></span> Sqft</div></div>
+            </div>
+            <div class="party-card">
+              <div class="party-field"><div class="party-field-label">Number of Floors</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Construction Type</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Estimated Completion</div><div class="party-field-val"><span class="party-field-blank"></span> Months</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scope of Work -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-list-check"></i> Scope of Work</div>
+          <table class="scope-table">
+            <thead>
+              <tr>
+                <th style="width:40%">Work Item</th>
+                <th>Description</th>
+                <th style="width:90px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="scope-label">Foundation &amp; Basement</td><td>Excavation, PCC, footings, plinth beam, DPC</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">RCC / Structural Work</td><td>Columns, beams, slabs — as per approved drawing</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Masonry (Brickwork)</td><td>External &amp; internal walls with agreed brick/block type</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Plastering &amp; Putty</td><td>Internal &amp; external cement plaster + putty finish</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Flooring (Tiles)</td><td>Floor and bathroom tiles up to agreed rate per sqft</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Doors &amp; Windows</td><td>Main door, room doors, windows — agreed wood type</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Electrical Work</td><td>Internal wiring, switchboards, DB — as per plan</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Plumbing &amp; Sanitary</td><td>Water supply, drainage, sanitary fixtures — standard grade</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Water Tank &amp; Sump</td><td>RCC overhead tank + underground sump (as per built-up area)</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Painting</td><td>Internal emulsion + external weather-shield — agreed brand</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Septic Tank</td><td>RCC septic tank — standard 10,000 litre capacity</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Architectural Drawing</td><td>Floor plan, elevation, structural drawings</td><td><span class="scope-included"><i class="fas fa-check-circle"></i> Included</span></td></tr>
+              <tr><td class="scope-label">Interior Work</td><td>Modular kitchen, wardrobes, interior décor</td><td><span class="scope-excluded"><i class="fas fa-times-circle"></i> Excluded</span></td></tr>
+              <tr><td class="scope-label">Compound Wall &amp; Gate</td><td>Boundary wall and entrance gate</td><td><span class="scope-excluded"><i class="fas fa-times-circle"></i> Excluded</span></td></tr>
+              <tr><td class="scope-label">Landscaping</td><td>Garden, driveway, external paving</td><td><span class="scope-excluded"><i class="fas fa-times-circle"></i> Excluded</span></td></tr>
+              <tr><td class="scope-label">Government Fees</td><td>Plan approval, EB, TNPCB, other statutory charges</td><td><span class="scope-excluded"><i class="fas fa-times-circle"></i> Excluded</span></td></tr>
+              <tr><td class="scope-label">GST &amp; Taxes</td><td>Applicable GST on construction services</td><td><span class="scope-excluded"><i class="fas fa-times-circle"></i> Excluded</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Payment Schedule -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-calendar-check"></i> Payment Schedule — Milestone Based</div>
+          <table class="pay-table">
+            <thead>
+              <tr><th style="width:40px">Stage</th><th>Milestone / Work Completion</th><th style="width:70px">%</th><th style="width:140px">Amount (₹)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="stage-num">1</span></td>
+                <td><strong>Agreement signing</strong> — on execution of this agreement</td>
+                <td class="pct-cell">10%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr>
+                <td><span class="stage-num">2</span></td>
+                <td><strong>Foundation completion</strong> — after foundation &amp; plinth slab</td>
+                <td class="pct-cell">20%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr>
+                <td><span class="stage-num">3</span></td>
+                <td><strong>Ground floor slab</strong> — after ground floor columns, beams &amp; slab</td>
+                <td class="pct-cell">25%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr>
+                <td><span class="stage-num">4</span></td>
+                <td><strong>Roof / Top slab</strong> — after top floor slab &amp; brickwork</td>
+                <td class="pct-cell">20%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr>
+                <td><span class="stage-num">5</span></td>
+                <td><strong>Plastering &amp; finishing</strong> — after plaster, tiles, doors, windows</td>
+                <td class="pct-cell">15%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr>
+                <td><span class="stage-num">6</span></td>
+                <td><strong>Final handover</strong> — after painting, electrical &amp; plumbing final</td>
+                <td class="pct-cell">10%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+              <tr class="pay-total-row">
+                <td colspan="2"><strong>Total Contract Value</strong></td>
+                <td class="pct-cell">100%</td>
+                <td><span class="party-field-blank" style="min-width:110px"></span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.78rem;color:#999;margin-top:10px;line-height:1.6;">
+            <i class="fas fa-info-circle" style="color:var(--primary-gold)"></i>
+            Payments are to be made within 5 working days of milestone completion. Work continues to the next stage only upon receipt of the stage payment.
+          </p>
+        </div>
+
+        <!-- Material Specifications -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-cubes"></i> Agreed Material Specifications</div>
+          <div class="parties-grid">
+            <div class="party-card">
+              <div class="party-field"><div class="party-field-label">Structure Type</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Brick / Block</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Steel Brand</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Cement Brand</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+            </div>
+            <div class="party-card">
+              <div class="party-field"><div class="party-field-label">Paint Brand</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Tile Rate (per sqft)</div><div class="party-field-val">₹ <span class="party-field-blank" style="min-width:80px"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Wood (Doors &amp; Frame)</div><div class="party-field-val"><span class="party-field-blank"></span></div></div>
+              <div class="party-field"><div class="party-field-label">Effective Rate (per sqft)</div><div class="party-field-val">₹ <span class="party-field-blank" style="min-width:80px"></span></div></div>
+            </div>
+          </div>
+          <p style="font-size:0.78rem;color:#999;margin-top:10px;line-height:1.6;">
+            Any upgrade in materials beyond this specification requires a written change-order and additional payment to be agreed before execution.
+          </p>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-file-contract"></i> Terms &amp; Conditions</div>
+          <ol class="clause-list">
+            <li><strong>Commencement:</strong> Construction commences within 15 working days of Agreement signing payment (10%) and handing over of possession of the site.</li>
+            <li><strong>Timeline:</strong> The estimated duration is indicative. Delays caused by monsoon, client-directed changes, late payment, or government approvals are not counted toward the contractual timeline.</li>
+            <li><strong>Design Changes:</strong> Any changes to the approved drawings after work has begun will be assessed for additional cost and time. No changes are executed without a signed Change Order.</li>
+            <li><strong>Client Responsibilities:</strong> The client shall ensure: (a) clear site access at all times; (b) government plan approvals before commencement; (c) timely payments per the payment schedule; (d) an authorised person for on-site decisions.</li>
+            <li><strong>Material Procurement:</strong> Thulir Construction procures all agreed materials. The client may inspect material delivery. No third-party materials are to be introduced without mutual written consent.</li>
+            <li><strong>Work Supervision:</strong> A qualified site engineer appointed by Thulir Construction supervises all work. The client is entitled to visit the site at any time with prior notice. Daily/weekly progress updates will be shared via WhatsApp/ERP.</li>
+            <li><strong>Dispute Resolution:</strong> Any disputes shall first be resolved by mutual discussion within 30 days. If unresolved, disputes shall be referred to arbitration under the Arbitration &amp; Conciliation Act, 1996. Jurisdiction: Sankari / Salem.</li>
+            <li><strong>Termination by Client:</strong> The client may terminate this agreement by giving 30 days' written notice. The client shall pay for all work completed, materials procured, and a cancellation fee of 5% of the remaining contract value.</li>
+            <li><strong>Termination by Contractor:</strong> Thulir Construction may suspend or terminate work if payment is overdue by more than 15 days beyond the due date, after issuing a written notice.</li>
+            <li><strong>Force Majeure:</strong> Neither party is liable for delays caused by acts of God, government orders, pandemic, or circumstances beyond reasonable control.</li>
+            <li><strong>Intellectual Property:</strong> Architectural drawings and structural designs remain the intellectual property of Thulir Construction unless otherwise agreed in writing.</li>
+            <li><strong>Safety:</strong> Thulir Construction ensures safe construction practices on site. The client and visitors must follow all site safety instructions when on site.</li>
+          </ol>
+        </div>
+
+        <!-- Warranty & Guarantee -->
+        <div class="agr-section">
+          <div class="agr-sec-title"><i class="fas fa-shield-alt"></i> Warranty &amp; Post-Handover Guarantee</div>
+          <div class="guarantee-grid">
+            <div class="guarantee-chip">
+              <i class="fas fa-hard-hat"></i>
+              <div class="gc-title">Structure — 10 Years</div>
+              <div class="gc-sub">Structural defects in columns, beams, and slab covered for 10 years</div>
+            </div>
+            <div class="guarantee-chip">
+              <i class="fas fa-tint"></i>
+              <div class="gc-title">Waterproofing — 5 Years</div>
+              <div class="gc-sub">Roof, bathroom, and terrace waterproofing guaranteed for 5 years</div>
+            </div>
+            <div class="guarantee-chip">
+              <i class="fas fa-paint-roller"></i>
+              <div class="gc-title">Plaster &amp; Finish — 1 Year</div>
+              <div class="gc-sub">Cracks in plaster, tile debonding, and surface defects covered for 1 year</div>
+            </div>
+            <div class="guarantee-chip">
+              <i class="fas fa-bolt"></i>
+              <div class="gc-title">Electrical — 1 Year</div>
+              <div class="gc-sub">Wiring faults and switchboard issues covered for 1 year</div>
+            </div>
+            <div class="guarantee-chip">
+              <i class="fas fa-faucet"></i>
+              <div class="gc-title">Plumbing — 1 Year</div>
+              <div class="gc-sub">Leakages in internal plumbing covered for 1 year from handover</div>
+            </div>
+            <div class="guarantee-chip">
+              <i class="fas fa-door-open"></i>
+              <div class="gc-title">Doors &amp; Windows — 1 Year</div>
+              <div class="gc-sub">Frame settlement, shutter alignment defects covered for 1 year</div>
+            </div>
+          </div>
+          <p style="font-size:0.78rem;color:#999;margin-top:14px;line-height:1.6;">
+            Warranty excludes: damage due to client modifications, natural disasters, negligence, or normal wear &amp; tear. Warranty claim must be reported in writing within the warranty period.
+          </p>
+        </div>
+
+        <!-- Signatures -->
+        <div class="agr-section" style="margin-bottom:0">
+          <div class="agr-sec-title"><i class="fas fa-pen-nib"></i> Signatures</div>
+          <p style="font-size:0.86rem;color:#666;margin-bottom:18px;line-height:1.7;">
+            Both parties confirm they have read, understood, and agreed to all the terms and conditions set out in this agreement. This agreement is signed on <strong><span class="party-field-blank" style="min-width:120px"></span></strong> at <strong><span class="party-field-blank" style="min-width:120px"></span></strong>.
+          </p>
+          <div class="sig-grid">
+            <div class="sig-block">
+              <div class="sig-party">Party A — Contractor</div>
+              <div class="sig-line"></div>
+              <div class="sig-name-line">Authorised Signatory, Thulir Construction</div>
+              <div class="sig-name-line" style="margin-top:4px;font-size:0.78rem;color:#bbb;">Name &amp; Designation:</div>
+            </div>
+            <div class="sig-block">
+              <div class="sig-party">Party B — Client</div>
+              <div class="sig-line"></div>
+              <div class="sig-name-line">Client Signature with Date</div>
+              <div class="sig-name-line" style="margin-top:4px;font-size:0.78rem;color:#bbb;">Name: <span class="party-field-blank" style="min-width:140px"></span></div>
+            </div>
+          </div>
+          <div style="margin-top:24px;padding:14px 18px;background:#f8f9fa;border-radius:10px;font-size:0.76rem;color:#aaa;line-height:1.6;text-align:center;">
+            This agreement is to be executed on stamp paper of appropriate value as per the Tamil Nadu Stamp Act, 1899. One signed copy to be retained by each party.
+          </div>
+        </div>
+
+      </div><!-- /doc-body -->
+    </div><!-- /agr-doc -->
+  </div><!-- /agr-wrap -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Thulir Construction</h3>
+          <p>Building dreams with excellence. Committed to delivering high-quality construction services that stand the test of time.</p>
+          <ul class="social-icons">
+            <li><a href="https://wa.me/917418477647" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+          <p><a href="Distinction.html">Our Distinction</a></p>
+          <p><a href="package.html">Packages</a></p>
+          <p><a href="estimate.html">Cost Estimator</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <p><a href="#">Villa Construction</a></p>
+          <p><a href="#">Apartment Buildings</a></p>
+          <p><a href="#">Structural Engineering</a></p>
+          <p><a href="#">Vastu-Compliant Design</a></p>
+          <p><a href="#">Project Management</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Thulir Construction. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active'); navLinks.classList.remove('active');
+      }
+    });
+    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('active'); navLinks.classList.remove('active');
+    }));
+  </script>
+</body>
+</html>

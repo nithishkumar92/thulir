@@ -990,3 +990,216 @@ body {
     font-size: 1rem;
   }
 }
+
+/* ========================================
+   WHATSAPP FLOAT BUTTON
+   ======================================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  z-index: 9998;
+  transition: all 0.3s ease;
+  animation: pulse-wa 2.5s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 12px rgba(37, 211, 102, 0.12); }
+}
+
+/* ========================================
+   FOUNDER SECTION
+   ======================================== */
+.founder-section {
+  padding: 120px 0;
+  background: linear-gradient(135deg, #fdfaf4 0%, #fff9ee 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.founder-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 50%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(168, 135, 52, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.founder-image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.founder-photo-frame {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 6px solid var(--secondary-gold);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(168, 135, 52, 0.25);
+  background: linear-gradient(135deg, rgba(168, 135, 52, 0.1), rgba(217, 172, 90, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.founder-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.founder-photo-placeholder {
+  font-size: 7rem;
+  color: var(--secondary-gold);
+  opacity: 0.4;
+}
+
+.founder-img-badge {
+  position: absolute;
+  bottom: 15px;
+  right: -5px;
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  color: white;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(168, 135, 52, 0.35);
+  white-space: nowrap;
+}
+
+.founder-details {
+  padding: 0 10px;
+}
+
+.founder-label {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(168, 135, 52, 0.1), rgba(217, 172, 90, 0.1));
+  border-radius: 30px;
+  color: var(--primary-gold);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.founder-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1a1a2e;
+  line-height: 1.2;
+  margin-bottom: 35px;
+  letter-spacing: -0.5px;
+}
+
+.founder-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.credential-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.credential-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.credential-text h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 3px;
+}
+
+.credential-text p {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+  .founder-photo-frame {
+    width: 260px;
+    height: 260px;
+  }
+  .credential-item {
+    text-align: left;
+  }
+  .founder-credentials {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .founder-section { padding: 80px 0; }
+  .founder-photo-frame { width: 220px; height: 220px; }
+  .founder-heading { font-size: 1.7rem; }
+}
+
+@media (max-width: 480px) {
+  .founder-photo-frame { width: 180px; height: 180px; }
+  .founder-photo-placeholder { font-size: 5rem; }
+  .founder-heading { font-size: 1.5rem; }
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}

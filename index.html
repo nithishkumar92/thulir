@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thulir Construction - Building Dreams with Excellence</title>
+  <title>Thulir Construction — Home</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
@@ -239,6 +239,51 @@
         font-size: 0.75rem;
       }
     }
+
+    /* Mobile nav overrides */
+    @media (max-width: 768px) {
+      .hamburger { display: flex !important; }
+      .nav-links {
+        position: fixed !important;
+        top: 85px !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: #ffffff !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        gap: 0 !important;
+        z-index: 999 !important;
+        overflow-y: auto !important;
+        height: calc(100vh - 85px) !important;
+      }
+      .nav-links.active { transform: translateX(0) !important; }
+      .nav-links a {
+        padding: 22px 25px !important;
+        border-bottom: 1px solid rgba(168, 135, 52, 0.15) !important;
+        width: 100% !important;
+        text-align: left !important;
+        font-size: 1.1rem !important;
+        display: block !important;
+        background: transparent !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        color: #333 !important;
+        -webkit-text-fill-color: #333 !important;
+        pointer-events: auto !important;
+      }
+      .nav-links a:last-child { border-bottom: none !important; }
+      .nav-links a::before { display: none !important; }
+      .nav-links a.active {
+        background: linear-gradient(135deg, rgba(168, 135, 52, 0.15), rgba(217, 172, 90, 0.15)) !important;
+        border-left: 4px solid #a88734 !important;
+        color: #a88734 !important;
+        -webkit-text-fill-color: #a88734 !important;
+        font-weight: 700 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -257,9 +302,12 @@
         <a href="gallery.html">Gallery</a>
         <a href="Distinction.html">Distinction</a>
         <a href="package.html">Packages</a>
+        <a href="estimate.html">Estimator</a>
+        <a href="agreement.html">Agreement</a>
+        <a href="erp.html">Tracking</a>
         <a href="contact.html">Contact</a>
       </div>
-      
+
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -272,15 +320,15 @@
     <div class="hero-container">
       <div class="hero-content">
         <h1>Building Your Vision Into Reality</h1>
-        <p class="subtitle">Premium Construction Solutions with Unmatched Excellence</p>
-        <p>Transform your dreams into architectural masterpieces with Thulir Construction. We combine cutting-edge technology, superior craftsmanship, and transparent communication to deliver exceptional results that exceed expectations.</p>
+        <p class="subtitle">Trusted Residential Construction Specialists · Tamil Nadu</p>
+        <p>Thulir Construction is a Sankari-based company led by a B.E. Civil Engineer with 10+ years of project experience across Tamil Nadu, Karnataka, and Maharashtra. We build Vastu-compliant villas and apartment buildings — delivering structural precision, transparent agreements, and homes built to last.</p>
         
         <div class="cta-buttons">
           <a href="contact.html" class="btn btn-primary">
             <i class="fas fa-phone-alt"></i>
             Get Free Consultation
           </a>
-          <a href="package.html" class="btn btn-secondary">
+          <a href="estimate.html" class="btn btn-secondary">
             <i class="fas fa-box-open"></i>
             Explore Packages
           </a>
@@ -288,16 +336,16 @@
         
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-number">50+</span>
-            <span class="stat-label">Projects Delivered</span>
+            <span class="stat-number">18+</span>
+            <span class="stat-label">Buildings Completed</span>
           </div>
           <div class="stat-item">
             <span class="stat-number">100%</span>
             <span class="stat-label">Client Satisfaction</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">5+</span>
-            <span class="stat-label">Years Expertise</span>
+            <span class="stat-number">Since 2021</span>
+            <span class="stat-label">Trusted & Established</span>
           </div>
         </div>
       </div>
@@ -352,50 +400,102 @@
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <i class="fa fa-compass-drafting"></i>
+            <i class="fa fa-house"></i>
           </div>
-          <h3>Architectural Design</h3>
-          <p>Innovative designs that seamlessly blend aesthetics with functionality, creating spaces that inspire and perform.</p>
+          <h3>Villa Construction</h3>
+          <p>Custom single-family homes built with structural precision, quality materials, and Vastu alignment — tailored to your family's needs.</p>
         </div>
-        
+
         <div class="service-card">
           <div class="service-icon">
             <i class="fa fa-building"></i>
           </div>
-          <h3>General Contracting</h3>
-          <p>End-to-end construction services with meticulous attention to detail and unwavering commitment to quality.</p>
+          <h3>Apartment Buildings</h3>
+          <p>Multi-floor residential complexes designed for durability and space efficiency, engineered to exceed structural standards.</p>
         </div>
-        
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fa fa-compass"></i>
+          </div>
+          <h3>Vastu-Compliant Design</h3>
+          <p>Every floor plan carefully laid out in harmony with Vastu principles — blending tradition with modern construction excellence.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fa fa-compass-drafting"></i>
+          </div>
+          <h3>Structural Engineering</h3>
+          <p>B.E. Civil Engineer-led structural analysis, elevation design, and planning shared with you before basement work begins.</p>
+        </div>
+
         <div class="service-card">
           <div class="service-icon">
             <i class="fa fa-list-check"></i>
           </div>
           <h3>Project Management</h3>
-          <p>Expert coordination ensuring your project stays on time, within budget, and exceeds quality standards.</p>
+          <p>End-to-end oversight with transparent agreements, scheduled payment milestones, and consistent on-site progress updates.</p>
         </div>
-        
+
         <div class="service-card">
           <div class="service-icon">
-            <i class="fa fa-hammer"></i>
+            <i class="fa fa-house-circle-check"></i>
           </div>
-          <h3>Renovations</h3>
-          <p>Transform existing spaces with modern upgrades that enhance both value and functionality.</p>
+          <h3>Finishing & Handover</h3>
+          <p>Precision interior finishing using professional equipment, followed by thorough cleaning for a pristine, move-in-ready handover.</p>
         </div>
-        
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fa fa-leaf"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Section -->
+  <section class="founder-section">
+    <div class="container">
+      <div class="founder-grid">
+        <div class="founder-image-wrap">
+          <div class="founder-photo-frame">
+            <img src="images/founder.jpeg" alt="Founder - Thulir Construction"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <i class="fas fa-user-tie founder-photo-placeholder" style="display:none;"></i>
           </div>
-          <h3>Sustainable Building</h3>
-          <p>Eco-friendly construction practices using sustainable materials and energy-efficient solutions.</p>
+          <span class="founder-img-badge"><i class="fas fa-award"></i> &nbsp;B.E. Civil Engineer</span>
         </div>
-        
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fa fa-handshake"></i>
+
+        <div class="founder-details">
+          <span class="founder-label">Meet the Founder</span>
+          <h2 class="founder-heading">Built on Expertise,<br>Driven by Vision</h2>
+
+          <div class="founder-credentials">
+            <div class="credential-item">
+              <div class="credential-icon"><i class="fas fa-drafting-compass"></i></div>
+              <div class="credential-text">
+                <h4>B.E. Civil Engineer &amp; Structural Expert</h4>
+                <p>Deep expertise in structural and building construction with proven technical knowledge.</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon"><i class="fas fa-briefcase"></i></div>
+              <div class="credential-text">
+                <h4>Proven Project Leadership</h4>
+                <p>Former Project Head in Bangalore, overseeing large-scale residential &amp; commercial builds across Karnataka, Mysore, and Maharashtra.</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon"><i class="fas fa-seedling"></i></div>
+              <div class="credential-text">
+                <h4>Founder of Thulir Construction</h4>
+                <p>Established in Oct 2021 to deliver structurally sound, Vastu-compliant buildings with transparency and client-first values.</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon"><i class="fas fa-building"></i></div>
+              <div class="credential-text">
+                <h4>Track Record of Success</h4>
+                <p>18+ buildings completed, with multiple projects currently in progress across Tamil Nadu.</p>
+              </div>
+            </div>
           </div>
-          <h3>Consulting</h3>
-          <p>Expert guidance and strategic advice for all phases of your construction project.</p>
         </div>
       </div>
     </div>
@@ -457,6 +557,14 @@
           <h4>Pristine Handovers</h4>
           <p>Thorough cleaning of every space before handover, ensuring a flawless finish.</p>
         </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-compass"></i>
+          </div>
+          <h4>Vastu-Compliant Design</h4>
+          <p>Every structure is designed in alignment with Vastu principles, blending tradition with modern construction excellence.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -481,6 +589,8 @@
           <p><a href="gallery.html">Gallery</a></p>
           <p><a href="Distinction.html">Our Distinction</a></p>
           <p><a href="package.html">Packages</a></p>
+          <p><a href="estimate.html">Cost Estimator</a></p>
+          <p><a href="agreement.html">Agreement</a></p>
           <p><a href="contact.html">Contact</a></p>
         </div>
         
@@ -497,19 +607,24 @@
           <h3>Contact Us</h3>
           <ul class="contact-list">
             <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
-            <li><i class="fas fa-envelope"></i><a href="/cdn-cgi/l/email-protection#3957504d51504a51524c54584b794d514c55504b5a56574a4d4b4c5a4d505657175057"><span class="__cf_email__" data-cfemail="89e7e0fde1e0fae1e2fce4e8fbc9fde1fce5e0fbeae6e7fafdfbfceafde0e6e7a7e0e7">[email&#160;protected]</span></a></li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
             <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
           </ul>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2025 Thulir Construction. All rights reserved.</p>
+        <p>&copy; 2026 Thulir Construction. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -537,4 +652,13 @@
       }
     });
 
-    // Close
+    // Close menu when a nav link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
