@@ -192,33 +192,12 @@
     .card-visual {
       position: relative;
       height: 270px;
-      display: grid;
-      grid-template-columns: 56% 44%;
       overflow: hidden;
       background: #0f0f0f;
       cursor: pointer;
     }
 
-    /* Dark band covers the straight grid boundary — hides the vertical cut */
-    .card-visual::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: calc(56% - 14px);
-      width: 28px;
-      height: 100%;
-      z-index: 5;
-      pointer-events: none;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(0,0,0,0.82) 30%,
-        rgba(0,0,0,0.82) 70%,
-        transparent
-      );
-    }
-
-    /* Rotated gold line sits on top of the dark band */
+    /* Rotated gold diagonal line */
     .card-visual::after {
       content: '';
       position: absolute;
@@ -231,7 +210,7 @@
       background: var(--gold);
       transform: rotate(5.93deg);
       transform-origin: center;
-      box-shadow: 0 0 8px rgba(201,168,76,0.55);
+      box-shadow: 0 0 10px rgba(201,168,76,0.6), -3px 0 8px rgba(0,0,0,0.3), 3px 0 8px rgba(0,0,0,0.3);
     }
 
     /* Hover overlay hint */
@@ -267,10 +246,22 @@
     .proj-card:hover .visual-hint { background: rgba(0,0,0,0.18); }
     .proj-card:hover .visual-hint-label { opacity: 1; transform: translateY(0) scale(1); }
 
-    /* Photo slots */
+    /* Photo slots — absolute, truly clipped diagonally */
     .photo-slot {
-      position: relative;
+      position: absolute;
+      inset: 0;
       overflow: hidden;
+    }
+    /* Left slot (elevation) — clip right edge to the diagonal */
+    .photo-slot:first-child {
+      clip-path: polygon(0 0, calc(56% - 14px) 0, calc(56% + 14px) 100%, 0 100%);
+    }
+    /* Right slot (completed) — use nth-child(2), NOT :last-child which matches .visual-hint */
+    .photo-slot:nth-child(2) {
+      clip-path: polygon(calc(56% - 14px) 0, 100% 0, 100% 100%, calc(56% + 14px) 100%);
+    }
+    .photo-slot:nth-child(2) .photo-lbl {
+      left: calc(56% + 10px);
     }
     .photo-slot img {
       width: 100%;
