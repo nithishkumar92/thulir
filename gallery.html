@@ -192,38 +192,38 @@
     .card-visual {
       position: relative;
       height: 270px;
-      display: grid;
-      grid-template-columns: 56% 44%;
+      overflow: hidden;
       background: #0f0f0f;
       cursor: pointer;
     }
 
-    /* Gold diagonal slash divider */
-    .card-visual::after {
+    /* Gold diagonal slash — rotated thin line (atan(28/270) ≈ 5.93°) */
+    .card-visual::before {
       content: '';
       position: absolute;
+      left: calc(56% - 12px);
       top: 0;
-      /* centre the slash around the 56% boundary */
-      left: calc(56% - 14px);
-      width: 28px;
+      width: 24px;
       height: 100%;
       z-index: 6;
       pointer-events: none;
-      background:
-        linear-gradient(
-          to bottom right,
-          transparent 46%,
-          var(--gold)  48%,
-          var(--gold)  52%,
-          transparent 54%
-        ),
-        linear-gradient(
-          to bottom right,
-          transparent 44%,
-          rgba(0,0,0,0.55) 48%,
-          rgba(0,0,0,0.55) 52%,
-          transparent 56%
-        );
+      background: linear-gradient(to right, transparent, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.45) 65%, transparent);
+      transform: rotate(5.93deg);
+      transform-origin: center;
+    }
+    .card-visual::after {
+      content: '';
+      position: absolute;
+      left: calc(56% - 1px);
+      top: 0;
+      width: 2px;
+      height: 100%;
+      z-index: 7;
+      pointer-events: none;
+      background: var(--gold);
+      transform: rotate(5.93deg);
+      transform-origin: center;
+      box-shadow: 0 0 8px rgba(201,168,76,0.6);
     }
 
     /* Hover overlay hint */
@@ -259,10 +259,23 @@
     .proj-card:hover .visual-hint { background: rgba(0,0,0,0.18); }
     .proj-card:hover .visual-hint-label { opacity: 1; transform: translateY(0) scale(1); }
 
-    /* Photo slots */
+    /* Photo slots — absolute, clipped diagonally */
     .photo-slot {
-      position: relative;
+      position: absolute;
+      inset: 0;
       overflow: hidden;
+    }
+    /* Left slot: right edge follows diagonal top→bottom (56%-14px → 56%+14px) */
+    .photo-slot:first-child {
+      clip-path: polygon(0 0, calc(56% - 14px) 0, calc(56% + 14px) 100%, 0 100%);
+    }
+    /* Right slot: left edge follows same diagonal */
+    .photo-slot:last-child {
+      clip-path: polygon(calc(56% - 14px) 0, 100% 0, 100% 100%, calc(56% + 14px) 100%);
+    }
+    /* Push "Completed" label into the right half */
+    .photo-slot:last-child .photo-lbl {
+      left: calc(56% + 10px);
     }
     .photo-slot img {
       width: 100%;
