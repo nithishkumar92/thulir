@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "generate-manifest.bat",
+      "photo-manager.html",
+      "test_navbar.html"
+    ]
+  }
+}
