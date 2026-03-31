@@ -32,25 +32,34 @@
        GALLERY HERO BAND
     ═══════════════════════════════════════ */
     .g-hero {
-      background: linear-gradient(135deg, #111 0%, #1c1c1c 100%);
-      padding: 54px 6% 46px;
+      background: linear-gradient(135deg, #080808 0%, #141414 60%, #1a1410 100%);
+      padding: 58px 6% 50px;
       position: relative;
       overflow: hidden;
     }
-    .g-hero::before {
-      content: 'PROJECTS';
+    /* Dot-grid texture */
+    .g-hero::after {
+      content: '';
       position: absolute;
-      right: 4%;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    /* Glowing gold orb */
+    .g-hero::before {
+      content: '';
+      position: absolute;
+      right: 10%;
       top: 50%;
       transform: translateY(-50%);
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(60px, 10vw, 120px);
-      font-weight: 800;
-      color: rgba(255,255,255,0.03);
-      line-height: 1;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      border-radius: 50%;
       pointer-events: none;
-      user-select: none;
     }
+    .g-hero-content { position: relative; z-index: 2; }
     .g-hero h1 {
       font-family: 'Syne', sans-serif;
       font-size: clamp(26px, 3.8vw, 44px);
@@ -84,7 +93,9 @@
        FILTER STRIP
     ═══════════════════════════════════════ */
     .filter-strip {
-      background: #fff;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--rule);
       position: sticky;
       top: 85px;
@@ -92,49 +103,58 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 6%;
+      padding: 12px 6%;
     }
-    .filter-tabs { display: flex; }
+    .filter-tabs {
+      display: flex;
+      background: #ede9e0;
+      border-radius: 50px;
+      padding: 3px;
+      gap: 2px;
+    }
     .ftab {
-      padding: 16px 20px;
-      font-size: 11.5px;
-      font-weight: 600;
+      padding: 9px 22px;
+      font-size: 11px;
+      font-weight: 700;
       color: var(--smoke);
-      background: none;
+      background: transparent;
       border: none;
+      border-radius: 50px;
       cursor: pointer;
-      position: relative;
       font-family: 'Outfit', sans-serif;
       text-transform: uppercase;
-      letter-spacing: 0.9px;
-      transition: color .2s;
+      letter-spacing: 1px;
+      transition: all .22s ease;
       white-space: nowrap;
+      position: relative;
     }
-    .ftab::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 16px; right: 16px;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform .25s ease;
+    .ftab::after { display: none; }
+    .ftab.active {
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-    .ftab.active { color: var(--ink); }
-    .ftab.active::after { transform: scaleX(1); }
-    .ftab:hover { color: var(--ink); }
+    .ftab:hover:not(.active) { color: var(--ink); background: rgba(0,0,0,0.06); }
     .proj-count {
-      font-size: 11px;
-      color: var(--smoke);
+      font-size: 10px;
+      font-weight: 700;
+      color: #666;
       font-family: 'Outfit', sans-serif;
       white-space: nowrap;
-      padding-left: 12px;
+      letter-spacing: 0.5px;
+      background: #ede9e0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
     }
 
     /* ═══════════════════════════════════════
        GRID WRAPPER
     ═══════════════════════════════════════ */
-    .g-wrap { padding: 36px 6% 90px; }
+    .g-wrap {
+      padding: 40px 6% 100px;
+      background: linear-gradient(180deg, #ede8df 0%, #f2ede4 60px);
+    }
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -161,9 +181,9 @@
       transform: translateY(0);
     }
     .proj-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.13);
-      border-color: rgba(201,168,76,0.25);
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.14), 0 0 0 1px rgba(201,168,76,0.22), 0 8px 30px rgba(201,168,76,0.07);
+      border-color: rgba(201,168,76,0.4);
     }
 
     /* ═══════════════════════════════════════
@@ -335,19 +355,27 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-size: 9.5px;
-      font-weight: 600;
-      color: #1a7a45;
-      background: #e5f7ed;
-      padding: 3px 9px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #15693c;
+      background: linear-gradient(135deg, #e0f7eb 0%, #d0f2e0 100%);
+      padding: 4px 10px;
       border-radius: 20px;
       font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border: 1px solid rgba(26,122,69,0.15);
     }
     .badge-dot {
       width: 5px; height: 5px;
       border-radius: 50%;
       background: #1a7a45;
       flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     .card-name {
@@ -409,10 +437,10 @@
     /* CTA Button */
     .view-btn {
       width: 100%;
-      background: var(--ink);
-      border: none;
-      border-radius: 11px;
-      padding: 11px 16px;
+      background: linear-gradient(135deg, #111 0%, #1d1d1d 100%);
+      border: 1.5px solid rgba(201,168,76,0.18);
+      border-radius: 12px;
+      padding: 12px 16px;
       font-size: 12px;
       font-weight: 600;
       color: #fff;
@@ -422,26 +450,34 @@
       justify-content: center;
       gap: 8px;
       font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.3px;
-      transition: background .22s, color .22s, transform .15s;
+      letter-spacing: 0.4px;
+      transition: all .25s ease;
     }
-    .view-btn:hover { background: var(--gold); color: #000; }
+    .view-btn:hover {
+      background: linear-gradient(135deg, var(--gold) 0%, #e8bc5a 100%);
+      border-color: transparent;
+      color: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(201,168,76,0.32);
+    }
     .view-btn:active { transform: scale(0.98); }
     .view-btn i { font-size: 12px; }
     .vbtn-count {
       background: rgba(255,255,255,0.13);
       font-size: 9.5px;
-      padding: 1px 7px;
+      padding: 2px 8px;
       border-radius: 20px;
-      transition: background .22s, color .22s;
+      font-weight: 700;
+      transition: background .25s, color .25s;
     }
-    .view-btn:hover .vbtn-count { background: rgba(0,0,0,0.13); }
+    .view-btn:hover .vbtn-count { background: rgba(0,0,0,0.14); }
     .view-btn.no-photos {
-      background: #e8e3db;
-      color: #999;
+      background: #eae5dc;
+      border-color: transparent;
+      color: #aaa;
       cursor: default;
     }
-    .view-btn.no-photos:hover { background: #e8e3db; color: #999; }
+    .view-btn.no-photos:hover { background: #eae5dc; color: #aaa; transform: none; box-shadow: none; }
 
     /* ═══════════════════════════════════════
        LIGHTBOX
@@ -675,12 +711,14 @@
 
   <!-- ══════════ HERO BAND ══════════ -->
   <div class="g-hero">
-    <h1>Our <em>Completed</em> Projects</h1>
-    <p>
-      <span><i class="fas fa-building"></i> 18+ Buildings</span>
-      <span><i class="fas fa-map-marker-alt"></i> Tamil Nadu</span>
-      <span><i class="fas fa-compass"></i> Vastu-Compliant</span>
-    </p>
+    <div class="g-hero-content">
+      <h1>Our <em>Completed</em> Projects</h1>
+      <p>
+        <span><i class="fas fa-building"></i> 18+ Buildings</span>
+        <span><i class="fas fa-map-marker-alt"></i> Tamil Nadu</span>
+        <span><i class="fas fa-compass"></i> Vastu-Compliant</span>
+      </p>
+    </div>
   </div>
 
   <!-- ══════════ FILTER STRIP ══════════ -->
