@@ -10,84 +10,213 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600;700;800;900&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="gallery-data.js"></script>
 
   <style>
-    body { padding-top: 85px; background: #f2ede4; }
+    body { padding-top: 85px; background: #fafaf8; font-family: 'Inter', 'Outfit', sans-serif; }
 
     :root {
       --gold:      #C9A84C;
       --gold-dim:  rgba(201,168,76,0.18);
       --ink:       #0f0f0f;
       --smoke:     #888;
-      --paper:     #f2ede4;
+      --paper:     #fafaf8;
       --card:      #ffffff;
-      --rule:      #e6e1d6;
+      --rule:      #ebebeb;
     }
 
     /* ═══════════════════════════════════════
        GALLERY HERO BAND
     ═══════════════════════════════════════ */
     .g-hero {
-      background: linear-gradient(135deg, #080808 0%, #141414 60%, #1a1410 100%);
-      padding: 58px 6% 50px;
+      background: #0d0d0d;
+      padding: 60px 6% 56px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      min-height: 380px;
     }
-    /* Dot-grid texture */
     .g-hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image: linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+      background-size: 52px 52px;
       pointer-events: none;
     }
-    /* Glowing gold orb */
     .g-hero::before {
       content: '';
       position: absolute;
-      right: 10%;
+      right: 8%;
       top: 50%;
       transform: translateY(-50%);
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-      border-radius: 50%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(ellipse 55% 70% at 85% 40%, rgba(201,168,76,0.14) 0%, transparent 65%);
       pointer-events: none;
     }
-    .g-hero-content { position: relative; z-index: 2; }
-    .g-hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(26px, 3.8vw, 44px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.1;
-      margin: 0 0 10px;
-    }
-    .g-hero h1 em {
-      color: var(--gold);
-      font-style: normal;
-    }
-    .g-hero p {
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      margin: 0;
+    .g-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
       display: flex;
-      align-items: center;
-      gap: 14px;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
       flex-wrap: wrap;
     }
-    .g-hero p span {
-      display: flex;
+    .g-hero-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 7px;
+      background: rgba(201,168,76,0.13);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #d4aa6a;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 13px;
+      border-radius: 100px;
+      margin-bottom: 18px;
     }
-    .g-hero p span i { color: var(--gold); font-size: 10px; }
+    .g-hero-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: #d4aa6a; }
+    .g-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(30px, 4.5vw, 54px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.08;
+      margin: 0 0 14px;
+    }
+    .g-hero h1 em { color: var(--gold); font-style: normal; }
+    .g-hero-sub {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      max-width: 440px;
+      line-height: 1.65;
+    }
+    .g-hero-stats {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      align-items: stretch;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .g-stat {
+      text-align: center;
+      padding: 22px 32px;
+      position: relative;
+    }
+    .g-stat + .g-stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .g-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+    .g-stat-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(201,168,76,0.7);
+      margin-top: 6px;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+    }
+    @media(max-width:700px){
+      .g-hero {
+        padding: 36px 5% 32px;
+        min-height: auto;
+        align-items: flex-start;
+      }
+      .g-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .g-hero-badge { margin-bottom: 10px; }
+      .g-hero h1 { font-size: 28px; margin-bottom: 8px; }
+      .g-hero-sub { font-size: 12px; }
+      .g-hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 0;
+      }
+      .g-stat { padding: 14px 16px; }
+      .g-stat + .g-stat::before { display: none; }
+      /* right-column stats get a left border, bottom-row stats get a top border */
+      .g-stat:nth-child(2),
+      .g-stat:nth-child(4) { border-left: 1px solid rgba(255,255,255,0.08); }
+      .g-stat:nth-child(3),
+      .g-stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); }
+      .g-stat-num { font-size: 20px; }
+      .g-stat-label { font-size: 8px; letter-spacing: 1px; margin-top: 4px; }
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION HEADER
+    ═══════════════════════════════════════ */
+    .section-header {
+      padding: 48px 6% 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 7px;
+      font-family: 'Inter', sans-serif;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(20px, 2.8vw, 30px);
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 1.2;
+    }
+    .section-title em { color: var(--gold); font-style: normal; }
+    .section-sub {
+      font-size: 13px;
+      color: #888;
+      margin-top: 5px;
+      max-width: 360px;
+      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+    }
+    .section-count {
+      font-size: 12px;
+      font-weight: 700;
+      background: #f0ede7;
+      color: #8a7550;
+      border: 1px solid #e0d8cc;
+      padding: 7px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
 
     /* ═══════════════════════════════════════
        FILTER STRIP
@@ -107,7 +236,7 @@
     }
     .filter-tabs {
       display: flex;
-      background: #ede9e0;
+      background: #f0ede8;
       border-radius: 50px;
       padding: 3px;
       gap: 2px;
@@ -121,14 +250,12 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: all .22s ease;
       white-space: nowrap;
-      position: relative;
     }
-    .ftab::after { display: none; }
     .ftab.active {
       color: #fff;
       background: var(--ink);
@@ -136,347 +263,270 @@
     }
     .ftab:hover:not(.active) { color: var(--ink); background: rgba(0,0,0,0.06); }
     .proj-count {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       color: #666;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
       white-space: nowrap;
-      letter-spacing: 0.5px;
-      background: #ede9e0;
+      background: #f0ede8;
       padding: 6px 14px;
       border-radius: 20px;
-      text-transform: uppercase;
     }
 
     /* ═══════════════════════════════════════
-       GRID WRAPPER
+       WRAPPER
     ═══════════════════════════════════════ */
     .g-wrap {
-      padding: 40px 6% 100px;
-      background: linear-gradient(180deg, #ede8df 0%, #f2ede4 60px);
+      padding: 8px 5% 80px;
+      background: #fafaf8;
     }
     .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 26px;
-      max-width: 1200px;
+      max-width: 1320px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
     }
 
     /* ═══════════════════════════════════════
-       PROJECT CARD
+       PROJECT ROW — 500px row style
     ═══════════════════════════════════════ */
-    .proj-card {
-      background: var(--card);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.06);
-      transition: transform .32s ease, box-shadow .32s ease;
+    .proj-row {
+      padding: 28px 0 32px;
+      border-bottom: 1px solid #ebebeb;
       opacity: 0;
-      transform: translateY(22px);
-      border: 1.5px solid transparent;
+      transform: translateY(14px);
     }
-    .proj-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .proj-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.14), 0 0 0 1px rgba(201,168,76,0.22), 0 8px 30px rgba(201,168,76,0.07);
-      border-color: rgba(201,168,76,0.4);
-    }
+    .proj-row.visible { opacity: 1; transform: translateY(0); }
+    .proj-row:last-child { border-bottom: none; }
 
-    /* ═══════════════════════════════════════
-       CARD VISUAL — split photo area
-    ═══════════════════════════════════════ */
-    .card-visual {
-      position: relative;
-      height: 270px;
-      overflow: hidden;
-      background: #0f0f0f;
-      cursor: pointer;
+    /* Row heading */
+    .proj-row-head {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
     }
-
-    /* Rotated gold diagonal line */
-    .card-visual::after {
-      content: '';
-      position: absolute;
-      left: calc(56% - 1px);
-      top: 0;
-      width: 2px;
-      height: 100%;
-      z-index: 6;
-      pointer-events: none;
-      background: var(--gold);
-      transform: rotate(5.93deg);
-      transform-origin: center;
-      box-shadow: 0 0 10px rgba(201,168,76,0.6), -3px 0 8px rgba(0,0,0,0.3), 3px 0 8px rgba(0,0,0,0.3);
-    }
-
-    /* Hover overlay hint */
-    .visual-hint {
-      position: absolute;
-      inset: 0;
-      z-index: 8;
+    .prh-title-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0);
-      transition: background .3s;
-      pointer-events: none;
+      justify-content: space-between;
+      gap: 12px;
     }
-    .visual-hint-label {
+    .prh-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .prh-meta {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(0,0,0,0.62);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
+      flex-wrap: wrap;
+      font-family: 'Inter', sans-serif;
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      padding: 9px 20px;
-      border-radius: 50px;
-      opacity: 0;
-      transform: translateY(6px) scale(0.97);
-      transition: opacity .28s, transform .28s;
+      color: #aaa;
+      margin-top: 10px;
     }
-    .proj-card:hover .visual-hint { background: rgba(0,0,0,0.18); }
-    .proj-card:hover .visual-hint-label { opacity: 1; transform: translateY(0) scale(1); }
+    .prh-dot { color: #ddd; }
+    .prh-price { color: var(--gold); font-weight: 700; font-size: 13px; }
+    .prh-type {
+      background: #f5f2ec;
+      color: #8a7550;
+      border: 1px solid #e8e2d8;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .prh-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .s-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .s-dot.g { background: #22c55e; }
+    .s-dot.b { background: #3b82f6; }
+    .s-dot.a { background: #f59e0b; }
+    .prh-viewall {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      background: none;
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s, color .2s;
+      text-decoration: none;
+    }
+    .prh-viewall:hover { background: rgba(201,168,76,0.08); }
+    .prh-coming {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #bbb;
+    }
 
-    /* Photo slots — absolute, truly clipped diagonally */
-    .photo-slot {
-      position: absolute;
-      inset: 0;
+    /* Photo strip */
+    .photo-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    }
+    .photo-strip::-webkit-scrollbar { display: none; }
+
+    .strip-photo {
+      flex-shrink: 0;
+      width: 300px;
+      height: 210px;
+      border-radius: 10px;
       overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: #1a1a1a;
     }
-    /* Left slot (elevation) — clip right edge to the diagonal */
-    .photo-slot:first-child {
-      clip-path: polygon(0 0, calc(56% - 14px) 0, calc(56% + 14px) 100%, 0 100%);
-    }
-    /* Right slot (completed) — use nth-child(2), NOT :last-child which matches .visual-hint */
-    .photo-slot:nth-child(2) {
-      clip-path: polygon(calc(56% - 14px) 0, 100% 0, 100% 100%, calc(56% + 14px) 100%);
-    }
-    .photo-slot:nth-child(2) .photo-lbl {
-      left: calc(56% + 10px);
-    }
-    .photo-slot img {
+    .strip-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .5s ease;
+      transition: transform .45s ease;
     }
-    .proj-card:hover .photo-slot img { transform: scale(1.05); }
-
-    /* Photo labels (bottom-left of each slot) */
-    .photo-lbl {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 9px 3px;
-      border-radius: 4px;
-      font-family: 'Outfit', sans-serif;
-      z-index: 4;
-    }
-
-    /* "+N more" badge on completed photo */
-    .more-badge {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: var(--gold);
-      color: #000;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-family: 'Outfit', sans-serif;
-      z-index: 4;
-      letter-spacing: 0.2px;
-    }
-
-    /* Empty photo slot (no image yet) */
-    .photo-empty {
+    .strip-photo:hover img { transform: scale(1.07); }
+    .strip-photo-overlay {
       position: absolute;
       inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .28s;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px 12px;
+    }
+    .strip-photo:hover .strip-photo-overlay { opacity: 1; }
+    .strip-photo-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    /* Empty strip slot */
+    .strip-empty {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
-    }
-    .photo-empty i {
-      font-size: 20px;
-      color: rgba(201,168,76,0.28);
-    }
-    .photo-empty span {
-      font-size: 8px;
-      color: rgba(255,255,255,0.18);
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    /* ═══════════════════════════════════════
-       CARD INFO SECTION
-    ═══════════════════════════════════════ */
-    .card-info {
-      padding: 18px 20px 17px;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 9px;
-    }
-    .card-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--gold);
-      letter-spacing: 3.5px;
-    }
-    .card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 9px;
-      font-weight: 700;
-      color: #15693c;
-      background: linear-gradient(135deg, #e0f7eb 0%, #d0f2e0 100%);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      border: 1px solid rgba(26,122,69,0.15);
-    }
-    .badge-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #1a7a45;
-      flex-shrink: 0;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .card-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--ink);
-      line-height: 1.2;
-      margin: 0 0 5px;
-    }
-    .card-loc {
-      font-size: 11px;
-      color: var(--smoke);
-      font-family: 'Outfit', sans-serif;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-bottom: 15px;
-    }
-    .card-loc i { font-size: 9px; color: var(--gold); }
-
-    .card-rule {
-      height: 1px;
-      background: var(--rule);
-      margin-bottom: 13px;
-    }
-
-    .card-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .card-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .card-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    .cpill {
-      font-size: 9.5px;
-      font-weight: 500;
-      color: #555;
-      background: #f0ece4;
-      padding: 4px 9px;
-      border-radius: 20px;
-      font-family: 'Outfit', sans-serif;
-      white-space: nowrap;
-    }
-
-    /* CTA Button */
-    .view-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #111 0%, #1d1d1d 100%);
-      border: 1.5px solid rgba(201,168,76,0.18);
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.4px;
-      transition: all .25s ease;
-    }
-    .view-btn:hover {
-      background: linear-gradient(135deg, var(--gold) 0%, #e8bc5a 100%);
-      border-color: transparent;
-      color: #000;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 22px rgba(201,168,76,0.32);
-    }
-    .view-btn:active { transform: scale(0.98); }
-    .view-btn i { font-size: 12px; }
-    .vbtn-count {
-      background: rgba(255,255,255,0.13);
-      font-size: 9.5px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 700;
-      transition: background .25s, color .25s;
-    }
-    .view-btn:hover .vbtn-count { background: rgba(0,0,0,0.14); }
-    .view-btn.no-photos {
-      background: #eae5dc;
-      border-color: transparent;
-      color: #aaa;
+      background: linear-gradient(145deg, #1c1c1c, #282828);
       cursor: default;
     }
-    .view-btn.no-photos:hover { background: #eae5dc; color: #aaa; transform: none; box-shadow: none; }
+    .strip-empty i { font-size: 22px; color: rgba(201,168,76,0.2); }
+    .strip-empty span {
+      font-size: 8px;
+      color: rgba(255,255,255,0.15);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── Spec card (first slot) ── */
+    .strip-spec {
+      background: linear-gradient(160deg, #141414 0%, #1e1a13 100%);
+      border: 1px solid rgba(201,168,76,0.18);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 15px 13px;
+      gap: 0;
+      flex-shrink: 0;
+    }
+    .ss-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .ss-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.22);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .ss-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0;
+    }
+    .ss-rupee { font-size: 13px; color: rgba(255,255,255,0.85); vertical-align: baseline; margin-right: 1px; }
+    .ss-unit  { font-size: 13px; color: rgba(255,255,255,0.85); font-family: 'Outfit', sans-serif; font-weight: 500; vertical-align: baseline; }
+    .ss-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      flex: 1;
+    }
+    .ss-spec-item { display: flex; flex-direction: column; gap: 3px; }
+    .ss-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.65);
+    }
+    .ss-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .ss-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .ss-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 3px 9px;
+      border-radius: 100px;
+    }
+
+    @media(max-width:700px){
+      .strip-photo { width: 220px; height: 160px; }
+      .strip-spec  { width: 220px; height: 160px; padding: 12px 12px 10px; }
+      .prh-name { font-size: 15px; }
+      .ss-val { font-size: 13px; }
+      .ss-price { font-size: 14px; }
+    }
 
     /* ═══════════════════════════════════════
        LIGHTBOX
@@ -621,20 +671,15 @@
        RESPONSIVE
     ═══════════════════════════════════════ */
     @media (max-width: 860px) {
-      .proj-grid { grid-template-columns: 1fr; gap: 20px; }
-      .g-wrap { padding: 24px 5% 70px; }
-      .g-hero { padding: 38px 5% 32px; }
-      .card-visual { height: 240px; }
-      .filter-strip { top: 85px; padding: 0 5%; }
+      .g-wrap { padding: 20px 5% 60px; }
+      .section-header { padding: 36px 5% 20px; }
+      .filter-strip { top: 85px; padding: 10px 5%; }
     }
     @media (max-width: 520px) {
-      .card-visual { height: 195px; }
-      .card-info { padding: 14px 15px 15px; }
-      .card-name { font-size: 16px; }
-      .card-value { font-size: 19px; }
-      .filter-strip { padding: 0 4%; }
-      .ftab { padding: 14px 13px; font-size: 11px; }
-      .ftab::after { left: 13px; right: 13px; }
+      .card-name { font-size: 15px; }
+      .cv-num { font-size: 18px; }
+      .filter-strip { padding: 10px 4%; }
+      .ftab { padding: 8px 13px; font-size: 10px; }
       .lb-main { padding: 0 52px; }
       .lb-img { max-height: 54vh; }
       .lb-nav-btn { width: 40px; height: 40px; font-size: 13px; }
@@ -710,13 +755,18 @@
 
   <!-- ══════════ HERO BAND ══════════ -->
   <div class="g-hero">
-    <div class="g-hero-content">
-      <h1>Our <em>Completed</em> Projects</h1>
-      <p>
-        <span><i class="fas fa-building"></i> 18+ Buildings</span>
-        <span><i class="fas fa-map-marker-alt"></i> Tamil Nadu</span>
-        <span><i class="fas fa-compass"></i> Vastu-Compliant</span>
-      </p>
+    <div class="g-hero-inner">
+      <div>
+        <div class="g-hero-badge"><span class="g-hero-badge-dot"></span>COMPLETED PROJECTS</div>
+        <h1>We Build<br><em>Dreams</em> Into<br>Reality</h1>
+        <p class="g-hero-sub">Every project we deliver reflects our commitment to quality craftsmanship, Vastu compliance, and timely completion — across Tamil Nadu.</p>
+      </div>
+      <div class="g-hero-stats">
+        <div class="g-stat"><div class="g-stat-num">18+</div><div class="g-stat-label">Projects</div></div>
+        <div class="g-stat"><div class="g-stat-num">11+</div><div class="g-stat-label">Years</div></div>
+        <div class="g-stat"><div class="g-stat-num">100%</div><div class="g-stat-label">Vastu Compliant</div></div>
+        <div class="g-stat"><div class="g-stat-num">₹50Cr+</div><div class="g-stat-label">Delivered</div></div>
+      </div>
     </div>
   </div>
 
@@ -727,7 +777,7 @@
       <button class="ftab" data-filter="apartment">Apartments</button>
       <button class="ftab" data-filter="villa">Villas</button>
     </div>
-    <div class="proj-count" id="projCount">7 projects</div>
+    <div class="proj-count" id="projCountStrip">7 projects</div>
   </div>
 
   <!-- ══════════ GALLERY GRID ══════════ -->
@@ -813,46 +863,102 @@
 
     const SITES = [
       {
-        folder: 'apartment-flat', type: 'apartment',
-        name: 'Apartment Flat', value: '₹1.40 Cr',
+        folder: 'apartment-flat', type: 'apartment', typeName: 'Apartment',
+        name: 'Apartment Flat, Sankari', value: '1.40 Cr',
         location: 'Sankari, Salem District, Tamil Nadu',
-        stats: ['6,180 sq.ft.', '3 Floors', '5 × 2BHK'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '6,180 sq.ft' },
+          { label: 'FLOORS',   val: 'G + 2' },
+          { label: 'UNITS',    val: '5 × 2BHK' },
+          { label: 'YEAR',     val: '2024' },
+        ],
+        highlights: ['Vastu Compliant', 'RCC Frame', 'Solar Ready'],
+        stats: ['6,180 sq.ft.', 'G + 2', '5 × 2BHK', '2024'],
       },
       {
-        folder: 'villa-thangayur-1', type: 'villa',
-        name: 'Villa — Thangayur', value: '₹1.08 Cr',
+        folder: 'Villa-thangayur', type: 'villa', typeName: 'Villa',
+        name: 'Villa — Thangayur', value: '1.08 Cr',
         location: 'Thangayur, Tamil Nadu',
-        stats: ['4,350 sq.ft.', '2 × 2BHK'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '4,350 sq.ft' },
+          { label: 'FLOORS',   val: 'G + 1' },
+          { label: 'UNITS',    val: '2 × 2BHK' },
+          { label: 'YEAR',     val: '2023' },
+        ],
+        highlights: ['Vastu Compliant', 'Premium Finish', 'Gated'],
+        stats: ['4,350 sq.ft.', 'G + 1', '2 × 2BHK', '2023'],
       },
       {
-        folder: 'villa-akkamapetti', type: 'villa',
-        name: 'Villa — Akkamapetti', value: '₹80 Lakh',
+        folder: 'Villa-akkamapetti #1', type: 'villa', typeName: 'Villa',
+        name: 'Villa — Akkamapetti', value: '80 Lakh',
         location: 'Akkamapetti, Tamil Nadu',
-        stats: ['3,650 sq.ft.', '1.5 Years'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '3,650 sq.ft' },
+          { label: 'FLOORS',   val: 'G + 1' },
+          { label: 'CONFIG',   val: '3 BHK' },
+          { label: 'YEAR',     val: '2022' },
+        ],
+        highlights: ['Vastu Compliant', 'Gated'],
+        stats: ['3,650 sq.ft.', 'G + 1', '3 BHK', '2022'],
       },
       {
-        folder: 'villa-thangayur-2', type: 'villa',
-        name: 'Villa — Thangayur II', value: '₹40 Lakh',
+        folder: 'Villa-Akkamapettai #2', type: 'villa', typeName: 'Villa',
+        name: 'Villa — Thangayur II', value: '40 Lakh',
         location: 'Thangayur, Tamil Nadu',
-        stats: ['1,350 sq.ft.', '2 BHK', '1 Year'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '1,350 sq.ft' },
+          { label: 'FLOORS',   val: 'Ground' },
+          { label: 'CONFIG',   val: '2 BHK' },
+          { label: 'YEAR',     val: '2023' },
+        ],
+        highlights: ['Vastu Compliant'],
+        stats: ['1,350 sq.ft.', 'Ground', '2 BHK', '2023'],
       },
       {
-        folder: 'villa-pollachi', type: 'villa',
-        name: 'Villa — Pollachi', value: '₹35 Lakh',
+        folder: 'Villa-pollachi', type: 'villa', typeName: 'Villa',
+        name: 'Villa — Pollachi', value: '35 Lakh',
         location: 'Pollachi, Tamil Nadu',
-        stats: ['900 sq.ft.', '2 BHK', '10 Months'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '900 sq.ft' },
+          { label: 'FLOORS',   val: 'Ground' },
+          { label: 'CONFIG',   val: '2 BHK' },
+          { label: 'YEAR',     val: '2022' },
+        ],
+        highlights: ['Vastu Compliant'],
+        stats: ['900 sq.ft.', 'Ground', '2 BHK', '2022'],
       },
       {
-        folder: 'villa-sankari-1', type: 'villa',
-        name: 'Villa — S.K Nagar Sankari', value: '₹90 Lakh',
+        folder: 'Villa-S.K Nagar', type: 'villa', typeName: 'Villa',
+        name: 'Villa — S.K Nagar Sankari', value: '90 Lakh',
         location: 'S.K Nagar, Sankari, Tamil Nadu',
-        stats: ['3,200 sq.ft.', '1 Year'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '3,200 sq.ft' },
+          { label: 'FLOORS',   val: 'G + 1' },
+          { label: 'CONFIG',   val: '4 BHK' },
+          { label: 'YEAR',     val: '2023' },
+        ],
+        highlights: ['Vastu Compliant', 'RCC Frame', 'Gated'],
+        stats: ['3,200 sq.ft.', 'G + 1', '4 BHK', '2023'],
       },
       {
-        folder: 'villa-sankari-2', type: 'villa',
-        name: 'Villa — S.K Nagar Sankari II', value: '₹1.20 Cr',
+        folder: 'Spring Rajendren', type: 'villa', typeName: 'Villa',
+        name: 'Villa — S.K Nagar Sankari II', value: '1.20 Cr',
         location: 'S.K Nagar, Sankari, Tamil Nadu',
-        stats: ['3,100 sq.ft.', '1 Year'],
+        status: 'completed',
+        specs: [
+          { label: 'BUILT-UP', val: '3,100 sq.ft' },
+          { label: 'FLOORS',   val: 'G + 1' },
+          { label: 'CONFIG',   val: '4 BHK' },
+          { label: 'YEAR',     val: '2024' },
+        ],
+        highlights: ['Vastu Compliant', 'Premium Finish'],
+        stats: ['3,100 sq.ft.', 'G + 1', '4 BHK', '2024'],
       },
     ];
 
@@ -861,130 +967,108 @@
     }
 
     /* ─────────────────────────────────────────────
-       BUILD A SINGLE PHOTO SLOT HTML
-    ───────────────────────────────────────────── */
-    function buildSlot(src, label, extraCount) {
-      const moreBadge = (extraCount > 0)
-        ? `<div class="more-badge">+${extraCount} more</div>` : '';
-
-      if (src) {
-        return `
-          <div class="photo-slot">
-            <img src="${src}" alt="${label}" loading="lazy">
-            <div class="photo-lbl">${label}</div>
-            ${moreBadge}
-          </div>`;
-      }
-      /* No image yet */
-      const icon = (label === 'Elevation') ? 'drafting-compass' : 'camera';
-      return `
-        <div class="photo-slot">
-          <div class="photo-empty">
-            <i class="fas fa-${icon}"></i>
-            <span>${label}</span>
-          </div>
-          <div class="photo-lbl">${label}</div>
-        </div>`;
-    }
-
-    /* ─────────────────────────────────────────────
-       RENDER GALLERY
+       RENDER GALLERY — 500px row style
     ───────────────────────────────────────────── */
     function renderGallery(filter) {
       const grid = document.getElementById('projGrid');
       const list = (filter === 'all') ? SITES : SITES.filter(s => s.type === filter);
 
-      document.getElementById('projCount').textContent =
-        list.length + ' project' + (list.length !== 1 ? 's' : '');
+      document.getElementById('projCountStrip').textContent = list.length + ' project' + (list.length !== 1 ? 's' : '');
 
       grid.innerHTML = '';
 
       list.forEach((site, i) => {
-        const files = getFiles(site.folder);
-
-        /* Elevation = first image; Completed = third if ≥3, else second */
-        const elevSrc = files.length >= 1 ? `${IMG}${site.folder}/${files[0]}` : null;
-        const compFileIdx = files.length >= 3 ? 2 : (files.length >= 2 ? 1 : -1);
-        const compSrc  = compFileIdx >= 0 ? `${IMG}${site.folder}/${files[compFileIdx]}` : null;
-        const extraCnt = files.length > 2 ? files.length - 2 : 0;
-
+        const files    = getFiles(site.folder);
         const hasPhotos = files.length > 0;
 
-        const pillsHtml = site.stats
-          .map(s => `<span class="cpill">${s}</span>`)
-          .join('');
+        const dotCls      = site.status === 'completed' ? 'g' : site.status === 'ongoing' ? 'b' : 'a';
+        const statusLabel = site.status === 'completed' ? 'Completed' : site.status === 'ongoing' ? 'Ongoing' : 'Upcoming';
 
-        const btnHtml = hasPhotos
-          ? `<button class="view-btn js-view">
-               <i class="fas fa-images"></i>
-               View All Photos
-               <span class="vbtn-count">${files.length}</span>
-             </button>`
-          : `<button class="view-btn no-photos" disabled>
-               <i class="fas fa-clock"></i>
-               Photos Coming Soon
-             </button>`;
-
-        const card = document.createElement('div');
-        card.className = 'proj-card';
-        card.innerHTML = `
-          <div class="card-visual js-visual">
-            ${buildSlot(elevSrc, 'Elevation', 0)}
-            ${buildSlot(compSrc, 'Completed', extraCnt)}
-            <div class="visual-hint">
-              <div class="visual-hint-label">
-                <i class="fas fa-images"></i>
-                ${hasPhotos ? 'View Gallery' : 'Coming Soon'}
-              </div>
+        /* ── Spec card (first slot) ── */
+        const [priceNum, priceUnit] = site.value.split(' ');
+        const specCardHtml = `
+          <div class="strip-photo strip-spec">
+            <div class="ss-top">
+              <span class="ss-badge">${site.typeName}</span>
+              <span class="ss-price"><span class="ss-rupee">₹</span>${priceNum} <span class="ss-unit">${priceUnit || ''}</span></span>
             </div>
-          </div>
-          <div class="card-info">
-            <div class="card-meta">
-              <span class="card-num">${String(i + 1).padStart(2, '0')}</span>
-              <span class="card-badge"><span class="badge-dot"></span>Completed</span>
+            <div class="ss-specs">
+              ${site.specs.map(s => `
+                <div class="ss-spec-item">
+                  <span class="ss-lbl">${s.label}</span>
+                  <span class="ss-val">${s.val}</span>
+                </div>`).join('')}
             </div>
-            <div class="card-name">${site.name}</div>
-            <div class="card-loc">
-              <i class="fas fa-map-marker-alt"></i>${site.location}
+            <div class="ss-tags">
+              ${site.highlights.map(h => `<span class="ss-tag">✓ ${h}</span>`).join('')}
             </div>
-            <div class="card-rule"></div>
-            <div class="card-bottom">
-              <div class="card-value">${site.value}</div>
-              <div class="card-pills">${pillsHtml}</div>
-            </div>
-            ${btnHtml}
           </div>`;
 
-        /* Click on the visual opens the lightbox */
+        /* ── Photo strip ── */
+        let stripHtml = specCardHtml;
         if (hasPhotos) {
-          card.querySelector('.js-visual').addEventListener('click', () =>
-            openLightbox(site, files, 0)
-          );
-          card.querySelector('.js-view').addEventListener('click', (e) => {
-            e.stopPropagation();
-            openLightbox(site, files, 0);
+          files.forEach((f, fi) => {
+            stripHtml += `
+              <div class="strip-photo js-strip-photo" data-idx="${fi}">
+                <img src="${IMG}${site.folder}/${f}" alt="${site.name} — photo ${fi + 1}" loading="lazy">
+                <div class="strip-photo-overlay">
+                  <span class="strip-photo-lbl">${site.typeName}</span>
+                </div>
+              </div>`;
           });
+        } else {
+          stripHtml += `
+            <div class="strip-photo strip-empty">
+              <i class="fas fa-drafting-compass"></i>
+              <span>Coming Soon</span>
+            </div>`;
         }
 
-        grid.appendChild(card);
+        /* ── View-all button ── */
+        const viewAllHtml = hasPhotos
+          ? `<button class="prh-viewall js-viewall"><i class="fas fa-images"></i> View All</button>`
+          : `<span class="prh-coming">Photos coming soon</span>`;
+
+        /* ── Build row ── */
+        const row = document.createElement('div');
+        row.className = 'proj-row';
+        row.style.transition = `opacity .5s ease ${i * 0.07}s, transform .5s ease ${i * 0.07}s`;
+        row.innerHTML = `
+          <div class="proj-row-head">
+            <div class="prh-title-row">
+              <div class="prh-name">${site.name}</div>
+              ${viewAllHtml}
+            </div>
+          </div>
+          <div class="photo-strip">${stripHtml}</div>
+          <div class="prh-meta">
+            <span><i class="fas fa-map-marker-alt" style="font-size:10px;color:#bbb;margin-right:4px;"></i>${site.location}</span>
+            <span class="prh-dot">·</span>
+            <span class="prh-price">₹${site.value}</span>
+          </div>`;
+
+        /* ── Event listeners ── */
+        if (hasPhotos) {
+          row.querySelectorAll('.js-strip-photo').forEach(el => {
+            el.addEventListener('click', () =>
+              openLightbox(site, files, parseInt(el.dataset.idx))
+            );
+          });
+          const va = row.querySelector('.js-viewall');
+          if (va) va.addEventListener('click', () => openLightbox(site, files, 0));
+        }
+
+        grid.appendChild(row);
       });
 
-      /* Scroll-triggered fade-in */
+      /* ── Scroll-triggered fade-in ── */
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            obs.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.08 });
 
-      grid.querySelectorAll('.proj-card').forEach((c, idx) => {
-        c.style.transition =
-          `opacity .5s ease ${idx * 0.06}s, transform .5s ease ${idx * 0.06}s, ` +
-          'box-shadow .32s ease, border-color .32s ease';
-        obs.observe(c);
-      });
+      grid.querySelectorAll('.proj-row').forEach(r => obs.observe(r));
     }
 
     /* Filter tab clicks */

@@ -7,7 +7,13 @@
       "**/node_modules/**",
       "generate-manifest.bat",
       "photo-manager.html",
-      "test_navbar.html"
+      "test_navbar.html",
+      "admin.html",
+      "admin-server.js",
+      "sites-data.js",
+      "package.json",
+      "package-lock.json",
+      "node_modules/**"
     ]
   }
 }

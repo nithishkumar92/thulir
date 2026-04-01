@@ -8,52 +8,442 @@
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    body { padding-top: 85px; }
-    .distinction-hero { padding: 100px 0 80px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); text-align: center; position: relative; overflow: hidden; }
-    .distinction-hero::before { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 80%; height: 200%; background: radial-gradient(ellipse at center, rgba(168, 135, 52, 0.08) 0%, transparent 70%); border-radius: 50%; }
-    .hero-content { max-width: 800px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
-    .distinction-hero h1 { font-family: 'Inter', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .distinction-hero p { font-size: 1.2rem; color: var(--light-text); line-height: 1.7; max-width: 600px; margin: 0 auto; }
-    .features-section { padding: 80px 0; background: var(--white); }
-    .feature-item { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
-    .feature-item:last-child { margin-bottom: 0; }
-    .feature-item:nth-child(even) .feature-image { order: 2; }
-    .feature-item:nth-child(even) .feature-content { order: 1; }
-    .feature-image { position: relative; border-radius: 20px; overflow: hidden; height: 400px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(168, 135, 52, 0.1); }
-    .feature-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .feature-image:hover img { transform: scale(1.05); }
-    .feature-image .fallback-icon { font-size: 5rem; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0.3; }
-    .feature-content { padding: 0 20px; }
-    .feature-number { display: inline-flex; width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); border-radius: 12px; align-items: center; justify-content: center; color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 20px; }
-    .feature-content h2 { font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.2; }
-    .feature-content p { font-size: 1.1rem; color: var(--light-text); line-height: 1.8; }
-    .feature-badge { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(168, 135, 52, 0.1), rgba(217, 172, 90, 0.1)); padding: 12px 20px; border-radius: 30px; margin-top: 20px; color: var(--primary-gold); font-weight: 600; font-size: 0.95rem; }
-    .stats-section { padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); position: relative; overflow: hidden; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; position: relative; z-index: 2; }
-    .stat-card { text-align: center; padding: 40px 30px; background: white; border-radius: 20px; border: 1px solid rgba(168, 135, 52, 0.1); transition: var(--transition); }
-    .stat-card:hover { transform: translateY(-10px); border-color: rgba(168, 135, 52, 0.2); }
-    .stat-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem; }
-    .stat-card h3 { font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 10px; }
-    .stat-card p { color: var(--light-text); font-size: 1rem; font-weight: 600; }
-    .cta-section { padding: 100px 0; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold)); text-align: center; position: relative; overflow: hidden; }
-    .cta-content { max-width: 700px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
-    .cta-content h2 { font-family: 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: white; margin-bottom: 20px; line-height: 1.2; }
-    .cta-content p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.95); margin-bottom: 40px; line-height: 1.7; }
-    .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-    .btn-white { background: white; color: var(--primary-gold); }
-    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); }
-    .btn-outline { background: transparent; color: white; border: 2.5px solid white; }
-    .btn-outline:hover { background: white; color: var(--primary-gold); transform: translateY(-3px); }
-    @media (max-width: 1024px) { .feature-item { grid-template-columns: 1fr; gap: 40px; margin-bottom: 80px; } .feature-item:nth-child(even) .feature-image, .feature-item:nth-child(even) .feature-content { order: unset; } .feature-image { height: 350px; } }
-    @media (max-width: 768px) { .distinction-hero { padding: 80px 0 60px; } .distinction-hero h1 { font-size: 2.2rem; } .feature-item { gap: 30px; margin-bottom: 60px; } .feature-image { height: 300px; } .feature-content h2 { font-size: 1.6rem; } .stats-grid { grid-template-columns: 1fr; gap: 25px; } .cta-buttons { flex-direction: column; align-items: center; } .cta-buttons .btn { width: 100%; max-width: 300px; justify-content: center; } }
-    @media (max-width: 480px) { .distinction-hero h1 { font-size: 1.8rem; } .distinction-hero p { font-size: 1rem; } .feature-content h2 { font-size: 1.4rem; } .feature-content p { font-size: 1rem; } .features-section, .stats-section, .cta-section { padding: 60px 0; } }
+    body { padding-top: 85px; background: #fafaf8; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #e8c96a;
+      --ink: #0f0f0f;
+    }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    .dist-hero {
+      background: #0d0d0d;
+      min-height: 460px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 6% 72px;
+    }
+    .dist-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.055) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+    .dist-hero-orb {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 55%;
+      background: radial-gradient(ellipse 70% 80% at 90% 50%, rgba(201,168,76,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .dist-hero-num {
+      position: absolute;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(180px, 22vw, 320px);
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -10px;
+    }
+    .dist-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+    .dist-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.28);
+      color: #d4aa6a;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+      font-family: 'Inter', sans-serif;
+    }
+    .dist-hero-badge-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #d4aa6a;
+    }
+    .dist-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.06;
+      margin: 0 0 18px;
+    }
+    .dist-hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .dist-hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 32px;
+    }
+    .dist-hero-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .dist-hero-pills span {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      padding: 5px 13px;
+      border-radius: 100px;
+    }
+    @media(max-width:700px){
+      .dist-hero { padding: 52px 5% 48px; min-height: auto; }
+      .dist-hero h1 { font-size: 30px; }
+      .dist-hero-num { display: none; }
+    }
+
+    /* ══════════════════════════════════
+       SECTION INTRO
+    ══════════════════════════════════ */
+    .dist-intro {
+      padding: 60px 6% 8px;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .dist-intro-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .dist-intro-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .dist-intro-title em { color: var(--gold); font-style: normal; }
+    .dist-intro-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════
+       FEATURE CARDS GRID
+    ══════════════════════════════════ */
+    .dist-features {
+      padding: 40px 6% 80px;
+    }
+    .dist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    @media(max-width:1060px){ .dist-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:640px){  .dist-grid { grid-template-columns: 1fr; gap: 16px; } }
+
+    .feat-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid #ebebeb;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .feat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.09);
+      border-color: rgba(201,168,76,0.35);
+    }
+
+    /* Photo thumbnail */
+    .feat-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .feat-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .feat-card:hover .feat-thumb img { transform: scale(1.06); }
+    .feat-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
+    }
+    .feat-thumb-empty {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a, #252525);
+      font-size: 2.2rem;
+      color: rgba(201,168,76,0.25);
+    }
+    .feat-num-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 4px 9px;
+      border-radius: 6px;
+    }
+
+    /* Card body */
+    .feat-body {
+      padding: 18px 18px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .feat-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .feat-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .feat-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.25;
+    }
+    .feat-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      color: #777;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .feat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fdf6e8;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: #9a7030;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-top: 2px;
+      align-self: flex-start;
+    }
+    .feat-badge i { font-size: 8px; }
+
+    /* ══════════════════════════════════
+       STATS STRIP
+    ══════════════════════════════════ */
+    .dist-stats {
+      background: #0d0d0d;
+      padding: 56px 6%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .dist-stats::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+    .dist-stat {
+      text-align: center;
+      padding: 20px 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .dist-stat + .dist-stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 15%; bottom: 15%;
+      width: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .dist-stat-icon {
+      width: 44px; height: 44px;
+      border-radius: 11px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      color: var(--gold);
+      font-size: 16px;
+    }
+    .dist-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .dist-stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(201,168,76,0.65);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    @media(max-width:700px){
+      .dist-stats { grid-template-columns: repeat(2,1fr); gap: 0; }
+      .dist-stat:nth-child(3)::before,
+      .dist-stat:nth-child(1)::before { display: none; }
+      .dist-stat:nth-child(3),
+      .dist-stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.07); }
+      .dist-stat:nth-child(2)::before,
+      .dist-stat:nth-child(4)::before { display: block; }
+      .dist-stat-num { font-size: 24px; }
+    }
+
+    /* ══════════════════════════════════
+       CTA
+    ══════════════════════════════════ */
+    .dist-cta {
+      background: #fafaf8;
+      border-top: 1px solid #ebebeb;
+      padding: 80px 6%;
+      text-align: center;
+    }
+    .dist-cta-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .dist-cta h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .dist-cta h2 em { color: var(--gold); font-style: normal; }
+    .dist-cta p {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #888;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .dist-cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1a1a;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .cta-btn-dark:hover { background: #333; transform: translateY(-2px); }
+    .cta-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #1a1a1a;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 100px;
+      border: 2px solid #ddd;
+      text-decoration: none;
+      transition: border-color .2s, transform .2s;
+    }
+    .cta-btn-outline:hover { border-color: #999; transform: translateY(-2px); }
   </style>
 </head>
 <body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -77,95 +467,283 @@
     </div>
   </nav>
 
-  <section class="distinction-hero">
-    <div class="hero-content">
-      <span class="section-tag">Our Distinction</span>
-      <h1>Why Choose Thulir Construction?</h1>
-      <p>We don't just build structures—we create lasting value through innovation, quality, and unmatched attention to detail.</p>
-    </div>
-  </section>
-
-  <section class="features-section">
-    <div class="container">
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/01.png" alt="Anti-Termite Treatment" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-shield-halved fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">01</div><h2>Anti-Termite Treatment</h2><p>We carry out comprehensive anti-termite treatment after soil filling up to the basement level to ensure long-term protection against termites. Your investment deserves lasting protection from the ground up.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Long-term Protection</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/02.png" alt="Detailed Agreement Copy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-file-contract fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">02</div><h2>Detailed Agreement Copy</h2><p>We provide a comprehensive agreement copy to clients before starting work, including all specifications, details of work, and the payment schedule. Complete transparency from day one—no hidden surprises.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>100% Transparency</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/03.png" alt="Structural Analysis" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-drafting-compass fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">03</div><h2>Structural Analysis & Elevation</h2><p>We deliver a detailed structural analysis and share the exterior elevation photo as discussed with the client before completing the basement work. Visualize your dream before we build it.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Preview Your Vision</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/04.png" alt="Water Leakage Testing" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-droplet fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">04</div><h2>Water Leakage Testing</h2><p>We conduct thorough water leakage tests in sunken areas and RCC water tanks on raw concrete surfaces before any plastering. After identifying leakage spots, we perform 'pressure PU grout' to arrest the leakage.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Zero Leakage Guarantee</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/05.png" alt="Mini Mixer Machine" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-blender fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">05</div><h2>Mini Mixer Machine for Plaster Mortar</h2><p>We use a mini mixer machine to prepare plaster mortar, ensuring proper and consistent cement mixing for superior quality. Modern equipment for flawless finishes.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Superior Quality</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/06.png" alt="Use of Vibrators" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-water fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">06</div><h2>Use of Vibrators</h2><p>We ensure the use of vibrators for all major concrete work to avoid honeycombs and achieve uniform settlement of concrete in the formwork. Professional-grade equipment for structural integrity.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Structural Excellence</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/07.png" alt="Mini Power Trowel Machine" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-brush fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">07</div><h2>Mini Power Trowel Machine</h2><p>We use a mini power trowel machine across plastered surfaces to ensure uniform finishes and an aesthetically pleasing look. Precision finishing for a flawless appearance.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Perfect Finish</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/08.png" alt="Putty Spraying Machine" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-spray-can fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">08</div><h2>Putty Spraying Machine</h2><p>We utilize a putty spraying machine with a 5-foot-long trowel to level surfaces, eliminating unwanted undulations on walls and achieving a smooth and level finish.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Smooth Surfaces</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/09.png" alt="Crane for Material Shifting" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-truck-moving fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">09</div><h2>Crane for Material Shifting</h2><p>Our crane, operable up to 5 floors, eliminates labor wastage and saves time in shifting materials to higher floors. Efficient logistics for faster project completion.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Time Efficiency</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/10.png" alt="Own Shuttering Plates" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-layer-group fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">10</div><h2>Own Shuttering Plates</h2><p>By using our own shuttering plates, we prevent premature removal of shuttering (before 21 days), a common practice by competitors to reduce rental costs. This ensures better curing and structural integrity.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Proper Curing</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/11.png" alt="On-Site Labor Accommodation" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-people-roof fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">11</div><h2>On-Site Labor Accommodation</h2><p>We provide accommodation near the construction site for laborers to minimize delays caused by absenteeism and ensure timely work starts every day. Consistent progress, every single day.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Zero Delays</span></div>
-      </div>
-      <div class="feature-item">
-        <div class="feature-image"><img src="images/12.png" alt="Clean Handovers" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><i class="fas fa-sparkles fallback-icon" style="display:none;"></i></div>
-        <div class="feature-content"><div class="feature-number">12</div><h2>Clean Handovers</h2><p>We clean every area of the house thoroughly before handing it over to the client, ensuring a spotless finish. Move-in ready perfection.</p><span class="feature-badge"><i class="fas fa-check-circle"></i>Spotless Delivery</span></div>
+  <!-- ══════════ HERO ══════════ -->
+  <section class="dist-hero">
+    <div class="dist-hero-grid"></div>
+    <div class="dist-hero-orb"></div>
+    <div class="dist-hero-num">12</div>
+    <div class="dist-hero-inner">
+      <div class="dist-hero-badge"><span class="dist-hero-badge-dot"></span>OUR DISTINCTION</div>
+      <h1>Built Different.<br><em>Delivered Better.</em></h1>
+      <p class="dist-hero-sub">Every project we undertake is backed by 12 proprietary quality-control processes that most builders skip — protecting your investment from foundation to finish.</p>
+      <div class="dist-hero-pills">
+        <span><i class="fas fa-check" style="font-size:9px;color:#C9A84C;margin-right:4px"></i>18+ Projects Delivered</span>
+        <span><i class="fas fa-check" style="font-size:9px;color:#C9A84C;margin-right:4px"></i>11+ Years Experience</span>
+        <span><i class="fas fa-check" style="font-size:9px;color:#C9A84C;margin-right:4px"></i>100% Client Satisfaction</span>
       </div>
     </div>
   </section>
 
-  <section class="stats-section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-award"></i></div><h3>100%</h3><p>Client Satisfaction</p></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock"></i></div><h3>On-Time</h3><p>Project Delivery</p></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt"></i></div><h3>Premium</h3><p>Quality Materials</p></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><h3>Expert</h3><p>Skilled Team</p></div>
+  <!-- ══════════ INTRO ══════════ -->
+  <div class="dist-intro">
+    <div class="dist-intro-eyebrow">12 Proprietary Processes</div>
+    <div class="dist-intro-title">What Makes Us <em>Different</em></div>
+    <p class="dist-intro-sub">From the soil beneath your foundation to the final clean sweep before handover — every detail is handled with precision, accountability and pride.</p>
+  </div>
+
+  <!-- ══════════ FEATURES GRID ══════════ -->
+  <section class="dist-features">
+    <div class="dist-grid">
+
+      <!-- 01 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/01.png" alt="Anti-Termite Treatment" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-shield-halved\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">01</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="feat-title">Anti-Termite Treatment</div>
+          </div>
+          <p class="feat-desc">Comprehensive anti-termite treatment carried out after soil filling up to basement level — ensuring long-term protection from the ground up.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Long-term Protection</span>
+        </div>
       </div>
+
+      <!-- 02 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/02.png" alt="Detailed Agreement Copy" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-file-contract\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">02</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-file-contract"></i></div>
+            <div class="feat-title">Detailed Agreement Copy</div>
+          </div>
+          <p class="feat-desc">A comprehensive agreement including all specifications, work details, and payment schedule is provided before work begins. Complete transparency, no surprises.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>100% Transparency</span>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/03.png" alt="Structural Analysis" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-drafting-compass\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">03</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-drafting-compass"></i></div>
+            <div class="feat-title">Structural Analysis & Elevation</div>
+          </div>
+          <p class="feat-desc">Detailed structural analysis and exterior elevation shared with the client before basement completion — visualize your dream before we build it.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Preview Your Vision</span>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/04.png" alt="Water Leakage Testing" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-droplet\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">04</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-droplet"></i></div>
+            <div class="feat-title">Water Leakage Testing</div>
+          </div>
+          <p class="feat-desc">Thorough leakage tests on raw concrete surfaces before plastering. Identified spots treated with pressure PU grout for a zero-leakage guarantee.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Zero Leakage Guarantee</span>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/05.png" alt="Mini Mixer Machine" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-gears\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">05</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-gears"></i></div>
+            <div class="feat-title">Mini Mixer for Plaster Mortar</div>
+          </div>
+          <p class="feat-desc">A mini mixer machine ensures proper, consistent cement mixing for plaster mortar — delivering superior quality and uniformly strong walls.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Superior Quality</span>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/06.png" alt="Use of Vibrators" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-bolt\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">06</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-bolt"></i></div>
+            <div class="feat-title">Concrete Vibrators</div>
+          </div>
+          <p class="feat-desc">Vibrators are used for all major concrete work to avoid honeycombs and achieve uniform settlement in formwork — professional-grade structural integrity.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Structural Excellence</span>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/07.png" alt="Mini Power Trowel Machine" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-brush\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">07</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-brush"></i></div>
+            <div class="feat-title">Mini Power Trowel Machine</div>
+          </div>
+          <p class="feat-desc">Power trowel applied across all plastered surfaces ensures uniform, aesthetically pleasing finishes — precision for a flawless appearance.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Perfect Finish</span>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/08.png" alt="Putty Spraying Machine" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-spray-can\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">08</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-spray-can"></i></div>
+            <div class="feat-title">Putty Spraying Machine</div>
+          </div>
+          <p class="feat-desc">A putty spraying machine with a 5-foot trowel eliminates undulations on walls — delivering smooth, level surfaces ready for a premium paint finish.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Smooth Surfaces</span>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/09.png" alt="Crane for Material Shifting" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-truck-moving\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">09</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-truck-moving"></i></div>
+            <div class="feat-title">In-House Crane</div>
+          </div>
+          <p class="feat-desc">Our crane, operable up to 5 floors, eliminates labor wastage and saves significant time in shifting materials — faster project completion guaranteed.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Time Efficiency</span>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/10.png" alt="Own Shuttering Plates" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-layer-group\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">10</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-layer-group"></i></div>
+            <div class="feat-title">Own Shuttering Plates</div>
+          </div>
+          <p class="feat-desc">Using our own shuttering plates prevents premature removal before 21 days — a common cost-cutting shortcut by competitors that compromises structural integrity.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Proper Curing</span>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/11.png" alt="On-Site Labor Accommodation" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-people-roof\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">11</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-people-roof"></i></div>
+            <div class="feat-title">On-Site Labor Accommodation</div>
+          </div>
+          <p class="feat-desc">Workers are housed near the site to minimize absenteeism and ensure timely work starts every single day — consistent progress, no delays.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Zero Delays</span>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="feat-card">
+        <div class="feat-thumb">
+          <img src="images/12.png" alt="Clean Handovers" onerror="this.parentElement.innerHTML='<div class=\'feat-thumb-empty\'><i class=\'fas fa-sparkles\'></i></div>'">
+          <div class="feat-thumb-overlay"></div>
+          <div class="feat-num-badge">12</div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-icon-row">
+            <div class="feat-icon"><i class="fas fa-sparkles"></i></div>
+            <div class="feat-title">Clean Handovers</div>
+          </div>
+          <p class="feat-desc">Every area is thoroughly cleaned before handing over to the client — move-in ready perfection from the very first day you step inside your new home.</p>
+          <span class="feat-badge"><i class="fas fa-check-circle"></i>Spotless Delivery</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>Ready to Build Your Dream Home?</h2>
-      <p>Experience the Thulir difference. Let's discuss your project and create something extraordinary together.</p>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn btn-white"><i class="fas fa-phone"></i>Get Free Consultation</a>
-        <a href="package.html" class="btn btn-outline"><i class="fas fa-box-open"></i>View Packages</a>
-      </div>
+  <!-- ══════════ STATS STRIP ══════════ -->
+  <div class="dist-stats">
+    <div class="dist-stat">
+      <div class="dist-stat-icon"><i class="fas fa-award"></i></div>
+      <div class="dist-stat-num">100%</div>
+      <div class="dist-stat-label">Client Satisfaction</div>
+    </div>
+    <div class="dist-stat">
+      <div class="dist-stat-icon"><i class="fas fa-clock"></i></div>
+      <div class="dist-stat-num">On-Time</div>
+      <div class="dist-stat-label">Project Delivery</div>
+    </div>
+    <div class="dist-stat">
+      <div class="dist-stat-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="dist-stat-num">Premium</div>
+      <div class="dist-stat-label">Quality Materials</div>
+    </div>
+    <div class="dist-stat">
+      <div class="dist-stat-icon"><i class="fas fa-users"></i></div>
+      <div class="dist-stat-num">Expert</div>
+      <div class="dist-stat-label">Skilled Team</div>
+    </div>
+  </div>
+
+  <!-- ══════════ CTA ══════════ -->
+  <section class="dist-cta">
+    <div class="dist-cta-eyebrow">Start Your Project</div>
+    <h2>Ready to Build Your <em>Dream Home?</em></h2>
+    <p>Experience the Thulir difference. Let's discuss your project and create something extraordinary together.</p>
+    <div class="dist-cta-btns">
+      <a href="contact.html" class="cta-btn-dark"><i class="fas fa-phone"></i>Get Free Consultation</a>
+      <a href="package.html" class="cta-btn-outline"><i class="fas fa-box-open"></i>View Packages</a>
     </div>
   </section>
 
+  <!-- ══════════ FOOTER ══════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
           <h3>Thulir Construction</h3>
-          <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
+          <p>Building dreams with excellence. Committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
           <ul class="social-icons">
             <li><a href="https://wa.me/917418477647" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
             <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank"><i class="fab fa-facebook"></i></a></li>
@@ -173,15 +751,39 @@
             <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </div>
-        <div class="footer-section"><h3>Quick Links</h3><p><a href="index.html">Home</a></p><p><a href="gallery.html">Gallery</a></p><p><a href="Distinction.html">Our Distinction</a></p><p><a href="package.html">Packages</a></p><p><a href="estimate.html">Cost Estimator</a></p><p><a href="agreement.html">Agreement</a></p><p><a href="contact.html">Contact</a></p></div>
-        <div class="footer-section"><h3>Services</h3><p><a href="#">Architectural Design</a></p><p><a href="#">General Contracting</a></p><p><a href="#">Project Management</a></p><p><a href="#">Renovations</a></p><p><a href="#">Consulting</a></p></div>
-        <div class="footer-section"><h3>Contact Us</h3><ul class="contact-list"><li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li><li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li><li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li></ul></div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+          <p><a href="Distinction.html">Our Distinction</a></p>
+          <p><a href="package.html">Packages</a></p>
+          <p><a href="estimate.html">Cost Estimator</a></p>
+          <p><a href="agreement.html">Agreement</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <p><a href="#">Architectural Design</a></p>
+          <p><a href="#">General Contracting</a></p>
+          <p><a href="#">Project Management</a></p>
+          <p><a href="#">Renovations</a></p>
+          <p><a href="#">Consulting</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul class="contact-list">
+            <li><i class="fas fa-map-marker-alt"></i> Krishna Nagar-II, Sankari tk, 637301</li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:nithishkumar@thulirconstruction.in">nithishkumar@thulirconstruction.in</a></li>
+            <li><i class="fas fa-phone"></i><a href="tel:+917418477647">+91 74184-77647</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2026 Thulir Construction. All rights reserved.</p></div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Thulir Construction. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- WhatsApp Float Button -->
   <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
@@ -190,10 +792,31 @@
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+    const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
-    document.addEventListener('click', (e) => { if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) { hamburger.classList.remove('active'); navLinks.classList.remove('active'); } });
-    document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }); });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active'); navLinks.classList.remove('active');
+      }
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); });
+    });
+
+    /* Scroll fade-in for feature cards */
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.feat-card').forEach((c, i) => {
+      c.style.cssText += `opacity:0;transform:translateY(24px);transition:opacity .5s ease ${i * 0.05}s,transform .5s ease ${i * 0.05}s,box-shadow .28s ease,border-color .28s ease`;
+      obs.observe(c);
+    });
   </script>
 </body>
 </html>

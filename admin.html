@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thulir Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f0f0f;
+      --card:     #1a1a1a;
+      --card2:    #222222;
+      --border:   #2a2a2a;
+      --gold:     #C9A84C;
+      --gold-dim: #a8882e;
+      --gold-bg:  rgba(201,168,76,0.08);
+      --text:     #f0f0f0;
+      --muted:    #888;
+      --muted2:   #555;
+      --red:      #e05252;
+      --green:    #4caf7d;
+      --radius:   10px;
+      --radius-lg:16px;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scrollbar ────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ── Login Screen ─────────────────────────────── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 40%, #1a150a 0%, #0f0f0f 70%);
+    }
+
+    .login-box {
+      width: 380px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.06);
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .login-logo .brand-t {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .login-logo h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .login-logo .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .login-logo .divider-gold {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field-wrap {
+      margin-bottom: 20px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="number"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .pw-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0f0f0f;
+    }
+    .btn-gold:hover {
+      background: #d9b85c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    }
+    .btn-gold:active { transform: translateY(0); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--muted);
+      background: var(--card2);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      padding: 8px 12px;
+    }
+    .btn-ghost:hover { color: var(--text); background: var(--card2); }
+
+    .btn-danger {
+      background: rgba(224,82,82,0.12);
+      color: var(--red);
+      border: 1px solid rgba(224,82,82,0.2);
+    }
+    .btn-danger:hover {
+      background: rgba(224,82,82,0.2);
+    }
+
+    .btn-full { width: 100%; justify-content: center; padding: 13px; font-size: 15px; }
+
+    .login-error {
+      background: rgba(224,82,82,0.1);
+      border: 1px solid rgba(224,82,82,0.3);
+      border-radius: var(--radius);
+      color: var(--red);
+      font-size: 13px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .login-error.show { display: block; }
+
+    /* ── Dashboard ────────────────────────────────── */
+    #dashboard { display: none; min-height: 100vh; }
+
+    /* Header */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 60px;
+      background: #131313;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .topbar-brand span { color: var(--gold); }
+
+    .topbar-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius);
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover { color: var(--text); border-color: var(--muted2); background: var(--card2); }
+
+    /* Main content */
+    .main {
+      padding: 28px 28px 60px;
+      max-width: 1400px;
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 28px;
+      min-width: 160px;
+      flex: 1;
+      max-width: 240px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-card .stat-sub {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 4px;
+    }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: rgba(201,168,76,0.25);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .badge-folder {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-photos {
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.18);
+    }
+
+    .badge-status {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .badge-completed { background: rgba(76,175,125,0.1); color: var(--green); border: 1px solid rgba(76,175,125,0.2); }
+    .badge-ongoing   { background: rgba(201,168,76,0.1); color: var(--gold);  border: 1px solid rgba(201,168,76,0.2); }
+    .badge-upcoming  { background: rgba(88,150,230,0.1); color: #5896e6;      border: 1px solid rgba(88,150,230,0.2); }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    /* Mini photo strip */
+    .photo-strip {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .photo-strip-img {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: var(--card2);
+    }
+
+    .photo-strip-placeholder {
+      width: 80px;
+      height: 60px;
+      border-radius: 6px;
+      background: var(--card2);
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted2);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .card-actions .btn {
+      flex: 1;
+      justify-content: center;
+      padding: 9px 12px;
+      font-size: 13px;
+    }
+
+    /* ── Photo Drawer ─────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 520px;
+      max-width: 100vw;
+      background: #141414;
+      border-left: 1px solid var(--border);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .drawer-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.01);
+      position: relative;
+    }
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+      border-color: var(--gold);
+      background: var(--gold-bg);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      font-size: 28px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .upload-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .upload-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .upload-progress {
+      margin-top: 12px;
+      display: none;
+    }
+    .upload-progress.show { display: block; }
+
+    .progress-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .photo-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--card2);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-delete {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      border-radius: 99px;
+      background: rgba(0,0,0,0.75);
+      border: none;
+      color: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .photo-item:hover .photo-delete {
+      opacity: 1;
+    }
+    .photo-delete:hover { background: var(--red); }
+
+    .photo-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .photo-empty i {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted2);
+    }
+
+    /* ── Modal ────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      padding: 20px;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 600px;
+      max-width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      z-index: 1;
+    }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      padding: 24px 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-row.single { grid-template-columns: 1fr; }
+
+    .modal-footer {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding: 16px 28px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-footer .btn { min-width: 100px; justify-content: center; }
+
+    /* ── Toast ────────────────────────────────────── */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      max-width: 320px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      pointer-events: all;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    .toast-success { background: rgba(76,175,125,0.95); color: #fff; }
+    .toast-error   { background: rgba(224,82,82,0.95);  color: #fff; }
+    .toast-info    { background: rgba(88,150,230,0.95); color: #fff; }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── Loading spinner ──────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state i {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted2);
+    }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 640px) {
+      .topbar { padding: 0 16px; }
+      .main { padding: 16px 16px 60px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .drawer { width: 100vw; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-strip { gap: 10px; }
+      .stat-card { max-width: none; }
+    }
+
+    /* Separator */
+    .sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+    }
+
+    /* Hint text */
+    .field-hint {
+      font-size: 11px;
+      color: var(--muted2);
+      margin-top: 5px;
+    }
+
+    /* Photo count chip on strip */
+    .strip-more {
+      width: 80px;
+      height: 60px;
+      border-radius: 6px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Login Screen ──────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="brand-t">Thulir Construction</div>
+      <h1>Admin Panel</h1>
+      <div class="sub">Project Management</div>
+      <div class="divider-gold"></div>
+    </div>
+
+    <div id="login-error" class="login-error">
+      <i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>
+      <span id="login-error-msg">Invalid password. Please try again.</span>
+    </div>
+
+    <div class="field-wrap">
+      <label class="field-label" for="pw-input">Password</label>
+      <div class="input-wrap">
+        <input type="password" id="pw-input" placeholder="Enter admin password" autocomplete="current-password" />
+        <button class="pw-toggle" id="pw-toggle" type="button" tabindex="-1">
+          <i class="fa-regular fa-eye" id="pw-toggle-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn btn-gold btn-full" onclick="login()">
+      <i class="fa-solid fa-lock-open"></i> Sign In
+    </button>
+  </div>
+</div>
+
+<!-- ── Dashboard ─────────────────────────────────────────── -->
+<div id="dashboard">
+  <nav class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-brand"><span>Thulir</span> Admin</div>
+      <div class="sep"></div>
+      <span class="topbar-tag">Backoffice</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-gold" onclick="openAdd()">
+        <i class="fa-solid fa-plus"></i> Add Project
+      </button>
+      <button class="icon-btn" onclick="loadData()" title="Refresh">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+      <button class="icon-btn" onclick="logout()" title="Logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="main">
+    <!-- Stats -->
+    <div class="stats-strip" id="stats-strip">
+      <div class="stat-card">
+        <div class="stat-label">Total Projects</div>
+        <div class="stat-value" id="stat-projects">—</div>
+        <div class="stat-sub">active listings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Photos</div>
+        <div class="stat-value" id="stat-photos">—</div>
+        <div class="stat-sub">across all projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Completed</div>
+        <div class="stat-value" id="stat-completed">—</div>
+        <div class="stat-sub">handed over</div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section-header">
+      <div class="section-title"><i class="fa-solid fa-building" style="color:var(--gold);margin-right:8px;"></i>Projects</div>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
+        Loading projects…
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Photo Drawer ───────────────────────────────────────── -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="photo-drawer">
+  <div class="drawer-header">
+    <div class="drawer-title" id="drawer-title">Photos</div>
+    <button class="icon-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-body">
+    <!-- Upload zone -->
+    <div class="upload-zone" id="upload-zone">
+      <input type="file" id="upload-input" multiple accept="image/*" onchange="handleFileSelect(event)" />
+      <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+      <div class="upload-label">Drop photos here or click to browse</div>
+      <div class="upload-sub">JPG, PNG, WebP · Multiple files allowed</div>
+      <div class="upload-progress" id="upload-progress">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- Photo grid -->
+    <div class="photo-grid" id="photo-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── Add/Edit Modal ─────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="modal" id="project-modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Add Project</div>
+      <button class="icon-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-folder-orig" />
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <label class="field-label" for="f-name">Project Name</label>
+          <input type="text" id="f-name" placeholder="e.g. Villa — Sankari" oninput="autoFolder()" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="f-folder">Folder Name</label>
+          <input type="text" id="f-folder" placeholder="e.g. Villa-sankari" />
+          <div class="field-hint" id="folder-hint">Auto-generated from name</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <label class="field-label" for="f-location">Location</label>
+          <input type="text" id="f-location" placeholder="e.g. Sankari, Tamil Nadu" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="f-type">Type</label>
+          <select id="f-type">
+            <option value="villa">Villa</option>
+            <option value="apartment">Apartment</option>
+            <option value="commercial">Commercial</option>
+            <option value="plot">Plot</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <label class="field-label" for="f-value">Value / Price</label>
+          <input type="text" id="f-value" placeholder="e.g. 1.40 Cr" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="f-status">Status</label>
+          <select id="f-status">
+            <option value="completed">Completed</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <label class="field-label" for="f-builtup">Built-Up Area</label>
+          <input type="text" id="f-builtup" placeholder="e.g. 3,200 sq.ft" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="f-floors">Floors</label>
+          <input type="text" id="f-floors" placeholder="e.g. G + 1" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-wrap">
+          <label class="field-label" for="f-config">Config / Units</label>
+          <input type="text" id="f-config" placeholder="e.g. 4 BHK or 5 × 2BHK" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="f-year">Year</label>
+          <input type="text" id="f-year" placeholder="e.g. 2024" />
+        </div>
+      </div>
+
+      <div class="form-row single">
+        <div class="field-wrap">
+          <label class="field-label" for="f-highlights">Highlights <span style="font-weight:400;color:var(--muted2)">(comma-separated)</span></label>
+          <input type="text" id="f-highlights" placeholder="e.g. Vastu Compliant, RCC Frame, Solar Ready" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-gold" id="save-btn" onclick="saveProject()">
+        <i class="fa-solid fa-floppy-disk"></i> Save Project
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast Container ────────────────────────────────────── -->
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════ */
+const API = 'http://localhost:3001/api';
+let token    = '';
+let sites    = [];
+let manifests = {};
+let drawerFolder = null;
+let editMode = 'add'; // 'add' | 'edit'
+
+/* ══════════════════════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════════════════════ */
+function toast(msg, type = 'info') {
+  const c = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  const icons = { success: 'fa-circle-check', error: 'fa-circle-exclamation', info: 'fa-circle-info' };
+  el.className = `toast toast-${type}`;
+  el.innerHTML = `<i class="fa-solid ${icons[type]}"></i><span>${msg}</span>`;
+  c.appendChild(el);
+  setTimeout(() => {
+    el.style.animation = 'toastIn 0.3s reverse forwards';
+    setTimeout(() => el.remove(), 300);
+  }, 3400);
+}
+
+async function apiFetch(path, opts = {}) {
+  opts.headers = { ...(opts.headers || {}), 'x-admin-token': token };
+  if (opts.body && typeof opts.body === 'object' && !(opts.body instanceof FormData)) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(opts.body);
+  }
+  const r = await fetch(API + path, opts);
+  if (r.status === 401) { logout(); throw new Error('Unauthorised'); }
+  return r;
+}
+
+function photoUrl(folder, filename) {
+  return `images/gallery/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════════════════════ */
+async function login() {
+  const pw = document.getElementById('pw-input').value.trim();
+  if (!pw) return;
+
+  const btn = document.querySelector('#login-screen .btn-gold');
+  btn.innerHTML = '<span class="spinner"></span> Signing in…';
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(`${API}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Login failed');
+
+    token = data.token;
+    sessionStorage.setItem('admin-token', token);
+    showDashboard();
+  } catch (e) {
+    const err = document.getElementById('login-error');
+    document.getElementById('login-error-msg').textContent = e.message;
+    err.classList.add('show');
+    btn.innerHTML = '<i class="fa-solid fa-lock-open"></i> Sign In';
+    btn.disabled = false;
+  }
+}
+
+function logout() {
+  token = '';
+  sessionStorage.removeItem('admin-token');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+  document.getElementById('login-error').classList.remove('show');
+  document.querySelector('#login-screen .btn-gold').innerHTML = '<i class="fa-solid fa-lock-open"></i> Sign In';
+  document.querySelector('#login-screen .btn-gold').disabled = false;
+}
+
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadData();
+}
+
+/* ══════════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════════ */
+async function loadData() {
+  try {
+    const [sitesR, manifestsR] = await Promise.all([
+      apiFetch('/sites'),
+      apiFetch('/manifests'),
+    ]);
+    sites     = await sitesR.json();
+    manifests = await manifestsR.json();
+    renderProjects();
+    updateStats();
+  } catch (e) {
+    if (e.message !== 'Unauthorised') toast('Failed to load data: ' + e.message, 'error');
+  }
+}
+
+function updateStats() {
+  document.getElementById('stat-projects').textContent = sites.length;
+  const total = Object.values(manifests).reduce((s, f) => s + (f ? f.length : 0), 0);
+  document.getElementById('stat-photos').textContent = total;
+  document.getElementById('stat-completed').textContent = sites.filter(s => s.status === 'completed').length;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROJECTS GRID
+══════════════════════════════════════════════════════════ */
+function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  if (!sites.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <i class="fa-solid fa-folder-open"></i>
+      No projects yet. Click <strong>Add Project</strong> to get started.
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = sites.map(site => {
+    const photos = manifests[site.folder] || [];
+    const photoCount = photos.length;
+    const previewPhotos = photos.slice(0, 4);
+    const extra = photoCount - 4;
+
+    // Status badge class
+    const statusClass = { completed: 'badge-completed', ongoing: 'badge-ongoing', upcoming: 'badge-upcoming' }[site.status] || 'badge-completed';
+
+    // Photo strip
+    let strip = '';
+    if (previewPhotos.length === 0) {
+      strip = `<div class="photo-strip-placeholder"><i class="fa-regular fa-image"></i></div>`.repeat(2);
+    } else {
+      strip = previewPhotos.map(f =>
+        `<img class="photo-strip-img" src="${photoUrl(site.folder, f)}" alt="" loading="lazy" onerror="this.style.display='none'" />`
+      ).join('');
+      if (extra > 0) {
+        strip += `<div class="strip-more">+${extra}</div>`;
+      }
+    }
+
+    const typeName = site.typeName || (site.type ? site.type.charAt(0).toUpperCase() + site.type.slice(1) : 'Project');
+
+    return `<div class="project-card" data-folder="${escHtml(site.folder)}">
+      <div class="card-top">
+        <div class="card-name">${escHtml(site.name)}</div>
+        <div class="card-badges">
+          <span class="badge badge-status ${statusClass}">${escHtml(site.status || 'completed')}</span>
+          <span class="badge badge-photos"><i class="fa-solid fa-images"></i> ${photoCount}</span>
+        </div>
+      </div>
+      <div class="card-meta">
+        <i class="fa-solid fa-location-dot" style="color:var(--gold);font-size:11px;"></i>
+        ${escHtml(site.location || '—')}
+      </div>
+      <div class="card-value">
+        <i class="fa-solid fa-indian-rupee-sign" style="font-size:11px;opacity:0.7;"></i>
+        ${escHtml(site.value || '—')}
+        <span style="color:var(--muted);font-weight:400;margin-left:6px;font-size:12px;">${escHtml(typeName)}</span>
+      </div>
+      <div class="photo-strip">
+        ${strip}
+      </div>
+      <div class="badge badge-folder" style="margin-bottom:14px;display:inline-flex;">
+        <i class="fa-regular fa-folder" style="margin-right:3px;"></i> ${escHtml(site.folder)}
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-outline js-photos" data-folder="${escHtml(site.folder)}">
+          <i class="fa-solid fa-images"></i> Photos
+        </button>
+        <button class="btn btn-outline js-edit" data-folder="${escHtml(site.folder)}">
+          <i class="fa-solid fa-pen"></i> Edit
+        </button>
+        <button class="btn btn-danger js-delete" data-folder="${escHtml(site.folder)}" style="flex:0;padding:9px 12px;" title="Delete project">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  /* Attach click handlers via event delegation — avoids quoting issues */
+  grid.querySelectorAll('.js-photos').forEach(btn =>
+    btn.addEventListener('click', () => openPhotos(btn.dataset.folder))
+  );
+  grid.querySelectorAll('.js-edit').forEach(btn =>
+    btn.addEventListener('click', () => openEdit(btn.dataset.folder))
+  );
+  grid.querySelectorAll('.js-delete').forEach(btn =>
+    btn.addEventListener('click', () => deleteProject(btn.dataset.folder))
+  );
+}
+
+function escHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ══════════════════════════════════════════════════════════
+   PHOTO DRAWER
+══════════════════════════════════════════════════════════ */
+async function openPhotos(folder) {
+  drawerFolder = folder;
+  const site = sites.find(s => s.folder === folder);
+  document.getElementById('drawer-title').textContent = (site ? site.name : folder) + ' — Photos';
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('photo-drawer').classList.add('open');
+  await reloadPhotos(folder);
+}
+
+async function reloadPhotos(folder) {
+  try {
+    const r = await apiFetch('/photos/' + encodeURIComponent(folder));
+    const files = await r.json();
+    manifests[folder] = files;
+    renderPhotoGrid(folder, files);
+    updateStats();
+  } catch (e) {
+    toast('Failed to load photos', 'error');
+  }
+}
+
+function renderPhotoGrid(folder, files) {
+  const grid = document.getElementById('photo-grid');
+  if (!files.length) {
+    grid.innerHTML = `<div class="photo-empty">
+      <i class="fa-regular fa-images"></i>
+      No photos yet. Upload some above.
+    </div>`;
+    return;
+  }
+  grid.innerHTML = files.map(f => `
+    <div class="photo-item">
+      <img src="${photoUrl(folder, f)}" alt="${escHtml(f)}" loading="lazy" />
+      <button class="photo-delete js-photo-del" data-folder="${escHtml(folder)}" data-file="${escHtml(f)}" title="Delete">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.js-photo-del').forEach(btn =>
+    btn.addEventListener('click', () => deletePhoto(btn.dataset.folder, btn.dataset.file))
+  );
+}
+
+function closeDrawer() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('photo-drawer').classList.remove('open');
+  drawerFolder = null;
+  renderProjects(); // refresh strip
+}
+
+/* Drag & Drop on upload zone */
+const uploadZone = document.getElementById('upload-zone');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag-over');
+  if (drawerFolder && e.dataTransfer.files.length) {
+    uploadFiles(drawerFolder, e.dataTransfer.files);
+  }
+});
+
+function handleFileSelect(e) {
+  if (drawerFolder && e.target.files.length) {
+    uploadFiles(drawerFolder, e.target.files);
+    e.target.value = ''; // reset so same files can be re-selected
+  }
+}
+
+async function uploadFiles(folder, files) {
+  const prog = document.getElementById('upload-progress');
+  const fill = document.getElementById('progress-fill');
+  prog.classList.add('show');
+  fill.style.width = '10%';
+
+  const fd = new FormData();
+  for (const f of files) fd.append('photos', f);
+
+  try {
+    fill.style.width = '50%';
+    const r = await apiFetch('/upload/' + encodeURIComponent(folder), { method: 'POST', body: fd });
+    fill.style.width = '90%';
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Upload failed');
+    fill.style.width = '100%';
+    toast(`Uploaded ${data.files.length} photo${data.files.length !== 1 ? 's' : ''}`, 'success');
+    await reloadPhotos(folder);
+  } catch (e) {
+    toast('Upload failed: ' + e.message, 'error');
+  } finally {
+    setTimeout(() => { prog.classList.remove('show'); fill.style.width = '0%'; }, 600);
+  }
+}
+
+async function deletePhoto(folder, filename) {
+  if (!confirm(`Delete "${filename}" from this project?`)) return;
+  try {
+    const r = await apiFetch('/photo/' + encodeURIComponent(folder) + '/' + encodeURIComponent(filename), { method: 'DELETE' });
+    if (!r.ok) throw new Error('Delete failed');
+    toast('Photo deleted', 'success');
+    await reloadPhotos(folder);
+  } catch (e) {
+    toast('Delete failed: ' + e.message, 'error');
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   ADD / EDIT MODAL
+══════════════════════════════════════════════════════════ */
+function clearModal() {
+  ['f-name','f-folder','f-location','f-value','f-builtup','f-floors','f-config','f-year','f-highlights']
+    .forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-type').value   = 'villa';
+  document.getElementById('f-status').value = 'completed';
+  document.getElementById('edit-folder-orig').value = '';
+}
+
+function openAdd() {
+  editMode = 'add';
+  clearModal();
+  document.getElementById('modal-title').textContent = 'Add Project';
+  document.getElementById('f-folder').readOnly = false;
+  document.getElementById('folder-hint').textContent = 'Auto-generated from name';
+  document.getElementById('save-btn').innerHTML = '<i class="fa-solid fa-plus"></i> Add Project';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openEdit(folder) {
+  const site = sites.find(s => s.folder === folder);
+  if (!site) return;
+  editMode = 'edit';
+  clearModal();
+  document.getElementById('modal-title').textContent = 'Edit Project';
+  document.getElementById('edit-folder-orig').value = folder;
+
+  document.getElementById('f-name').value     = site.name     || '';
+  document.getElementById('f-folder').value   = site.folder   || '';
+  document.getElementById('f-location').value = site.location || '';
+  document.getElementById('f-value').value    = site.value    || '';
+  document.getElementById('f-type').value     = site.type     || 'villa';
+  document.getElementById('f-status').value   = site.status   || 'completed';
+
+  // specs
+  const specVal = (label) => {
+    const s = (site.specs || []).find(s => s.label === label);
+    return s ? s.val : '';
+  };
+  document.getElementById('f-builtup').value  = specVal('BUILT-UP');
+  document.getElementById('f-floors').value   = specVal('FLOORS');
+  document.getElementById('f-config').value   = specVal('CONFIG') || specVal('UNITS');
+  document.getElementById('f-year').value     = specVal('YEAR');
+  document.getElementById('f-highlights').value = (site.highlights || []).join(', ');
+
+  document.getElementById('f-folder').readOnly = true;
+  document.getElementById('folder-hint').textContent = 'Cannot be changed after creation';
+  document.getElementById('save-btn').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function handleModalOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function autoFolder() {
+  if (editMode !== 'add') return;
+  const name = document.getElementById('f-name').value;
+  const slug = name.trim()
+    .replace(/[—–]/g, '-')
+    .replace(/[^\w\s.-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  document.getElementById('f-folder').value = slug;
+}
+
+async function saveProject() {
+  const name     = document.getElementById('f-name').value.trim();
+  const folder   = document.getElementById('f-folder').value.trim();
+  const location = document.getElementById('f-location').value.trim();
+  const type     = document.getElementById('f-type').value;
+  const value    = document.getElementById('f-value').value.trim();
+  const status   = document.getElementById('f-status').value;
+  const builtup  = document.getElementById('f-builtup').value.trim();
+  const floors   = document.getElementById('f-floors').value.trim();
+  const config   = document.getElementById('f-config').value.trim();
+  const year     = document.getElementById('f-year').value.trim();
+  const hlRaw    = document.getElementById('f-highlights').value.trim();
+  const highlights = hlRaw ? hlRaw.split(',').map(h => h.trim()).filter(Boolean) : [];
+
+  if (!name) { toast('Project name is required', 'error'); return; }
+  if (!folder) { toast('Folder name is required', 'error'); return; }
+
+  const configLabel = type === 'apartment' ? 'UNITS' : 'CONFIG';
+  const specs = [
+    builtup && { label: 'BUILT-UP', val: builtup },
+    floors  && { label: 'FLOORS',   val: floors  },
+    config  && { label: configLabel, val: config  },
+    year    && { label: 'YEAR',      val: year    },
+  ].filter(Boolean);
+
+  const stats = [builtup, floors, config, year].filter(Boolean).map(v => v.replace(/sq\.ft$/, 'sq.ft.'));
+
+  const typeName = { villa: 'Villa', apartment: 'Apartment', commercial: 'Commercial', plot: 'Plot' }[type] || type;
+
+  const payload = { name, folder, location, type, typeName, value, status, specs, highlights, stats };
+
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Saving…';
+
+  try {
+    let r;
+    if (editMode === 'add') {
+      r = await apiFetch('/sites', { method: 'POST', body: payload });
+    } else {
+      const orig = document.getElementById('edit-folder-orig').value;
+      r = await apiFetch('/sites/' + encodeURIComponent(orig), { method: 'PUT', body: payload });
+    }
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Save failed');
+    toast(editMode === 'add' ? 'Project added!' : 'Project saved!', 'success');
+    closeModal();
+    await loadData();
+  } catch (e) {
+    toast('Save failed: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = editMode === 'add'
+      ? '<i class="fa-solid fa-plus"></i> Add Project'
+      : '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+  }
+}
+
+async function deleteProject(folder) {
+  const site = sites.find(s => s.folder === folder);
+  const name = site ? site.name : folder;
+  if (!confirm(`Delete "${name}"?\n\nThis will remove the project from the listings. Photo files on disk will NOT be deleted.`)) return;
+
+  try {
+    const r = await apiFetch('/sites/' + encodeURIComponent(folder), { method: 'DELETE' });
+    if (!r.ok) throw new Error('Delete failed');
+    toast('Project deleted', 'success');
+    await loadData();
+  } catch (e) {
+    toast('Delete failed: ' + e.message, 'error');
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PASSWORD TOGGLE
+══════════════════════════════════════════════════════════ */
+document.getElementById('pw-toggle').addEventListener('click', () => {
+  const inp  = document.getElementById('pw-input');
+  const icon = document.getElementById('pw-toggle-icon');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.className = 'fa-regular fa-eye-slash';
+  } else {
+    inp.type = 'password';
+    icon.className = 'fa-regular fa-eye';
+  }
+});
+
+/* Enter key on password field */
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+
+/* ══════════════════════════════════════════════════════════
+   INIT — auto-login from sessionStorage
+══════════════════════════════════════════════════════════ */
+(function init() {
+  const saved = sessionStorage.getItem('admin-token');
+  if (saved) {
+    token = saved;
+    showDashboard();
+  }
+})();
+</script>
+</body>
+</html>
