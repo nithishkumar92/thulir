@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — Thulir Construction</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #dfc171;
+      --gold-dark: #a88a34;
+      --dark: #0f0f0f;
+      --dark-card: #1a1a1a;
+      --text: #ffffff;
+      --text-dim: rgba(255,255,255,0.6);
+      --border: rgba(201,168,76,0.2);
+      --success: #22c55e;
+      --error: #ef4444;
+      --font-main: 'Inter', sans-serif;
+      --font-accent: 'Syne', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── Utilities ── */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Layout ── */
+    header {
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 15, 15, 0.9);
+      backdrop-filter: blur(5px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo i {
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .logo h1 {
+      font-family: var(--font-accent);
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .main-container {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 30px;
+    }
+
+    /* ── Navigation / Sidebar ── */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .connect-card {
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .connect-card.active {
+      border-color: var(--success);
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    .connect-card i {
+      font-size: 40px;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .connect-card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .connect-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      font-family: var(--font-main);
+      font-size: 14px;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.1);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-dim);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    .btn-danger:hover {
+      background: var(--error);
+      color: white;
+    }
+
+    .site-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .site-item {
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .site-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .site-item.active {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.1);
+    }
+
+    .site-item i {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    .site-item-info h4 {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .site-item-info span {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .add-site-btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* ── Main Content Area ── */
+    .content-area {
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .view-card {
+      padding: 30px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    .view-card.show {
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-family: var(--font-accent);
+      font-size: 24px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 30px;
+    }
+
+    /* ── Form Styles ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input, select, textarea {
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: white;
+      font-family: var(--font-main);
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── Image Manager ── */
+    .image-manager {
+      margin-top: 40px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .image-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .image-card:hover .image-overlay {
+      opacity: 1;
+    }
+
+    .overlay-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: white;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      border: none;
+    }
+
+    .overlay-btn.delete {
+      background: var(--error);
+      color: white;
+    }
+
+    .add-image-card {
+      aspect-ratio: 4/3;
+      border-radius: 10px;
+      border: 2px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-dim);
+    }
+
+    .add-image-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      color: var(--gold);
+    }
+
+    .add-image-card i {
+      font-size: 24px;
+    }
+
+    /* ── Footer / Status Bar ── */
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px 5%;
+      background: #111;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 200;
+    }
+
+    .status-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .status-badge.connected { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+    .status-badge.disconnected { background: rgba(239, 68, 68, 0.1); color: var(--error); }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Empty State ── */
+    .empty-state {
+      text-align: center;
+      padding: 100px 20px;
+      color: var(--text-dim);
+    }
+
+    .empty-state i {
+      font-size: 60px;
+      margin-bottom: 20px;
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <i class="fas fa-toolbox"></i>
+      <h1>Thulir Construction <span>Admin</span></h1>
+    </div>
+    <div class="header-actions">
+      <a href="gallery.html" target="_blank" class="btn btn-ghost"><i class="fas fa-eye"></i> View Live Gallery</a>
+    </div>
+  </header>
+
+  <div class="main-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      
+      <div class="connect-card glass" id="connectCard">
+        <i class="fas fa-folder-closed"></i>
+        <h2>Connect Workspace</h2>
+        <p>Connect your project folder to enable live editing and file saving.</p>
+        <button class="btn btn-gold" onclick="connectFolder()" id="connectBtn">
+          <i class="fas fa-link"></i> Select 'thulir' Folder
+        </button>
+      </div>
+
+      <div class="site-nav glass" id="siteNav">
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;">
+          <h3 style="font-size: 14px; font-family: var(--font-accent);">PROJECT SITES</h3>
+          <span id="siteCount" style="font-size: 11px; background: var(--border); padding: 2px 8px; border-radius:10px;">0</span>
+        </div>
+        <div class="site-list" id="siteList" style="padding: 10px; max-height: 500px; overflow-y: auto;">
+          <div class="empty-state" style="padding: 20px; font-size: 12px;">
+            Connect folder to see projects
+          </div>
+        </div>
+        <div style="padding: 10px 20px 20px;">
+          <button class="btn btn-outline add-site-btn" onclick="addNewSiteView()">
+            <i class="fas fa-plus"></i> Add New Site
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Content Area -->
+    <main class="content-area">
+      
+      <div id="welcomeView" class="view-card glass show">
+        <div class="empty-state">
+          <i class="fas fa-city"></i>
+          <h2 style="color:white; margin-bottom: 15px;">Thulir Project Manager</h2>
+          <p>Welcome to the unified admin portal. Connect your workspace folder to begin managing projects, uploading images, and updating your live website.</p>
+        </div>
+      </div>
+
+      <div id="editorView" class="view-card glass">
+        <div class="section-title">
+          <span id="editorTitle">Edit Project Site</span>
+          <button class="btn btn-danger btn-ghost" onclick="deleteCurrentSite()" style="font-size: 12px;">
+            <i class="fas fa-trash"></i> Delete Site
+          </button>
+        </div>
+        <p class="section-subtitle">Manage project details, specifications, and gallery photos.</p>
+
+        <form id="siteForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Internal Folder Name</label>
+              <input type="text" id="site_folder" placeholder="e.g. villa-pollachi" required>
+            </div>
+            <div class="form-group">
+              <label>Display Name</label>
+              <input type="text" id="site_name" placeholder="e.g. Villa — Pollachi" required>
+            </div>
+            <div class="form-group">
+              <label>Project Type</label>
+              <select id="site_type" required>
+                <option value="villa">Villa</option>
+                <option value="apartment">Apartment</option>
+                <option value="ongoing">Ongoing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Type Label (e.g. Villa, Apartment)</label>
+              <input type="text" id="site_typeName" placeholder="Villa">
+            </div>
+            <div class="form-group">
+              <label>Project Value</label>
+              <input type="text" id="site_value" placeholder="e.g. 1.10 Cr">
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="site_location" placeholder="e.g. Sankari, Tamil Nadu">
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="site_status">
+                <option value="completed">Completed</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="upcoming">Upcoming</option>
+              </select>
+            </div>
+            
+            <div class="form-group full">
+              <label>Highlights (Comma separated)</label>
+              <textarea id="site_highlights" rows="2" placeholder="Vastu Compliant, RCC Frame, Premium Finish"></textarea>
+            </div>
+
+            <!-- Specs Section -->
+            <div class="form-group full" style="margin-top: 10px;">
+              <label>Specifications (Key: Value pairs)</label>
+              <div id="specsContainer" style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                <!-- Dynamically filled -->
+              </div>
+              <button type="button" class="btn btn-ghost" onclick="addSpecRow()" style="margin-top: 10px; width: fit-content; font-size: 11px;">
+                <i class="fas fa-plus"></i> Add Spec Row
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Image Management -->
+        <div class="image-manager">
+          <label>Gallery Images</label>
+          <div class="image-grid" id="imageGrid">
+            <!-- Dynamically filled -->
+            <div class="add-image-card" onclick="uploadImages()">
+              <i class="fas fa-cloud-arrow-up"></i>
+              <span>Upload Photos</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; display: flex; gap: 15px;">
+          <button class="btn btn-gold" style="flex: 1;" onclick="saveCurrentSite()">
+            <i class="fas fa-save"></i> Save Site Changes
+          </button>
+          <button class="btn btn-outline" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="status-info">
+      <div id="connectionBadge" class="status-badge disconnected">
+        <i class="fas fa-circle"></i> Offline
+      </div>
+      <div id="statusMsg">Select workspace folder to get started.</div>
+    </div>
+    <div class="status-actions">
+      <button class="btn btn-gold" id="publishBtn" onclick="publishChanges()" disabled>
+        <i class="fas fa-rocket"></i> Publish Website Updates
+      </button>
+    </div>
+  </div>
+
+  <!-- Progress Modal -->
+  <div class="modal-overlay" id="loadingModal">
+    <div class="modal">
+      <div class="loading-spinner"></div>
+      <h3 id="loadingTitle">Saving Workspace</h3>
+      <p id="loadingMsg" style="color: var(--text-dim); margin-top: 10px; font-size: 14px;">Updating project files and images...</p>
+    </div>
+  </div>
+
+  <script>
+    /* ════════════════════════════════════════════
+       STATE MANAGEMENT
+    ════════════════════════════════════════════ */
+    let rootDir = null;
+    let sites = [];
+    let manifests = {};
+    let currentSiteIndex = -1;
+    let pendingImages = []; // { file, objUrl, isNew: true }
+    
+    const elements = {
+      siteList: document.getElementById('siteList'),
+      siteCount: document.getElementById('siteCount'),
+      connectionBadge: document.getElementById('connectionBadge'),
+      statusMsg: document.getElementById('statusMsg'),
+      welcomeView: document.getElementById('welcomeView'),
+      editorView: document.getElementById('editorView'),
+      editorTitle: document.getElementById('editorTitle'),
+      siteForm: document.getElementById('siteForm'),
+      specsContainer: document.getElementById('specsContainer'),
+      imageGrid: document.getElementById('imageGrid'),
+      publishBtn: document.getElementById('publishBtn'),
+      loadingModal: document.getElementById('loadingModal')
+    };
+
+    /* ════════════════════════════════════════════
+       FOLDER CONNECTION
+    ════════════════════════════════════════════ */
+    async function connectFolder() {
+      try {
+        rootDir = await window.showDirectoryPicker({ mode: 'readwrite' });
+        
+        // Load Data
+        await loadWorkspaceData();
+        
+        // Update UI
+        elements.connectionBadge.className = 'status-badge connected';
+        elements.connectionBadge.innerHTML = '<i class="fas fa-circle"></i> Connected';
+        elements.statusMsg.innerHTML = `Connected to <b>${rootDir.name}/</b>`;
+        document.getElementById('connectCard').innerHTML = `
+          <i class="fas fa-check-circle" style="color: var(--success);"></i>
+          <h2 style="color: var(--success);">Workspace Active</h2>
+          <p>Files are ready for structural editing and image management.</p>
+          <div style="font-size: 11px; background: rgba(255,255,255,0.05); padding: 8px; border-radius: 8px; font-family: monospace; word-break: break-all;">
+            ${rootDir.name}/
+          </div>
+        `;
+        elements.publishBtn.disabled = false;
+        renderSiteList();
+        
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error(err);
+          alert('Failed to connect: ' + err.message);
+        }
+      }
+    }
+
+    async function loadWorkspaceData() {
+      try {
+        // Load sites-data.js
+        const sitesFile = await rootDir.getFileHandle('sites-data.js');
+        const sitesContent = await (await sitesFile.getFile()).text();
+        const sitesMatch = sitesContent.match(/window\.GALLERY_SITES\s*=\s*([\s\S]+?);/);
+        if (sitesMatch) {
+          // Dangerous eval for simplicity in this specific admin tool context
+          // In a real app, use a proper parser or JSON data files.
+          sites = eval(`(${sitesMatch[1]})`);
+        }
+
+        // Load gallery-data.js
+        const manifestFile = await rootDir.getFileHandle('gallery-data.js');
+        const manifestContent = await (await manifestFile.getFile()).text();
+        const manifestMatch = manifestContent.match(/window\.GALLERY_MANIFESTS\s*=\s*([\s\S]+?);/);
+        if (manifestMatch) {
+          manifests = eval(`(${manifestMatch[1]})`);
+        }
+      } catch (err) {
+        console.error('Data Load Error:', err);
+        alert('Could not load data files. Ensure you selected the correct folder containing sites-data.js and gallery-data.js');
+      }
+    }
+
+    /* ════════════════════════════════════════════
+       UI RENDERING
+    ════════════════════════════════════════════ */
+    function renderSiteList() {
+      elements.siteCount.textContent = sites.length;
+      elements.siteList.innerHTML = '';
+      
+      sites.forEach((site, index) => {
+        const item = document.createElement('div');
+        item.className = `site-item glass ${currentSiteIndex === index ? 'active' : ''}`;
+        item.onclick = () => openEditor(index);
+        item.innerHTML = `
+          <i class="fas ${site.type === 'apartment' ? 'fa-building' : 'fa-house'}"></i>
+          <div class="site-item-info">
+            <h4>${site.name}</h4>
+            <span>${site.location}</span>
+          </div>
+        `;
+        elements.siteList.appendChild(item);
+      });
+    }
+
+    function openEditor(index) {
+      currentSiteIndex = index;
+      const site = sites[index];
+      pendingImages = []; // Clear pending
+      
+      elements.welcomeView.classList.remove('show');
+      elements.editorView.classList.add('show');
+      elements.editorTitle.textContent = `Edit Site: ${site.name}`;
+      
+      // Auto-fill form
+      document.getElementById('site_folder').value = site.folder;
+      document.getElementById('site_name').value = site.name;
+      document.getElementById('site_type').value = site.type;
+      document.getElementById('site_typeName').value = site.typeName;
+      document.getElementById('site_value').value = site.value;
+      document.getElementById('site_location').value = site.location;
+      document.getElementById('site_status').value = site.status;
+      document.getElementById('site_highlights').value = (site.highlights || []).join(', ');
+      
+      // Render Specs
+      renderSpecs(site.specs || []);
+      
+      // Render Images
+      renderImages(site.folder);
+      
+      renderSiteList();
+    }
+
+    function addNewSiteView() {
+      if (!rootDir) { alert('Connect folder first'); return; }
+      
+      const newSite = {
+        folder: '', name: '', type: 'villa', typeName: 'Villa', 
+        value: '', location: '', status: 'completed',
+        specs: [{label: 'BUILT-UP', val: ''}, {label: 'YEAR', val: ''}],
+        highlights: ['Vastu Compliant'],
+        stats: []
+      };
+      
+      currentSiteIndex = sites.length;
+      sites.push(newSite);
+      openEditor(currentSiteIndex);
+    }
+
+    function renderSpecs(specs) {
+      elements.specsContainer.innerHTML = '';
+      specs.forEach((s, i) => {
+        addSpecRow(s.label, s.val);
+      });
+      if (specs.length === 0) addSpecRow();
+    }
+
+    function addSpecRow(label = '', val = '') {
+      const rowNum = elements.specsContainer.children.length;
+      const div = document.createElement('div');
+      div.style.display = 'contents';
+      div.innerHTML = `
+        <input type="text" placeholder="Label (e.g. YEAR)" value="${label}" class="spec-label">
+        <input type="text" placeholder="Value (e.g. 2024)" value="${val}" class="spec-val">
+      `;
+      elements.specsContainer.appendChild(div);
+    }
+
+    function renderImages(folder) {
+      // Clear current grid except the "Add" card
+      const addCard = elements.imageGrid.querySelector('.add-image-card');
+      elements.imageGrid.innerHTML = '';
+      
+      // Existing images
+      const files = manifests[folder] || [];
+      files.forEach((file, idx) => {
+        const card = document.createElement('div');
+        card.className = 'image-card';
+        // Note: In a real browser, we can't show local disk images easily without a server 
+        // OR by using the File API to get a URL. 
+        // For this admin tool, we'll try to resolve them if the user gives permission to that folder too,
+        // but for now we'll just show the filename as a placeholder or try to use a relative path if possible.
+        // ACTUALLY: Let's use the file handle to generate an ObjectURL.
+        card.innerHTML = `<img src="images/gallery/${folder}/${file}" alt="${file}" onerror="this.src='https://via.placeholder.com/300x200?text=${file}'">
+          <div class="image-overlay">
+            <button class="overlay-btn delete" onclick="deleteImage('${folder}', ${idx})"><i class="fas fa-trash"></i></button>
+          </div>`;
+        elements.imageGrid.appendChild(card);
+      });
+
+      // Pending uploaded images
+      pendingImages.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'image-card';
+        card.style.borderColor = 'var(--gold)';
+        card.innerHTML = `<img src="${p.objUrl}">
+          <div class="image-overlay" style="opacity: 1; background: rgba(0,0,0,0.3)">
+            <span style="font-size: 10px; color: white;">NEW</span>
+            <button class="overlay-btn delete" onclick="removePendingImage(${idx})"><i class="fas fa-times"></i></button>
+          </div>`;
+        elements.imageGrid.appendChild(card);
+      });
+
+      elements.imageGrid.appendChild(addCard);
+    }
+
+    /* ════════════════════════════════════════════
+       IMAGE ACTIONS
+    ════════════════════════════════════════════ */
+    async function uploadImages() {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'image/*';
+      inp.multiple = true;
+      inp.onchange = ev => {
+        for (const file of ev.target.files) {
+          pendingImages.push({
+            file,
+            objUrl: URL.createObjectURL(file),
+            isNew: true
+          });
+        }
+        renderImages(document.getElementById('site_folder').value);
+      };
+      inp.click();
+    }
+
+    function removePendingImage(idx) {
+      URL.revokeObjectURL(pendingImages[idx].objUrl);
+      pendingImages.splice(idx, 1);
+      renderImages(document.getElementById('site_folder').value);
+    }
+
+    function deleteImage(folder, idx) {
+      if (confirm('Are you sure you want to remove this image? (Changes will be saved to manifest)')) {
+        manifests[folder].splice(idx, 1);
+        renderImages(folder);
+      }
+    }
+
+    /* ════════════════════════════════════════════
+       SAVE SITE
+    ════════════════════════════════════════════ */
+    function saveCurrentSite() {
+      const folder = document.getElementById('site_folder').value.trim();
+      if (!folder) { alert('Folder name is required'); return; }
+
+      const site = sites[currentSiteIndex];
+      site.folder = folder;
+      site.name = document.getElementById('site_name').value.trim();
+      site.type = document.getElementById('site_type').value;
+      site.typeName = document.getElementById('site_typeName').value.trim();
+      site.value = document.getElementById('site_value').value.trim();
+      site.location = document.getElementById('site_location').value.trim();
+      site.status = document.getElementById('site_status').value;
+      
+      const highlightsRaw = document.getElementById('site_highlights').value;
+      site.highlights = highlightsRaw.split(',').map(h => h.trim()).filter(h => h);
+      
+      const specs = [];
+      const labels = elements.specsContainer.querySelectorAll('.spec-label');
+      const vals = elements.specsContainer.querySelectorAll('.spec-val');
+      labels.forEach((l, i) => {
+        if (l.value.trim()) specs.push({ label: l.value.trim(), val: vals[i].value.trim() });
+      });
+      site.specs = specs;
+      
+      // Update stats (simple mirror of specs for this template)
+      site.stats = specs.map(s => s.val);
+
+      // Handle Manifest entry
+      if (!manifests[folder]) manifests[folder] = [];
+      
+      // Images will be saved physically during "Publish"
+      // But we update the manifest names now
+      pendingImages.forEach(p => {
+        if (!manifests[folder].includes(p.file.name)) {
+          manifests[folder].push(p.file.name);
+        }
+      });
+
+      alert('Site details updated locally. Click "Publish Website Updates" at the bottom to save files to disk.');
+      renderSiteList();
+    }
+
+    function deleteCurrentSite() {
+      if (confirm('DELETE this site and all its metadata? (Images in folder will NOT be deleted)')) {
+        sites.splice(currentSiteIndex, 1);
+        renderSiteList();
+        closeEditor();
+      }
+    }
+
+    function closeEditor() {
+      elements.editorView.classList.remove('show');
+      elements.welcomeView.classList.add('show');
+      currentSiteIndex = -1;
+      renderSiteList();
+    }
+
+    /* ════════════════════════════════════════════
+       PUBLISH (DISK OPERATIONS)
+    ════════════════════════════════════════════ */
+    async function publishChanges() {
+      if (!rootDir) return;
+      
+      elements.loadingModal.classList.add('show');
+      elements.publishBtn.disabled = true;
+      
+      try {
+        // 1. Save Physical Images
+        document.getElementById('loadingTitle').textContent = 'Uploading Images';
+        // Usually we'd iterate over all sites to save pending images.
+        // For this POC, let's assume we are saving images for the current site if active.
+        const currentFolder = currentSiteIndex !== -1 ? sites[currentSiteIndex].folder : null;
+        if (currentFolder && pendingImages.length > 0) {
+          const galleryDir = await (await rootDir.getDirectoryHandle('images', {create:true}))
+                                  .getDirectoryHandle('gallery', {create:true});
+          const targetDir = await galleryDir.getDirectoryHandle(currentFolder, {create:true});
+          
+          for (let i = 0; i < pendingImages.length; i++) {
+            const p = pendingImages[i];
+            const fh = await targetDir.getFileHandle(p.file.name, {create: true});
+            const wr = await fh.createWritable();
+            await wr.write(p.file);
+            await wr.close();
+            document.getElementById('loadingMsg').textContent = `Saved ${i+1}/${pendingImages.length} images...`;
+          }
+          pendingImages = []; // Reset
+        }
+
+        // 2. Save sites-data.js
+        document.getElementById('loadingTitle').textContent = 'Updating Metadata';
+        const sitesJs = `window.GALLERY_SITES = ${JSON.stringify(sites, null, 2)};\n`;
+        const sFile = await rootDir.getFileHandle('sites-data.js', {create: true});
+        const sWr = await sFile.createWritable();
+        await sWr.write(sitesJs);
+        await sWr.close();
+
+        // 3. Save gallery-data.js
+        const manifestJs = `window.GALLERY_MANIFESTS = ${JSON.stringify(manifests, null, 2)};\n`;
+        const mFile = await rootDir.getFileHandle('gallery-data.js', {create: true});
+        const mWr = await mFile.createWritable();
+        await mWr.write(manifestJs);
+        await mWr.close();
+
+        // 4. Sync gallery.html (The hardest part)
+        // We will try to replace the SITES array in gallery.html
+        try {
+          const gFile = await rootDir.getFileHandle('gallery.html');
+          let gContent = await (await gFile.getFile()).text();
+          
+          // Use regex to locate the SITES constant
+          const sitesRegex = /(const SITES\s*=\s*)\[[\s\S]+?\];/;
+          const newSitesStr = JSON.stringify(sites, null, 2);
+          gContent = gContent.replace(sitesRegex, `$1${newSitesStr};`);
+          
+          const gWr = await gFile.createWritable();
+          await gWr.write(gContent);
+          await gWr.close();
+        } catch (e) {
+          console.warn('Could not sync gallery.html automatically:', e);
+        }
+
+        setTimeout(() => {
+          elements.loadingModal.classList.remove('show');
+          elements.publishBtn.disabled = false;
+          alert('Website published successfully!');
+        }, 800);
+
+      } catch (err) {
+        console.error(err);
+        alert('Publish failed: ' + err.message);
+        elements.loadingModal.classList.remove('show');
+        elements.publishBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /F/thulir-website-claude/thulir -maxdepth 2 -type f \\\\\\(-name README* -o -name package.json -o -name .gitignore -o -name *.md \\\\\\))",
+      "Bash(grep -h 'src=\"\"\"\"images/' F:/thulir-website-claude/thulir/*.html)",
+      "Bash(dir \"F:\\\\thulir-website-claude\\\\thulir\")",
+      "Bash(dir \"F:\\\\thulir-website-claude\")",
+      "Bash(dir \"F:\\\\thulir-website-claude\\\\thulir\\\\images\\\\gallery\")",
+      "Bash(ls \"F:\\\\thulir-website-claude\\\\thulir\\\\images\\\\gallery\"\" 2>/dev/null; find \"F:thulir-website-claude\" -name \"package.json \")",
+      "Bash(dir \"F:\\\\thulir-website-claude\\\\thulir\" /b)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
