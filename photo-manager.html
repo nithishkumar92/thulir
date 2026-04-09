@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Manager — Thulir Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #a88734;
+      --gold-light: #d9ac5a;
+      --dark: #1a1a2e;
+      --bg: #f5f3ef;
+      --border: rgba(168,135,52,0.2);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Montserrat',sans-serif; background:var(--bg); color:var(--dark); }
+
+    /* ── Header ── */
+    header {
+      background:var(--dark);
+      padding:18px 36px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      position:sticky; top:0; z-index:50;
+    }
+    header .logo-icon { font-size:1.8rem; color:var(--gold-light); }
+    header h1 { font-family:'Cormorant Garamond',serif; font-size:1.7rem; color:var(--gold-light); }
+    header p  { font-size:0.78rem; color:rgba(255,255,255,0.5); margin-top:2px; }
+    header .home-link {
+      margin-left:auto;
+      color:rgba(255,255,255,0.6);
+      text-decoration:none;
+      font-size:0.82rem;
+      border:1px solid rgba(255,255,255,0.2);
+      padding:6px 14px;
+      border-radius:6px;
+      transition:all .2s;
+    }
+    header .home-link:hover { color:#fff; border-color:var(--gold-light); }
+
+    /* ── Layout ── */
+    .container { max-width:1100px; margin:0 auto; padding:28px 20px 100px; }
+
+    /* ── Setup card ── */
+    .setup-card {
+      background:#fff;
+      border:2px dashed var(--border);
+      border-radius:14px;
+      padding:32px;
+      text-align:center;
+      margin-bottom:28px;
+    }
+    .setup-card.connected { border-style:solid; border-color:#4caf50; background:#f1fff1; }
+    .setup-card h2 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin:12px 0 6px; }
+    .setup-card p  { color:#888; font-size:0.88rem; margin-bottom:18px; }
+
+    /* ── Buttons ── */
+    .btn { border:none; border-radius:8px; font-family:'Montserrat',sans-serif; font-weight:600; cursor:pointer; transition:opacity .2s; }
+    .btn:disabled { opacity:.4; cursor:not-allowed; }
+    .btn-gold  { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; padding:12px 24px; font-size:.95rem; }
+    .btn-gold:hover:not(:disabled) { opacity:.88; }
+    .btn-outline { background:transparent; border:1px solid var(--gold); color:var(--gold); padding:6px 12px; font-size:.78rem; }
+    .btn-outline:hover:not(:disabled) { background:rgba(168,135,52,.07); }
+    .btn-fill   { background:var(--gold); color:#fff; padding:6px 12px; font-size:.78rem; }
+    .btn-fill:hover:not(:disabled) { opacity:.88; }
+
+    /* ── Warning bar ── */
+    .warn-bar {
+      background:#fff8e1; border:1px solid #ffe082; border-radius:10px;
+      padding:12px 16px; margin-bottom:22px; font-size:.83rem; color:#7a5000;
+      display:none; align-items:flex-start; gap:10px;
+    }
+    .warn-bar.show { display:flex; }
+    .warn-bar i { margin-top:2px; flex-shrink:0; }
+
+    /* ── Section title ── */
+    .sec-head {
+      display:flex; align-items:center; gap:12px;
+      border-bottom:2px solid var(--border);
+      padding-bottom:12px; margin-bottom:20px;
+    }
+    .sec-head h2 { font-family:'Cormorant Garamond',serif; font-size:1.55rem; }
+    .sec-head .badge {
+      background:var(--gold); color:#fff;
+      padding:3px 10px; border-radius:12px; font-size:.72rem; font-weight:700;
+    }
+    section { margin-bottom:44px; }
+
+    /* ── Photo slots grid ── */
+    .slots-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+
+    .photo-slot {
+      background:#fff; border-radius:10px; overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.06); border:1px solid var(--border);
+      transition:box-shadow .2s;
+    }
+    .photo-slot:hover { box-shadow:0 4px 18px rgba(168,135,52,.15); }
+
+    .slot-preview {
+      height:150px; background:#f0ede8;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; position:relative;
+    }
+    .slot-preview img { width:100%; height:100%; object-fit:cover; }
+    .slot-preview .ph-icon { font-size:2.4rem; color:rgba(168,135,52,.28); }
+
+    .slot-info { padding:11px; }
+    .slot-label { font-weight:600; font-size:.82rem; margin-bottom:3px; }
+    .slot-path  { font-family:monospace; font-size:.68rem; color:#999; margin-bottom:8px; word-break:break-all; }
+
+    .slot-status {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:.7rem; font-weight:700; padding:3px 9px;
+      border-radius:10px; margin-bottom:9px;
+    }
+    .st-empty   { background:#f5f5f5; color:#999; }
+    .st-pending { background:#fff3e0; color:#e65100; }
+    .st-saved   { background:#e8f5e9; color:#2e7d32; }
+
+    .slot-actions { display:flex; gap:6px; }
+    .slot-actions .btn { flex:1; }
+
+    /* ── Gallery projects ── */
+    .gallery-project {
+      background:#fff; border-radius:12px;
+      border:1px solid var(--border); margin-bottom:18px; overflow:hidden;
+    }
+    .proj-head {
+      padding:15px 20px;
+      background:linear-gradient(135deg,#1a1a2e,#2d2d4e);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    }
+    .proj-head h3 { font-family:'Cormorant Garamond',serif; font-size:1.18rem; color:var(--gold-light); }
+    .proj-meta { display:flex; gap:14px; font-size:.72rem; color:rgba(255,255,255,.55); }
+    .proj-body { padding:16px 20px; }
+    .proj-hint { font-size:.78rem; color:#999; margin-bottom:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .proj-hint code { background:#f0ede8; padding:2px 6px; border-radius:4px; font-size:.72rem; }
+    .count-tag { background:rgba(168,135,52,.12); color:var(--gold); padding:2px 9px; border-radius:9px; font-size:.72rem; font-weight:700; }
+
+    .photos-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; align-items:flex-start; }
+
+    .photo-thumb-wrap { position:relative; display:inline-block; }
+    .photo-thumb {
+      width:78px; height:78px; border-radius:7px;
+      object-fit:cover; border:1px solid var(--border);
+      display:block;
+    }
+    .thumb-num {
+      position:absolute; bottom:3px; left:3px;
+      background:rgba(0,0,0,.55); color:#fff;
+      font-size:.58rem; padding:1px 5px; border-radius:4px;
+    }
+    .thumb-del {
+      position:absolute; top:-5px; right:-5px;
+      width:18px; height:18px; border-radius:50%;
+      background:#e53935; color:#fff; border:none;
+      font-size:10px; cursor:pointer; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .add-thumb {
+      width:78px; height:78px; border-radius:7px;
+      border:2px dashed rgba(168,135,52,.35);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; color:rgba(168,135,52,.45); font-size:1.6rem;
+      transition:all .2s;
+    }
+    .add-thumb:hover { border-color:var(--gold); color:var(--gold); background:rgba(168,135,52,.04); }
+
+    .proj-save-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .proj-save-msg { font-size:.78rem; color:#4caf50; display:none; }
+
+    /* ── Sticky save bar ── */
+    .save-bar {
+      position:fixed; bottom:0; left:0; right:0;
+      background:var(--dark); padding:12px 28px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      z-index:40; box-shadow:0 -4px 20px rgba(0,0,0,.25);
+    }
+    .save-bar span { color:rgba(255,255,255,.65); font-size:.85rem; }
+    .save-bar strong { color:var(--gold-light); }
+
+    /* ── Progress modal ── */
+    .modal-bg {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.5); z-index:999;
+      align-items:center; justify-content:center;
+    }
+    .modal-bg.show { display:flex; }
+    .modal {
+      background:#fff; border-radius:14px; padding:30px;
+      max-width:380px; width:90%; text-align:center;
+    }
+    .modal h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; margin-bottom:14px; }
+    .prog-bar { width:100%; height:7px; background:#eee; border-radius:4px; overflow:hidden; margin:14px 0; }
+    .prog-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light)); transition:width .3s; }
+    .modal p   { color:#999; font-size:.84rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <i class="fas fa-images logo-icon"></i>
+  <div>
+    <h1>Photo Manager</h1>
+    <p>Thulir Construction — Assign &amp; Save Images to the Website</p>
+  </div>
+  <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i> Back to Website</a>
+</header>
+
+<div class="container">
+
+  <!-- ── STEP 1: CONNECT FOLDER ── -->
+  <div class="setup-card" id="setupCard">
+    <i class="fas fa-folder-open" style="font-size:2.4rem;color:var(--gold);"></i>
+    <h2>Connect Your Website Folder</h2>
+    <p>Click below and select the <strong>thulir/</strong> folder.<br>Images will be saved automatically to the correct paths.</p>
+    <button class="btn btn-gold" onclick="selectFolder()" id="connectBtn">
+      <i class="fas fa-folder-open"></i>&nbsp; Select thulir/ Folder
+    </button>
+    <p style="margin-top:10px;font-size:.74rem;color:#bbb;">
+      Works in Chrome &amp; Edge. Other browsers: use <strong>Manual Mode</strong> — pick files, preview, download &amp; copy manually.
+    </p>
+  </div>
+
+  <div class="warn-bar" id="warnBar">
+    <i class="fas fa-exclamation-triangle"></i>
+    <span><strong>Manual Mode Active</strong> — Auto-save unavailable. Select an image to preview it, then the "Download" button saves it to your Downloads folder.
+    Copy each downloaded file into <code>thulir/images/</code> using the path shown on each card.</span>
+  </div>
+
+  <!-- ── SECTION 1: FOUNDER PHOTO ── -->
+  <section>
+    <div class="sec-head">
+      <i class="fas fa-user-tie" style="color:var(--gold);"></i>
+      <h2>Founder Photo</h2>
+      <span class="badge">1 slot</span>
+    </div>
+    <div class="slots-grid">
+      <div class="photo-slot">
+        <div class="slot-preview" id="prev-founder">
+          <i class="fas fa-user-tie ph-icon"></i>
+        </div>
+        <div class="slot-info">
+          <div class="slot-label">Nithish Kumar — Founder</div>
+          <div class="slot-path">images/founder.jpg</div>
+          <div class="slot-status st-empty" id="st-founder"><i class="fas fa-circle-dot"></i> Not Set</div>
+          <div class="slot-actions">
+            <button class="btn btn-outline" onclick="pickSlot('founder','images/founder.jpg')"><i class="fas fa-upload"></i> Choose</button>
+            <button class="btn btn-fill" id="savebtn-founder" disabled onclick="saveSlot('founder','images/founder.jpg')"><i class="fas fa-save"></i> Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 2: DISTINCTION FEATURES ── -->
+  <section>
+    <div class="sec-head">
+      <i class="fas fa-star" style="color:var(--gold);"></i>
+      <h2>Distinction — Feature Images</h2>
+      <span class="badge">12 slots</span>
+    </div>
+    <div class="slots-grid" id="dist-grid"></div>
+  </section>
+
+  <!-- ── SECTION 3: GALLERY PROJECTS ── -->
+  <section>
+    <div class="sec-head">
+      <i class="fas fa-building" style="color:var(--gold);"></i>
+      <h2>Gallery — Project Photos</h2>
+      <span class="badge">7 projects</span>
+    </div>
+    <div id="gallery-wrap"></div>
+  </section>
+
+</div>
+
+<!-- Sticky save bar -->
+<div class="save-bar">
+  <span><strong id="pendingNum">0</strong> image(s) pending</span>
+  <button class="btn btn-gold" id="saveAllBtn" disabled onclick="saveAll()">
+    <i class="fas fa-cloud-upload-alt"></i>&nbsp; Save All to Folder
+  </button>
+</div>
+
+<!-- Progress modal -->
+<div class="modal-bg" id="progModal">
+  <div class="modal">
+    <h3><i class="fas fa-spinner fa-spin" style="color:var(--gold);"></i>&nbsp; Saving Images…</h3>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    <p id="progText">0 of 0 saved</p>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════
+   DATA
+════════════════════════════════════════════ */
+const DIST_FEATURES = [
+  { id:'f01', label:'Anti-Termite Treatment',       path:'images/01.png', icon:'fa-shield-halved'  },
+  { id:'f02', label:'Detailed Agreement Copy',      path:'images/02.png', icon:'fa-file-contract'  },
+  { id:'f03', label:'Structural Analysis',          path:'images/03.png', icon:'fa-drafting-compass'},
+  { id:'f04', label:'Water Leakage Testing',        path:'images/04.png', icon:'fa-droplet'        },
+  { id:'f05', label:'Mini Mixer Machine',           path:'images/05.png', icon:'fa-blender'        },
+  { id:'f06', label:'Use of Vibrators',             path:'images/06.png', icon:'fa-water'          },
+  { id:'f07', label:'Mini Power Trowel Machine',    path:'images/07.png', icon:'fa-brush'          },
+  { id:'f08', label:'Putty Spraying Machine',       path:'images/08.png', icon:'fa-spray-can'      },
+  { id:'f09', label:'Crane for Material Shifting',  path:'images/09.png', icon:'fa-truck-moving'   },
+  { id:'f10', label:'Own Shuttering Plates',        path:'images/10.png', icon:'fa-layer-group'    },
+  { id:'f11', label:'On-Site Labor Accommodation',  path:'images/11.png', icon:'fa-people-roof'    },
+  { id:'f12', label:'Clean Handovers',              path:'images/12.png', icon:'fa-sparkles'       },
+];
+
+const GALLERY_PROJECTS = [
+  { folder:'apartment-flat',    name:'Apartment Flat',            value:'1.40 Cr', location:'Tamil Nadu',          area:'6180 Sqft' },
+  { folder:'villa-thangayur-1', name:'Villa — Thangayur',         value:'1.08 Cr', location:'Thangayur',           area:'4350 Sqft' },
+  { folder:'villa-akkamapetti', name:'Villa — Akkamapetti',       value:'80 Lakh', location:'Akkamapetti',         area:'3650 Sqft' },
+  { folder:'villa-thangayur-2', name:'Villa — Thangayur II',      value:'40 Lakh', location:'Thangayur',           area:'1350 Sqft' },
+  { folder:'villa-pollachi',    name:'Villa — Pollachi',          value:'35 Lakh', location:'Pollachi',            area:'900 Sqft'  },
+  { folder:'villa-sankari-1',   name:'Villa — S.K Nagar Sankari', value:'90 Lakh', location:'S.K Nagar Sankari',   area:'3200 Sqft' },
+  { folder:'villa-sankari-2',   name:'Villa — S.K Nagar Sankari II',value:'1.20 Cr',location:'S.K Nagar Sankari', area:'3100 Sqft' },
+];
+
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+let rootDir = null;
+const slotFiles    = {};   // slotId → { file, path }
+const galleryFiles = {};   // folder → [File, ...]
+GALLERY_PROJECTS.forEach(p => galleryFiles[p.folder] = []);
+
+const hasFsApi = 'showDirectoryPicker' in window;
+if (!hasFsApi) document.getElementById('warnBar').classList.add('show');
+
+/* ════════════════════════════════════════════
+   BUILD DISTINCTION GRID
+════════════════════════════════════════════ */
+const distGrid = document.getElementById('dist-grid');
+DIST_FEATURES.forEach(f => {
+  const div = document.createElement('div');
+  div.className = 'photo-slot';
+  div.innerHTML = `
+    <div class="slot-preview" id="prev-${f.id}">
+      <i class="fas ${f.icon} ph-icon"></i>
+    </div>
+    <div class="slot-info">
+      <div class="slot-label">${f.label}</div>
+      <div class="slot-path">${f.path}</div>
+      <div class="slot-status st-empty" id="st-${f.id}"><i class="fas fa-circle-dot"></i> Not Set</div>
+      <div class="slot-actions">
+        <button class="btn btn-outline" onclick="pickSlot('${f.id}','${f.path}')"><i class="fas fa-upload"></i> Choose</button>
+        <button class="btn btn-fill" id="savebtn-${f.id}" disabled onclick="saveSlot('${f.id}','${f.path}')"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>`;
+  distGrid.appendChild(div);
+});
+
+/* ════════════════════════════════════════════
+   BUILD GALLERY PROJECTS
+════════════════════════════════════════════ */
+const galleryWrap = document.getElementById('gallery-wrap');
+GALLERY_PROJECTS.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'gallery-project';
+  div.innerHTML = `
+    <div class="proj-head">
+      <h3>${p.name}</h3>
+      <div class="proj-meta">
+        <span><i class="fas fa-map-marker-alt"></i> ${p.location}</span>
+        <span><i class="fas fa-ruler-combined"></i> ${p.area}</span>
+        <span><i class="fas fa-tag"></i> ₹${p.value}</span>
+      </div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-hint">
+        Folder: <code>images/gallery/${p.folder}/</code>
+        Named: <code>001.png, 002.png …</code>
+        <span class="count-tag" id="ctag-${p.folder}">0 photos</span>
+      </div>
+      <div class="photos-row" id="row-${p.folder}">
+        <div class="add-thumb" onclick="addGalleryPhotos('${p.folder}')" title="Add photos">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+      <div class="proj-save-row">
+        <button class="btn btn-fill" id="gsave-${p.folder}" disabled onclick="saveGallery('${p.folder}')">
+          <i class="fas fa-save"></i> Save to Folder
+        </button>
+        <span class="proj-save-msg" id="gmsg-${p.folder}"><i class="fas fa-check-circle"></i> Saved!</span>
+      </div>
+    </div>`;
+  galleryWrap.appendChild(div);
+});
+
+/* ════════════════════════════════════════════
+   SINGLE SLOT PICK + SAVE
+════════════════════════════════════════════ */
+function pickSlot(id, targetPath) {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    previewFile(file, `prev-${id}`);
+    slotFiles[id] = { file, path: targetPath };
+    setStatus(id, 'pending', 'fa-clock', 'st-pending', 'Ready to Save');
+    document.getElementById(`savebtn-${id}`).disabled = false;
+    refreshPending();
+  };
+  inp.click();
+}
+
+async function saveSlot(id, targetPath) {
+  const entry = slotFiles[id];
+  if (!entry) return;
+  if (rootDir) {
+    try {
+      await writeFile(rootDir, targetPath, entry.file);
+      setStatus(id, 'saved', 'fa-check-circle', 'st-saved', 'Saved ✓');
+      document.getElementById(`savebtn-${id}`).disabled = true;
+      delete slotFiles[id];
+      refreshPending();
+    } catch(e) { alert('Save failed: ' + e.message); }
+  } else {
+    download(entry.file, targetPath.split('/').pop());
+    setStatus(id, 'saved', 'fa-download', 'st-saved', 'Downloaded — move to ' + targetPath);
+  }
+}
+
+/* ════════════════════════════════════════════
+   GALLERY PICK + SAVE
+════════════════════════════════════════════ */
+function addGalleryPhotos(folder) {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.multiple = true;
+  inp.onchange = e => {
+    Array.from(e.target.files).forEach(file => {
+      galleryFiles[folder].push(file);
+      renderGalleryThumb(folder, galleryFiles[folder].length - 1, file);
+    });
+    updateGalleryCount(folder);
+  };
+  inp.click();
+}
+
+function renderGalleryThumb(folder, idx, file) {
+  const row = document.getElementById(`row-${folder}`);
+  const addBtn = row.querySelector('.add-thumb');
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const wrap = document.createElement('div');
+    wrap.className = 'photo-thumb-wrap';
+    wrap.id = `gthumb-${folder}-${idx}`;
+    wrap.innerHTML = `
+      <img src="${ev.target.result}" class="photo-thumb" title="${pad3(idx+1)}.png">
+      <span class="thumb-num">${pad3(idx+1)}</span>
+      <button class="thumb-del" onclick="removeGalleryPhoto('${folder}',${idx})" title="Remove">✕</button>`;
+    row.insertBefore(wrap, addBtn);
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeGalleryPhoto(folder, idx) {
+  galleryFiles[folder].splice(idx, 1);
+  rebuildGalleryRow(folder);
+  updateGalleryCount(folder);
+}
+
+function rebuildGalleryRow(folder) {
+  const row = document.getElementById(`row-${folder}`);
+  row.innerHTML = `<div class="add-thumb" onclick="addGalleryPhotos('${folder}')" title="Add photos"><i class="fas fa-plus"></i></div>`;
+  galleryFiles[folder].forEach((file, idx) => renderGalleryThumb(folder, idx, file));
+}
+
+function updateGalleryCount(folder) {
+  const n = galleryFiles[folder].length;
+  document.getElementById(`ctag-${folder}`).textContent = `${n} photo${n!==1?'s':''}`;
+  document.getElementById(`gsave-${folder}`).disabled = n === 0;
+  refreshPending();
+}
+
+async function saveGallery(folder) {
+  const files = galleryFiles[folder];
+  if (!files.length) return;
+  if (rootDir) {
+    try {
+      for (let i = 0; i < files.length; i++) {
+        await writeFile(rootDir, `images/gallery/${folder}/${pad3(i+1)}.png`, files[i]);
+      }
+      await patchGalleryCount(folder, files.length);
+      document.getElementById(`gsave-${folder}`).disabled = true;
+      document.getElementById(`gmsg-${folder}`).style.display = 'inline';
+      document.getElementById(`ctag-${folder}`).textContent = `${files.length} saved ✓`;
+      refreshPending();
+    } catch(e) { alert('Save failed: ' + e.message); }
+  } else {
+    files.forEach((f, i) => setTimeout(() => download(f, `${pad3(i+1)}.png`), i * 250));
+    alert(`Downloaded ${files.length} file(s).\nMove them to:\n  thulir/images/gallery/${folder}/\n\nAlso update "count" in gallery.html for "${folder}" to ${files.length}.`);
+  }
+}
+
+/* ════════════════════════════════════════════
+   SAVE ALL
+════════════════════════════════════════════ */
+async function saveAll() {
+  const slots   = Object.entries(slotFiles);
+  const gItems  = Object.entries(galleryFiles).filter(([,f])=>f.length>0);
+  const total   = slots.length + gItems.reduce((s,[,f])=>s+f.length,0);
+  if (!total) return;
+
+  if (!rootDir) {
+    slots.forEach(([id, e]) => { download(e.file, e.path.split('/').pop()); setStatus(id,'saved','fa-download','st-saved','Downloaded'); });
+    gItems.forEach(([folder, files]) => files.forEach((f,i) => setTimeout(() => download(f,`${pad3(i+1)}.png`), i*250)));
+    return;
+  }
+
+  const modal = document.getElementById('progModal');
+  const fill  = document.getElementById('progFill');
+  const txt   = document.getElementById('progText');
+  modal.classList.add('show');
+  let done = 0;
+
+  for (const [id, e] of slots) {
+    await writeFile(rootDir, e.path, e.file);
+    setStatus(id,'saved','fa-check-circle','st-saved','Saved ✓');
+    document.getElementById(`savebtn-${id}`).disabled = true;
+    delete slotFiles[id];
+    done++; fill.style.width = (done/total*100)+'%'; txt.textContent = `${done} of ${total} saved`;
+  }
+  for (const [folder, files] of gItems) {
+    for (let i=0; i<files.length; i++) {
+      await writeFile(rootDir, `images/gallery/${folder}/${pad3(i+1)}.png`, files[i]);
+      done++; fill.style.width = (done/total*100)+'%'; txt.textContent = `${done} of ${total} saved`;
+    }
+    await patchGalleryCount(folder, files.length);
+    document.getElementById(`gsave-${folder}`).disabled = true;
+    document.getElementById(`gmsg-${folder}`).style.display = 'inline';
+    document.getElementById(`ctag-${folder}`).textContent = `${files.length} saved ✓`;
+  }
+
+  setTimeout(() => { modal.classList.remove('show'); refreshPending(); }, 700);
+}
+
+/* ════════════════════════════════════════════
+   FOLDER CONNECT
+════════════════════════════════════════════ */
+async function selectFolder() {
+  if (!hasFsApi) { document.getElementById('warnBar').classList.add('show'); return; }
+  try {
+    rootDir = await window.showDirectoryPicker({ mode:'readwrite' });
+    const card = document.getElementById('setupCard');
+    card.classList.add('connected');
+    card.innerHTML = `
+      <i class="fas fa-check-circle" style="font-size:2rem;color:#4caf50;"></i>
+      <h2 style="color:#2e7d32;">Folder Connected!</h2>
+      <p>📁 <strong>${rootDir.name}/</strong> — Images will be saved directly into the correct paths.</p>`;
+    document.getElementById('saveAllBtn').disabled = false;
+    refreshPending();
+  } catch(e) { if (e.name !== 'AbortError') alert('Error: ' + e.message); }
+}
+
+/* ════════════════════════════════════════════
+   FILE SYSTEM HELPERS
+════════════════════════════════════════════ */
+async function writeFile(dir, relPath, file) {
+  const parts = relPath.split('/');
+  let cur = dir;
+  for (let i=0; i<parts.length-1; i++)
+    cur = await cur.getDirectoryHandle(parts[i], { create:true });
+  const ext   = parts[parts.length-1].split('.').pop().toLowerCase();
+  const blob  = await toBlob(file, ext);
+  const fh    = await cur.getFileHandle(parts[parts.length-1], { create:true });
+  const wr    = await fh.createWritable();
+  await wr.write(blob);
+  await wr.close();
+}
+
+async function toBlob(file, targetExt) {
+  const mime = { jpg:'image/jpeg', jpeg:'image/jpeg', png:'image/png', webp:'image/webp' };
+  const target = mime[targetExt] || 'image/png';
+  if (file.type === target) return file;
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth; c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img,0,0);
+      c.toBlob(b => { res(b); URL.revokeObjectURL(img.src); }, target, 0.93);
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function patchGalleryCount(folder, count) {
+  try {
+    const fh   = await rootDir.getFileHandle('gallery.html');
+    const text = await (await fh.getFile()).text();
+    const re   = new RegExp(`(folder:\\s*"${folder}"[^,\\n]*,\\s*name:[^,]+,\\s*count:\\s*)\\d+`);
+    const patched = text.replace(re, `$1${count}`);
+    const wr = await fh.createWritable();
+    await wr.write(patched);
+    await wr.close();
+  } catch(e) { console.warn('Could not patch gallery.html:', e); }
+}
+
+/* ════════════════════════════════════════════
+   UI HELPERS
+════════════════════════════════════════════ */
+function previewFile(file, previewId) {
+  const el = document.getElementById(previewId);
+  const reader = new FileReader();
+  reader.onload = ev => { el.innerHTML = `<img src="${ev.target.result}" alt="preview">`; };
+  reader.readAsDataURL(file);
+}
+
+function setStatus(id, _type, icon, cls, text) {
+  const el = document.getElementById(`st-${id}`);
+  el.className = `slot-status ${cls}`;
+  el.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+}
+
+function refreshPending() {
+  const n1 = Object.keys(slotFiles).length;
+  const n2 = Object.values(galleryFiles).reduce((s,f)=>s+f.length,0);
+  const total = n1 + n2;
+  document.getElementById('pendingNum').textContent = total;
+  document.getElementById('saveAllBtn').disabled = total===0 || !rootDir;
+}
+
+function download(file, name) {
+  const url = URL.createObjectURL(file);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function pad3(n) { return String(n).padStart(3,'0'); }
+</script>
+</body>
+</html>
