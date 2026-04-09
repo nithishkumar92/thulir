@@ -726,6 +726,79 @@
         font-weight: 700 !important;
       }
     }
+
+    /* ═══════════════════════════════════════
+       HERO ANIMATION
+    ═══════════════════════════════════════ */
+    .hero-animation {
+      position: absolute;
+      top: 50%;
+      right: 8%;
+      transform: translateY(-50%);
+      width: 400px;
+      max-width: 40vw;
+      height: 300px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .blueprint-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .blueprint-svg .anim-draw {
+      stroke: var(--gold);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: svgDraw 6s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite alternate;
+    }
+    @keyframes svgDraw {
+      0%, 10% {
+        stroke-dashoffset: var(--len);
+        fill-opacity: 0;
+      }
+      70%, 100% {
+        stroke-dashoffset: 0;
+        fill-opacity: 1;
+      }
+    }
+    .p-base { --len: 400; stroke-dasharray: 400; animation-delay: 0s; }
+    .p-b1 { --len: 200; stroke-dasharray: 200; animation-delay: 0.2s; }
+    .p-b1-f { --len: 150; stroke-dasharray: 150; animation-delay: 0.6s; }
+    .p-b1-d { --len: 100; stroke-dasharray: 100; animation-delay: 0.8s; }
+    .p-b1-w { --len: 80; stroke-dasharray: 80; animation-delay: 1s; }
+    .p-b2 { --len: 450; stroke-dasharray: 450; animation-delay: 0.6s; }
+    .p-b2-f { --len: 400; stroke-dasharray: 400; animation-delay: 1.2s; }
+    .p-b2-r { --len: 100; stroke-dasharray: 100; animation-delay: 1.5s; }
+    .p-b2-x { --len: 600; stroke-dasharray: 600; animation-delay: 1.8s; }
+    .p-crane-base { --len: 250; stroke-dasharray: 250; animation-delay: 0.4s; }
+    .p-crane-jib { --len: 150; stroke-dasharray: 150; animation-delay: 0.8s; }
+    .p-crane-back { --len: 50; stroke-dasharray: 50; animation-delay: 1s; }
+    .p-crane-cable { --len: 150; stroke-dasharray: 150; animation-delay: 1.2s; }
+    .p-crane-zig { --len: 350; stroke-dasharray: 350; animation-delay: 1.5s; }
+    .p-hook-c { --len: 100; stroke-dasharray: 100; animation-delay: 2s; }
+    .p-load { --len: 150; stroke-dasharray: 150; animation-delay: 2.2s; }
+
+    .crane-lift {
+      animation: craneLiftMove 6s ease-in-out infinite alternate;
+    }
+    @keyframes craneLiftMove {
+      0%, 30% { transform: translateY(40px); }
+      70%, 100% { transform: translateY(0px); }
+    }
+    @media (max-width: 860px) {
+      .hero-animation {
+        opacity: 0.4;
+        right: -5%;
+        max-width: 50vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-animation {
+        opacity: 0.15;
+        right: -10%;
+        max-width: 70vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -755,6 +828,42 @@
 
   <!-- ══════════ HERO BAND ══════════ -->
   <div class="g-hero">
+    <div class="hero-animation" aria-hidden="true">
+      <svg class="blueprint-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <path d="M0 250 H400 M50 0 V300 M100 0 V300 M150 0 V300 M200 0 V300 M250 0 V300 M300 0 V300 M350 0 V300 M0 50 H400 M0 100 H400 M0 150 H400 M0 200 H400" stroke="rgba(201,168,76,0.05)" stroke-width="1" />
+
+        <g filter="url(#glow)">
+          <line x1="20" y1="250" x2="380" y2="250" stroke-width="2" class="anim-draw p-base" />
+          <path d="M 60 250 V 160 H 130 V 250" fill="none" class="anim-draw p-b1" />
+          <path d="M 60 220 H 130 M 60 190 H 130" fill="none" class="anim-draw p-b1-f" opacity="0.5" />
+          <path d="M 85 250 V 210 H 105 V 250" fill="none" class="anim-draw p-b1-d" opacity="0.8" />
+          <path d="M 70 170 H 90 V 180 H 70 Z M 100 170 H 120 V 180 H 100 Z" fill="rgba(201,168,76,0.1)" class="anim-draw p-b1-w" />
+          <path d="M 150 250 V 70 H 250 V 250" fill="none" stroke-width="2.5" class="anim-draw p-b2" />
+          <path d="M 150 210 H 250 M 150 170 H 250 M 150 130 H 250 M 150 90 H 250" fill="none" class="anim-draw p-b2-f" opacity="0.6" />
+          <path d="M 180 70 L 200 40 L 220 70" fill="none" stroke-width="1.5" class="anim-draw p-b2-r" />
+          <path d="M 150 210 L 250 250 M 150 250 L 250 210 M 150 170 L 250 210 M 150 210 L 250 170 M 150 130 L 250 170 M 150 170 L 250 130" fill="none" class="anim-draw p-b2-x" opacity="0.25" />
+          <path d="M 280 250 V 20" fill="none" stroke-width="2.5" class="anim-draw p-crane-base" />
+          <path d="M 280 20 L 150 20" fill="none" stroke-width="2.5" class="anim-draw p-crane-jib" />
+          <path d="M 280 20 L 310 40" fill="none" stroke-width="2.5" class="anim-draw p-crane-back" />
+          <path d="M 280 60 L 150 20" fill="none" class="anim-draw p-crane-cable" opacity="0.5" />
+          <path d="M 280 20 L 250 60 L 280 100 L 250 140 L 280 180 L 250 220 L 280 250" fill="none" class="anim-draw p-crane-zig" opacity="0.3" />
+          <g class="crane-lift">
+            <line x1="200" y1="20" x2="200" y2="100" class="anim-draw p-hook-c" fill="none" />
+            <path d="M 190 100 H 210 M 195 100 V 110 M 205 100 V 110 M 190 110 H 210 V 130 H 190 Z" fill="rgba(201,168,76,0.15)" stroke-width="1.5" class="anim-draw p-load" />
+          </g>
+        </g>
+      </svg>
+    </div>
     <div class="g-hero-inner">
       <div>
         <div class="g-hero-badge"><span class="g-hero-badge-dot"></span>COMPLETED PROJECTS</div>
