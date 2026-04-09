@@ -877,6 +877,7 @@ body {
 
   .hero-content p {
     max-width: 100%;
+    text-align: justify;
   }
 
   .cta-buttons {
