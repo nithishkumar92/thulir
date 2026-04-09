@@ -732,73 +732,113 @@
     }
 
     /* ═══════════════════════════════════════
-       HERO ANIMATION
+       HERO ANIMATION — Construction Site
     ═══════════════════════════════════════ */
     .hero-animation {
       position: absolute;
       top: 50%;
-      right: 8%;
+      right: 5%;
       transform: translateY(-50%);
-      width: 400px;
-      max-width: 40vw;
-      height: 300px;
+      width: 480px;
+      max-width: 42vw;
+      height: 380px;
       z-index: 1;
       pointer-events: none;
     }
     .blueprint-svg {
       width: 100%;
       height: 100%;
+      overflow: visible;
     }
-    .blueprint-svg .anim-draw {
-      stroke: var(--gold);
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      animation: svgDraw 6s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite alternate;
-    }
-    @keyframes svgDraw {
-      0%, 10% {
-        stroke-dashoffset: var(--len);
-        fill-opacity: 0;
-      }
-      70%, 100% {
-        stroke-dashoffset: 0;
-        fill-opacity: 1;
-      }
-    }
-    .p-base { --len: 400; stroke-dasharray: 400; animation-delay: 0s; }
-    .p-b1 { --len: 200; stroke-dasharray: 200; animation-delay: 0.2s; }
-    .p-b1-f { --len: 150; stroke-dasharray: 150; animation-delay: 0.6s; }
-    .p-b1-d { --len: 100; stroke-dasharray: 100; animation-delay: 0.8s; }
-    .p-b1-w { --len: 80; stroke-dasharray: 80; animation-delay: 1s; }
-    .p-b2 { --len: 450; stroke-dasharray: 450; animation-delay: 0.6s; }
-    .p-b2-f { --len: 400; stroke-dasharray: 400; animation-delay: 1.2s; }
-    .p-b2-r { --len: 100; stroke-dasharray: 100; animation-delay: 1.5s; }
-    .p-b2-x { --len: 600; stroke-dasharray: 600; animation-delay: 1.8s; }
-    .p-crane-base { --len: 250; stroke-dasharray: 250; animation-delay: 0.4s; }
-    .p-crane-jib { --len: 150; stroke-dasharray: 150; animation-delay: 0.8s; }
-    .p-crane-back { --len: 50; stroke-dasharray: 50; animation-delay: 1s; }
-    .p-crane-cable { --len: 150; stroke-dasharray: 150; animation-delay: 1.2s; }
-    .p-crane-zig { --len: 350; stroke-dasharray: 350; animation-delay: 1.5s; }
-    .p-hook-c { --len: 100; stroke-dasharray: 100; animation-delay: 2s; }
-    .p-load { --len: 150; stroke-dasharray: 150; animation-delay: 2.2s; }
 
-    .crane-lift {
-      animation: craneLiftMove 6s ease-in-out infinite alternate;
+    /* Draw-on animation */
+    .bp { fill: none; stroke: var(--gold); stroke-linecap: round; stroke-linejoin: round; }
+    .bp-draw {
+      animation: bpDraw 4s cubic-bezier(0.65,0,0.35,1) forwards;
     }
-    @keyframes craneLiftMove {
-      0%, 30% { transform: translateY(40px); }
-      70%, 100% { transform: translateY(0px); }
+    @keyframes bpDraw {
+      from { stroke-dashoffset: var(--d); opacity: 0.2; }
+      to   { stroke-dashoffset: 0; opacity: 1; }
+    }
+    /* Fade-in for fills */
+    .bp-fade {
+      opacity: 0;
+      animation: bpFade 1.2s ease forwards;
+    }
+    @keyframes bpFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    /* Pulsing glow */
+    .bp-pulse {
+      animation: bpPulse 3s ease-in-out infinite;
+    }
+    @keyframes bpPulse {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 0.6; }
+    }
+    /* Crane hook lift */
+    .hook-group {
+      animation: hookLift 5s ease-in-out infinite alternate;
+    }
+    @keyframes hookLift {
+      0%   { transform: translateY(30px); }
+      100% { transform: translateY(0px); }
+    }
+    /* Crane cable swing */
+    .cable-swing {
+      transform-origin: 320px 28px;
+      animation: cableSwing 4s ease-in-out infinite alternate;
+    }
+    @keyframes cableSwing {
+      0%   { transform: rotate(-2deg); }
+      100% { transform: rotate(2deg); }
+    }
+    /* Floating particles */
+    .spark {
+      fill: var(--gold);
+      opacity: 0;
+      animation: sparkFloat 3s ease-out infinite;
+    }
+    @keyframes sparkFloat {
+      0%   { opacity: 0; transform: translateY(0) scale(1); }
+      20%  { opacity: 0.9; }
+      100% { opacity: 0; transform: translateY(-40px) scale(0); }
+    }
+    /* Dimension tick */
+    .dim-line { stroke: rgba(201,168,76,0.35); stroke-width: 0.6; stroke-dasharray: 3 2; }
+    .dim-txt {
+      font-family: 'Inter', sans-serif;
+      font-size: 7px;
+      fill: rgba(201,168,76,0.5);
+      letter-spacing: 0.5px;
+    }
+    /* Progress bar animation */
+    .progress-fill {
+      animation: progressGrow 4s ease-out forwards;
+    }
+    @keyframes progressGrow {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+    /* Blinking beacon */
+    .beacon {
+      animation: beaconBlink 1.5s ease-in-out infinite;
+    }
+    @keyframes beaconBlink {
+      0%, 100% { opacity: 0.2; r: 2; }
+      50%      { opacity: 1; r: 4; }
     }
     @media (max-width: 860px) {
       .hero-animation {
-        opacity: 0.4;
+        opacity: 0.35;
         right: -5%;
         max-width: 50vw;
       }
     }
     @media (max-width: 600px) {
       .hero-animation {
-        opacity: 0.15;
+        opacity: 0.12;
         right: -10%;
         max-width: 70vw;
       }
@@ -833,38 +873,197 @@
   <!-- ══════════ HERO BAND ══════════ -->
   <div class="g-hero">
     <div class="hero-animation" aria-hidden="true">
-      <svg class="blueprint-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+      <svg class="blueprint-svg" viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
+            <feGaussianBlur stdDeviation="1.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
+          <filter id="glowStrong">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d4aa6a"/>
+            <stop offset="100%" stop-color="#C9A84C"/>
+          </linearGradient>
         </defs>
-        
-        <path d="M0 250 H400 M50 0 V300 M100 0 V300 M150 0 V300 M200 0 V300 M250 0 V300 M300 0 V300 M350 0 V300 M0 50 H400 M0 100 H400 M0 150 H400 M0 200 H400" stroke="rgba(201,168,76,0.05)" stroke-width="1" />
+
+        <!-- ── Blueprint grid ── -->
+        <g opacity="0.06">
+          <line x1="0" y1="60" x2="480" y2="60" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="0" y1="120" x2="480" y2="120" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="0" y1="180" x2="480" y2="180" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="0" y1="240" x2="480" y2="240" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="0" y1="300" x2="480" y2="300" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="60" y1="0" x2="60" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="120" y1="0" x2="120" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="180" y1="0" x2="180" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="240" y1="0" x2="240" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="300" y1="0" x2="300" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="360" y1="0" x2="360" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+          <line x1="420" y1="0" x2="420" y2="380" stroke="var(--gold)" stroke-width="0.5"/>
+        </g>
 
         <g filter="url(#glow)">
-          <line x1="20" y1="250" x2="380" y2="250" stroke-width="2" class="anim-draw p-base" />
-          <path d="M 60 250 V 160 H 130 V 250" fill="none" class="anim-draw p-b1" />
-          <path d="M 60 220 H 130 M 60 190 H 130" fill="none" class="anim-draw p-b1-f" opacity="0.5" />
-          <path d="M 85 250 V 210 H 105 V 250" fill="none" class="anim-draw p-b1-d" opacity="0.8" />
-          <path d="M 70 170 H 90 V 180 H 70 Z M 100 170 H 120 V 180 H 100 Z" fill="rgba(201,168,76,0.1)" class="anim-draw p-b1-w" />
-          <path d="M 150 250 V 70 H 250 V 250" fill="none" stroke-width="2.5" class="anim-draw p-b2" />
-          <path d="M 150 210 H 250 M 150 170 H 250 M 150 130 H 250 M 150 90 H 250" fill="none" class="anim-draw p-b2-f" opacity="0.6" />
-          <path d="M 180 70 L 200 40 L 220 70" fill="none" stroke-width="1.5" class="anim-draw p-b2-r" />
-          <path d="M 150 210 L 250 250 M 150 250 L 250 210 M 150 170 L 250 210 M 150 210 L 250 170 M 150 130 L 250 170 M 150 170 L 250 130" fill="none" class="anim-draw p-b2-x" opacity="0.25" />
-          <path d="M 280 250 V 20" fill="none" stroke-width="2.5" class="anim-draw p-crane-base" />
-          <path d="M 280 20 L 150 20" fill="none" stroke-width="2.5" class="anim-draw p-crane-jib" />
-          <path d="M 280 20 L 310 40" fill="none" stroke-width="2.5" class="anim-draw p-crane-back" />
-          <path d="M 280 60 L 150 20" fill="none" class="anim-draw p-crane-cable" opacity="0.5" />
-          <path d="M 280 20 L 250 60 L 280 100 L 250 140 L 280 180 L 250 220 L 280 250" fill="none" class="anim-draw p-crane-zig" opacity="0.3" />
-          <g class="crane-lift">
-            <line x1="200" y1="20" x2="200" y2="100" class="anim-draw p-hook-c" fill="none" />
-            <path d="M 190 100 H 210 M 195 100 V 110 M 205 100 V 110 M 190 110 H 210 V 130 H 190 Z" fill="rgba(201,168,76,0.15)" stroke-width="1.5" class="anim-draw p-load" />
+
+          <!-- ── Ground line ── -->
+          <line x1="10" y1="330" x2="470" y2="330" class="bp bp-draw" stroke-width="2" style="--d:460;stroke-dasharray:460;animation-delay:0s"/>
+
+          <!-- ══ BUILDING 1 — Small house (left) ══ -->
+          <!-- Walls -->
+          <path d="M 40 330 V 220 H 160 V 330" class="bp bp-draw" stroke-width="2" style="--d:380;stroke-dasharray:380;animation-delay:0.3s"/>
+          <!-- Roof -->
+          <path d="M 30 220 L 100 170 L 170 220" class="bp bp-draw" stroke-width="2" style="--d:260;stroke-dasharray:260;animation-delay:0.6s"/>
+          <!-- Roof ridge line -->
+          <line x1="100" y1="170" x2="100" y2="155" class="bp bp-draw" stroke-width="1.5" style="--d:15;stroke-dasharray:15;animation-delay:0.8s"/>
+          <!-- Floor lines -->
+          <line x1="40" y1="275" x2="160" y2="275" class="bp bp-draw" stroke-width="0.8" style="--d:120;stroke-dasharray:120;animation-delay:0.9s" opacity="0.5"/>
+          <!-- Door -->
+          <path d="M 85 330 V 290 H 115 V 330" class="bp bp-draw" stroke-width="1.5" style="--d:120;stroke-dasharray:120;animation-delay:1s"/>
+          <!-- Door arc -->
+          <path d="M 85 290 Q 100 275 115 290" class="bp bp-draw" stroke-width="1" style="--d:45;stroke-dasharray:45;animation-delay:1.2s" opacity="0.6"/>
+          <!-- Windows -->
+          <rect x="50" y="235" width="20" height="18" rx="2" class="bp bp-draw" stroke-width="1.2" style="--d:76;stroke-dasharray:76;animation-delay:1.1s"/>
+          <line x1="60" y1="235" x2="60" y2="253" class="bp bp-draw" stroke-width="0.8" style="--d:18;stroke-dasharray:18;animation-delay:1.3s" opacity="0.6"/>
+          <line x1="50" y1="244" x2="70" y2="244" class="bp bp-draw" stroke-width="0.8" style="--d:20;stroke-dasharray:20;animation-delay:1.3s" opacity="0.6"/>
+          <rect x="130" y="235" width="20" height="18" rx="2" class="bp bp-draw" stroke-width="1.2" style="--d:76;stroke-dasharray:76;animation-delay:1.1s"/>
+          <line x1="140" y1="235" x2="140" y2="253" class="bp bp-draw" stroke-width="0.8" style="--d:18;stroke-dasharray:18;animation-delay:1.3s" opacity="0.6"/>
+          <line x1="130" y1="244" x2="150" y2="244" class="bp bp-draw" stroke-width="0.8" style="--d:20;stroke-dasharray:20;animation-delay:1.3s" opacity="0.6"/>
+          <!-- Upper windows -->
+          <rect x="50" y="282" width="20" height="18" rx="2" class="bp bp-draw" stroke-width="1.2" style="--d:76;stroke-dasharray:76;animation-delay:1.2s"/>
+          <rect x="130" y="282" width="20" height="18" rx="2" class="bp bp-draw" stroke-width="1.2" style="--d:76;stroke-dasharray:76;animation-delay:1.2s"/>
+          <!-- Building fill glow -->
+          <rect x="41" y="221" width="118" height="108" rx="0" fill="rgba(201,168,76,0.03)" class="bp-fade" style="animation-delay:1.5s"/>
+
+          <!-- ══ BUILDING 2 — Tall apartment (center) ══ -->
+          <!-- Main walls -->
+          <path d="M 185 330 V 80 H 310 V 330" class="bp bp-draw" stroke-width="2.5" style="--d:625;stroke-dasharray:625;animation-delay:0.5s"/>
+          <!-- Floor slabs -->
+          <line x1="185" y1="280" x2="310" y2="280" class="bp bp-draw" stroke-width="1" style="--d:125;stroke-dasharray:125;animation-delay:1s" opacity="0.5"/>
+          <line x1="185" y1="230" x2="310" y2="230" class="bp bp-draw" stroke-width="1" style="--d:125;stroke-dasharray:125;animation-delay:1.1s" opacity="0.5"/>
+          <line x1="185" y1="180" x2="310" y2="180" class="bp bp-draw" stroke-width="1" style="--d:125;stroke-dasharray:125;animation-delay:1.2s" opacity="0.5"/>
+          <line x1="185" y1="130" x2="310" y2="130" class="bp bp-draw" stroke-width="1" style="--d:125;stroke-dasharray:125;animation-delay:1.3s" opacity="0.5"/>
+          <!-- Parapet wall -->
+          <path d="M 182 80 H 313 M 182 75 H 313" class="bp bp-draw" stroke-width="0.8" style="--d:262;stroke-dasharray:262;animation-delay:1.4s" opacity="0.6"/>
+          <!-- Windows — row 1 (ground) -->
+          <rect x="195" y="290" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.4s"/>
+          <rect x="235" y="290" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.5s"/>
+          <rect x="275" y="290" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.6s"/>
+          <!-- Windows — row 2 -->
+          <rect x="195" y="240" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.5s"/>
+          <rect x="235" y="240" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.6s"/>
+          <rect x="275" y="240" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.7s"/>
+          <!-- Windows — row 3 -->
+          <rect x="195" y="190" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.6s"/>
+          <rect x="235" y="190" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.7s"/>
+          <rect x="275" y="190" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.8s"/>
+          <!-- Windows — row 4 -->
+          <rect x="195" y="140" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.7s"/>
+          <rect x="235" y="140" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.8s"/>
+          <rect x="275" y="140" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.9s"/>
+          <!-- Windows — row 5 (top) -->
+          <rect x="195" y="90" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.8s"/>
+          <rect x="235" y="90" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:1.9s"/>
+          <rect x="275" y="90" width="22" height="28" rx="2" class="bp bp-draw" stroke-width="1" style="--d:100;stroke-dasharray:100;animation-delay:2.0s"/>
+          <!-- Entry door -->
+          <path d="M 237 330 V 295 H 258 V 330" class="bp bp-draw" stroke-width="1.5" style="--d:105;stroke-dasharray:105;animation-delay:2s"/>
+          <!-- Steps -->
+          <path d="M 230 330 H 265 M 227 333 H 268 M 224 336 H 271" class="bp bp-draw" stroke-width="0.8" style="--d:135;stroke-dasharray:135;animation-delay:2.1s" opacity="0.5"/>
+          <!-- Building fill glow -->
+          <rect x="186" y="81" width="123" height="248" rx="0" fill="rgba(201,168,76,0.025)" class="bp-fade" style="animation-delay:2s"/>
+          <!-- Water tank on roof -->
+          <rect x="230" y="58" width="35" height="17" rx="3" class="bp bp-draw" stroke-width="1" style="--d:104;stroke-dasharray:104;animation-delay:2.2s"/>
+          <line x1="247" y1="58" x2="247" y2="50" class="bp bp-draw" stroke-width="0.8" style="--d:8;stroke-dasharray:8;animation-delay:2.3s" opacity="0.6"/>
+
+          <!-- ══ TOWER CRANE ══ -->
+          <!-- Main mast -->
+          <line x1="370" y1="330" x2="370" y2="28" class="bp bp-draw" stroke-width="3" style="--d:302;stroke-dasharray:302;animation-delay:0.4s"/>
+          <!-- Mast lattice -->
+          <path d="M 363 330 V 28 M 377 330 V 28" class="bp bp-draw" stroke-width="0.6" style="--d:604;stroke-dasharray:604;animation-delay:0.7s" opacity="0.3"/>
+          <path d="M 363 330 L 377 300 L 363 270 L 377 240 L 363 210 L 377 180 L 363 150 L 377 120 L 363 90 L 377 60 L 363 30" class="bp bp-draw" stroke-width="0.6" style="--d:620;stroke-dasharray:620;animation-delay:1s" opacity="0.25"/>
+          <!-- Base platform -->
+          <path d="M 350 330 H 390 M 345 335 H 395" class="bp bp-draw" stroke-width="1.5" style="--d:90;stroke-dasharray:90;animation-delay:0.5s"/>
+          <!-- Cab -->
+          <rect x="362" y="55" width="16" height="12" rx="1" class="bp bp-draw" stroke-width="1" style="--d:56;stroke-dasharray:56;animation-delay:1.2s"/>
+          <!-- Jib arm (right — forward jib) -->
+          <line x1="370" y1="28" x2="185" y2="28" class="bp bp-draw" stroke-width="2.5" style="--d:185;stroke-dasharray:185;animation-delay:0.8s"/>
+          <!-- Counter-jib (left) -->
+          <line x1="370" y1="28" x2="430" y2="28" class="bp bp-draw" stroke-width="2.5" style="--d:60;stroke-dasharray:60;animation-delay:0.9s"/>
+          <!-- Counter-weight -->
+          <rect x="418" y="28" width="16" height="10" rx="1" fill="rgba(201,168,76,0.15)" class="bp bp-draw" stroke-width="1.2" style="--d:52;stroke-dasharray:52;animation-delay:1.1s"/>
+          <!-- Top support cables -->
+          <line x1="370" y1="18" x2="370" y2="28" class="bp bp-draw" stroke-width="2" style="--d:10;stroke-dasharray:10;animation-delay:0.85s"/>
+          <line x1="370" y1="18" x2="220" y2="28" class="bp bp-draw" stroke-width="1" style="--d:152;stroke-dasharray:152;animation-delay:0.95s" opacity="0.6"/>
+          <line x1="370" y1="18" x2="430" y2="28" class="bp bp-draw" stroke-width="1" style="--d:62;stroke-dasharray:62;animation-delay:1s" opacity="0.6"/>
+          <!-- Trolley on jib -->
+          <rect x="248" y="24" width="12" height="8" rx="1" class="bp bp-draw" stroke-width="0.8" style="--d:40;stroke-dasharray:40;animation-delay:1.5s"/>
+
+          <!-- Cable + hook (animated) -->
+          <g class="cable-swing">
+            <line x1="254" y1="32" x2="254" y2="95" class="bp bp-draw" stroke-width="1" style="--d:63;stroke-dasharray:63;animation-delay:1.8s" opacity="0.7"/>
+            <g class="hook-group">
+              <!-- Hook -->
+              <path d="M 250 95 H 258 M 254 95 V 105 Q 254 112 248 112 Q 242 112 242 106" class="bp bp-draw" stroke-width="1.2" style="--d:40;stroke-dasharray:40;animation-delay:2s"/>
+              <!-- Load — concrete slab -->
+              <rect x="240" y="114" width="28" height="14" rx="2" fill="rgba(201,168,76,0.1)" class="bp bp-draw" stroke-width="1.2" style="--d:84;stroke-dasharray:84;animation-delay:2.2s"/>
+              <!-- Load lifting lines -->
+              <line x1="248" y1="105" x2="244" y2="114" class="bp bp-draw" stroke-width="0.8" style="--d:12;stroke-dasharray:12;animation-delay:2.3s" opacity="0.5"/>
+              <line x1="248" y1="105" x2="264" y2="114" class="bp bp-draw" stroke-width="0.8" style="--d:18;stroke-dasharray:18;animation-delay:2.3s" opacity="0.5"/>
+            </g>
           </g>
+
+          <!-- ═══ DETAILS & DECORATIONS ═══ -->
+
+          <!-- Dimension line — small building width -->
+          <line x1="40" y1="345" x2="160" y2="345" class="dim-line bp-fade" style="animation-delay:2.5s"/>
+          <line x1="40" y1="340" x2="40" y2="350" class="dim-line bp-fade" style="animation-delay:2.5s"/>
+          <line x1="160" y1="340" x2="160" y2="350" class="dim-line bp-fade" style="animation-delay:2.5s"/>
+          <text x="85" y="353" class="dim-txt bp-fade" style="animation-delay:2.6s" text-anchor="middle">30'-0"</text>
+
+          <!-- Dimension line — tall building width -->
+          <line x1="185" y1="345" x2="310" y2="345" class="dim-line bp-fade" style="animation-delay:2.7s"/>
+          <line x1="185" y1="340" x2="185" y2="350" class="dim-line bp-fade" style="animation-delay:2.7s"/>
+          <line x1="310" y1="340" x2="310" y2="350" class="dim-line bp-fade" style="animation-delay:2.7s"/>
+          <text x="247" y="353" class="dim-txt bp-fade" style="animation-delay:2.8s" text-anchor="middle">G+4 · 40'-0"</text>
+
+          <!-- Dimension line — tall building height -->
+          <line x1="318" y1="80" x2="318" y2="330" class="dim-line bp-fade" style="animation-delay:2.9s"/>
+          <line x1="313" y1="80" x2="323" y2="80" class="dim-line bp-fade" style="animation-delay:2.9s"/>
+          <line x1="313" y1="330" x2="323" y2="330" class="dim-line bp-fade" style="animation-delay:2.9s"/>
+          <text x="327" y="210" class="dim-txt bp-fade" style="animation-delay:3s" text-anchor="start" transform="rotate(90 327 210)">50'-0"</text>
+
+          <!-- Safety beacon on crane top -->
+          <circle cx="370" cy="14" r="3" fill="#ff4444" class="beacon" filter="url(#glowStrong)"/>
+
+          <!-- Construction sparks / dust particles -->
+          <circle cx="120" cy="325" r="1.5" class="spark" style="animation-delay:0s"/>
+          <circle cx="200" cy="326" r="1" class="spark" style="animation-delay:0.8s"/>
+          <circle cx="260" cy="328" r="1.2" class="spark" style="animation-delay:1.6s"/>
+          <circle cx="310" cy="325" r="1" class="spark" style="animation-delay:2.4s"/>
+          <circle cx="160" cy="327" r="0.8" class="spark" style="animation-delay:0.4s"/>
+          <circle cx="370" cy="326" r="1.3" class="spark" style="animation-delay:1.2s"/>
+          <circle cx="90" cy="328" r="1" class="spark" style="animation-delay:2s"/>
+          <circle cx="250" cy="325" r="0.7" class="spark" style="animation-delay:2.8s"/>
+
+          <!-- Scaffolding on tall building right side -->
+          <g opacity="0.2">
+            <line x1="310" y1="330" x2="310" y2="80" class="bp bp-draw" stroke-width="0.6" style="--d:250;stroke-dasharray:250;animation-delay:2s"/>
+            <line x1="315" y1="330" x2="315" y2="80" class="bp bp-draw" stroke-width="0.6" style="--d:250;stroke-dasharray:250;animation-delay:2s"/>
+            <line x1="310" y1="280" x2="315" y2="280" class="bp bp-draw" stroke-width="0.6" style="--d:5;stroke-dasharray:5;animation-delay:2.2s"/>
+            <line x1="310" y1="230" x2="315" y2="230" class="bp bp-draw" stroke-width="0.6" style="--d:5;stroke-dasharray:5;animation-delay:2.3s"/>
+            <line x1="310" y1="180" x2="315" y2="180" class="bp bp-draw" stroke-width="0.6" style="--d:5;stroke-dasharray:5;animation-delay:2.4s"/>
+            <line x1="310" y1="130" x2="315" y2="130" class="bp bp-draw" stroke-width="0.6" style="--d:5;stroke-dasharray:5;animation-delay:2.5s"/>
+          </g>
+
+          <!-- Small tree (landscaping) left of building 1 -->
+          <line x1="22" y1="330" x2="22" y2="308" class="bp bp-draw" stroke-width="1" style="--d:22;stroke-dasharray:22;animation-delay:2.8s" opacity="0.4"/>
+          <circle cx="22" cy="302" r="8" class="bp bp-draw" stroke-width="0.8" style="--d:51;stroke-dasharray:51;animation-delay:3s" opacity="0.3"/>
+          <circle cx="22" cy="296" r="6" class="bp bp-draw" stroke-width="0.8" style="--d:38;stroke-dasharray:38;animation-delay:3.1s" opacity="0.25"/>
+
+          <!-- Ground texture — hatching below ground line -->
+          <path d="M 10 335 L 20 330 M 30 335 L 40 330 M 50 335 L 60 330 M 70 335 L 80 330 M 90 335 L 100 330 M 110 335 L 120 330 M 130 335 L 140 330 M 150 335 L 160 330 M 170 335 L 180 330 M 190 335 L 200 330 M 210 335 L 220 330 M 230 335 L 240 330 M 250 335 L 260 330 M 270 335 L 280 330 M 290 335 L 300 330 M 310 335 L 320 330 M 330 335 L 340 330 M 350 335 L 360 330 M 370 335 L 380 330 M 390 335 L 400 330 M 410 335 L 420 330 M 430 335 L 440 330 M 450 335 L 460 330 M 460 335 L 470 330" class="bp bp-draw" stroke-width="0.5" style="--d:500;stroke-dasharray:500;animation-delay:0.2s" opacity="0.15"/>
+
         </g>
       </svg>
     </div>
