@@ -10,7 +10,6 @@
       "test_navbar.html",
       "admin.html",
       "admin-server.js",
-      "sites-data.js",
       "package.json",
       "package-lock.json",
       "node_modules/**"

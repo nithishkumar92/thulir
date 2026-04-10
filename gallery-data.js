@@ -34,8 +34,8 @@ window.GALLERY_MANIFESTS = {
   ],
 
   // ── Villa-Akkamapettai-3 ─────────────────────────────────────────────────────────
+  // Note: 20241128_175527.heic is excluded — browsers cannot display .heic files
   "Villa-Akkamapettai-3": [
-    "20241128_175527.heic",
     "Photo from Nithish Kumar (5).jpg",
   ],
 
