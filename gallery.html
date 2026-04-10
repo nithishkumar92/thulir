@@ -401,14 +401,26 @@
       cursor: pointer;
       position: relative;
       background: #1a1a1a;
+      /* Shimmer skeleton while image loads */
+      background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
     }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* Stop shimmer once image is loaded — set via JS */
+    .strip-photo.loaded { animation: none; background: #1a1a1a; }
     .strip-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .45s ease;
+      transition: transform .45s ease, opacity .3s ease;
+      opacity: 0;  /* start invisible, fade in on load */
     }
+    .strip-photo.loaded img { opacity: 1; }
     .strip-photo:hover img { transform: scale(1.07); }
     .strip-photo-overlay {
       position: absolute;
@@ -1222,9 +1234,13 @@
         let stripHtml = specCardHtml;
         if (hasPhotos) {
           files.forEach((f, fi) => {
+            /* First photo per row loads eagerly (already in viewport); rest are lazy */
+            const loadAttr = (i === 0 && fi === 0) ? 'eager' : 'lazy';
             stripHtml += `
               <div class="strip-photo js-strip-photo" data-idx="${fi}">
-                <img src="${IMG}${site.folder}/${f}" alt="${site.name} — photo ${fi + 1}" loading="lazy">
+                <img src="${IMG}${site.folder}/${f}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
+                     onload="this.closest('.strip-photo').classList.add('loaded')"
+                     onerror="this.closest('.strip-photo').classList.add('loaded'); this.style.opacity='0.1'">
                 <div class="strip-photo-overlay">
                   <span class="strip-photo-lbl">${site.typeName}</span>
                 </div>
@@ -1314,7 +1330,7 @@
       lbFiles.forEach((src, i) => {
         const t = document.createElement('div');
         t.className = 'lb-thumb';
-        t.innerHTML = `<img src="${src}" alt="Photo ${i + 1}" loading="lazy">`;
+        t.innerHTML = `<img src="${src}" alt="Photo ${i + 1}" loading="lazy" decoding="async">`;
         t.addEventListener('click', () => showImg(i));
         thumbsEl.appendChild(t);
       });
