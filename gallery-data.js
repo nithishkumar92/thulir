@@ -57,8 +57,8 @@ window.GALLERY_MANIFESTS = {
     "qqq.jpg",
   ],
 
-  // ── Villa-S.K Nagar ─────────────────────────────────────────────────────────
-  "Villa-S.K Nagar": [
+  // ── Kupnoor - Sankari ───────────────────────────────────────────────────────
+  "Kupnoor - Sankari": [
     "orr-1.jpg",
     "orr-2.jpg",
     "orr-3.jpg",
