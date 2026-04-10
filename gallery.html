@@ -1238,7 +1238,7 @@
             const loadAttr = (i === 0 && fi === 0) ? 'eager' : 'lazy';
             stripHtml += `
               <div class="strip-photo js-strip-photo" data-idx="${fi}">
-                <img src="${IMG}${site.folder}/${f}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
+                <img src="${IMG}${encodeURIComponent(site.folder)}/${encodeURIComponent(f)}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
                      onload="this.closest('.strip-photo').classList.add('loaded')"
                      onerror="this.closest('.strip-photo').classList.add('loaded'); this.style.opacity='0.1'">
                 <div class="strip-photo-overlay">
@@ -1317,7 +1317,7 @@
 
     function openLightbox(site, files, startIdx) {
       if (!files.length) return;
-      lbFiles = files.map(f => `${IMG}${site.folder}/${f}`);
+      lbFiles = files.map(f => `${IMG}${encodeURIComponent(site.folder)}/${encodeURIComponent(f)}`);
 
       document.getElementById('lbName').textContent = site.name;
       document.getElementById('lbMeta').textContent =
