@@ -76,7 +76,7 @@ window.GALLERY_SITES = [
     ]
   },
   {
-    "folder": "Villa-akkamapetti #1",
+    "folder": "Villa-akkamapetti-1",
     "type": "villa",
     "typeName": "Villa",
     "name": "Villa — Akkamapetti",
@@ -113,7 +113,7 @@ window.GALLERY_SITES = [
     ]
   },
   {
-    "folder": "Villa-Akkamapettai #2",
+    "folder": "Villa-Akkamapettai-2",
     "type": "villa",
     "typeName": "Villa",
     "name": "Villa — Thangayur II",

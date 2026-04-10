@@ -25,22 +25,22 @@ window.GALLERY_MANIFESTS = {
     "Sankari Town-2.jpg",
   ],
 
-  // ── Villa-Akkamapettai #2 ─────────────────────────────────────────────────────────
-  "Villa-Akkamapettai #2": [
+  // ── Villa-Akkamapettai-2 ─────────────────────────────────────────────────────────
+  "Villa-Akkamapettai-2": [
     "20231110_162046~2.jpg",
     "IMG-20230715-WA0009.jpg",
     "Photo from Nithish Kumar.jpg",
     "Screenshot_20260213_211301_Photos.png",
   ],
 
-  // ── Villa-Akkamapettai #3 ─────────────────────────────────────────────────────────
-  "Villa-Akkamapettai #3": [
+  // ── Villa-Akkamapettai-3 ─────────────────────────────────────────────────────────
+  "Villa-Akkamapettai-3": [
     "20241128_175527.heic",
     "Photo from Nithish Kumar (5).jpg",
   ],
 
-  // ── Villa-akkamapetti #1 ─────────────────────────────────────────────────────────
-  "Villa-akkamapetti #1": [
+  // ── Villa-akkamapetti-1 ─────────────────────────────────────────────────────────
+  "Villa-akkamapetti-1": [
     "20220602_072612.jpg",
     "20230107_100118.jpg",
     "IMG-20220301-WA0002.jpg",

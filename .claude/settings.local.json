@@ -8,7 +8,11 @@
       "Bash(dir \"F:\\\\thulir-website-claude\\\\thulir\\\\images\\\\gallery\")",
       "Bash(ls \"F:\\\\thulir-website-claude\\\\thulir\\\\images\\\\gallery\"\" 2>/dev/null; find \"F:thulir-website-claude\" -name \"package.json \")",
       "Bash(dir \"F:\\\\thulir-website-claude\\\\thulir\" /b)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(node -e ':*)",
+      "Bash(mv \"Villa-akkamapetti #1\" \"Villa-akkamapetti-1\")",
+      "Bash(mv \"Villa-Akkamapettai #2\" \"Villa-Akkamapettai-2\")",
+      "Bash(mv \"Villa-Akkamapettai #3\" \"Villa-Akkamapettai-3\")"
     ]
   }
 }
