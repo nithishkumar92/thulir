@@ -1413,6 +1413,7 @@
         vid.style.display = 'block';
         vid.src = src;
         vid.load();
+        vid.play().catch(() => {}); /* autoplay */
       } else {
         vid.style.display = 'none';
         img.style.display = 'block';
