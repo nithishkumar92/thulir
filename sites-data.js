@@ -22,7 +22,7 @@ window.GALLERY_SITES = [
       },
       {
         "label": "YEAR",
-        "val": "2024"
+        "val": "2025"
       }
     ],
     "highlights": [
@@ -34,7 +34,7 @@ window.GALLERY_SITES = [
       "6,180 sq.ft.",
       "G + 2",
       "5 × 2BHK",
-      "2024"
+      "2025"
     ]
   },
   {
