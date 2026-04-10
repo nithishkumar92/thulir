@@ -12,6 +12,7 @@ window.GALLERY_MANIFESTS = {
     "20220715_153110.jpg",
     "20230107_100118.jpg",
     "IMG-20220301-WA0002.jpg",
+    "VID-20220301-WA0007.mp4",
   ],
 
   // ── 2) Rajavel - S.K Nagar - Sankari ──────────────────────────────────────
@@ -29,6 +30,7 @@ window.GALLERY_MANIFESTS = {
     "orr-2.jpg",
     "orr-3.jpg",
     "orr-4.jpg",
+    "20241012_103632.jpg",
   ],
 
   // ── 3) Sasi - Paramthi Vellor ─────────────────────────────────────────────
@@ -58,6 +60,7 @@ window.GALLERY_MANIFESTS = {
     "IMG-20230715-WA0009.jpg",
     "Photo from Nithish Kumar.jpg",
     "Screenshot_20260213_211301_Photos.png",
+    "20240215_120658.mp4",
   ],
 
   // ── 5) Rajendren - S.K Nagar - Sankari ────────────────────────────────────
@@ -87,12 +90,14 @@ window.GALLERY_MANIFESTS = {
     "20260326_174247.jpg",
     "20260406_151636.jpg",
     "20260406_151652.jpg",
+    "20250620_105221.mp4",
   ],
 
   // ── 7) Pullipalayam - Tiruchengode ────────────────────────────────────────
   "7) Pullipalayam - Tiruchengode": [
     "20250902_112932.jpg",
     "20251121_111101.jpg",
+    "20241123_113628.jpg",
   ],
 
   // ── 8) Villa-pollachi ─────────────────────────────────────────────────────
@@ -149,6 +154,9 @@ window.GALLERY_MANIFESTS = {
     "IMG-20241120-WA0002.jpg",
     "Thangayur-1.jpg",
     "Thangayur-2.jpg",
+    "20241016_065714.jpg",
+    "20241016_065731.jpg",
+    "20250101_174557.mp4",
   ],
 
   // ── 14) Mani Kupnoor - Sankari ────────────────────────────────────────────
@@ -168,6 +176,7 @@ window.GALLERY_MANIFESTS = {
     "20230321_080834.jpg",
     "20230814_083056.jpg",
     "Photo from Nithish Kumar (5).jpg",
+    "20241128_175527.jpg",
   ],
 
 };

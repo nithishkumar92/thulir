@@ -422,6 +422,33 @@
     }
     .strip-photo.loaded img { opacity: 1; }
     .strip-photo:hover img { transform: scale(1.07); }
+
+    /* Video strip card */
+    .strip-photo video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .strip-video-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(0,0,0,0.55);
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: background .2s;
+    }
+    .strip-video-badge i { color: #fff; font-size: 14px; margin-left: 3px; }
+    .strip-photo:hover .strip-video-badge { background: rgba(201,168,76,0.75); }
+
     .strip-photo-overlay {
       position: absolute;
       inset: 0;
@@ -630,6 +657,14 @@
       box-shadow: 0 24px 64px rgba(0,0,0,0.65);
       transition: opacity .15s;
       display: block;
+    }
+    .lb-video {
+      max-width: 100%;
+      max-height: 66vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65);
+      display: block;
+      background: #000;
     }
     .lb-nav-btn {
       position: absolute;
@@ -1123,6 +1158,7 @@
       <button class="lb-nav-btn" id="lbPrev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
       <div class="lb-img-box">
         <img src="" alt="" class="lb-img" id="lbImg">
+        <video controls class="lb-video" id="lbVideo" style="display:none"></video>
       </div>
       <button class="lb-nav-btn" id="lbNext" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
       <div class="lb-counter"><span id="lbCur">1</span> / <span id="lbTot">1</span></div>
@@ -1234,17 +1270,32 @@
         let stripHtml = specCardHtml;
         if (hasPhotos) {
           files.forEach((f, fi) => {
-            /* First photo per row loads eagerly (already in viewport); rest are lazy */
-            const loadAttr = (i === 0 && fi === 0) ? 'eager' : 'lazy';
-            stripHtml += `
+            const src      = `${IMG}${encodeURIComponent(site.folder)}/${encodeURIComponent(f)}`;
+            const isVideo  = f.toLowerCase().endsWith('.mp4');
+            /* First non-video loads eagerly; rest are lazy */
+            const loadAttr = (i === 0 && fi === 0 && !isVideo) ? 'eager' : 'lazy';
+
+            if (isVideo) {
+              stripHtml += `
+              <div class="strip-photo js-strip-photo loaded" data-idx="${fi}">
+                <video src="${src}" muted playsinline preload="none"
+                       onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video>
+                <div class="strip-video-badge"><i class="fas fa-play"></i></div>
+                <div class="strip-photo-overlay">
+                  <span class="strip-photo-lbl">Video</span>
+                </div>
+              </div>`;
+            } else {
+              stripHtml += `
               <div class="strip-photo js-strip-photo" data-idx="${fi}">
-                <img src="${IMG}${encodeURIComponent(site.folder)}/${encodeURIComponent(f)}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
+                <img src="${src}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
                      onload="this.closest('.strip-photo').classList.add('loaded')"
                      onerror="this.closest('.strip-photo').classList.add('loaded'); this.style.opacity='0.1'">
                 <div class="strip-photo-overlay">
                   <span class="strip-photo-lbl">${site.typeName}</span>
                 </div>
               </div>`;
+            }
           });
         } else {
           stripHtml += `
@@ -1330,7 +1381,13 @@
       lbFiles.forEach((src, i) => {
         const t = document.createElement('div');
         t.className = 'lb-thumb';
-        t.innerHTML = `<img src="${src}" alt="Photo ${i + 1}" loading="lazy" decoding="async">`;
+        const isVid = src.toLowerCase().endsWith('.mp4');
+        if (isVid) {
+          t.innerHTML = `<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;border-radius:4px">
+            <i class="fas fa-play" style="color:#C9A84C;font-size:18px"></i></div>`;
+        } else {
+          t.innerHTML = `<img src="${src}" alt="Photo ${i + 1}" loading="lazy" decoding="async">`;
+        }
         t.addEventListener('click', () => showImg(i));
         thumbsEl.appendChild(t);
       });
@@ -1342,12 +1399,26 @@
 
     function showImg(idx) {
       lbIdx = idx;
-      const img = document.getElementById('lbImg');
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = lbFiles[idx];
-        img.style.opacity = '1';
-      }, 130);
+      const img   = document.getElementById('lbImg');
+      const vid   = document.getElementById('lbVideo');
+      const src   = lbFiles[idx];
+      const isVid = src.toLowerCase().endsWith('.mp4');
+
+      /* Stop any playing video when switching */
+      vid.pause();
+      vid.src = '';
+
+      if (isVid) {
+        img.style.display = 'none';
+        vid.style.display = 'block';
+        vid.src = src;
+        vid.load();
+      } else {
+        vid.style.display = 'none';
+        img.style.display = 'block';
+        img.style.opacity = '0';
+        setTimeout(() => { img.src = src; img.style.opacity = '1'; }, 130);
+      }
       document.getElementById('lbCur').textContent = idx + 1;
       document.querySelectorAll('.lb-thumb').forEach((t, i) => {
         t.classList.toggle('active', i === idx);
@@ -1358,6 +1429,8 @@
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
+      const vid = document.getElementById('lbVideo');
+      vid.pause(); vid.src = '';
     }
 
     document.getElementById('lbClose').addEventListener('click', closeLightbox);
