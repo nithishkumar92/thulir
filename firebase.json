@@ -10,6 +10,7 @@
       "test_navbar.html",
       "admin.html",
       "admin-server.js",
+      "compress-images.js",
       "package.json",
       "package-lock.json",
       "node_modules/**"
