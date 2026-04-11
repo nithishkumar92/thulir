@@ -12,7 +12,15 @@
       "Bash(node -e ':*)",
       "Bash(mv \"Villa-akkamapetti #1\" \"Villa-akkamapetti-1\")",
       "Bash(mv \"Villa-Akkamapettai #2\" \"Villa-Akkamapettai-2\")",
-      "Bash(mv \"Villa-Akkamapettai #3\" \"Villa-Akkamapettai-3\")"
+      "Bash(mv \"Villa-Akkamapettai #3\" \"Villa-Akkamapettai-3\")",
+      "Bash(node compress-images.js)",
+      "Bash(ffmpeg -version)",
+      "Bash(grep -l \"worker\\\\|portal\\\\|punch\\\\|advance\\\\|jarv\" /f/thulir-website-claude/thulir/*.html)",
+      "Bash(grep -r \"tab\\\\|Tab\\\\|assistant\\\\|Assistant\\\\|ai\\\\|AI\" /f/thulir-website-claude/thulir/*.html)",
+      "Bash(grep -rn \"data-tab\\\\|role=\\\\\"tab\\\\|tablist\\\\|tabpanel\" /f/thulir-website-claude/thulir/*.html)",
+      "Bash(git log:*)",
+      "Bash(grep -r \"api\\\\|fetch\\\\|XMLHttpRequest\" /f/thulir-website-claude/thulir/*.html /f/thulir-website-claude/thulir/*.js)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

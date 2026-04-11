@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Thulir – Worker Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:   #1a1a2e;
+      --accent:  #e63946;
+      --gold:    #f4a261;
+      --bg:      #f5f6fa;
+      --white:   #ffffff;
+      --muted:   #8a8fa8;
+      --border:  #e4e6ef;
+      --nav-h:   64px;
+      --header-h: 116px;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: #1a1a2e;
+      overflow: hidden;
+    }
+
+    /* ── APP SHELL ── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      max-width: 430px;
+      margin: 0 auto;
+      background: var(--white);
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,.12);
+    }
+
+    /* ── TOP HEADER ── */
+    .header {
+      background: var(--white);
+      padding: 14px 18px 0;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .header-row1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .team-block {
+      display: flex;
+      flex-direction: column;
+    }
+    .team-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .team-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-top: 1px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--brand);
+      color: var(--white);
+      border: none;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-add:hover { opacity: .85; }
+    .btn-add svg { width: 14px; height: 14px; }
+
+    .btn-logout {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      border-radius: 8px;
+      transition: background .2s;
+    }
+    .btn-logout:hover { background: var(--bg); }
+    .btn-logout svg { width: 20px; height: 20px; }
+
+    .header-row2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 14px;
+    }
+
+    .site-selector {
+      flex: 1;
+      position: relative;
+    }
+    .site-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .site-dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      gap: 8px;
+      transition: border-color .2s;
+    }
+    .site-dropdown:hover { border-color: var(--muted); }
+    .site-dropdown span {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .site-dropdown svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
+
+    .btn-punch {
+      background: var(--brand);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: background .2s, transform .1s;
+      flex-shrink: 0;
+    }
+    .btn-punch:hover { background: #2d2d4e; }
+    .btn-punch:active { transform: scale(.96); }
+    .btn-punch svg { width: 16px; height: 16px; }
+
+    /* ── CHAT AREA ── */
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 18px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Bot message bubble */
+    .bot-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      max-width: 85%;
+    }
+    .bot-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(26,26,46,.25);
+    }
+    .bot-avatar svg { width: 20px; height: 20px; color: var(--white); }
+
+    .bot-bubble {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0 14px 14px 14px;
+      padding: 12px 14px;
+    }
+    .bot-bubble .bot-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .bot-bubble p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #444;
+    }
+
+    /* User message bubble */
+    .user-message {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .user-bubble {
+      background: var(--brand);
+      color: var(--white);
+      border-radius: 14px 0 14px 14px;
+      padding: 10px 14px;
+      font-size: 13px;
+      max-width: 75%;
+      line-height: 1.5;
+    }
+
+    /* Preview card */
+    .preview-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .preview-card .preview-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+      color: #333;
+    }
+    .preview-row:last-child { border-bottom: none; }
+    .preview-row span:last-child { font-weight: 600; color: var(--brand); }
+
+    .preview-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .btn-confirm, .btn-cancel {
+      flex: 1;
+      border: none;
+      border-radius: 10px;
+      padding: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-confirm { background: var(--brand); color: var(--white); }
+    .btn-cancel  { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+    .btn-confirm:hover, .btn-cancel:hover { opacity: .85; }
+
+    /* ── VOICE BUTTON ── */
+    .voice-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 18px 18px;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    .voice-ring {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .voice-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      transition: border-color .3s;
+    }
+    .voice-ring.listening::before {
+      border-color: var(--accent);
+      animation: pulse-ring 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);   opacity: 1; }
+      60%  { transform: scale(1.08); opacity: .5; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+    .btn-voice {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .1s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      position: relative;
+    }
+    .btn-voice svg { width: 40px; height: 40px; color: #aaa; transition: color .2s; }
+    .btn-voice:hover { border-color: var(--muted); box-shadow: 0 6px 24px rgba(0,0,0,.12); }
+    .btn-voice:active, .btn-voice.listening {
+      background: var(--brand);
+      border-color: var(--brand);
+      transform: scale(.96);
+      box-shadow: 0 8px 28px rgba(26,26,46,.3);
+    }
+    .btn-voice.listening svg { color: var(--white); }
+
+    .voice-hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── INPUT BAR ── */
+    .input-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px 12px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .btn-image-attach {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .btn-image-attach:hover { background: var(--border); }
+    .btn-image-attach svg { width: 18px; height: 18px; }
+
+    .input-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 0 10px 0 14px;
+      gap: 6px;
+      transition: border-color .2s;
+    }
+    .input-wrap:focus-within { border-color: var(--brand); }
+
+    #textInput {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      color: var(--brand);
+      outline: none;
+      padding: 9px 0;
+      font-family: inherit;
+    }
+    #textInput::placeholder { color: #b0b5c8; }
+
+    .btn-voice-input {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+    .btn-voice-input svg { width: 18px; height: 18px; }
+
+    .btn-send {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--white);
+      flex-shrink: 0;
+      transition: background .2s, transform .1s;
+    }
+    .btn-send:hover { background: #2d2d4e; }
+    .btn-send:active { transform: scale(.92); }
+    .btn-send svg { width: 17px; height: 17px; }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      display: flex;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px 10px;
+      cursor: pointer;
+      gap: 4px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: color .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-item svg { width: 22px; height: 22px; }
+    .nav-item.active { color: var(--brand); }
+    .nav-item.active svg { color: var(--brand); }
+
+    /* ── SITE DROPDOWN PANEL ── */
+    .site-panel {
+      position: absolute;
+      top: var(--header-h);
+      left: 18px;
+      right: 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      z-index: 100;
+      overflow: hidden;
+      display: none;
+    }
+    .site-panel.open { display: block; }
+    .site-panel-item {
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+      color: var(--brand);
+    }
+    .site-panel-item:last-child { border-bottom: none; }
+    .site-panel-item:hover, .site-panel-item.selected { background: var(--bg); font-weight: 700; }
+
+    /* ── TYPING INDICATOR ── */
+    .typing-indicator {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0 14px 14px 14px;
+      padding: 12px 16px;
+    }
+    .typing-dots span {
+      width: 7px; height: 7px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: bounce .9s ease-in-out infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: .15s; }
+    .typing-dots span:nth-child(3) { animation-delay: .3s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40%           { transform: translateY(-6px); }
+    }
+
+    /* ── TABS (hidden panels) ── */
+    .tab-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    .tab-panel.active { display: flex; }
+
+    .placeholder-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .placeholder-panel svg { width: 48px; height: 48px; opacity: .4; }
+
+    /* safe area padding for notch phones */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header-row1">
+      <div class="team-block">
+        <span class="team-label">Team</span>
+        <span class="team-name" id="workerName">Naveen Kumar</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn-add" onclick="addWorker()">
+          <!-- plus icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add
+        </button>
+        <button class="btn-logout" onclick="logout()" title="Logout">
+          <!-- logout icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="header-row2">
+      <div class="site-selector">
+        <div class="site-label">Site</div>
+        <div class="site-dropdown" id="siteDropdownBtn" onclick="toggleSitePanel()">
+          <span id="siteNameDisplay">Pullipalayam – Duraisamy</span>
+          <!-- chevron down -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <button class="btn-punch" id="punchBtn" onclick="handlePunch()">
+        <!-- clock icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="punchLabel">Punch-in</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- site selection panel -->
+  <div class="site-panel" id="sitePanel">
+    <div class="site-panel-item selected" onclick="selectSite('Pullipalayam – Duraisamy')">Pullipalayam – Duraisamy</div>
+    <div class="site-panel-item" onclick="selectSite('Sengodan – Akkampettai – Sankari')">Sengodan – Akkampettai – Sankari</div>
+    <div class="site-panel-item" onclick="selectSite('Rajavel – S.K Nagar – Sankari')">Rajavel – S.K Nagar – Sankari</div>
+    <div class="site-panel-item" onclick="selectSite('Sasi – Paramthi Vellore')">Sasi – Paramthi Vellore</div>
+    <div class="site-panel-item" onclick="selectSite('Sudhakaran – Akkampettai – Sankari')">Sudhakaran – Akkampettai – Sankari</div>
+  </div>
+
+  <!-- ── MAIN TABS ── -->
+
+  <!-- JARVES TAB (active) -->
+  <div class="tab-panel active" id="tab-jarves">
+    <div class="chat-area" id="chatArea">
+      <!-- Initial greeting -->
+      <div class="bot-message">
+        <div class="bot-avatar">
+          <!-- bot / sparkle icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+        </div>
+        <div class="bot-bubble">
+          <div class="bot-name">Hi! I'm Jarves 👋</div>
+          <p>Tell me the advance — by voice, text, or photo. I'll show you a preview before saving.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice button -->
+    <div class="voice-section">
+      <div class="voice-ring" id="voiceRing">
+        <button class="btn-voice" id="voiceBtn" onmousedown="startVoice()" onmouseup="stopVoice()" ontouchstart="startVoice(event)" ontouchend="stopVoice(event)">
+          <!-- microphone icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </button>
+      </div>
+      <span class="voice-hint" id="voiceHint">Hold to speak</span>
+    </div>
+
+    <!-- Text input bar -->
+    <div class="input-bar">
+      <button class="btn-image-attach" onclick="attachImage()" title="Attach photo">
+        <!-- image icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </button>
+      <div class="input-wrap">
+        <input type="text" id="textInput" placeholder="Type an advance… e.g. ₹500 for Ravi" onkeydown="handleKey(event)" />
+        <button class="btn-voice-input" onclick="inputVoice()" title="Voice input">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+        </button>
+      </div>
+      <button class="btn-send" onclick="sendMessage()" title="Send">
+        <!-- send icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PUNCH TAB -->
+  <div class="tab-panel" id="tab-punch">
+    <div class="placeholder-panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Punch History
+    </div>
+  </div>
+
+  <!-- ADVANCE TAB -->
+  <div class="tab-panel" id="tab-advance">
+    <div class="placeholder-panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Advance Records
+    </div>
+  </div>
+
+  <!-- STORE TAB -->
+  <div class="tab-panel" id="tab-store">
+    <div class="placeholder-panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Store
+    </div>
+  </div>
+
+  <!-- WORK TAB -->
+  <div class="tab-panel" id="tab-work">
+    <div class="placeholder-panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Work Log
+    </div>
+  </div>
+
+  <!-- REPORT TAB -->
+  <div class="tab-panel" id="tab-report">
+    <div class="placeholder-panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Reports
+    </div>
+  </div>
+
+  <!-- ── BOTTOM NAV ── -->
+  <nav class="bottom-nav">
+    <button class="nav-item" id="nav-punch" onclick="switchTab('punch')">
+      <!-- clock icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Punch
+    </button>
+    <button class="nav-item active" id="nav-jarves" onclick="switchTab('jarves')">
+      <!-- sparkle icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      Jarves
+    </button>
+    <button class="nav-item" id="nav-advance" onclick="switchTab('advance')">
+      <!-- rupee icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Advance
+    </button>
+    <button class="nav-item" id="nav-store" onclick="switchTab('store')">
+      <!-- shopping bag -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Store
+    </button>
+    <button class="nav-item" id="nav-work" onclick="switchTab('work')">
+      <!-- briefcase -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Work
+    </button>
+    <button class="nav-item" id="nav-report" onclick="switchTab('report')">
+      <!-- file-text -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Report
+    </button>
+  </nav>
+
+</div>
+
+<script>
+  // ── STATE ──
+  let punchedIn = false;
+  let currentTab = 'jarves';
+
+  // ── TAB SWITCHING ──
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.getElementById('nav-' + tab).classList.add('active');
+    currentTab = tab;
+    closeSitePanel();
+  }
+
+  // ── SITE PANEL ──
+  function toggleSitePanel() {
+    document.getElementById('sitePanel').classList.toggle('open');
+  }
+  function closeSitePanel() {
+    document.getElementById('sitePanel').classList.remove('open');
+  }
+  function selectSite(name) {
+    document.getElementById('siteNameDisplay').textContent = name;
+    document.querySelectorAll('.site-panel-item').forEach(el => {
+      el.classList.toggle('selected', el.textContent === name);
+    });
+    closeSitePanel();
+  }
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#sitePanel') && !e.target.closest('#siteDropdownBtn')) closeSitePanel();
+  });
+
+  // ── PUNCH ──
+  function handlePunch() {
+    punchedIn = !punchedIn;
+    document.getElementById('punchBtn').style.background = punchedIn ? '#e63946' : '';
+    document.getElementById('punchLabel').textContent = punchedIn ? 'Punch-out' : 'Punch-in';
+    if (currentTab === 'jarves') {
+      addBotMessage(punchedIn
+        ? `Punched in at ${timeNow()} ✅ Have a productive day, ${document.getElementById('workerName').textContent.split(' ')[0]}!`
+        : `Punched out at ${timeNow()}. See you tomorrow! 👋`
+      );
+    }
+  }
+
+  // ── VOICE ──
+  function startVoice(e) {
+    if (e) e.preventDefault();
+    document.getElementById('voiceBtn').classList.add('listening');
+    document.getElementById('voiceRing').classList.add('listening');
+    document.getElementById('voiceHint').textContent = 'Listening…';
+  }
+  function stopVoice(e) {
+    if (e) e.preventDefault();
+    document.getElementById('voiceBtn').classList.remove('listening');
+    document.getElementById('voiceRing').classList.remove('listening');
+    document.getElementById('voiceHint').textContent = 'Hold to speak';
+    // Simulate a voice result for demo
+    simulateVoiceInput('₹500 advance for Ravi');
+  }
+  function inputVoice() {
+    addBotMessage('Voice input in the text field is coming soon!');
+  }
+
+  function simulateVoiceInput(text) {
+    addUserMessage(text);
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      showPreview({ worker: 'Ravi', amount: '₹500', site: document.getElementById('siteNameDisplay').textContent, date: dateNow() });
+    }, 1400);
+  }
+
+  // ── TEXT INPUT ──
+  function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
+
+  function sendMessage() {
+    const input = document.getElementById('textInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addUserMessage(text);
+    processInput(text);
+  }
+
+  function processInput(text) {
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      // Simple parser: look for amount pattern
+      const amountMatch = text.match(/₹?\s*(\d+)/);
+      const workerMatch = text.match(/for\s+(\w+)/i);
+      if (amountMatch) {
+        showPreview({
+          worker: workerMatch ? workerMatch[1] : 'Worker',
+          amount: '₹' + amountMatch[1],
+          site: document.getElementById('siteNameDisplay').textContent,
+          date: dateNow()
+        });
+      } else {
+        addBotMessage("I didn't catch an amount. Please say something like: \"₹500 advance for Ravi\".");
+      }
+    }, 1200);
+  }
+
+  // ── CHAT HELPERS ──
+  function addBotMessage(text) {
+    const area = document.getElementById('chatArea');
+    const el = document.createElement('div');
+    el.className = 'bot-message';
+    el.innerHTML = `
+      <div class="bot-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      </div>
+      <div class="bot-bubble"><p>${text}</p></div>`;
+    area.appendChild(el);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  function addUserMessage(text) {
+    const area = document.getElementById('chatArea');
+    const el = document.createElement('div');
+    el.className = 'user-message';
+    el.innerHTML = `<div class="user-bubble">${text}</div>`;
+    area.appendChild(el);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  function showTyping() {
+    const area = document.getElementById('chatArea');
+    const el = document.createElement('div');
+    el.className = 'typing-indicator';
+    el.id = 'typingIndicator';
+    el.innerHTML = `
+      <div class="bot-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      </div>
+      <div class="typing-dots"><span></span><span></span><span></span></div>`;
+    area.appendChild(el);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  function showPreview(data) {
+    const area = document.getElementById('chatArea');
+    const el = document.createElement('div');
+    el.className = 'bot-message';
+    el.innerHTML = `
+      <div class="bot-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      </div>
+      <div style="flex:1">
+        <div class="bot-bubble" style="margin-bottom:8px"><p>Here's a preview — confirm to save:</p></div>
+        <div class="preview-card">
+          <div class="preview-label">Advance Preview</div>
+          <div class="preview-row"><span>Worker</span><span>${data.worker}</span></div>
+          <div class="preview-row"><span>Amount</span><span>${data.amount}</span></div>
+          <div class="preview-row"><span>Site</span><span>${data.site}</span></div>
+          <div class="preview-row"><span>Date</span><span>${data.date}</span></div>
+          <div class="preview-actions">
+            <button class="btn-confirm" onclick="confirmAdvance(this, '${data.worker}', '${data.amount}')">Confirm ✓</button>
+            <button class="btn-cancel" onclick="cancelAdvance(this)">Cancel</button>
+          </div>
+        </div>
+      </div>`;
+    area.appendChild(el);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  function confirmAdvance(btn, worker, amount) {
+    btn.closest('.preview-card').querySelectorAll('.btn-confirm, .btn-cancel').forEach(b => b.disabled = true);
+    btn.textContent = 'Saved!';
+    btn.style.background = '#2e7d32';
+    addBotMessage(`✅ ${amount} advance for <strong>${worker}</strong> saved successfully!`);
+  }
+
+  function cancelAdvance(btn) {
+    btn.closest('.bot-message').remove();
+    addBotMessage("Cancelled. Tell me a new advance whenever you're ready.");
+  }
+
+  // ── MISC ──
+  function addWorker() { addBotMessage('Worker onboarding coming soon!'); }
+  function logout()    { if (confirm('Log out?')) window.location.href = 'index.html'; }
+  function attachImage() { addBotMessage('Photo attachment is coming soon!'); }
+
+  function timeNow() {
+    return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+  }
+  function dateNow() {
+    return new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+</script>
+</body>
+</html>
