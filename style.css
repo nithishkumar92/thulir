@@ -600,27 +600,11 @@ body {
   transition: var(--transition);
   cursor: default;
 }
-
-.service-card:first-child {
-  background: #1a1a2e;
-  border-color: transparent;
-  box-shadow: 0 8px 32px rgba(26,26,46,0.25);
-}
-
-.service-card:first-child h3 { color: #fff; }
-.service-card:first-child p  { color: rgba(255,255,255,0.7); }
-
 .service-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-color: rgba(168, 135, 52, 0.25);
 }
-
-.service-card:first-child:hover {
-  box-shadow: 0 14px 40px rgba(26,26,46,0.35);
-  border-color: transparent;
-}
-
 .service-icon {
   width: 50px;
   height: 50px;
