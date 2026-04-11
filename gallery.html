@@ -417,7 +417,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .45s ease, opacity .3s ease;
+      transition: transform .35s ease, opacity .18s ease;
       opacity: 0;  /* start invisible, fade in on load */
     }
     .strip-photo.loaded img { opacity: 1; }
@@ -1272,8 +1272,10 @@
           files.forEach((f, fi) => {
             const src      = `${IMG}${encodeURIComponent(site.folder)}/${encodeURIComponent(f)}`;
             const isVideo  = f.toLowerCase().endsWith('.mp4');
-            /* First non-video loads eagerly; rest are lazy */
-            const loadAttr = (i === 0 && fi === 0 && !isVideo) ? 'eager' : 'lazy';
+            /* First project, first 2 photos → eager + high priority; rest → lazy */
+            const isHighPri = (i === 0 && fi < 2 && !isVideo);
+            const loadAttr  = isHighPri ? 'eager' : 'lazy';
+            const fetchPri  = isHighPri ? ' fetchpriority="high"' : (fi < 3 ? ' fetchpriority="low"' : '');
 
             if (isVideo) {
               stripHtml += `
@@ -1288,7 +1290,7 @@
             } else {
               stripHtml += `
               <div class="strip-photo js-strip-photo" data-idx="${fi}">
-                <img src="${src}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"
+                <img src="${src}" alt="${site.name} — photo ${fi + 1}" loading="${loadAttr}" decoding="async"${fetchPri}
                      onload="this.closest('.strip-photo').classList.add('loaded')"
                      onerror="this.closest('.strip-photo').classList.add('loaded'); this.style.opacity='0.1'">
                 <div class="strip-photo-overlay">
