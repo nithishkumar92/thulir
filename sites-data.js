@@ -253,5 +253,17 @@ window.GALLERY_SITES = [
     ],
     "highlights": ["Vastu Compliant"],
     "stats": ["2,500 sq.ft.", "G + 1", "3 BHK", "2022"]
+  },
+  {
+    "folder": "16) Additional Photo",
+    "type": "villa",
+    "typeName": "Villa",
+    "name": "Additional Photos",
+    "value": "",
+    "location": "Tamil Nadu",
+    "status": "completed",
+    "specs": [],
+    "highlights": [],
+    "stats": []
   }
 ];

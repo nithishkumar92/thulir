@@ -20,7 +20,11 @@
       "Bash(grep -rn \"data-tab\\\\|role=\\\\\"tab\\\\|tablist\\\\|tabpanel\" /f/thulir-website-claude/thulir/*.html)",
       "Bash(git log:*)",
       "Bash(grep -r \"api\\\\|fetch\\\\|XMLHttpRequest\" /f/thulir-website-claude/thulir/*.html /f/thulir-website-claude/thulir/*.js)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where magick:*)",
+      "Bash(where convert:*)",
+      "Bash(where ffmpeg:*)",
+      "Bash(node -e \"require\\('heic-convert'\\)\")"
     ]
   }
 }
