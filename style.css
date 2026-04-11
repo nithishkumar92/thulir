@@ -317,6 +317,37 @@ body {
   border-color: var(--secondary-gold);
 }
 
+.btn-erp {
+  background: transparent;
+  color: var(--accent-red);
+  border: 2.5px solid var(--accent-red);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-erp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--accent-red);
+  transition: var(--transition);
+  z-index: -1;
+  border-radius: 10px;
+}
+
+.btn-erp:hover::before {
+  width: 100%;
+}
+
+.btn-erp:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(209, 26, 42, 0.3);
+}
+
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
