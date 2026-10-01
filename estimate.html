@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thulir Construction — Cost Estimator</title>
+  <title>Construction Cost Estimator | Thulir Construction</title>
+  <meta name="description" content="Estimate the cost of building your home in Tamil Nadu. Enter your built-up area and specifications to get a material and BOQ-based estimate.">
+  <meta name="theme-color" content="#a88734">
+  <link rel="canonical" href="https://www.thulirconstruction.in/estimate.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thulir Construction">
+  <meta property="og:title" content="Construction Cost Estimator | Thulir Construction">
+  <meta property="og:description" content="Estimate the cost of building your home in Tamil Nadu. Enter your built-up area and specifications to get a material and BOQ-based estimate.">
+  <meta property="og:url" content="https://www.thulirconstruction.in/estimate.html">
+  <meta property="og:image" content="https://www.thulirconstruction.in/cover.jpg">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -346,28 +355,6 @@
     @media (max-width:768px) {
 
       /* Nav */
-      .hamburger { display:flex !important; }
-      .nav-links {
-        position:fixed !important; top:85px !important; left:0 !important; right:0 !important; bottom:0 !important;
-        background:#ffffff !important; flex-direction:column !important; padding:0 !important;
-        transform:translateX(-100%) !important; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
-        gap:0 !important; z-index:999 !important; overflow-y:auto !important; height:calc(100vh - 85px) !important;
-      }
-      .nav-links.active { transform:translateX(0) !important; }
-      .nav-links a {
-        padding:22px 25px !important; border-bottom:1px solid rgba(168,135,52,0.15) !important;
-        width:100% !important; text-align:left !important; font-size:1.1rem !important;
-        display:block !important; background:transparent !important;
-        -webkit-background-clip:unset !important; background-clip:unset !important;
-        color:#333 !important; -webkit-text-fill-color:#333 !important; pointer-events:auto !important;
-      }
-      .nav-links a:last-child { border-bottom:none !important; }
-      .nav-links a::before { display:none !important; }
-      .nav-links a.active {
-        background:linear-gradient(135deg,rgba(168,135,52,0.15),rgba(217,172,90,0.15)) !important;
-        border-left:4px solid #a88734 !important; color:#a88734 !important;
-        -webkit-text-fill-color:#a88734 !important; font-weight:700 !important;
-      }
 
       /* Hero */
       .est-hero { padding:36px 16px 24px; }
@@ -502,7 +489,7 @@
         <a href="agreement.html">Agreement</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -1024,20 +1011,7 @@
     updateLiveRate();
     generate();
 
-    /* ── Navbar ── */
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
-    document.addEventListener('click', e => {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active'); navLinks.classList.remove('active');
-      }
-    });
-    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
-      hamburger.classList.remove('active'); navLinks.classList.remove('active');
-    }));
   </script>
+  <script src="nav.js"></script>
 </body>
 </html>

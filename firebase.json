@@ -7,7 +7,6 @@
       "**/node_modules/**",
       "generate-manifest.bat",
       "photo-manager.html",
-      "test_navbar.html",
       "admin.html",
       "admin-server.js",
       "compress-images.js",

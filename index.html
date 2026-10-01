@@ -18,6 +18,34 @@
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    "name": "Thulir Construction",
+    "url": "https://www.thulirconstruction.in/",
+    "logo": "https://www.thulirconstruction.in/cover.jpg",
+    "image": "https://www.thulirconstruction.in/cover.jpg",
+    "description": "Residential construction specialists building Vastu-compliant villas and apartment buildings across Tamil Nadu.",
+    "telephone": "+91-74184-77647",
+    "email": "nithishkumar@thulirconstruction.in",
+    "foundingDate": "2021-10",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Krishna Nagar-II",
+      "addressLocality": "Sankari",
+      "addressRegion": "Tamil Nadu",
+      "postalCode": "637301",
+      "addressCountry": "IN"
+    },
+    "areaServed": ["Sankari", "Salem", "Namakkal", "Erode", "Tamil Nadu"],
+    "sameAs": [
+      "https://www.facebook.com/ThulirConstruction/",
+      "https://www.instagram.com/thulir_construction/",
+      "https://www.youtube.com/@thulirconstruction"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -370,44 +398,6 @@
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <script>
-    (function () {
-      var navbar = document.getElementById('navbar');
-      var hamburger = document.getElementById('hamburger');
-      var navLinks = document.getElementById('navLinks');
-
-      function setMenu(open) {
-        hamburger.classList.toggle('active', open);
-        navLinks.classList.toggle('active', open);
-        hamburger.setAttribute('aria-expanded', String(open));
-        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        document.body.classList.toggle('menu-open', open);
-      }
-
-      function onScroll() {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
-      }
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      hamburger.addEventListener('click', function () {
-        setMenu(!navLinks.classList.contains('active'));
-      });
-
-      // Close on outside click, link click, Escape, or when resized to desktop
-      document.addEventListener('click', function (e) {
-        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) setMenu(false);
-      });
-      navLinks.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () { setMenu(false); });
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setMenu(false);
-      });
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 1024) setMenu(false);
-      });
-    })();
-  </script>
+  <script src="nav.js"></script>
 </body>
 </html>

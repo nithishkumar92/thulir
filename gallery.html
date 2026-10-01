@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thulir Construction — Our Projects</title>
+  <title>Project Gallery — Villas & Apartments | Thulir Construction</title>
+  <meta name="description" content="Browse completed villas and apartment buildings by Thulir Construction across Sankari, Salem and Tamil Nadu, with photos, specifications and videos.">
+  <meta name="theme-color" content="#a88734">
+  <link rel="canonical" href="https://www.thulirconstruction.in/gallery.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thulir Construction">
+  <meta property="og:title" content="Project Gallery — Villas & Apartments | Thulir Construction">
+  <meta property="og:description" content="Browse completed villas and apartment buildings by Thulir Construction across Sankari, Salem and Tamil Nadu, with photos, specifications and videos.">
+  <meta property="og:url" content="https://www.thulirconstruction.in/gallery.html">
+  <meta property="og:image" content="https://www.thulirconstruction.in/cover.jpg">
 
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
@@ -741,45 +750,6 @@
     }
 
     /* ═══════════════════════════════════════
-       NAVBAR MOBILE (from style.css overrides)
-    ═══════════════════════════════════════ */
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed !important;
-        top: 85px !important;
-        left: 0 !important; right: 0 !important; bottom: 0 !important;
-        background: #ffffff !important;
-        flex-direction: column !important;
-        padding: 0 !important;
-        transform: translateX(-100%) !important;
-        transition: transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.1) !important;
-        gap: 0 !important;
-        z-index: 999 !important;
-        overflow-y: auto !important;
-        height: calc(100vh - 85px) !important;
-      }
-      .nav-links.active { transform: translateX(0) !important; }
-      .nav-links a {
-        padding: 22px 25px !important;
-        border-bottom: 1px solid rgba(168,135,52,0.15) !important;
-        width: 100% !important;
-        text-align: left !important;
-        font-size: 1.1rem !important;
-        display: block !important;
-        color: #333 !important;
-        -webkit-text-fill-color: #333 !important;
-      }
-      .nav-links a.active {
-        background: linear-gradient(135deg, rgba(168,135,52,0.15), rgba(217,172,90,0.15)) !important;
-        border-left: 4px solid #a88734 !important;
-        color: #a88734 !important;
-        -webkit-text-fill-color: #a88734 !important;
-        font-weight: 700 !important;
-      }
-    }
-
-    /* ═══════════════════════════════════════
        HERO ANIMATION — Construction Site
     ═══════════════════════════════════════ */
     .hero-animation {
@@ -914,7 +884,7 @@
         <a href="agreement.html">Agreement</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -1467,35 +1437,10 @@
       }
     });
 
-    /* ─────────────────────────────────────────────
-       NAVBAR
-    ───────────────────────────────────────────── */
-    const navEl    = document.getElementById('navbar');
-    const hamEl    = document.getElementById('hamburger');
-    const linksEl  = document.getElementById('navLinks');
-
-    window.addEventListener('scroll', () =>
-      navEl.classList.toggle('scrolled', window.scrollY > 50)
-    );
-    hamEl.addEventListener('click', () => {
-      hamEl.classList.toggle('active');
-      linksEl.classList.toggle('active');
-    });
-    document.addEventListener('click', e => {
-      if (!hamEl.contains(e.target) && !linksEl.contains(e.target)) {
-        hamEl.classList.remove('active');
-        linksEl.classList.remove('active');
-      }
-    });
-    document.querySelectorAll('.nav-links a').forEach(a =>
-      a.addEventListener('click', () => {
-        hamEl.classList.remove('active');
-        linksEl.classList.remove('active');
-      })
-    );
 
     /* ── INIT ── */
     renderGallery('all');
   </script>
+  <script src="nav.js"></script>
 </body>
 </html>

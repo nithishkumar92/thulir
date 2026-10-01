@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thulir Construction — Our Distinction</title>
+  <title>Our Distinction — What Sets Thulir Construction Apart</title>
+  <meta name="description" content="Anti-termite treatment, leakage testing, structural analysis and pristine handovers — see the quality practices behind every Thulir Construction build.">
+  <meta name="theme-color" content="#a88734">
+  <link rel="canonical" href="https://www.thulirconstruction.in/Distinction.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thulir Construction">
+  <meta property="og:title" content="Our Distinction — What Sets Thulir Construction Apart">
+  <meta property="og:description" content="Anti-termite treatment, leakage testing, structural analysis and pristine handovers — see the quality practices behind every Thulir Construction build.">
+  <meta property="og:url" content="https://www.thulirconstruction.in/Distinction.html">
+  <meta property="og:image" content="https://www.thulirconstruction.in/cover.jpg">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="apple-touch-icon" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -462,7 +471,7 @@
         <a href="agreement.html">Agreement</a>
         <a href="contact.html">Contact</a>
       </div>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -788,19 +797,6 @@
   </a>
 
   <script>
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active'); navLinks.classList.remove('active');
-      }
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); });
-    });
 
     /* Scroll fade-in for feature cards */
     const obs = new IntersectionObserver(entries => {
@@ -817,5 +813,6 @@
       obs.observe(c);
     });
   </script>
+  <script src="nav.js"></script>
 </body>
 </html>

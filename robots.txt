@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin-portal.html
+Disallow: /worker-portal.html
+Disallow: /erp.html
+Disallow: /agreement.html
+
+Sitemap: https://www.thulirconstruction.in/sitemap.xml
