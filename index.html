@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thulir Construction — Home</title>
+  <title>Thulir Construction — Trusted Residential Builders in Sankari, Tamil Nadu</title>
+  <meta name="description" content="Thulir Construction builds Vastu-compliant villas and apartment buildings across Tamil Nadu. B.E. Civil Engineer-led, transparent agreements, 18+ buildings completed.">
+  <meta name="theme-color" content="#a88734">
+  <link rel="canonical" href="https://www.thulirconstruction.in/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thulir Construction">
+  <meta property="og:title" content="Thulir Construction — Building Your Vision Into Reality">
+  <meta property="og:description" content="Trusted residential construction specialists in Tamil Nadu. Vastu-compliant villas and apartments built to last.">
+  <meta property="og:url" content="https://www.thulirconstruction.in/">
+  <meta property="og:image" content="https://www.thulirconstruction.in/cover.jpg">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg">
@@ -14,283 +23,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Hero Visual Enhancement with Cover Image */
-    .hero-visual {
-      position: relative;
-      height: 600px;
-    }
-
-    .hero-image-stack {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero-card {
-      position: absolute;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .hero-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
-    }
-
-    .hero-card-main {
-      width: 85%;
-      height: 70%;
-      top: 15%;
-      left: 0;
-      z-index: 3;
-      background: white;
-      border: 1px solid rgba(168, 135, 52, 0.1);
-    }
-
-    .hero-card-accent {
-      width: 70%;
-      height: 60%;
-      bottom: 5%;
-      right: 0;
-      z-index: 2;
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      opacity: 0.15;
-    }
-
-    .hero-card-bg {
-      width: 60%;
-      height: 50%;
-      top: 0;
-      right: 10%;
-      z-index: 1;
-      background: linear-gradient(135deg, #e9ecef, #f8f9fa);
-      opacity: 0.6;
-    }
-
-    .hero-card-content {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card-content img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      max-width: 500px;
-    }
-
-    .floating-badges {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      top: 10%;
-      right: -5%;
-      z-index: 4;
-    }
-
-    .floating-badge {
-      background: white;
-      padding: 20px 25px;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(168, 135, 52, 0.15);
-      animation: float 5s ease-in-out infinite;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      min-width: 200px;
-    }
-
-    .floating-badge:nth-child(2) {
-      animation-delay: 1.5s;
-    }
-
-    .badge-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-
-    .badge-content h4 {
-      font-size: 0.9rem;
-      margin-bottom: 3px;
-      color: var(--dark-text);
-      font-weight: 700;
-    }
-
-    .badge-content p {
-      font-size: 0.75rem;
-      color: var(--light-text);
-      margin: 0;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    @media (max-width: 1024px) {
-      .hero-visual {
-        height: 450px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-visual {
-        height: auto;
-        margin-top: 30px;
-      }
-
-      .hero-image-stack {
-        height: auto;
-        min-height: 300px;
-      }
-
-      .hero-card-main {
-        width: 100%;
-        height: auto;
-        position: relative;
-        top: 0;
-        left: 0;
-      }
-
-      .hero-card-accent,
-      .hero-card-bg {
-        display: none;
-      }
-
-      .hero-card-content {
-        padding: 30px 20px;
-        height: auto;
-      }
-
-      .hero-card-content img {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .floating-badges {
-        position: static;
-        flex-direction: column;
-        align-items: stretch;
-        margin-top: 20px;
-        padding: 0 20px;
-      }
-
-      .floating-badge {
-        width: 100%;
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-visual {
-        margin-top: 20px;
-      }
-
-      .hero-image-stack {
-        min-height: 250px;
-      }
-
-      .hero-card-content {
-        padding: 20px 15px;
-      }
-
-      .floating-badges {
-        margin-top: 15px;
-        padding: 0 15px;
-        gap: 15px;
-      }
-
-      .floating-badge {
-        min-width: auto;
-        padding: 15px 18px;
-      }
-
-      .badge-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-      }
-
-      .badge-content h4 {
-        font-size: 0.85rem;
-      }
-
-      .badge-content p {
-        font-size: 0.75rem;
-      }
-    }
-
-    /* Mobile nav overrides */
-    @media (max-width: 768px) {
-      .hamburger { display: flex !important; }
-      .nav-links {
-        position: fixed !important;
-        top: 85px !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: #ffffff !important;
-        flex-direction: column !important;
-        padding: 0 !important;
-        transform: translateX(-100%) !important;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        gap: 0 !important;
-        z-index: 999 !important;
-        overflow-y: auto !important;
-        height: calc(100vh - 85px) !important;
-      }
-      .nav-links.active { transform: translateX(0) !important; }
-      .nav-links a {
-        padding: 22px 25px !important;
-        border-bottom: 1px solid rgba(168, 135, 52, 0.15) !important;
-        width: 100% !important;
-        text-align: left !important;
-        font-size: 1.1rem !important;
-        display: block !important;
-        background: transparent !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
-        color: #333 !important;
-        -webkit-text-fill-color: #333 !important;
-        pointer-events: auto !important;
-      }
-      .nav-links a:last-child { border-bottom: none !important; }
-      .nav-links a::before { display: none !important; }
-      .nav-links a.active {
-        background: linear-gradient(135deg, rgba(168, 135, 52, 0.15), rgba(217, 172, 90, 0.15)) !important;
-        border-left: 4px solid #a88734 !important;
-        color: #a88734 !important;
-        -webkit-text-fill-color: #a88734 !important;
-        font-weight: 700 !important;
-      }
-    }
-  </style>
 </head>
-<body>
+<body class="home-page">
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
-        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img">
+        <img src="https://i.postimg.cc/8CTQtC9d/IMG-20240706-WA0005sa.jpg" alt="Thulir Construction Logo" class="logo-img" width="55" height="55">
         <div class="logo-text">
           <span class="logo-main">THULIR</span>
           <span class="logo-sub">CONSTRUCTION</span>
@@ -307,11 +45,11 @@
         <a href="contact.html">Contact</a>
       </div>
 
-      <div class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
@@ -327,7 +65,7 @@
             <i class="fas fa-phone-alt"></i>
             Get Free Consultation
           </a>
-          <a href="https://erp.thulirconstruction.in/" class="btn btn-erp" target="_blank" rel="noopener">
+          <a href="https://erp.thulirconstruction.in/" class="btn btn-erp" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-hard-hat"></i>
             Worker Portal
           </a>
@@ -359,7 +97,7 @@
           <div class="hero-card hero-card-accent"></div>
           <div class="hero-card hero-card-main">
             <div class="hero-card-content">
-              <img src="cover.jpg" alt="Thulir Construction Quality" loading="eager" fetchpriority="high" decoding="async">
+              <img src="cover.jpg" alt="Modern residential building under construction by Thulir Construction" width="1200" height="1145" loading="eager" fetchpriority="high" decoding="async">
             </div>
           </div>
         </div>
@@ -463,7 +201,7 @@
       <div class="founder-grid">
         <div class="founder-image-wrap">
           <div class="founder-photo-frame">
-            <img src="images/founder.jpeg" alt="Founder - Thulir Construction"
+            <img src="images/founder.jpeg" alt="Founder of Thulir Construction" width="320" height="320" loading="lazy" decoding="async"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <i class="fas fa-user-tie founder-photo-placeholder" style="display:none;"></i>
           </div>
@@ -584,10 +322,10 @@
           <h3>Thulir Construction</h3>
           <p>Building dreams with excellence. We are committed to delivering high-quality construction services that exceed expectations and stand the test of time.</p>
           <ul class="social-icons">
-            <li><a href="https://wa.me/917418477647" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
-            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://wa.me/917418477647" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+            <li><a href="https://www.facebook.com/ThulirConstruction/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/thulir_construction/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/@thulirconstruction" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </div>
         
@@ -604,11 +342,11 @@
         
         <div class="footer-section">
           <h3>Services</h3>
-          <p><a href="#">Architectural Design</a></p>
-          <p><a href="#">General Contracting</a></p>
-          <p><a href="#">Project Management</a></p>
-          <p><a href="#">Renovations</a></p>
-          <p><a href="#">Consulting</a></p>
+          <p><a href="#services">Architectural Design</a></p>
+          <p><a href="#services">General Contracting</a></p>
+          <p><a href="#services">Project Management</a></p>
+          <p><a href="#services">Renovations</a></p>
+          <p><a href="#services">Consulting</a></p>
         </div>
         
         <div class="footer-section">
@@ -628,45 +366,48 @@
   </footer>
 
   <!-- WhatsApp Float Button -->
-  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/917418477647" class="whatsapp-float" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
   <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+    (function () {
+      var navbar = document.getElementById('navbar');
+      var hamburger = document.getElementById('hamburger');
+      var navLinks = document.getElementById('navLinks');
+
+      function setMenu(open) {
+        hamburger.classList.toggle('active', open);
+        navLinks.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.classList.toggle('menu-open', open);
       }
-    });
 
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+      function onScroll() {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
       }
-    });
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Close menu when a nav link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+      hamburger.addEventListener('click', function () {
+        setMenu(!navLinks.classList.contains('active'));
       });
-    });
+
+      // Close on outside click, link click, Escape, or when resized to desktop
+      document.addEventListener('click', function (e) {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) setMenu(false);
+      });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1024) setMenu(false);
+      });
+    })();
   </script>
 </body>
 </html>
